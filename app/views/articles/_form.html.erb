@@ -1,0 +1,21 @@
+<div>
+    <% form_for @article do |f| %>
+    <div>
+        <div>
+            <%= f.label :title %>
+        </div>
+        <div>
+            <%= f.text_field :title, placeholder: "Title", autofocus: true %>
+        </div>
+        <div>
+            <%= f.label :content %>
+        </div>
+        <div>
+            <%= f.text_farea :content, placeholder: "Content", autofocus: true %>
+        </div>
+        <div>
+            <%= f.submit %>
+        </div>
+    </div>
+    <% end %>
+</div>

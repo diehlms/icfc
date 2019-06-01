@@ -1,0 +1,12 @@
+<%= form_for @comment do |f| %>
+    <div>
+        <%= f.label :comment %>
+    </div>
+    <div>
+        <%= f.text_area :comment %>
+    </div>
+    <%= f.hidden_field :article_id %>
+    <div>
+        <%= f.submit %>
+    </div>
+<% end %>

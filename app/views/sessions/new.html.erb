@@ -1,0 +1,17 @@
+<%= form_for @session do |f| %>
+    <div>
+        <%= f.label :email%>
+    </div>
+    <div>
+        <%= f.text_field :email %>
+    </div>
+    <div>
+        <%= f.label :password %>
+    </div>
+    <div>
+        <%= f.password_field :password %>
+    </div>
+    <div>
+        <%= f.submit "Log in" %>
+    </div>
+<% end %>

@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   resources :sessions
   
   root 'pages#home'
+  
+  get '/articles', to: 'articles#index'
+  get '/users', to: 'users#index'
 
 end
