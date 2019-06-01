@@ -2,5 +2,9 @@ This is the ICFC homepage.
 
 Rah rah rah, baby!
 
-<%= link_to "create new user", new_user_path %>
-<%= link_to "write an article", new_article_path %>
+<%= link_to 'log in', login_path %>
+<%= link_to "sign up", new_user_path %>
+
+<% if logged_in? %>
+    <%= link_to "write an article", new_article_path %>
+<% end %>

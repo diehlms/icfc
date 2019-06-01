@@ -3,9 +3,11 @@
         <%= f.label :comment %>
     </div>
     <div>
-        <%= f.text_area :comment %>
+        <%= f.text_area :content %>
     </div>
-    <%= f.hidden_field :article_id %>
+    <div>
+        <%= f.hidden_field :article_id %>
+    </div>
     <div>
         <%= f.submit %>
     </div>
