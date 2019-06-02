@@ -39,7 +39,6 @@ def update
     end
 end
 
-
 def edit
     set_article
 end

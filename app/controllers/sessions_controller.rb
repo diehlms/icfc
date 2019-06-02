@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
             session[:user_id] = user.id
             redirect_to root_path
         else
-            flash[:erro] = "Invalid email/password combination"
+            flash[:error] = "Invalid email/password combination"
             render 'new'
         end
     end

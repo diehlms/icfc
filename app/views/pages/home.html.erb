@@ -2,9 +2,20 @@ This is the ICFC homepage.
 
 Rah rah rah, baby!
 
-<%= link_to 'log in', login_path %>
-<%= link_to "sign up", new_user_path %>
+<% if logged_in? %>
+    <%= link_to "log out", logout_path, method: :delete %>
+<% else %>
+    <%= link_to 'log in', login_path %> Or 
+    <%= link_to "sign up", new_user_path %>
+<% end %>
 
 <% if logged_in? %>
     <%= link_to "write an article", new_article_path %>
 <% end %>
+<br>
+<br>
+Daily max temp of Parry Sound:
+<% options = { units: "metric", APPID: "7b926685adb5adb5cbd8dcdf38b63587" } %>
+<% mactier_weather = OpenWeather::Current.geocode(45.34, -80.04, options) %>
+<%= mactier_weather["main"]["temp_max"].floor %>
+
