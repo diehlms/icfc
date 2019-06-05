@@ -24,6 +24,7 @@ gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'simple_form', '~> 4.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'open-weather'
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
