@@ -1,2 +1,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+/* navbar */
+
+.navbar.navbar-default {
+    background-color: black;
+    .navbar-brand {
+        color: white;
+    }
+    .dropdown-toggle {
+        color: white;
+    }
+}
