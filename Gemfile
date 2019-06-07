@@ -6,6 +6,7 @@ ruby '2.6.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use sqlite3 as the database for Active Record
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -24,7 +25,6 @@ gem 'simple_form', '~> 4.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'open-weather'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
-gem 'pg'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
