@@ -47,9 +47,9 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
-    autoprefixer-rails (9.5.1.1)
+    autoprefixer-rails (9.6.0)
       execjs
-    bcrypt (3.1.12)
+    bcrypt (3.1.13)
     bindex (0.7.0)
     bootsnap (1.4.4)
       msgpack (~> 1.0)
@@ -102,7 +102,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (2.2.0)
+    json (1.8.6)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -126,8 +126,9 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
-    open-weather (0.11.0)
-      json
+    open-weather (0.12.0)
+      json (~> 1)
+    pg (1.1.4)
     public_suffix (3.1.0)
     puma (3.12.1)
     rack (2.0.7)
@@ -235,6 +236,7 @@ DEPENDENCIES
   jquery-ui-rails (~> 6.0, >= 6.0.1)
   listen (>= 3.0.5, < 3.2)
   open-weather
+  pg
   puma (~> 3.11)
   rails (~> 5.2.3)
   sass-rails (~> 5.0)

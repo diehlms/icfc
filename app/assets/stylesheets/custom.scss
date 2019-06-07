@@ -5,10 +5,30 @@
 
 .navbar.navbar-default {
     background-color: black;
+    border-radius: 0;
     .navbar-brand {
         color: white;
     }
     .dropdown-toggle {
         color: white;
     }
+}
+
+/* footer */
+
+.footer {
+    background-color: black;
+    vertical-align: center;
+    margin-top: 25px;
+    font-size: 0.8em;
+    color: white;
+    .footer-left {
+        display: inline-block;
+    }
+}
+
+/* customs */
+
+.swim-test-subtext {
+    padding: 10px;
 }
