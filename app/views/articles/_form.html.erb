@@ -1,25 +1,26 @@
-<div>
+<div class="article-form">
     <%= form_for @article do |f| %>
-        <div>
-            <div>
+        <div class="row">
+            <div class="form-group">
                 <%= f.label :title %>
+                <%= f.text_field :title, placeholder: "Title", autofocus: true, class: "form-control" %>
             </div>
-            <div>
-                <%= f.text_field :title, placeholder: "Title", autofocus: true %>
-            </div>
-            <div>
+        </div>
+        <div class="row">
+            <div class="form-group">
                 <%= f.label :content %>
+                <%= f.text_area :content, placeholder: "Content", autofocus: true, class: "form-control", rows: 10 %>
             </div>
-            <div>
-                <%= f.text_area :content, placeholder: "Content", autofocus: true %>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <%= f.label :image %>
+                <%= f.file_field :image, class: "form-control" %>
             </div>
-            <div>
-                <%= f.label :imaage %>
-            <div>
-                <%= f.file_field :image %>
-            </div>
-            <div>
-                <%= f.submit %>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <%= f.submit class: "btn btn-primary mb-2" %>
             </div>
         </div>
     <% end %>

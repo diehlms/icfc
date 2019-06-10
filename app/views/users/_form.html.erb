@@ -1,21 +1,33 @@
-<%= form_with(model: user, local: true) do |form| %>
-    <div>
-        <%= form.label :username %>
-        <%= form.text_field :username %>
-    </div>
-    <div>
-        <%= form.label :email %>
-        <%= form.text_field :email %>
-    </div>
-    <div>
-        <%= form.label :password %>
-        <%= form.password_field :password %>
-    </div>
-    <div>
-        <%= form.label :password_confirmation %>
-        <%= form.password_field :password_confirmation %>
-    </div>
-    <div>
-        <%= form.submit(@user.new_record? ? "Sign up" : "Update account") %>
-    </div>
-<% end %>
+<div class="article-form">
+    <%= form_with(model: user, local: true) do |form| %>
+        <div class="row">
+            <div class="form-group">
+                <%= form.label :username %>
+                <%= form.text_field :username, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <%= form.label :email %>
+                <%= form.text_field :email, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <%= form.label :password %>
+                <%= form.password_field :password, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <%= form.label :password_confirmation %>
+                <%= form.password_field :password_confirmation, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <%= form.submit(@user.new_record? ? "Sign up" : "Update account", class: "btn btn-primary mb-2") %>
+            </div>
+        </div>
+    <% end %>
+</div>
