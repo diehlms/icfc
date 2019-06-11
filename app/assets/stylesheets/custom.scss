@@ -1,6 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/* container */
+
+.container {
+    margin-bottom: 80px;
+}
+
 /* navbar */
 
 .navbar.navbar-default {

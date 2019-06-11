@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-    helper_method :logged_in?
+    helper_method :logged_in?, :current_user
     require 'open_weather'
     
     def home

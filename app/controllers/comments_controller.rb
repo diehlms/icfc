@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
 
 def new
-    user = session[:user_id]
     @comment = Comment.new(article_id: params[:article_id])
     @article = Article.find(params[:article_id])
 end

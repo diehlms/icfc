@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_01_043909) do
+ActiveRecord::Schema.define(version: 2019_06_11_040626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2019_06_01_043909) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,6 +58,8 @@ ActiveRecord::Schema.define(version: 2019_06_01_043909) do
     t.boolean "admin", default: false
     t.boolean "email_confirmed", default: false
     t.string "confirm_token"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
     t.index ["email_id"], name: "index_users_on_email_id"
   end
 
