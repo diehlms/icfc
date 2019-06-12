@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   resources :articles
   resources :comments, only: [:new, :create, :destroy]
-  resources :users
+  resources :users do
+    member do
+      get :confirm_email
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
   resources :events
   

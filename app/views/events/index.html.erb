@@ -1,18 +1,24 @@
-<%= month_calendar do |date, events| %>
-  <%= date %>
-
-  <% events.each do |event| %>
-    <div>
-      <%= event.title %>
-      <%= event.location %>
-      <%= event.start_time %>
-    </div>
-  <% end %>
-<% end %>
-
 <p id="notice"><%= notice %></p>
 
 <h1>Events</h1>
+
+  <div id="articles">
+    <h2 id="month">
+      <%= link_to "<", date: @date.prev_month %>
+      <%= @date.strftime("%B %Y") %>
+      <%= link_to ">", date: @date.next_month %>
+    </h2>
+    <%= calendar @date do |date| %>
+      <%= date.day %>
+      <% if @events_by_date[date] %>
+        <ul>
+          <% @events_by_date[date].each do |event| %>
+            <li><%= link_to "#{event.events}", event %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
 
 <table>
   <thead>
@@ -28,7 +34,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.title %></td>
+        <td><%= event.events %></td>
         <td><%= event.location %></td>
         <td><%= event.start_time %></td>
         <td><%= event.end_time %></td>

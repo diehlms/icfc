@@ -1,0 +1,17 @@
+<h1 align="center">Directory</h1>
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Email Address</th>
+        <th>Phone Number</th>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+            <tr>
+                <td><%= link_to "#{user.username}", user_path(user) %></td>
+                <td><%= user.email %></td>
+                <td><%= user.phone_number %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

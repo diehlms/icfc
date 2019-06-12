@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_232510) do
+ActiveRecord::Schema.define(version: 2019_06_12_031218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 2019_06_11_232510) do
 
   create_table "events", force: :cascade do |t|
     t.string "events"
-    t.datetime "start_time"
-    t.datetime "end_time"
     t.string "location"
+    t.date "start_time"
+    t.date "end_time"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2019_06_11_232510) do
     t.string "confirm_token"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string "phone_number"
     t.index ["email_id"], name: "index_users_on_email_id"
   end
 

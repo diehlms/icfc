@@ -5,6 +5,8 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    @events_by_date = Event.all.group_by {|i| i.start_time }
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
   end
 
   # GET /events/1
@@ -25,16 +27,11 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
-    respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
+        redirect_to events_path
       else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        redirect_to new_event_path
       end
-    end
   end
 
   # PATCH/PUT /events/1
@@ -69,6 +66,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :location, :start_time, :end_time)
+      params.require(:event).permit(:events, :location, :start_time, :end_time)
     end
 end
