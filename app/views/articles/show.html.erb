@@ -1,6 +1,9 @@
+<% if notice %>
+    <%= notice %>
+<% end %>
 <%= @article.title %>
 <div>
-    <p>Created by: <%= @article.user.username if @article.user %></p>
+    <p>Created by: <%= @article.user.username if @article.user_id %></p>
     <%= simple_format(@article.content) %>
     <% if logged_in? %>
         <%= link_to "Add comment", new_comment_path(article_id: @article.id) %>

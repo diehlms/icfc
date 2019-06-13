@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
         if @user.save
           UserMailer.registration_confirmation(@user).deliver
-          flash[:success] = "Please confirm your email address to continue"
+          flash[:notice] = "Please confirm your email address to continue"
           redirect_to root_url
         else
           respond_to do |format|

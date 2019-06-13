@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :articles
-  resources :comments, only: [:new, :create, :destroy]
+  resources :comments
   resources :users do
     member do
       get :confirm_email
@@ -9,10 +9,12 @@ Rails.application.routes.draw do
   end
   resources :sessions, only: [:new, :create, :destroy]
   resources :events
+  resources :password_resets
   
   root 'pages#home'
   
   get '/articles', to: 'articles#index'
+  get '/blog', to: 'articles#index'
   get '/users', to: 'users#index'
   get '/signup', to: 'users#new', as: 'signup'
   get '/login', to: 'sessions#new', as: 'login'

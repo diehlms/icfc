@@ -20,8 +20,7 @@ end
 def create
     @article = current_user.articles.new(article_params)
     if @article.save
-        flash[:notice] = "Article created"
-        redirect_to article_path(@article)
+        redirect_to article_path(@article), notice: "Article created"
     else
         render 'new'
     end
@@ -31,11 +30,9 @@ def update
     set_article
     @article = current_user.articles.find(params[:id])
     if @article.update(article_params)
-        flash[:notice] = "Article updated"
-        redirect_to article_path(@article)
+        redirect_to article_path(@article), notice: "Article updated"
     else
-        flash[:notice] = "There was a problem with updating the article"
-        render 'edit'
+        render 'edit', notice: "There was a problem with updating the article"
     end
 end
 
@@ -47,8 +44,7 @@ def destroy
     set_article
     @article = current_user.articles.find(params[:id])
     if @article.destroy
-        flash[:notice] = "Article was deleted"
-        redirect_to articles_path
+        redirect_to articles_path, notice: "Article was deleted"
     else
         redirect_to articles_path
     end

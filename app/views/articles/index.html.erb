@@ -1,4 +1,12 @@
 <h1>All articles</h1>
+<% if logged_in? %>
+    <%= link_to "write an article", new_article_path %>
+<% else %>
+    <p> Please <%= link_to "log in", log_in_path %> to post articles and comment</p>
+<% end %>
+<% if notice %>
+    <p class="alert alert-notice"><%= notice %></p>
+<% end %>
 <% if @articles.any? %>
     <% @articles.each do |article| %>
         <div>

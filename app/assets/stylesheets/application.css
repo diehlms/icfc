@@ -13,5 +13,6 @@
  *= require jquery-ui/datepicker
  *= require_tree .
  *= require_self
+ *= require normalize
 
  */

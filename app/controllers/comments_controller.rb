@@ -18,19 +18,16 @@ def create
     @comment.user_id = session[:user_id]
     @articleid = params[:id]
     if @comment.save
-        flash[:notice] = "Comment saved"
-        redirect_to articles_path
+        redirect_to articles_path, notice: "Comment saved"
     else
-        flash[:error] = "Error saving comment"
-        redirect_to articles_path
+        redirect_to articles_path, notice: "Error saving comment"
     end
 end
 
 def update
     @comment = Comment.find_by_id(params[:id])
     @comment.update(comment_params)
-    flash[:notice] = "Comment updated"
-    redirect_to articles_path
+    redirect_to articles_path, notice: "Comment updated"
 end
 
 def edit

@@ -56,13 +56,20 @@
           <ul class="dropdown-menu">
             <% if logged_in? %>
               <li><%= link_to "log out", logout_path, method: :delete %></li>
+              <li role="separator" class="divider"></li>
               <li><%= link_to "write a post", new_article_path %></li>
+              <li role="separator" class="divider"></li>
             <% else %>
               <li><%= link_to 'log in', login_path %></li>
+              <li role="separator" class="divider"></li>
               <li><%= link_to "sign up", new_user_path %></li>
+              <li role="separator" class="divider"></li>
             <% end %>
             <li><%= link_to 'events', events_path %></li>
+            <li role="separator" class="divider"></li>
             <li><%= link_to 'directory', users_path %><li>
+            <li role="separator" class="divider"></li>
+            <li><%= link_to "Blog", articles_path %></li>
           </ul>
         </li>
       </ul>
