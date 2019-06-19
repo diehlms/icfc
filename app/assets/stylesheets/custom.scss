@@ -1,11 +1,23 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+/* fonts */
+
+.history-section {
+    font-family: 'Amatic SC', cursive;
+    font-size: 34px;
+}
+.section-title {
+    font-family: 'Amatic SC', cursive;
+    font-size: 34px;
+}
+
 /* container */
 
 .container {
-    margin-bottom: 500px;
+    margin-bottom: 200px;
 }
+
 
 /* navbar */
 
@@ -85,3 +97,5 @@
     font-size: 11px;
     padding-left: 20px;
 }
+
+

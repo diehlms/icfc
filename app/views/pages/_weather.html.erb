@@ -1,0 +1,13 @@
+<div class="Apis">
+    <% options = { units: "metric", APPID: "7b926685adb5adb5cbd8dcdf38b63587" } %>
+    <% mactier_weather = OpenWeather::Current.geocode(45.34, -80.04, options) %>
+</div>
+
+<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Weather</div>
+    <div class="card-body">
+        <h5 class="card-title">It is currently:</h5>
+        <h5><%= mactier_weather["main"]["temp_max"].floor %></h5>
+        <h5 class="card-text">in Parry Sound</h5>
+    </div>
+</div>

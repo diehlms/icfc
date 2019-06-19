@@ -1,10 +1,29 @@
-This is the ICFC homepage.
-
-Rah rah rah, baby!
-
-
-Daily max temp of Parry Sound:
-<% options = { units: "metric", APPID: "7b926685adb5adb5cbd8dcdf38b63587" } %>
-<% mactier_weather = OpenWeather::Current.geocode(45.34, -80.04, options) %>
-<%= mactier_weather["main"]["temp_max"].floor %>
-
+<div class="dashboard">
+    <div class="row">
+        <div class="col">
+            <%= render partial: "weather" %>
+        </div>
+        <br><br>
+        <div class="col">
+            <%= render partial: "exchange_rate" %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="breakfast-card">
+                    <script src="breakfast.js"></script>
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Breakfast</h5>
+                        <p class="breakfast-card-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="col">
+            <%= render partial: "traffic" %>
+        </div>
+    </div>
+</div>

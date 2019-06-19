@@ -7,16 +7,21 @@
 <% if notice %>
     <p class="alert alert-notice"><%= notice %></p>
 <% end %>
+<br><br>
 <% if @articles.any? %>
     <% @articles.each do |article| %>
-        <div>
-            <p>Created by: <%= article.user.username if article.user %></p>                
-            <%= link_to article.title, article_path(article) %>
-            <%= truncate(article.content, length: 200) %>
-            <%= image_tag(article.image.url, alt: 'Image') if article.image? %>
-            <% if logged_in? && article.user_id == current_user.id %>                   
-                <%= button_to "Delete", article_path(article), method: :delete, data: { confirm: "Are you sure you want to delete the article?" } %>
-            <% end %>
+        <div class="card article">               
+            <div class="card-body">
+                <div clas="row">
+                <%= link_to article.title, article_path(article), :class => "card-title" %>
+                <small><p class="card-subtitle mb-2 text-muted">Created by: <%= article.user.username if article.user %></p></small>
+                <p class="card-text"><%= truncate(article.content, length: 200) %></p>
+                <%= image_tag(article.image.url, alt: 'Image', :class => "card-img-right") if article.image? %>
+                <br><br>
+                <% if logged_in? && article.user_id == current_user.id %>                   
+                    <%= button_to "Delete", article_path(article), method: :delete, data: { confirm: "Are you sure you want to delete the article?" }, :class => "btn btn-danger" %>
+                <% end %>
+            </div>
         </div>
     <% end %>
 <% end %>
