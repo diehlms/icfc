@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 
 /* fonts */
 
@@ -30,6 +31,10 @@
     .dropdown-toggle {
         color: white;
     }
+}
+
+.navbar-brand {
+    height: 58px;
 }
 
 /* footer */
