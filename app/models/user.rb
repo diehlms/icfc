@@ -8,9 +8,12 @@ class User < ActiveRecord::Base
     before_save { self.email = email.downcase }
   
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+    VALID_PHONE_REGEX = /\A(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\z/
     
     validates :email, presence: true, length: { maximum: 105 },
     uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX}
+    validates :username, presence: true, length: { minimum: 6, maximum: 16 }
+    validates :phone, presence: true, format: { with: VALID_PHONE_REGEX }
     
     def email_activate
       self.email_confirmed = true

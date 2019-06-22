@@ -1,29 +1,25 @@
 <div class="dashboard">
     <div class="row">
-        <div class="col">
+        <div class="dashboard-column">
             <%= render partial: "weather" %>
         </div>
         <br><br>
-        <div class="col">
+        <div class="dashboard-column">
             <%= render partial: "exchange_rate" %>
         </div>
     </div>
     <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="breakfast-card">
-                    <script src="breakfast.js"></script>
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Breakfast</h5>
-                        <p class="breakfast-card-text"></p>
-                    </div>
-                </div>
+        <div class="dashboard-column">
+            <div class="card-body">
+                <h5>Breakfast</h5>
+                <p id="breakfast-card-text">Text</p>
             </div>
         </div>
         <br><br>
-        <div class="col">
+        <div class="dashboard-column">
             <%= render partial: "traffic" %>
         </div>
     </div>
 </div>
+
+<script src="breakfast.js"></script>
