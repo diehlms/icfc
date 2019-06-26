@@ -3,12 +3,13 @@ class ArticlesController < ApplicationController
 before_action :set_article, only: [:edit, :update, :show, :destroy]
 helper_method :current_user, :logged_in?
 
-
 def new
     @article = current_user.articles.build
 end
 
 def show
+    user = session[:user_id]
+    @comment = Comment.new(article_id: params[:id])
     set_article
     @comments = @article.comments
 end
@@ -19,6 +20,7 @@ end
 
 def create
     @article = current_user.articles.new(article_params)
+    
     if @article.save
         redirect_to article_path(@article), notice: "Article created"
     else
@@ -57,7 +59,10 @@ private
     end
 
     def set_article
-        @article = Article.find(params[:id])
+        @article = Article.find_by_id(params[:id])
     end
 
+    def comment_params
+        params.permit(:content, :user_id, :article_id)
+    end
 end

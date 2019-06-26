@@ -9,7 +9,7 @@
             <%= simple_format(@article.content) %>
         </div>
         <div class="col md-6">
-            <%= image_tag(@article.image.url, alt: 'Image', :class => "pull-right article-image") if @article.image? %>
+            <%= image_tag(@article.image.url(:thumb), alt: 'Image', :class => "pull-right article-image") if @article.image? %>
         </div>
     </div>
 </div>
@@ -17,23 +17,27 @@
     <% if logged_in? && @article.user_id == current_user.id %>                   
         <span class="a"><%= button_to "Delete", article_path(@article), method: :delete, class: "btn btn-danger" %></span>
         <span class="a"><%= button_to "Edit", edit_article_path(@article), class: "btn btn-primary"%></span>
-    <% end %>
-    <% if logged_in? %>
-        <span class="a"><%= link_to "Add comment", new_comment_path(article_id: @article.id), class: "btn btn-success" %></span>
     <% else %>
         <span class="a"><p class="btn btn-success">please <%= link_to 'log in', login_path %> to post comments</p></span>
     <% end %>
 </div>
-<div class="comments">
-    <% @article.comments.each do |comment| %>
+<br>
+<% if logged_in? %>
+    <h3>Leave a Reply:</h3>
+    <%= render partial: "comments/form", article_id: @article_id %>
+<% end %>
+<% if @article.comments.any? %>
     <div class="comment card">
-        <div class="comment card body">
-            <small><p class="card-subtitle mb-2 text-muted"><p>Posted by <%= comment.user.username %></p></p></small>
-            <p><%= comment.content %>
-            <% if logged_in? && comment.user_id == current_user.id %>
-                <%= button_to("Delete comment", comment_path(comment), method: :delete, class: "btn btn-danger") %>
+        <div class="comment card-body">
+            <h3><% @article.comments.each do |c| %> </h3> 
+                <span><em><small>Posted by: <strong><%= link_to c.user.username %></strong> <%= time_ago_in_words(c.created_at) %> ago</small></em></span>
+                <p><%= c.content %> </p>
+                <% if logged_in? && c.user_id == current_user.id %>
+                    <span class="UIbutton"><%= button_to comment_path(c), method: :delete, class: "btn btn-xs btn-danger pull-right" do %>
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    <% end %></span>
+                <% end %>
             <% end %>
         </div>
     </div>
-    <% end %>
-</div>
+<% end %>
