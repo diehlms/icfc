@@ -1,0 +1,5 @@
+<% if @cabin %>
+    <%= @cabin.name %>
+    <%= @cabin.bedrooms %>
+    <%= image_tag(cabin.image.url(:thumb), alt: 'Image', :class => "pull-right cabin-image") if cabin.image? %>
+<% end %>

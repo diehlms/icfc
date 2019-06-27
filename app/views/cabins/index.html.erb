@@ -1,0 +1,13 @@
+Cabins
+<% if logged_in? %>
+    <p><%= link_to "Add a cabin", new_cabin_path %></p>
+<% end %>
+<% if @cabins %>
+    <% @cabins.each do |cabin| %>
+        <div>
+            <h1><%= cabin.name %></h1>
+            <h1><%= cabin.bedrooms %></h1>
+            <%= image_tag(cabin.image.url(:thumb), alt: 'Image', :class => "pull-right cabin-image") if cabin.image? %>
+        </div>
+    <% end %>
+<% end %>

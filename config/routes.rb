@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :events
   resources :password_resets
-  
+  resources :cabins
   root 'pages#home'
   
   get '/articles', to: 'articles#index'
