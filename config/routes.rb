@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :events
   resources :password_resets
   resources :cabins
+  
   root 'pages#home'
   
   get '/articles', to: 'articles#index'

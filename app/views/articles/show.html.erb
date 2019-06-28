@@ -29,7 +29,7 @@
 <% if @article.comments.any? %>
     <div class="comment card">
         <div class="comment card-body">
-            <h3><% @article.comments.each do |c| %> </h3> 
+            <% @article.comments.each do |c| %>
                 <span><em><small>Posted by: <strong><%= link_to c.user.username %></strong> <%= time_ago_in_words(c.created_at) %> ago</small></em></span>
                 <p><%= c.content %> </p>
                 <% if logged_in? && c.user_id == current_user.id %>

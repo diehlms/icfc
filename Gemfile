@@ -28,6 +28,7 @@ gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 gem 'sorcery'
 gem 'simple_calendar', '~> 2.0'
 gem 'font-awesome-rails'
+gem 'leaflet-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

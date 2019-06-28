@@ -2,12 +2,20 @@ Cabins
 <% if logged_in? %>
     <p><%= link_to "Add a cabin", new_cabin_path %></p>
 <% end %>
-<% if @cabins %>
-    <% @cabins.each do |cabin| %>
-        <div>
-            <h1><%= cabin.name %></h1>
-            <h1><%= cabin.bedrooms %></h1>
-            <%= image_tag(cabin.image.url(:thumb), alt: 'Image', :class => "pull-right cabin-image") if cabin.image? %>
-        </div>
+<div id="mapid">
+</div>
+<script src="cabins.js"></script>
+<div class="cabin-grid">
+    <% if @cabins %>
+        <% @cabins.each do |cabin| %>
+            <div class="cabin card" style="width: 24rem;">
+                <%= image_tag(cabin.image.url(:thumb), alt: 'Image', class: "cabin card-img-top") if cabin.image? %>
+                <h3 class="cabin card-title"><%= cabin.name %></h3>
+                <div class="cabin card-body">
+                    <p><%= cabin.bedrooms %> bedrooms</p>
+                    <%= link_to "Check Availability", cabin_path(cabin), class: "btn btn-primary btn-block"%>
+                </div>
+            </div>
+        <% end %>
     <% end %>
-<% end %>
+</div>

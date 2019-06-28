@@ -1,6 +1,6 @@
 class CabinsController < ApplicationController
-    before_action :set_cabin, only: [:edit, :update, :show, :destroy]
     helper_method :current_user, :logged_in?
+    before_action :set_cabin, only: [:update, :show, :edit, :destroy]
     
     def index
         @cabins = Cabin.all
@@ -10,10 +10,15 @@ class CabinsController < ApplicationController
         @cabin = Cabin.new
     end
 
+    def edit
+        set_cabin
+    end
+
     def create
-        @cabin= Cabin.new(cabin_params)
+        @cabin = Cabin.new(cabin_params)
         if @cabin.save
-            redirect_to cabin_path(@cabin), notice: "Cabin created"
+            flash[:notice] = "cabin added"
+            redirect_to cabins_path
         else
             render 'new'
         end
@@ -21,17 +26,7 @@ class CabinsController < ApplicationController
 
     def show
         set_cabin
-    end
-
-    def delete
-        set_cabin
-        if @cabin.destroy
-            flash[:notice] = "cabin deleted"
-            redirect_to cabins_path
-        else
-            flash[:notice] = "something went wrong"
-            redirect_to cabins_path
-        end
+        @date = params[:date] ? Date.parse(params[:date]) : Date.today
     end
 
     def update
@@ -45,17 +40,25 @@ class CabinsController < ApplicationController
         end
     end
 
-    def edit
+    def destroy
         set_cabin
+        if @cabin.destroy
+            flash[:notice] = "cabin deleted"
+            redirect_to cabins_path
+        else
+            flash[:notice] = "something went wrong"
+            redirect_to cabins_path
+        end
     end
 
     private
+
+        def cabin_params
+            params.require(:cabin).permit(:name, :bedrooms, :image)
+        end
 
         def set_cabin
             @cabin = Cabin.find(params[:id])
         end
 
-        def cabin_params
-            @cabin.require(:cabin).permit(:name, :bedrooms, :image)
-        end
 end
