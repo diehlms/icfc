@@ -24,3 +24,28 @@
 #mapid { 
     height: 180px; 
 }
+
+.cabin-dates {
+    padding-left: 30px;
+}
+
+.cabin-show {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    line-height: 23px;
+    .cabin-image {
+        max-width: 300px;
+    }
+    .bedrooms {
+        background-color: green;
+        color: white;
+    }
+    .dock {
+        background-color: blue;
+        color: white;
+    }
+    .wheelchair {
+        background-color: orange;
+        color: white;
+    }
+}
