@@ -1,41 +1,43 @@
-<div class="cabin-show">
-  <% if @cabin %>
-    <div class="cabin-info">
-      <h1 class="section-title"><%= @cabin.name %></h1>
-      <div class="bedrooms">
-        <i class="fa fa-bed bedrooms"></i> <%= @cabin.bedrooms %> bedrooms
+<div class="container">
+  <div class="cabin-show">
+    <% if @cabin %>
+      <div class="cabin-info">
+        <h1 class="section-title"><%= @cabin.name %></h1>
+        <div class="bedrooms">
+          <i class="fa fa-bed bedrooms"></i> <%= @cabin.bedrooms %> bedrooms
+        </div>
+        <div class="dock">
+          <i class="fa fa-anchor dock"></i> Dock
+        </div>
+        <div class="wheelchair">
+          <i class="fa fa-wheelchair wheelchair"></i> Wheelchair convenient<br>
+        </div>
+        <div class="cabin-description">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis mauris ut lectus congue dictum at quis tellus. Suspendisse potenti. Fusce vestibulum ligula non elit varius dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum maximus condimentum. Nam varius dapibus rhoncus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+        </div>
+        <div class="reservation">
+          Interested in Renting this summer?
+          Please email [OWNER] at [OWNER EMAIL] or [EMAIL PHONE] to 
+        </div>
+        <div class="cabin-images">
+          <%= image_tag(@cabin.image.url, alt: 'Image', :class => "cabin-image") if @cabin.image? %>
+        </div>
       </div>
-      <div class="dock">
-        <i class="fa fa-anchor dock"></i> Dock
+      <div class="cabin-dates">
+        <div id="articles">
+          <h1 class="section-title">Dates of Availability:</h1>
+          <h2 id="month">
+            <%= link_to "<", date: @date.prev_month %>
+            <%= @date.strftime("%B %Y") %>
+            <%= link_to ">", date: @date.next_month %>
+          </h2>
+          <%= calendar @date do |date| %>
+            <%= date.day %>
+          <% end %>
+        </div>
       </div>
-      <div class="wheelchair">
-        <i class="fa fa-wheelchair wheelchair"></i> Wheelchair convenient<br>
-      </div>
-      <div class="cabin-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis mauris ut lectus congue dictum at quis tellus. Suspendisse potenti. Fusce vestibulum ligula non elit varius dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum maximus condimentum. Nam varius dapibus rhoncus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-      </div>
-      <div class="reservation">
-        Interested in Renting this summer?
-        Please email [OWNER] at [OWNER EMAIL] or [EMAIL PHONE] to 
-      </div>
-      <div class="cabin-images">
-        <%= image_tag(@cabin.image.url, alt: 'Image', :class => "cabin-image") if @cabin.image? %>
-      </div>
-    </div>
-    <div class="cabin-dates">
-      <div id="articles">
-        <h1 class="section-title">Dates of Availability:</h1>
-        <h2 id="month">
-          <%= link_to "<", date: @date.prev_month %>
-          <%= @date.strftime("%B %Y") %>
-          <%= link_to ">", date: @date.next_month %>
-        </h2>
-        <%= calendar @date do |date| %>
-          <%= date.day %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 
-<script src="cabins.js"></script>
+  <script src="cabins.js"></script>
+</div>

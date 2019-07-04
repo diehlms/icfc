@@ -2,48 +2,28 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#homepage-row {
-    display: flex;                 
-    flex-direction: row;            
-    flex-wrap: nowrap;              
-    justify-content: space-between; 
-    color: white;
-    text-align: center;
-}
-
-#homepage-row > div {
-    width: 33%;
-    height: 300px;
-}
-
-#exchange-card {
-    background-image: url("DSC_0311.jpg");
-    background-repeat: no-repeat;
-    background-size: 450px;
-    opacity: 0.7;
-}
-
-#weather-card {
-    background-image: url("DSC_0323.jpg");
-    background-repeat: no-repeat;
-    background-size: 450px;
-    opacity: 0.7;
-}
- 
-#breakfast-card { 
+.parallax.first {
     background-image: url("DSC_0345.jpg");
+}
+.parallax.second {
+    background-image: url("DSC_0323.jpg");
+}
+.parallax.third {
+    background-image: url("DSC_0311.jpg");
+}
+.parallax {
+    min-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: 450px;
+    background-size: cover;
 }
-
-.homepage-UIactions {
-    display: flex;                 
-    flex-direction: row;            
-    flex-wrap: nowrap;              
-    justify-content: space-between; 
-    text-align: center;
-    margin-bottom: 20px;
+.parallax-text {
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: auto;
 }
-.homepage-UIactions > span {
-    width: 33%;
+.home-button {
+    margin:0 auto;
+    display: inline-block;
 }

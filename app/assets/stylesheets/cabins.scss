@@ -15,10 +15,8 @@
 }
 
 .cabin-grid {
-    margin: 0px auto;
-    display: grid;
-    grid-template-columns: 20vw 20vw 20vw 20vw;
-    grid-template-rows: auto;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-auto-flow: row;
 }
 
 #mapid { 

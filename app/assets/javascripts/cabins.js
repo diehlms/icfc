@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     cabins.forEach(function(e) {
         L.marker([e["lat"], e["long"]]).addTo(mymap)
-        .bindPopup(e["family"])
+        .bindPopup(e["family"] + " cabin \n" + "\n website link")
         .openPopup();
 });
 });

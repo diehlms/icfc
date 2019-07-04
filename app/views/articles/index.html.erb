@@ -1,33 +1,35 @@
-<h1>Fishchat</h1>
-<% if logged_in? %>
-    <%= link_to "write an article", new_article_path %>
-<% else %>
-    <p> Please <%= link_to "log in", login_path %> to post articles and comment</p>
-<% end %>
-<% if notice %>
-    <p class="alert alert-notice"><%= notice %></p>
-<% end %>
-<br><br>
-<% if @articles.any? %>
-    <% @articles.each do |article| %>
-        <div class="article-card">               
-            <div class="article card-body">
-                <div class="col md-6">
-                    <h4><%= link_to article.title, article_path(article), :class => "card-title" %></h4>
-                    <small><p class="card-subtitle mb-2 text-muted">Created by: <%= article.user.username if article.user %></p></small>
-                    <p class="card-text"><%= truncate(article.content, length: 200) %></p>
-                </div>
-                <div class="col md-6">
-                    <%= image_tag(article.image.url(:thumb), alt: 'Image', :class => "pull-right article-image") if article.image? %>
-                    <br><br>
-                </div>
-            </div>
-            <% if logged_in? && article.user_id == current_user.id %>
-                <div class="UIactions">                  
-                    <span class="a"><%= button_to "Delete", article_path(article), method: :delete, class: "btn btn-danger" %></span>
-                    <span class="a"><%= button_to "Edit", edit_article_path(article), class: "btn btn-primary"%></span>
-                </div>
-            <% end %>
-        </div>
+<div class="container">
+    <h1>Fishchat</h1>
+    <% if logged_in? %>
+        <%= link_to "write an article", new_article_path %>
+    <% else %>
+        <p> Please <%= link_to "log in", login_path %> to post articles and comment</p>
     <% end %>
-<% end %>
+    <% if notice %>
+        <p class="alert alert-notice"><%= notice %></p>
+    <% end %>
+    <br><br>
+    <% if @articles.any? %>
+        <% @articles.each do |article| %>
+            <div class="article-card">               
+                <div class="article card-body">
+                    <div class="col md-6">
+                        <h4><%= link_to article.title, article_path(article), :class => "card-title" %></h4>
+                        <small><p class="card-subtitle mb-2 text-muted">Created by: <%= article.user.username if article.user %></p></small>
+                        <p class="card-text"><%= truncate(article.content, length: 200) %></p>
+                    </div>
+                    <div class="col md-6">
+                        <%= image_tag(article.image.url(:thumb), alt: 'Image', :class => "pull-right article-image") if article.image? %>
+                        <br><br>
+                    </div>
+                </div>
+                <% if logged_in? && article.user_id == current_user.id %>
+                    <div class="UIactions">                  
+                        <span class="a"><%= button_to "Delete", article_path(article), method: :delete, class: "btn btn-danger" %></span>
+                        <span class="a"><%= button_to "Edit", edit_article_path(article), class: "btn btn-primary"%></span>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
+    <% end %>
+</div>
