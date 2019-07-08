@@ -1,21 +1,23 @@
-Cabins
-<% if logged_in? %>
-    <p><%= link_to "Add a cabin", new_cabin_path %></p>
-<% end %>
-<div id="mapid">
-</div>
-<script src="cabins.js"></script>
-<div class="cabin-grid">
-    <% if @cabins %>
-        <% @cabins.each do |cabin| %>
-            <div class="cabin card" style="width: 24rem;">
-                <%= image_tag(cabin.image.url(:thumb), alt: 'Image', class: "cabin card-img-top") if cabin.image? %>
-                <h3 class="cabin card-title"><%= cabin.name %></h3>
-                <div class="cabin card-body">
-                    <p><%= cabin.bedrooms %> bedrooms</p>
-                    <%= link_to "Check Availability", cabin_path(cabin), class: "btn btn-primary btn-block"%>
-                </div>
-            </div>
-        <% end %>
+<div class="container">
+    <h4 class="section-title">Cabins</h4>
+    <% if logged_in? %>
+        <p><%= link_to "Add a cabin", new_cabin_path %></p>
     <% end %>
+    <div id="mapid">
+    </div>
+    <script src="cabins.js"></script>
+    <div class="cabin-grid">
+        <% if @cabins %>
+            <% @cabins.each do |cabin| %>
+                <div class="cabin card" style="width: 24rem;">
+                    <%= image_tag(cabin.image.url(:thumb), alt: 'Image', class: "cabin card-img-top") if cabin.image? %>
+                    <h3 class="cabin card-title"><%= cabin.name %></h3>
+                    <div class="cabin card-body">
+                        <p><%= cabin.bedrooms %> bedrooms</p>
+                        <%= link_to "Check Availability", cabin_path(cabin), class: "btn btn-primary btn-block"%>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
 </div>

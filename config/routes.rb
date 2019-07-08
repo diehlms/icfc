@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :events
   resources :password_resets
   resources :cabins
+  resources :cabindates
   
   root 'pages#home'
   

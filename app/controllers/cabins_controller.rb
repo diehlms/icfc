@@ -26,7 +26,8 @@ class CabinsController < ApplicationController
 
     def show
         set_cabin
-        @date = params[:date] ? Date.parse(params[:date]) : Date.today
+        @cabindate = Cabindate.new(cabin_id: params[:id])
+        @cabindates = @cabin.cabindates
     end
 
     def update
@@ -61,4 +62,7 @@ class CabinsController < ApplicationController
             @cabin = Cabin.find(params[:id])
         end
 
+        def cabindate_params
+            params.require(:cabindate).permit(:startdate, :enddate, :cabin_id)
+        end
 end

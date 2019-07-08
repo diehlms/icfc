@@ -24,6 +24,29 @@
     grid-template-columns: auto;
 }
 .home-button {
-    margin:0 auto;
+    background-color: white;
+    border: 0px;
+    border-radius: 0px;
+    opacity: 0.7;
+    color: black;
+    margin: 0 auto;
     display: inline-block;
 }
+
+.home-UIbuttons {
+    margin: 0 auto;
+}
+
+
+.card-group {
+    margin: 0 auto;
+}
+.home-card {
+    display: inline-block;
+}
+
+#title {
+    font-family: 'Amatic SC', cursive;
+}
+
+

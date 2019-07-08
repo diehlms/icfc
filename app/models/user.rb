@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
     has_many :articles
     has_many :comments, through: :articles
     has_many :events
+    has_many :cabins
   
     before_save { self.email = email.downcase }
   
@@ -12,8 +13,6 @@ class User < ActiveRecord::Base
     
     validates :email, presence: true, length: { maximum: 105 },
     uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX}
-    validates :username, presence: true, length: { minimum: 6, maximum: 16 }
-    validates :phone, presence: true, format: { with: VALID_PHONE_REGEX }
     
     def email_activate
       self.email_confirmed = true
