@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_012559) do
+ActiveRecord::Schema.define(version: 2019_07_09_023913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_07_08_012559) do
     t.string "image"
   end
 
-  create_table "cabindate", force: :cascade do |t|
+  create_table "cabindates", force: :cascade do |t|
     t.date "startdate"
     t.date "enddate"
     t.integer "cabin_id"
@@ -33,10 +33,13 @@ ActiveRecord::Schema.define(version: 2019_07_08_012559) do
   create_table "cabins", force: :cascade do |t|
     t.string "name"
     t.string "bedrooms"
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.boolean "washerdryer", default: false
+    t.boolean "dock", default: false
+    t.string "description"
+    t.json "images"
   end
 
   create_table "comments", force: :cascade do |t|

@@ -9,12 +9,14 @@
     <div class="cabin-grid">
         <% if @cabins %>
             <% @cabins.each do |cabin| %>
-                <div class="cabin card" style="width: 24rem;">
-                    <%= image_tag(cabin.image.url(:thumb), alt: 'Image', class: "cabin card-img-top") if cabin.image? %>
+                <div class="cabin card">
+                    <%= image_tag(cabin.images.url(:thumb), alt: 'Image', class: "cabin card-img-top") if cabin.images? %>
                     <h3 class="cabin card-title"><%= cabin.name %></h3>
                     <div class="cabin card-body">
                         <p><%= cabin.bedrooms %> bedrooms</p>
-                        <%= link_to "Check Availability", cabin_path(cabin), class: "btn btn-primary btn-block"%>
+                        <%= link_to "Check Availability", cabin_path(cabin), class: "btn btn-success btn-block"%>
+                        <%= link_to "Edit Cabin", edit_cabin_path(cabin), class: "btn btn-info btn-block"%>
+                        <%= button_to "Delete Cabin", cabin_path(cabin), method: :delete, class: "btn btn-danger btn-block"%>
                     </div>
                 </div>
             <% end %>

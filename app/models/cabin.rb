@@ -4,6 +4,5 @@ class Cabin < ApplicationRecord
     has_many :cabindates
     belongs_to :user
 
-    mount_uploader :image, ImageUploader
-    serialize :image, JSON
+    mount_uploader :images, ImageUploader
 end

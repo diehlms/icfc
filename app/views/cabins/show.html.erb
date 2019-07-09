@@ -1,20 +1,24 @@
 <div class="container">
-  <div class="cabin-show">
-    <% if @cabin %>
-      <div class="cabin-info">
+  <div class="individual-cabin">
+    <div class="cabin-info">
+      <% if @cabin %>
         <h1 class="section-title"><%= @cabin.name %></h1>
-      </div>
-      <div id="comment-form">
-          <%= render partial: "cabindates/form", cabin_id: @cabin_id %>
-      </div>
-    <% end %>
+        <%= @cabin.bedrooms %>
+        <%= @cabin.dock %>
+        <%= @cabin.washerdryer %>
+        <%= @cabin.description %>
+      <% end %>
+    </div>
+    <div class="cabin-dates">
+      <h3>Dates of Availability:</h3>
+      <% if @cabindates.any? %>
+        <% @cabindates.each do |date| %>
+          <%= date.startdate %> to 
+          <%= date.enddate %>
+          <br>
+        <% end %>
+      <% end%>
+      <%= render partial: "cabindates/form", cabin_id: @cabin_id %>
+    </div>
   </div>
-  <% if @cabindates.any? %>
-    <% @cabindates.each do |date| %>
-      <%= date.startdate %>
-      <%= date.enddate %>
-    <% end %>
-  <% end%>
-
-  <script src="cabins.js"></script>
 </div>

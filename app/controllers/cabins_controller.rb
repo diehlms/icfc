@@ -20,6 +20,7 @@ class CabinsController < ApplicationController
             flash[:notice] = "cabin added"
             redirect_to cabins_path
         else
+            flash[:notice] = "Something went wrong with the upload. Please try again."
             render 'new'
         end
     end
@@ -55,7 +56,7 @@ class CabinsController < ApplicationController
     private
 
         def cabin_params
-            params.require(:cabin).permit(:name, :bedrooms, :image)
+            params.require(:cabin).permit(:name, :bedrooms, :washerdryer, :dock, :description, {images: []})
         end
 
         def set_cabin
