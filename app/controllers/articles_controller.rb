@@ -20,7 +20,6 @@ end
 
 def create
     @article = current_user.articles.new(article_params)
-    
     if @article.save
         redirect_to article_path(@article), notice: "Article created"
     else
