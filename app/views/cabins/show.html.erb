@@ -3,22 +3,45 @@
     <div class="cabin-info">
       <% if @cabin %>
         <h1 class="section-title"><%= @cabin.name %></h1>
-        <%= @cabin.bedrooms %>
-        <%= @cabin.dock %>
-        <%= @cabin.washerdryer %>
-        <%= @cabin.description %>
+        <button class="img-scroll-btn" onclick="plusDivs(-1)">&#10094;</button>
+        <% @cabin_attachments.each do |p| %>
+          <div class="cabin-img-container">
+            <%= image_tag p.image_url, class: "cabin-individual-img" %>
+          </div>
+        <% end %>
+        <button class="img-scroll-btn" onclick="plusDivs(1)">&#10095;</button>
+        <%= @cabin.bedrooms %><br>
+        <%= @cabin.dock %><br>
+        <%= @cabin.washerdryer %><br>
+        <%= @cabin.description %><br>
       <% end %>
     </div>
     <div class="cabin-dates">
       <h3>Dates of Availability:</h3>
       <% if @cabindates.any? %>
-        <% @cabindates.each do |date| %>
-          <%= date.startdate %> to 
-          <%= date.enddate %>
-          <br>
-        <% end %>
+        <table>
+          <thead>
+            <th>From</th>
+            <th>To</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <% @cabindates.each do |date| %>
+              <tr>
+                <td><%= date.startdate %><td>
+                <td><%= date.enddate %><td>
+                <% if logged_in? && current_user.id == @cabin.user_id %>
+                  <td><%= button_to "delete", cabindates_path(date), method: :delete, class: "btn btn-xs btn-danger" %></td>
+                <% end%>
+              </tr>
+            <% end %>
+          </tbody>
       <% end%>
-      <%= render partial: "cabindates/form", cabin_id: @cabin_id %>
+      <% if logged_in? && @cabin.user_id == current_user.id %>
+        <h5>Add dates</h5>
+        <%= render partial: "cabindates/form", cabin_id: @cabin_id %>
+      <% end %>
     </div>
   </div>
+  <script src="cabins.js"></script>
 </div>

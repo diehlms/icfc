@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :cabin_attachments
   resources :articles
   resources :comments
   resources :users do

@@ -57,8 +57,6 @@
             <% if logged_in? %>
               <li><%= link_to "log out", logout_path, method: :delete %></li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to "write a post", new_article_path %></li>
-              <li role="separator" class="divider"></li>
             <% else %>
               <li><%= link_to 'log in', "#", data: {toggle: "modal", target: "#myModal"} %></li>
               <li role="separator" class="divider"></li>

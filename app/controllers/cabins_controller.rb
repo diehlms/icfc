@@ -7,7 +7,8 @@ class CabinsController < ApplicationController
     end
 
     def new
-        @cabin = Cabin.new
+        @cabin = current_user.cabins.build
+        @cabin_attachment = @cabin.cabin_attachments.build
     end
 
     def edit
@@ -15,8 +16,11 @@ class CabinsController < ApplicationController
     end
 
     def create
-        @cabin = Cabin.new(cabin_params)
+        @cabin = current_user.cabins.build(cabin_params)
         if @cabin.save
+            params[:cabin_attachments]['image'].each do |i|
+                @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
+            end
             flash[:notice] = "cabin added"
             redirect_to cabins_path
         else
@@ -27,6 +31,7 @@ class CabinsController < ApplicationController
 
     def show
         set_cabin
+        @cabin_attachments = @cabin.cabin_attachments.all
         @cabindate = Cabindate.new(cabin_id: params[:id])
         @cabindates = @cabin.cabindates
     end
@@ -34,6 +39,9 @@ class CabinsController < ApplicationController
     def update
         set_cabin
         if @cabin.update
+            params[:cabin_attachments]['image'].each do |i|
+                @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
+            end
             flash[:notice] = "cabin updated"
             redirect_to cabins_path
         else
@@ -56,7 +64,7 @@ class CabinsController < ApplicationController
     private
 
         def cabin_params
-            params.require(:cabin).permit(:name, :bedrooms, :washerdryer, :dock, :description, {images: []})
+            params.require(:cabin).permit(:name, :bedrooms, :washerdryer, :dock, :user_id, :description, cabin_attachments_attributes: [:id, :cabin_id, :image])
         end
 
         def set_cabin

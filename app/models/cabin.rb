@@ -3,6 +3,6 @@ class Cabin < ApplicationRecord
     validates :bedrooms, presence: true
     has_many :cabindates
     belongs_to :user
-
-    mount_uploader :images, ImageUploader
+    has_many :cabin_attachments
+    accepts_nested_attributes_for :cabin_attachments
 end

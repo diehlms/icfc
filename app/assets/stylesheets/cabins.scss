@@ -28,4 +28,15 @@
 .individual-cabin {
     display: grid;
     grid-template-columns: 50% 50%;
+    grid-column-gap: 3vw;
+}
+
+.cabin-img-container {
+    background-color: black;
+}
+
+.cabin-individual-img {
+    margin: 0 auto;
+    height: 40vh;
+    display: none;
 }

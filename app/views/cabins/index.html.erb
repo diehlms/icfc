@@ -15,8 +15,13 @@
                     <div class="cabin card-body">
                         <p><%= cabin.bedrooms %> bedrooms</p>
                         <%= link_to "Check Availability", cabin_path(cabin), class: "btn btn-success btn-block"%>
-                        <%= link_to "Edit Cabin", edit_cabin_path(cabin), class: "btn btn-info btn-block"%>
-                        <%= button_to "Delete Cabin", cabin_path(cabin), method: :delete, class: "btn btn-danger btn-block"%>
+                        <% if logged_in? && current_user.id == cabin.user_id %>
+                            <%= link_to "Edit Cabin", edit_cabin_path(cabin), class: "btn btn-info btn-block"%>
+                            <%= button_to "Delete Cabin", cabin_path(cabin), method: :delete, class: "btn btn-danger btn-block"%>
+                        <% elsif logged_in? && current_user.admin? %>
+                            <%= link_to "Edit Cabin", edit_cabin_path(cabin), class: "btn btn-info btn-block"%>
+                            <%= button_to "Delete Cabin", cabin_path(cabin), method: :delete, class: "btn btn-danger btn-block"%>
+                        <% end %>
                     </div>
                 </div>
             <% end %>

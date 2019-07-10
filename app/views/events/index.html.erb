@@ -29,19 +29,22 @@
       </tr>
     </thead>
     <br>
-    <%= link_to 'Add an Event', new_event_path, class: "btn btn-block btn-success" %>
+    <% if logged_in? && current_user.admin? %>
+        <%= link_to 'Add an Event', new_event_path, class: "btn btn-block btn-success" %>
+    <% end %>
     <br>
     <tbody>
       <div class="events-display">
         <% @events.each do |event| %>
           <tr>
-            <td><%= event.events %></td>
+            <td><%= link_to event.events, event_path(event) %></td>
             <td><%= event.location %></td>
             <td><%= event.start_time %></td>
             <td><%= event.end_time %></td>
-            <td><%= link_to 'Show', event, class: "btn btn-sm btn-primary" %></td>
-            <td><%= link_to 'Edit', edit_event_path(event), class: "btn btn-sm btn-info" %></td>
-            <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+            <% if logged_in? && current_user.admin? %>
+              <td><%= link_to 'Edit', edit_event_path(event), class: "btn btn-sm btn-info" %></td>
+              <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
+            <% end %>
           </tr>
         <% end %>
       </div>

@@ -37,7 +37,6 @@
     margin: 0 auto;
 }
 
-
 .card-group {
     margin: 0 auto;
 }
@@ -47,6 +46,14 @@
 
 #title {
     font-family: 'Amatic SC', cursive;
+    font-size: 75px;
+}
+
+#subtitle {
+    font-size: 30px;
 }
 
 
+.swim-test-subtext {
+    padding: 10px;
+}

@@ -8,6 +8,7 @@
     font-family: 'Amatic SC', cursive;
     font-size: 34px;
 }
+
 .section-title {
     font-family: 'Amatic SC', cursive;
     font-size: 34px;
@@ -17,13 +18,15 @@ p {
     font-family: 'Domine', serif;
 }
 
-#title {
-    font-size: 75px;
+.alert.alert-secondary {
+    font-family: 'Domine', serif;
+    text-align: center;
+    color: black;
+    background-color: lightblue;
+    border: 1px solid lightblue;
+    border-radius: 4px;
 }
 
-#subtitle {
-    font-size: 30px;
-}
 /* container */
 
 .form-container {
@@ -60,7 +63,9 @@ p {
 
 .navbar {
     margin-bottom: 0px;
+    font-family: 'Domine', serif;
 }
+
 .navbar.navbar-default {
     background-color: black;
     border-radius: 0;
@@ -87,11 +92,5 @@ p {
     .footer-left {
         display: inline-block;
     }
-}
-
-/* customs */
-
-.swim-test-subtext {
-    padding: 10px;
 }
 
