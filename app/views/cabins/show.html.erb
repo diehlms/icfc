@@ -1,35 +1,58 @@
 <div class="container">
+  <h1 class="section-title" align="center"><%= @cabin.name %></h1>
   <div class="individual-cabin">
     <div class="cabin-info">
       <% if @cabin %>
-        <h1 class="section-title"><%= @cabin.name %></h1>
-        <button class="img-scroll-btn" onclick="plusDivs(-1)">&#10094;</button>
-        <% @cabin_attachments.each do |p| %>
-          <div class="cabin-img-container">
-            <%= image_tag p.image_url, class: "cabin-individual-img" %>
+        <% if @cabin_attachments %>
+          <div class="cabin-attachment-container">
+            <% @cabin_attachments.each do |p| %>
+              <div class="cabin-img-container">
+                <%= image_tag p.image_url, class: "cabin-individual-img" %>
+              </div>
+            <% end %>
+            <button class="img-scroll-btn pull-left" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="img-scroll-btn pull-right" onclick="plusDivs(1)">&#10095;</button>
           </div>
         <% end %>
-        <button class="img-scroll-btn" onclick="plusDivs(1)">&#10095;</button>
-        <%= @cabin.bedrooms %><br>
-        <%= @cabin.dock %><br>
-        <%= @cabin.washerdryer %><br>
-        <%= @cabin.description %><br>
+        <br><br>
+        <div class="bedrooms">
+          <p><i class="fa fa-bed"></i> <%= @cabin.bedrooms %> bedrooms</p>
+        </div>
+        <div class="dock">
+          <% if @cabin.dock %>
+            <p><i class="fa fa-ship"></i> dock accessible</p>
+          <% end %>
+        </div>
+        <div class="washerdryer">
+          <% if @cabin.washerdryer %>
+            <p><i class="fa fa-check"></i> washer/dryer</p>
+          <% end %>
+        </div>
+        <div class="description">
+          <p><%= @cabin.description %></p>
+        </div>
       <% end %>
     </div>
     <div class="cabin-dates">
       <h3>Dates of Availability:</h3>
+      <p>Contact info:</p>
+      <p><%= @cabin.user.firstname %> <%= @cabin.user.lastname %></p>
+      <p><%= @cabin.user.email %>
+      <p><%= @cabin.user.phone_number %>
       <% if @cabindates.any? %>
-        <table>
+        <table class="table table-striped">
           <thead>
-            <th>From</th>
-            <th>To</th>
-            <th></th>
+            <tr>
+              <th scope="col">From</th>
+              <th scope="col">To</th>
+              <th scope="col"></th>
+            </tr>
           </thead>
           <tbody>
             <% @cabindates.each do |date| %>
               <tr>
-                <td><%= date.startdate %><td>
-                <td><%= date.enddate %><td>
+                <td><%= date.startdate.strftime("%B %e, %Y") %><td>
+                <td><%= date.enddate.strftime("%B %e, %Y") %><td>
                 <% if logged_in? && current_user.id == @cabin.user_id %>
                   <td><%= button_to "delete", cabindates_path(date), method: :delete, class: "btn btn-xs btn-danger" %></td>
                 <% end%>
@@ -38,7 +61,7 @@
           </tbody>
       <% end%>
       <% if logged_in? && @cabin.user_id == current_user.id %>
-        <h5>Add dates</h5>
+        <h3>Add dates</h3>
         <%= render partial: "cabindates/form", cabin_id: @cabin_id %>
       <% end %>
     </div>

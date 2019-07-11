@@ -1,34 +1,44 @@
-<%= form_for @cabin do |f| %>
-    <div class="form-group">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= f.label :bedrooms %>
-        <%= f.text_field :bedrooms, class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= f.label :washerdryer, "Washer/Dryer?" %>
-        <%= f.check_box :washerdryer, class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= f.label :dock, "Dock?" %>
-        <%= f.check_box :dock, class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= f.label :description %>
-        <%= f.text_field :description, class: "form-control" %>
-    </div>
-    <div class="form-group">
-        <%= f.fields_for :cabin_attachments do |p| %>
-            <div class="field">
-                <%= p.label :image %><br>
-                <%= p.file_field :image, multiple: true, name: "cabin_attachments[image][]"%>
+<div class="cabin-form">
+    <%= form_for @cabin do |f| %>
+        <div class="row">
+            <div class="form-group col-sm-4">
+                <%= f.label :name %>
+                <%= f.text_field :name, class: "form-control" %>
             </div>
-        <% end %>
-    </div>
-    <% f.hidden_field :user_id %>
-    <div class="form-group">
-        <%= f.submit class: "btn btn-primary mb-2" %>
-    </div>
-<% end %>
+        </div>
+        <div class="row">
+            <div class="col-sm-1 form-group">
+                <%= f.label :bedrooms %>
+                <%= f.text_field :bedrooms, class: "form-control" %>
+            </div>
+            <div class="col-sm-2 form-group">
+                <%= f.label :washerdryer, "Washer/Dryer?" %>
+                <%= f.check_box :washerdryer, class: "form-control" %>
+            </div>
+            <div class="col-sm-1 form-group">
+                <%= f.label :dock, "Dock?" %>
+                <%= f.check_box :dock, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 form-group">
+                <%= f.label :description %>
+                <%= f.text_field :description, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 form-group">
+                <%= f.fields_for :cabin_attachments do |p| %>
+                    <div class="field">
+                        <%= p.label :image, "Pictures" %><br>
+                        <%= p.file_field :image, multiple: true, name: "cabin_attachments[image][]"%>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <% f.hidden_field :user_id %>
+        <div class="form-group">
+            <%= f.submit class: "btn btn-primary mb-2" %>
+        </div>
+    <% end %>
+</div>

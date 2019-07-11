@@ -1,7 +1,7 @@
 <div class="container">
     <h4 class="section-title">Cabins</h4>
     <% if logged_in? %>
-        <p><%= link_to "Add a cabin", new_cabin_path %></p>
+        <p>Are you a member and would like to add your cabin's available reservation dates? <%= link_to "Add your cabin here", new_cabin_path %></p>
     <% end %>
     <div id="mapid">
     </div>
@@ -10,7 +10,6 @@
         <% if @cabins %>
             <% @cabins.each do |cabin| %>
                 <div class="cabin card">
-                    <%= image_tag(cabin.images.url(:thumb), alt: 'Image', class: "cabin card-img-top") if cabin.images? %>
                     <h3 class="cabin card-title"><%= cabin.name %></h3>
                     <div class="cabin card-body">
                         <p><%= cabin.bedrooms %> bedrooms</p>
