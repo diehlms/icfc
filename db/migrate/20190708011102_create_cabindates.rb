@@ -1,6 +1,6 @@
-class CreateCabindate < ActiveRecord::Migration[5.2]
+class CreateCabindates < ActiveRecord::Migration[5.2]
   def change
-    create_table :cabindate do |t|
+    create_table :cabindates do |t|
       t.date :startdate
       t.date :enddate
     end
