@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     # GET /users
     # GET /users.json
     def index
-      @users = User.all.order('username ASC')
+      @users = User.all.order('lastname ASC')
     end
   
     # GET /users/1
@@ -27,11 +27,11 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
         if @user.save
           UserMailer.registration_confirmation(@user).deliver
-          flash[:notice] = "Please confirm your email address to continue"
+          flash[:notice] = "Please confirm your email address to continue. If not in your main inbox, please check your spam folder."
           redirect_to root_url
         else
           respond_to do |format|
-            flash.now[:error] = "Something went wrong!"
+            flash.now[:error] = "Something went wrong! Try again."
             format.html { render :new }
             format.json { render json: @user.errors, status: :unprocessable_entity }
           end

@@ -31,6 +31,7 @@ class EventsController < ApplicationController
         flash[:notice] = "Event added"
         redirect_to events_path
       else
+        flash[:notice] = "Something went wrong with the upload. Please try again."
         redirect_to new_event_path
       end
   end
