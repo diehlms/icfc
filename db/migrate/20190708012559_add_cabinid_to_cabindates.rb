@@ -1,5 +1,5 @@
-class AddCabinidTocabindate < ActiveRecord::Migration[5.2]
+class AddCabinidToCabindates < ActiveRecord::Migration[5.2]
   def change
-    add_column :cabindate, :cabin_id, :integer
+    add_column :cabindates, :cabin_id, :integer
   end
 end
