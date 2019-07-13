@@ -19,12 +19,11 @@
   <body>
     <%= render 'layouts/navbar' %>
       <% if notice %>
-          <div class="alert alert-secondary" role="alert">
-            <%= notice %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+        <p class= "alert alert-secondary"><%= notice %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </p>
       <% end %>
       <%= yield %>
     <%= render 'layouts/footer' %>

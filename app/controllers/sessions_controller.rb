@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
         if user && user.authenticate(params[:session][:password])
           if user.email_confirmed
               session[:user_id] = user.id
-              redirect_to '/blog', notice: "You have logged in"
+              redirect_to root_path, notice: "You have logged in"
           else
             flash.now[:error] = "Please activate your account by following the instructions in the account confirmation email you recieved. "
             render 'new'
@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
     def destroy
         session.delete(:user_id)
         @current_user = nil
+        flash[:notice] = "logged out successfully"
         redirect_to root_url
     end
 

@@ -19,14 +19,16 @@ p {
 }
 
 .alert.alert-secondary {
+    position: absolute;
+    z-index: 999;
+    width: 80%;
     font-family: 'Domine', serif;
     text-align: center;
     color: black;
     background-color: lightblue;
     border: 1px solid lightblue;
-    border-radius: 4px;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 10vw;
+    margin-top: 10px;
 }
 
 /* container */
