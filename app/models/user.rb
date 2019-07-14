@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
     has_many :comments, through: :articles
     has_many :events
     has_many :cabins
-  
+    has_many :galleries
+    
     before_save { self.email = email.downcase }
   
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

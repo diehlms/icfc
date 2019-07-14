@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :password_resets
   resources :cabins
   resources :cabindates
+  resources :galleries, only: [:new, :index, :create, :destroy]
   
   root 'pages#home'
   
