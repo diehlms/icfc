@@ -29,8 +29,9 @@ gem 'sorcery'
 gem 'simple_calendar', '~> 2.0'
 gem 'font-awesome-rails'
 gem 'leaflet-rails'
-
 # storage
+
+gem 'fog'
 gem 'aws-sdk-s3', require: false
 gem 'fog-aws', group: :production
 
