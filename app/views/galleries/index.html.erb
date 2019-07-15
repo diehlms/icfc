@@ -5,18 +5,17 @@
     <% else %>
         <p align="center">please <%= link_to "log in", login_path, data: {toggle: "modal", target: "#myModal"} %> to post pictures</p>
     <% end %>
+    <div id="pictures">
+    </div>
     <% if @galleries %>
-        <% @galleries.each do |picture| %>
-            <div class="gallery-card card">
-                <%= image_tag(picture.image.url(:thumb), class: "gallery-img") if picture.image? %>
-                <div class="card-body">
-                    <%= picture.caption %>
-                    <% if picture.user_id == current_user.id %>
-                        <%= button_to "delete image", picture_path, method: :delete, class: "btn btn-block btn-danger" %>
-                    <% end %>
+        <div class="picture-container">
+            <% @galleries.each do |picture| %>
+                <div>
+                    <%= image_tag(picture.image.url(:thumb), class: "gallery-img") if picture.image? %>
+                    <%= button_to "delete", gallery_path(picture), method: :delete, class: "btn btn-block btn-danger"%>
                 </div>
-            </div>
-        <% end %>
+            <% end %>
+        </div>
     <% end %>
 </div>
 
@@ -41,3 +40,5 @@
         </div>
     </div>
 </div>
+
+<script src="galleries.js"></script>
