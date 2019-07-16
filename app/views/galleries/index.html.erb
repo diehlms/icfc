@@ -10,9 +10,23 @@
     <% if @galleries %>
         <div class="picture-container">
             <% @galleries.each do |picture| %>
-                <div>
-                    <%= image_tag(picture.image.url(:thumb), class: "gallery-img") if picture.image? %>
-                    <%= button_to "delete", gallery_path(picture), method: :delete, class: "btn btn-block btn-danger"%>
+                <div class="card picture">
+                    <div class="card card-body picture">
+                        <%= image_tag(picture.image.url(:thumb), class: "gallery-img", id: "image=#{dom_id(picture)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(picture)}"}) if picture.image? %>
+                        <% if logged_in? && picture.user_id == current_user.id %>
+                            <%= button_to "delete", gallery_path(picture), method: :delete, class: "btn btn-xs btn-danger"%>
+                        <% end %>
+                        <div id="imgModal-<%= dom_id(picture) %>" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="model-content">
+                                    <div class="img modal-body">
+                                        <%= image_tag(picture.image.url, class: "picture-modal-whole")%>
+                                        <p class="img-caption"><%= picture.caption %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             <% end %>
         </div>

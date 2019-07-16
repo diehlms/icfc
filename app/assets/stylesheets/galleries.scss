@@ -3,7 +3,34 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .picture-container {
-    display: grid;
-    grid-template-columns: repeat(5, 20%);
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+}
+
+.gallery-img {
+    height: 20vh;
+}
+
+.card.picture {
+    margin: 2px;
+    :hover {
+        cursor: pointer;
+    }
+}
+
+.img.modal-body {
+    margin: 0 auto;
+}
+
+.picture-modal-whole {
+    max-width: 100%;
+}
+
+.img-caption {
+    color: black;
+    font-size: 14px;
+    background-color: white;
+    text-align: center;
+    padding: 5px;
 }
