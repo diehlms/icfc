@@ -1,7 +1,7 @@
 <div class="container">
     <h1 class="section-title" align="center">Pictures</h1>
     <% if logged_in? %>
-        <%= link_to "post a picture <i class='fa fa-plus'></i>".html_safe, "#", data: {toggle: "modal", target: "#galleryModal"}, class: "btn btn-lg btn-success" %>
+        <%= link_to "post a picture <i class='fa fa-plus'></i>".html_safe, "#", data: {toggle: "modal", target: "#galleryModal"}, class: "btn btn-xs btn-success pull-left" %>
     <% else %>
         <p align="center">please <%= link_to "log in", login_path, data: {toggle: "modal", target: "#myModal"} %> to post pictures</p>
     <% end %>
@@ -13,8 +13,8 @@
                 <div class="card picture">
                     <div class="card card-body picture">
                         <%= image_tag(picture.image.url(:thumb), class: "gallery-img", id: "image=#{dom_id(picture)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(picture)}"}) if picture.image? %>
-                        <% if logged_in? && picture.user_id == current_user.id %>
-                            <%= button_to "delete", gallery_path(picture), method: :delete, class: "btn btn-xs btn-danger"%>
+                        <% if logged_in? && picture.user_id = current_user.id %>
+                                <%= button_to "delete", gallery_path(picture), method: :delete, class: "btn btn-xs btn-block btn-danger"%>
                         <% end %>
                         <div id="imgModal-<%= dom_id(picture) %>" class="modal fade">
                             <div class="modal-dialog">
