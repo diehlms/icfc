@@ -2,6 +2,8 @@
     <h4 class="section-title">Cabins</h4>
     <% if logged_in? %>
         <p>Are you a member and would like to add your cabin's available reservation dates? <%= link_to "Add your cabin here", new_cabin_path %></p>
+    <% else %>
+        <p>Please <%= link_to "log in", login_path %> to post your cabin and add reservation dates. </p>
     <% end %>
     <div id="mapid">
     </div>

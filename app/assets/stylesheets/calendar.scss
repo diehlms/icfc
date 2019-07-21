@@ -47,3 +47,15 @@
     font-size: 11px;
     padding-left: 20px;
 }
+
+@media only screen and (max-device-width: 400px) {
+    .calendar.container {
+        height: 900px;
+        #articles {
+            height: 100%;
+            td {
+                height: 150px;
+            }
+        }
+    }
+}

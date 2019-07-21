@@ -11,35 +11,51 @@
         </div>
     </div>
 </div>
-<section class="container welcome">
-</section>
-<div class="parallax second">
-</div>
-<section class="container apis">
-</section>
-<div class="parallax third">
-</div>
-<section class="container UIlinks">
-    <div class="card-group">
-        <div class="home-card">
-            <div class="home-card-body">
-                <h5 class="card-title">Current Weather</h5>
-                <p class="card-text"><%= render partial: "weather" %></p>
-            </div>
+<section class="UIlinks">
+    <div class="row">
+        <div class="col-md-8 home-section" id="home-intro">
+            <h2 class="section-title">Welcome to ICFC</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in imperdiet tortor, sit amet placerat mauris. Mauris varius facilisis ex at facilisis. Aliquam at consequat arcu, non rhoncus purus. Aenean ut libero vel dui rutrum sagittis. Ut vel hendrerit leo. In hac habitasse platea dictumst. Sed elit ante, maximus id risus a, aliquam interdum ex. Mauris ut velit vulputate, finibus dui ac, luctus quam. In eu lectus libero.</p>
         </div>
-        <div class="home-card">
-            <div class="home-card-body">
-                <h5 class="card-title">Exchange Rate</h5>
-                <p class="card-text"><%= render partial: "exchange_rate" %></p>
-            </div>
+        <div class="col-md-2 home-section" id="weather">
+            <h2 class="section-title">Current Weather</h2>
+            <p class="card-text"><%= render partial: "weather" %></p>
         </div>
-        <div class="home-card">
-            <div class="home-card-body">
-                <h5 class="card-title">Breakfast</h5>
-                <p class="card-text" id="breakfast-card-text"></p>
-            </div>
+        <div class="col-md-2 home-section" id="breakfast">
+            <h2 class="section-title">Breakfast</h2>
+            <p class="card-text" id="breakfast-card-text"></p>
         </div>
     </div>
 </section>
-<script src="breakfast.js"></script>
-<script src="money.js"></script>
+<div class="parallax second">
+</div>
+<section class="container">
+</section>
+<div class="parallax third">
+</div>
+<section class="container">
+    <div class="row col-sm-offset-2">
+        <div class="emergency-contacts col-md-6">
+            <h5 class="section-title">Emergency Contacts</h5>
+            <ul class="emergency-contact-list">
+                <li>Contact 1</li>
+                <li>Contact 2</li>
+                <li>Contact 3</li>
+                <li>Contact 4</li>
+                <li>Contact 5</li>
+                <li>Contact 6</li>
+            <ul>
+        </div>
+        <div class="emergency-contacts col-md-6">
+            <h5 class="section-title">Links</h5>
+            <ul class="emergency-contact-list">
+                <li>Events</li>
+                <li>Photos</li>
+                <li>Contacts</li>
+                <li>Blog</li>
+                <li>Cabins</li>
+            <ul>
+        </div>
+    </div>
+</section>
+<script src="/assets/javascripts/breakfast.js"></script>

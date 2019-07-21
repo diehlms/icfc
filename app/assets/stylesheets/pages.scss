@@ -35,13 +35,7 @@
 
 .home-UIbuttons {
     margin: 0 auto;
-}
-
-.card-group {
-    margin: 0 auto;
-}
-.home-card {
-    display: inline-block;
+    font-family: 'Domine', serif;
 }
 
 #title {
@@ -51,8 +45,43 @@
 
 #subtitle {
     font-size: 30px;
+    font-family: 'Domine', serif;
 }
 
 .swim-test-subtext {
     padding: 10px;
+}
+
+.collapsible {
+    color: black;
+    background-color: white;
+    border: 1px solid darkgreen;
+    cursor: pointer;
+}
+
+.collapsible:hover {
+    background-color: darkgreen;
+    color: white;
+    border: 1px solid white;
+}
+
+.table-content-collapse {
+    display: none;
+    border: none;
+    overflow: hidden;
+}
+
+.table-content-collapse.table.table-bordered.table-sm {
+    margin-top: 10px;
+    td {
+        width: 25%;
+    }
+}
+
+.home-section {
+    display: inline-block;
+}
+
+.UIlinks {
+    padding: 15px;
 }

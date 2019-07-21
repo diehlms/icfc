@@ -1,4 +1,5 @@
 <% options = { units: "metric", APPID: "7b926685adb5adb5cbd8dcdf38b63587" } %>
 <% mactier_weather = OpenWeather::Current.geocode(45.34, -80.04, options) %>
-<p>It is currently:</p>
-<%= mactier_weather["main"]["temp_max"].floor %> &#176; in Parry Sound
+<p><%= mactier_weather["main"]["temp_max"].floor %> &#176; in Parry Sound</p>
+<p>Humidity: <%= mactier_weather["main"]["humidity"] %> %</p>
+<p>Wind speed: <%= mactier_weather["wind"]["speed"]%> km/h</p>

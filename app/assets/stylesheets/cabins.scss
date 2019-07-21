@@ -15,9 +15,8 @@
 }
 
 .cabin-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 17vw);
-    grid-auto-flow: row;
+    display: flex;
+    flex-wrap: auto;
 
 }
 
@@ -48,4 +47,11 @@
 .img-scroll-btn {
     position: relative;
     height: 100%;
+}
+
+@media (max-device-width: 400px) {
+    .card.cabin {
+        width: 100%;
+        overflow: hidden;
+    }
 }
