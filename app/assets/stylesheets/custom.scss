@@ -20,6 +20,18 @@ p {
     font-family: 'Domine', serif;
 }
 
+ol {
+    li {
+        font-family: 'Domine', serif;
+    }
+}
+
+l {
+    li {
+        font-family: 'Domine', serif;
+    }
+}
+
 .alert.alert-secondary {
     position: absolute;
     z-index: 999;
@@ -49,6 +61,7 @@ p {
     }
 }
 
+
 .container {
     margin-top: 30px;
     margin-bottom: 200px;
@@ -77,6 +90,7 @@ p {
 }
 
 .navbar.navbar-default {
+    padding-left: 10px;
     background-color: black;
     border-radius: 0;
     border-color: black;
@@ -104,7 +118,32 @@ p {
     }
 }
 
+.sticky {
+    position: fixed;
+    margin-bottom: 50px;
+    top: 0;
+    width: 100%;
+}
+
 @media only screen and (max-device-width: 400px) {
+    
+    small {
+        font-size: 20px;
+    }
+
+    ol {
+        li {
+            font-size: 30px;
+        }
+    }
+
+    ul {
+        li {
+            font-size: 30px;
+
+        }
+    }
+
     p {
         font-size: 30px;
     }
@@ -133,4 +172,13 @@ p {
         line-height: 45px;
     }
 
+    .parallax {
+        height: 1500px;
+    }
+
+    .home-button {
+        padding: 15px;
+        font-size: 38px;
+    }
 }
+

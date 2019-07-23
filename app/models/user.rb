@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
     
     validates :email, presence: true, length: { maximum: 105 },
     uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX}
+    validates :username, presence: true, length: { minimum: 6, maximum: 20}
     
     def email_activate
       self.email_confirmed = true

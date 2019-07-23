@@ -34,26 +34,26 @@
 <div class="parallax third">
 </div>
 <section class="container">
-    <div class="row col-sm-offset-2">
+    <div class="row">
         <div class="emergency-contacts col-md-6">
             <h5 class="section-title">Emergency Contacts</h5>
-            <ul class="emergency-contact-list">
-                <li>Contact 1</li>
-                <li>Contact 2</li>
-                <li>Contact 3</li>
-                <li>Contact 4</li>
-                <li>Contact 5</li>
-                <li>Contact 6</li>
+            <ul class="list-group list-group-flush emergency-contact-list">
+                <li class="list-group-item">Contact 1</li>
+                <li class="list-group-item">Contact 2</li>
+                <li class="list-group-item">Contact 3</li>
+                <li class="list-group-item">Contact 4</li>
+                <li class="list-group-item">Contact 5</li>
+                <li class="list-group-item">Contact 6</li>
             <ul>
         </div>
         <div class="emergency-contacts col-md-6">
             <h5 class="section-title">Links</h5>
-            <ul class="emergency-contact-list">
-                <li>Events</li>
-                <li>Photos</li>
-                <li>Contacts</li>
-                <li>Blog</li>
-                <li>Cabins</li>
+            <ul class="list-group list-group-flush emergency-contact-list">
+                <li class="list-group-item"><%= link_to "events", events_path %></li>
+                <li class="list-group-item"><%= link_to "pictures", galleries_path %></li>
+                <li class="list-group-item"><%= link_to "cabins", cabins_path %></li>
+                <li class="list-group-item"><%= link_to "blog", articles_path %></li>
+                <li class="list-group-item"><%= link_to "directory", users_path %></li>
             <ul>
         </div>
     </div>
