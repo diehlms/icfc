@@ -1,24 +1,16 @@
-# README
+# IRON CITY FISHING CLUB
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the updated site for ICFC in Georgian Bay, the greatest place in the world.
+With this updated site, users who are activated will be able to:
 
-Things you may want to cover:
+* Create and share blog posts and travel updates
 
-* Ruby version
+* Share cabin reservation dates
 
-* System dependencies
+* Admin users can post events
 
-* Configuration
+* Logged in users can see others in the directory
 
-* Database creation
+* Read up on history and the culture of ICFC
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The site is still a work in progress, and any contributions for design would be much appreciated.
