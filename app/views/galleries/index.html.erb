@@ -13,8 +13,10 @@
                 <div class="card picture">
                     <div class="card card-body picture">
                         <%= image_tag(picture.image.url(:thumb), class: "gallery-img", id: "image=#{dom_id(picture)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(picture)}"}) if picture.image? %>
-                        <% if logged_in? && picture.user_id = current_user.id %>
-                                <%= button_to "delete", gallery_path(picture), method: :delete, class: "btn btn-xs btn-block btn-danger"%>
+                        <% if logged_in? && picture.user_id == current_user.id %>
+                            <%= button_to "delete", gallery_path(picture), method: :delete, class: "btn btn-xs btn-block btn-danger" %>
+                        <% elsif logged_in? && current_user.admin? %>
+                            <%= button_to "delete", gallery_path(picture), method: :delete, class: "btn btn-xs btn-block btn-danger" %>
                         <% end %>
                         <div id="imgModal-<%= dom_id(picture) %>" class="modal fade">
                             <div class="modal-dialog">
@@ -37,7 +39,7 @@
     <div class="modal-dialog modal-login">
         <div class="model-content">
             <div class="modal-body">
-                <%= form_for @gallery, user_id: @user_id do |f| %>
+                <%= form_for @gallery do |f| %>
                 <div class="form-group">
                     <%= f.label :caption, class: "session-label" %>
                     <%= f.text_field :caption, class: "form-control", placeholder: "caption", required: "required" %>

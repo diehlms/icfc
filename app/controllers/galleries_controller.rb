@@ -1,11 +1,11 @@
 class GalleriesController < ApplicationController
 
     def new
-        @gallery = Gallery.new
+        @gallery = current_user.galleries.build
     end
 
     def create
-        @gallery = Gallery.new(galleries_params)
+        @gallery = current_user.galleries.new(galleries_params)
         if @gallery.save
             flash[:notice] = "image added!"
             redirect_to galleries_path

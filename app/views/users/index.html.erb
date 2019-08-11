@@ -14,11 +14,12 @@
                     <tr>
                         <td><%= user.lastname %></td>
                         <td><%= user.firstname %></td>
-                        <td><%= user.email %></td>
-                        <td><%= user.phone_number %></td>
+                        <td class="userinfo"><%= user.email %></td>
+                        <td class="userinfo"><%= user.phone_number %></td>
                         <% if logged_in? %>
                             <% if user.id == current_user.id %>
-                                <td><%= link_to "edit profile", edit_user_path(user), class: "btn btn-info btn-sm btn-block" %></td>
+                                <td><%= link_to "edit profile", edit_user_path(user), class: "btn btn-info btn-sm" %></td>
+                                <td><button class="hideBtn btn btn-sm">Hide my info</button></td>
                             <% end %>
                         <% end %>
                     </tr>
@@ -30,4 +31,5 @@
             <p>You must be <%= link_to "logged in", login_path %> to view the directory.</p>
         </div>
     <% end %>
+    <script src="users.js"></script>
 </div>

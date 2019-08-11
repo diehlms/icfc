@@ -54,7 +54,7 @@
                 <td><%= date.startdate.strftime("%B %e, %Y") %><td>
                 <td><%= date.enddate.strftime("%B %e, %Y") %><td>
                 <% if logged_in? && current_user.id == @cabin.user_id %>
-                  <td><%= button_to "delete", cabindates_path(date), method: :delete, class: "btn btn-xs btn-danger" %></td>
+                  <td><%= button_to "delete", cabindate_path(date), method: :delete, class: "btn btn-xs btn-danger" %></td>
                 <% end%>
               </tr>
             <% end %>
