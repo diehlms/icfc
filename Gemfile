@@ -29,7 +29,6 @@ gem 'simple_calendar', '~> 2.0'
 gem 'font-awesome-rails'
 gem 'sorcery'
 gem 'leaflet-rails'
-# gem 'webpacker', '~> 4.x'
 # storage
 
 gem 'fog'
