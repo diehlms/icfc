@@ -26,7 +26,7 @@ ol {
     }
 }
 
-l {
+ul {
     li {
         font-family: 'Domine', serif;
     }
@@ -125,60 +125,13 @@ l {
     width: 100%;
 }
 
-@media only screen and (max-device-width: 400px) {
-    
-    small {
-        font-size: 20px;
+@media only screen and (max-width: 400px) {
+
+    h1 {
+        font-size: 2px;
     }
 
-    ol {
-        li {
-            font-size: 30px;
-        }
-    }
-
-    ul {
-        li {
-            font-size: 30px;
-
-        }
-    }
-
-    p {
-        font-size: 30px;
-    }
-
-    h2, h3, h4, h5, h6, strong {
-        font-size: 40px;
-    }
-
-    .navbar {
-        height: 100px;
-        font-size: 30px;
-        padding-left: 15px;
-    }
-
-    .nav.navbar-nav {
-        padding-top: 20px;
-    }
-
-    .navbar-brand {
-        height: 60px;
-    }
-
-    .dropdown-menu li {
-        height: 45px;
-        font-size: 40px;
-        line-height: 45px;
-    }
-
-    .parallax {
-        height: 1500px;
-    }
-
-    .home-button {
-        padding: 15px;
-        font-size: 38px;
+    .home-UIbuttons {
+        font-size: 2px;
     }
 }
-

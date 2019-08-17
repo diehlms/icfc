@@ -73,18 +73,7 @@
     color: white;
 }
 
-@media only screen and (max-device-width: 400px) {
-    .modal-login {
-        width: 80%;
-        font-size: 50px;
-        a {
-            font-size: 50px;
-        }
-    }
-    .modal-login .btn {
-        background: #00ce81;
-        font-size: 60px;
-        border: none;
-        line-height: normal;
-    }
+#session-new {
+    margin-left: 30px;
+    margin-right: 30px;
 }
