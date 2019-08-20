@@ -1,32 +1,36 @@
 <div class="static container">
-  <h2 class="section-title" align="center">Forms</h2>
-  <hr>
-  <div class="panel panel-default">
-    <div class="panel-heading">Leadership Team Forms</div>
-    <ul class="list-group">
-      <li class="list-group-item"><%= link_to 'Application', '/2019_LeaderTeam_Application.pdf', target: "_blank" %></li>
-      <li class="list-group-item"><%= link_to 'Information', '/2019_LeaderTeamApplicationInformation.pdf', target: "_blank" %></li>
-    </ul>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">Waitstaff Team Forms</div>
-    <ul class="list-group">
-      <li class="list-group-item"><%= link_to 'Application', '/2018_WS_Application.pdf', target: "_blank" %></li>
-      <li class="list-group-item"><%= link_to 'Information', '/2018_WS_Application_Information.pdf', target: "_blank" %></li></li>
-      <li class="list-group-item"><%= link_to 'Regulations', '/2018_WS_Regulations.pdf', target: "_blank" %></li>
-      <li class="list-group-item"><%= link_to 'Medical', '/2018_WS_MedicalForm.pdf', target: "_blank" %></li>
-    </ul>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">Dining Hall Forms</div>
-    <ul class="list-group">
-      <li class="list-group-item"><%= link_to 'Dietary Request Forms', '/2015_SpecialDietaryRequestForm.pdf', target: "_blank" %></li>
-    </ul>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">Work Order Forms</div>
-    <ul class="list-group">
-      <li class="list-group-item"><%= link_to 'Work Order Forms', '/WorkOrder.pdf', target: "_blank" %></li>
-    </ul>
-  </div>
+  <% if logged_in? %>
+    <h2 class="section-title" align="center">Forms</h2>
+    <hr>
+    <div class="panel panel-default">
+      <div class="panel-heading">Leadership Team Forms</div>
+      <ul class="list-group">
+        <li class="list-group-item"><%= link_to 'Application', '/2019_LeaderTeam_Application.pdf', target: "_blank" %></li>
+        <li class="list-group-item"><%= link_to 'Information', '/2019_LeaderTeamApplicationInformation.pdf', target: "_blank" %></li>
+      </ul>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Waitstaff Team Forms</div>
+      <ul class="list-group">
+        <li class="list-group-item"><%= link_to 'Application', '/2018_WS_Application.pdf', target: "_blank" %></li>
+        <li class="list-group-item"><%= link_to 'Information', '/2018_WS_Application_Information.pdf', target: "_blank" %></li></li>
+        <li class="list-group-item"><%= link_to 'Regulations', '/2018_WS_Regulations.pdf', target: "_blank" %></li>
+        <li class="list-group-item"><%= link_to 'Medical', '/2018_WS_MedicalForm.pdf', target: "_blank" %></li>
+      </ul>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Dining Hall Forms</div>
+      <ul class="list-group">
+        <li class="list-group-item"><%= link_to 'Dietary Request Forms', '/2015_SpecialDietaryRequestForm.pdf', target: "_blank" %></li>
+      </ul>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Work Order Forms</div>
+      <ul class="list-group">
+        <li class="list-group-item"><%= link_to 'Work Order Forms', '/WorkOrder.pdf', target: "_blank" %></li>
+      </ul>
+    </div>
+  <% else %>
+    <p>Please <%= link_to "log in", login_path %> to view this page. </p>
+  <% end %>
 </div>

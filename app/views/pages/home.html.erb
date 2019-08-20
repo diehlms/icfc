@@ -3,12 +3,14 @@
     <br><br>
         <h1 id="title" align="center">Iron City Fishing Club</h1>
         <h3 id="subtitle" align="center">45.112183 | -80.043042</h3>
-        <div class="home-UIbuttons">
-            <%= link_to "blog", articles_path, class: "btn btn-primary home-button" %>
-            <%= link_to "directory", users_path, class: "btn btn-primary home-button" %>
-            <%= link_to "calendar", events_path, class: "btn btn-primary home-button" %>
-            <%= link_to "cabin reservations", cabins_path, class: "btn btn-primary home-button" %>
-        </div>
+        <% if logged_in? %>
+            <div class="home-UIbuttons">
+                <%= link_to "blog", articles_path, class: "btn btn-primary home-button" %>
+                <%= link_to "directory", users_path, class: "btn btn-primary home-button" %>
+                <%= link_to "calendar", events_path, class: "btn btn-primary home-button" %>
+                <%= link_to "cabin reservations", cabins_path, class: "btn btn-primary home-button" %>
+            </div>
+        <% end %>
     </div>
 </div>
 <section class="UIlinks">
@@ -38,29 +40,31 @@
 </section>
 <div class="parallax parallax-container parallax third">
 </div>
-<section class="container">
-    <div class="row">
-        <div class="emergency-contacts col-md-6">
-            <h5 class="section-title">Emergency Contacts</h5>
-            <ul class="list-group list-group-flush emergency-contact-list">
-                <li class="list-group-item">Contact 1</li>
-                <li class="list-group-item">Contact 2</li>
-                <li class="list-group-item">Contact 3</li>
-                <li class="list-group-item">Contact 4</li>
-                <li class="list-group-item">Contact 5</li>
-                <li class="list-group-item">Contact 6</li>
-            <ul>
+<% if logged_in? %>
+    <section class="container">
+        <div class="row">
+            <div class="emergency-contacts col-md-6">
+                <h5 class="section-title">Emergency Contacts</h5>
+                <ul class="list-group list-group-flush emergency-contact-list">
+                    <li class="list-group-item">Contact 1</li>
+                    <li class="list-group-item">Contact 2</li>
+                    <li class="list-group-item">Contact 3</li>
+                    <li class="list-group-item">Contact 4</li>
+                    <li class="list-group-item">Contact 5</li>
+                    <li class="list-group-item">Contact 6</li>
+                <ul>
+            </div>
+            <div class="emergency-contacts col-md-6">
+                <h5 class="section-title">Links</h5>
+                <ul class="list-group list-group-flush emergency-contact-list">
+                    <li class="list-group-item"><%= link_to "events", events_path %></li>
+                    <li class="list-group-item"><%= link_to "pictures", galleries_path %></li>
+                    <li class="list-group-item"><%= link_to "cabins", cabins_path %></li>
+                    <li class="list-group-item"><%= link_to "blog", articles_path %></li>
+                    <li class="list-group-item"><%= link_to "directory", users_path %></li>
+                <ul>
+            </div>
         </div>
-        <div class="emergency-contacts col-md-6">
-            <h5 class="section-title">Links</h5>
-            <ul class="list-group list-group-flush emergency-contact-list">
-                <li class="list-group-item"><%= link_to "events", events_path %></li>
-                <li class="list-group-item"><%= link_to "pictures", galleries_path %></li>
-                <li class="list-group-item"><%= link_to "cabins", cabins_path %></li>
-                <li class="list-group-item"><%= link_to "blog", articles_path %></li>
-                <li class="list-group-item"><%= link_to "directory", users_path %></li>
-            <ul>
-        </div>
-    </div>
-</section>
+    </section>
+<% end %>
 <script src="/assets/javascripts/breakfast.js"></script>

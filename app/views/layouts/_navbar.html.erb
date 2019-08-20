@@ -11,26 +11,28 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Camp Info <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to 'Forms', forms_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'History', history_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'By-Laws', bylaws_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Membership', membership_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Customs & Traditions', customs_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Charitable Gift Fund', charitable_gift_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Planned Giving', planned_giving_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Family Agreements Policy', familyagreements_path %></li>
-          </ul>
-        </li>
+        <% if logged_in? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Camp Info <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Forms', forms_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'History', history_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'By-Laws', bylaws_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Membership', membership_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Customs & Traditions', customs_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Charitable Gift Fund', charitable_gift_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Planned Giving', planned_giving_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Family Agreements Policy', familyagreements_path %></li>
+            </ul>
+          </li>
+        <% end %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">External Links <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -57,25 +59,24 @@
             <% if logged_in? %>
               <li><%= link_to "log out", logout_path, method: :delete %></li>
               <li role="separator" class="divider"></li>
+              <li><%= link_to 'events', events_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'pictures', galleries_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'directory', users_path %><li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "blog", articles_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "cabins", cabins_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'in season reservations', 'https://www.pronto2.com/icfc/' %><li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'out of season reservations', 'https://www.pronto2.com/icfc/offseason.php' %></li>
             <% else %>
               <li><%= link_to 'log in', "#", data: {toggle: "modal", target: "#myModal"} %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "sign up", new_user_path %></li>
-              <li role="separator" class="divider"></li>
             <% end %>
-            <li><%= link_to 'events', events_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'pictures', galleries_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'directory', users_path %><li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to "blog", articles_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to "cabins", cabins_path %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'in season reservations', 'https://www.pronto2.com/icfc/' %><li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'out of season reservations', 'https://www.pronto2.com/icfc/offseason.php' %></li>
           </ul>
         </li>
       </ul>
