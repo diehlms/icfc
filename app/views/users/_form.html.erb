@@ -1,5 +1,6 @@
 <div class="container user-form col-sm-offset-1">
     <%= form_with(model: user, local: true) do |form| %>
+    <%= render 'layouts/error_messages', object: @user %>
     <div class="row">
         <div class="col-sm-3 user-names">
             <%= form.label :username %>

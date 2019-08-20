@@ -1,11 +1,12 @@
 class User < ActiveRecord::Base
     before_create :confirmation_token
     has_secure_password
-    has_many :articles
+    has_many :articles, dependent: :destroy
     has_many :comments, through: :articles
-    has_many :events
-    has_many :cabins
-    has_many :galleries
+    has_many :events, dependent: :destroy
+    has_many :cabins, dependent: :destroy
+    has_many :galleries, dependent: :destroy
+    has_many :events, dependent: :destroy
     
     before_save { self.email = email.downcase }
   
@@ -14,6 +15,7 @@ class User < ActiveRecord::Base
     
     validates :email, presence: true, length: { maximum: 105 },
     uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX}
+    validates :phone_number, presence: true, format: { with: VALID_PHONE_REGEX }
     validates :username, presence: true, length: { minimum: 6, maximum: 20}
     
     def email_activate

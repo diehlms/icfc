@@ -1,5 +1,6 @@
 <div class="cabin-form">
     <%= form_for @cabin do |f| %>
+        <%= render 'layouts/error_messages', object: @cabin %>
         <div class="row">
             <div class="form-group col-sm-4">
                 <%= f.label :name %>

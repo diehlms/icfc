@@ -1,6 +1,7 @@
 <div class="form-container">
     <div class="article-form">
         <%= form_for @article do |f| %>
+            <%= render 'layouts/error_messages', object: @article %>
             <div class="row">
                 <div class="form-group">
                     <%= f.label :title %>

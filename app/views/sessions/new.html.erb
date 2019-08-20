@@ -4,6 +4,7 @@
     <% end %>
     <div id="session-new">
         <%= form_for(:session, url: login_path) do |f| %>
+            <%= render 'layouts/error_messages', object: @session %>
             <div class="row">
                 <div class="form-group">
                     <%= f.label :email%>

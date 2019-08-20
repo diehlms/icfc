@@ -1,4 +1,5 @@
 <%= form_for @gallery do |f| %>
+    <%= render 'layouts/error_messages', object: @gallery %>
     <%= f.label :caption %>
     <%= f.text_field :caption%>
     <%= f.label :picture %>
