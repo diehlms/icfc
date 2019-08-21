@@ -1,13 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var mymap = L.map('mapid').setView([45.11, -80.04], 15);
-
+$(document).ready(function() {
+    let mymap = L.map('mapid').setView([45.11, -80.04], 15);
+  
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGllaGxtcyIsImEiOiJjanhmaWFhbTYxMDNtM29wazh4anY3Y2xzIn0.-vBDlIpg4TPa5IL7RLKjbg', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoiZGllaGxtcyIsImEiOiJjanhmaWFhbTYxMDNtM29wazh4anY3Y2xzIn0.-vBDlIpg4TPa5IL7RLKjbg'
     }).addTo(mymap);
-
+  
     let cabins = [
         {
           "lat": 45.110723,
@@ -270,30 +270,37 @@ document.addEventListener('DOMContentLoaded', function() {
           "family": "Caretaker's"
         }
        ]
-
+  
     cabins.forEach(function(e) {
         L.marker([e["lat"], e["long"]]).addTo(mymap)
         .bindPopup(e["family"] + " cabin")
         .openPopup();
+    });
 });
-});
 
-let slideIndex = 1;
-showDivs(slideIndex);
 
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
+$(document).ready(function() {
 
-function showDivs(n) {
-  let i;
+  let slideIndex = 1;
+
+  showDivs(slideIndex);
+
+  function plusDivs(n) {
+    showDivs(slideIndex += n);
+  }
+
   let x = document.getElementsByClassName("cabin-individual-img");
-  if (n > x.length) {
-    slideIndex = 1
-  } if (n < 1) {
-    slideIndex = x.length
-  } for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  } 
-  x[slideIndex - 1].style.display = "block";
-}
+
+  function showDivs(n) {
+    let i;
+    let x = document.getElementsByClassName("cabin-individual-img");
+    if (n > x.length) {
+      slideIndex = 1
+    } if (n < 1) {
+      slideIndex = x.length
+    } for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    } 
+    x[slideIndex - 1].style.display = "block";
+  }
+});

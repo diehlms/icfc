@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+function breakfastText() {
     const card = document.querySelector('#breakfast-card-text');
     let p = document.createElement('p');
     let d = new Date();
@@ -18,4 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
             break;
     };
     card.appendChild(p);
-});
+}
+
+document.addEventListener('DOMContentLoaded', breakfastText);

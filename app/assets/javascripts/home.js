@@ -1,3 +1,10 @@
+$(document).ready(function() {
+    $('.colorButton').click(function(e) {
+        e.preventDefault();
+        console.log('123');
+    })
+})
+
 objectFitImages();
 
 /* init Jarallax */

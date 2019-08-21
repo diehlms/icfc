@@ -17,7 +17,6 @@
 //= require jquery-ui/widgets/datepicker
 //= require bootstrap
 //= require activestorage
-//= require turbolinks
 //= require_tree .
 
 
@@ -29,20 +28,5 @@ $(document).ready(function(){
     });
 })
 
+
 $('.alert').alert()
-
-document.addEventListener("DOMContentLoaded", function() {
-    window.onscroll = function() { scroll()};
-
-    let navbar = document.getElementById("primary-nav");
-
-    let sticky = navbar.offsetTop;
-
-    function scroll() {
-        if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky");
-        } else {
-            navbar.classList.remove("sticky")
-        }
-    }
-})
