@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :cabins
   resources :cabindates
   resources :galleries, only: [:new, :index, :create, :destroy]
+  resources :families
   
   root 'pages#home'
   

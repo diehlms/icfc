@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
     
     before_save { self.email = email.downcase }
   
+    self.per_page = 20
+    
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     VALID_PHONE_REGEX = /\A(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\z/
     

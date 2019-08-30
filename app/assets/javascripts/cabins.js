@@ -279,28 +279,25 @@ $(document).ready(function() {
 });
 
 
-$(document).ready(function() {
+let slideIndex = 1;
 
-  let slideIndex = 1;
+showDivs(slideIndex);
 
-  showDivs(slideIndex);
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
 
-  function plusDivs(n) {
-    showDivs(slideIndex += n);
-  }
+let x = document.getElementsByClassName("cabin-individual-img");
 
+function showDivs(n) {
+  let i;
   let x = document.getElementsByClassName("cabin-individual-img");
-
-  function showDivs(n) {
-    let i;
-    let x = document.getElementsByClassName("cabin-individual-img");
-    if (n > x.length) {
-      slideIndex = 1
-    } if (n < 1) {
-      slideIndex = x.length
-    } for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    } 
-    x[slideIndex - 1].style.display = "block";
-  }
-});
+  if (n > x.length) {
+    slideIndex = 1
+  } if (n < 1) {
+    slideIndex = x.length
+  } for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  } 
+  x[slideIndex - 1].style.display = "block";
+}

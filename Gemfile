@@ -29,6 +29,8 @@ gem 'simple_calendar', '~> 2.0'
 gem 'font-awesome-rails'
 gem 'sorcery'
 gem 'leaflet-rails'
+gem 'will_paginate', '~> 3.1.1'
+gem 'will_paginate-bootstrap'
 # storage
 
 gem 'fog'

@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+    self.per_page = 10
+    
     has_many :comments, dependent: :destroy
     belongs_to :user
 

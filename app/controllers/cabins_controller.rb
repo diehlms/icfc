@@ -38,7 +38,7 @@ class CabinsController < ApplicationController
 
     def update
         set_cabin
-        if @cabin.update
+        if @cabin.update(cabin_params)
             params[:cabin_attachments]['image'].each do |i|
                 @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
             end

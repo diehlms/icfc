@@ -1,0 +1,10 @@
+<div class="container">
+    <h1 class="section-title">Add a family</h1>
+    <%= form_for @family do |f| %>
+        <div class="form-group">
+            <%= f.label :familyname %>
+            <%= f.text_field :familyname %>
+            <%= f.submit %>
+        </div>
+    <% end %>
+</div>
