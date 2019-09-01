@@ -1,8 +1,10 @@
 <div class="container">
     <h1 class="section-title" align="center">Pictures</h1>
-    <% if logged_in? %>
-        <%= link_to "post a picture <i class='fa fa-plus'></i>".html_safe, "#", data: {toggle: "modal", target: "#galleryModal"}, class: "add-pic btn btn-success" %>
-    <% end %>
+    <div id="add-pic-button">
+        <% if logged_in? %>
+            <%= link_to "post a picture <i class='fa fa-plus'></i>".html_safe, "#", data: {toggle: "modal", target: "#galleryModal"}, class: 'btn btn-success' %>
+        <% end %>
+    </div>
     <div id="pictures">
     </div>
     <% if @galleries %>

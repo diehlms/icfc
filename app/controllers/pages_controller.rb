@@ -4,6 +4,7 @@ class PagesController < ApplicationController
     require 'open_weather'
     
     def home
+        @encampment = Date.today.year - 1881
     end
     
     def forms

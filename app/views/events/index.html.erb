@@ -18,7 +18,11 @@
         <% end %>
       <% end %>
     </div>
-    <table class="table">
+    <br>
+    <% if logged_in? %>
+          <%= link_to 'Add an Event', new_event_path, class: "btn btn-block btn-success" %>
+      <% end %>
+    <!-- <table class="table">
       <thead>
         <tr>
           <th>Event</th>
@@ -29,11 +33,7 @@
         </tr>
       </thead>
       <br>
-      <% if logged_in? && current_user.admin? %>
-          <%= link_to 'Add an Event', new_event_path, class: "btn btn-block btn-success" %>
-      <% end %>
-      <br>
-      <tbody>
+     <tbody>
         <div class="events-display">
           <% @events.each do |event| %>
             <tr>
@@ -49,6 +49,7 @@
           <% end %>
         </div>
       </tbody>
+      -->
     </table>
   <% else %>
     <p>Please <%= link_to "log in", login_path %> to view the events page. </p>
