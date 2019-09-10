@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_195150) do
+ActiveRecord::Schema.define(version: 2019_09_10_195803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_195150) do
     t.date "start_time"
     t.date "end_time"
     t.string "description"
+    t.integer "user_id"
   end
 
   create_table "families", force: :cascade do |t|
@@ -106,4 +107,5 @@ ActiveRecord::Schema.define(version: 2019_09_09_195150) do
   add_foreign_key "cabindates", "cabins"
   add_foreign_key "cabins", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "events", "users"
 end
