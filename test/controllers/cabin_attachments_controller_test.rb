@@ -15,14 +15,6 @@ class CabinAttachmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create cabin_attachment" do
-    assert_difference('CabinAttachment.count') do
-      post cabin_attachments_url, params: { cabin_attachment: { cabin_id: @cabin_attachment.cabin_id, image: @cabin_attachment.image } }
-    end
-
-    assert_redirected_to cabin_attachment_url(CabinAttachment.last)
-  end
-
   test "should show cabin_attachment" do
     get cabin_attachment_url(@cabin_attachment)
     assert_response :success

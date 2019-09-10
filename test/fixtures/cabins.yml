@@ -3,9 +3,7 @@
 one:
   name: MyString
   bedrooms: MyString
-  image: MyString
 
 two:
   name: MyString
   bedrooms: MyString
-  image: MyString

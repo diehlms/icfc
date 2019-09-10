@@ -1,13 +1,12 @@
 <div class="container">
     <h1 align="center" class="section-title">Directory</h1>
     <% if logged_in? %>
-        <table class="table">
+        <table class="users-table table">
             <thead>
                 <th>Last Name</th>
                 <th>First Name</th>
                 <th>Email Address</th>
                 <th>Phone Number</th>
-                <th></th>
             </thead>
             <tbody>
                 <% @users.each do |user| %>
@@ -30,5 +29,4 @@
             <p>You must be <%= link_to "logged in", login_path %> to view the directory.</p>
         </div>
     <% end %>
-    <script src="users.js"></script>
 </div>

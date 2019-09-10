@@ -29,7 +29,7 @@ class CabindatesController < ApplicationController
         @cabinid = params[:id]
         if @cabindate.save
             flash[:notice] = "date added"
-            redirect_to cabins_path
+            redirect_to @cabindate
         else
             render 'new'
         end

@@ -6,7 +6,7 @@
         <p>Please <%= link_to "log in", login_path %> to post your cabin and add reservation dates. </p>
     <% end %>
     <% if logged_in? %>
-        <div id="mapid">
+        <div id="mapid" data-turbolinks="false">
         </div>
         <div class="cabin-grid">
             <% if @cabins %>

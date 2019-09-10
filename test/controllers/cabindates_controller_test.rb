@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class cabindateControllerTest < ActionDispatch::IntegrationTest
+class CabindateControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

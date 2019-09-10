@@ -10,11 +10,10 @@ class SessionsController < ApplicationController
               session[:user_id] = user.id
               redirect_to root_path, notice: "You have logged in"
           else
-            flash.now[:error] = "Please activate your account by following the instructions in the account confirmation email you recieved. "
-            render 'new'
+            redirect_to new_session_path, notice: "Please activate your account by following the instructions in the account confirmation email you recieved. "
           end
         else
-          render 'new', notice: "Invalid email/password combination"
+          redirect_to new_session_path, notice: "Invalid email/password combination"
         end
       end
 
