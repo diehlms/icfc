@@ -1,6 +1,9 @@
 <div class="container">
     <h1 align="center" class="section-title">Directory</h1>
     <% if logged_in? %>
+        <% if logged_in? %>
+            <%= link_to "edit profile", edit_user_path(current_user.id), class: "edit-user-btn btn btn-info btn-xs" %>
+        <% end %>
         <table class="users-table table">
             <thead>
                 <th>Last Name</th>
@@ -10,17 +13,14 @@
             </thead>
             <tbody>
                 <% @users.each do |user| %>
+                    <% will_paginate @users %>
                     <tr>
                         <td><%= user.lastname %></td>
                         <td><%= user.firstname %></td>
-                        <td class="userinfo"><%= user.email %></td>
-                        <td class="userinfo"><%= user.phone_number %></td>
-                        <% if logged_in? %>
-                            <% if user.id == current_user.id %>
-                                <td><%= link_to "edit profile", edit_user_path(user), class: "btn btn-info btn-sm" %></td>
-                            <% end %>
-                        <% end %>
+                        <td><%= user.email %></td>
+                        <td><%= user.phone_number %></td>
                     </tr>
+                    <% will_paginate @users %>
                 <% end %>
             </tbody>
         </table>

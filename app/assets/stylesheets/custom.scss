@@ -140,3 +140,9 @@ ul {
         font-size: 2px;
     }
 }
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: white;
+    }
+}

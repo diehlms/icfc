@@ -29,6 +29,9 @@
                         <div class="UIactions">                  
                             <span class="a"><%= button_to "Delete", article_path(article), method: :delete, class: "btn btn-danger" %></span>
                             <span class="a"><%= link_to "Edit", edit_article_path(article), class: "btn btn-primary"%></span>
+                            <% if article.comments.any? %>
+                                <span class="comment-count"><%= pluralize(article.comments.count, 'comment') %></span>
+                            <% end %>
                         </div>
                     <% end %>
                 </div>

@@ -26,10 +26,11 @@
     <% else %>
         <span class="a"><p class="btn btn-success">please <%= link_to 'log in', login_path %> to post comments</p></span>
     <% end %>
-    <% if @article.comments.any? %>
+    <% if @comments.any? %>
+        <%= will_paginate @comments %>
         <div class="comment card">
             <div class="comment card-body">
-                <% @article.comments.each do |c| %>
+                <% @comments.each do |c| %>
                     <span><em><small>Posted by: <strong><%= link_to c.user.username %></strong> <%= time_ago_in_words(c.created_at) %> ago</small></em></span>
                     <p><%= c.content %> </p>
                     <% if logged_in? && c.user_id == current_user.id %>

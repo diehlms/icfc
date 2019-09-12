@@ -20,7 +20,6 @@
 //= require_tree .
 
 
-
 $(document).ready(function() {
     $('.collapsible').click(function(){
         $(this).next().hasClass('collapse-table') ? $(this).next().removeClass('collapse-table') : $(this).next().addClass('collapse-table')
