@@ -533,6 +533,7 @@ DEPENDENCIES
   fog
   fog-aws
   font-awesome-rails
+  guard
   guard-livereload (~> 2.5)
   jbuilder (~> 2.5)
   jquery-rails (~> 4.3, >= 4.3.3)

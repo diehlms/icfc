@@ -283,7 +283,7 @@ $(document).ready(function() {
 $(document).ready(function() {
   if ($('.cabin-individual-img').length > 0 ) {
     let slideIndex = 1;
-
+    
     showDivs(slideIndex);
 
     function plusDivs(n) {
@@ -304,5 +304,16 @@ $(document).ready(function() {
       } 
       x[slideIndex - 1].style.display = "block";
     }
+
+    $('#leftButton').click(function() {
+      plusDivs(1)
+    })
+    $('#rightButton').click(function(){ 
+      plusDivs(-1)
+    })
+
+  } else {
+    $('#leftButton').css('display', 'none');
+    $('#rightButton').css('display', 'none');
   }
 })

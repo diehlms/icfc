@@ -18,8 +18,10 @@ class CabinsController < ApplicationController
     def create
         @cabin = current_user.cabins.build(cabin_params)
         if @cabin.save
-            params[:cabin_attachments]['image'].each do |i|
-                @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
+            if params[:cabin_attachments]
+                params[:cabin_attachments]['image'].each do |i|
+                    @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
+                end
             end
             flash[:notice] = "cabin added"
             redirect_to cabins_path

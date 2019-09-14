@@ -49,6 +49,16 @@
     height: 100%;
 }
 
+#leftButton, #rightButton {
+    color: black;
+    display: inline-block;
+    border: none;
+    width: 50%;
+    background-color: lightgrey;
+    &:hover {
+        background-color: #ddd;
+    }
+}
 @media (max-device-width: 400px) {
     .card.cabin {
         width: 100%;

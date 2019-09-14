@@ -79,10 +79,6 @@
     }
 }
 
-// nav .navbar-nav li a {
-//     color: white !important;
-// }
-
 .home-section {
     display: inline-block;
 }
@@ -94,29 +90,17 @@
 @media only screen and (max-width: 400px) {
     .parallax.first {
         background-image: url("DSC_0345.jpg") no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
         background-size: 375px auto;
-        height: 100%;
         overflow: hidden;
     }
     .parallax.second {
         background-image: url("DSC_0323.jpg") no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
         background-size: 375px auto;
-        height: 100%;
         overflow: hidden;
     }
     .parallax.third {
         background-image: url("DSC_0311.jpg") no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
         background-size: 375px auto;
-        height: 100%;
         overflow: hidden;
     }
 }

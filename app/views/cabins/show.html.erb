@@ -10,8 +10,8 @@
                 <%= image_tag p.image_url, class: "cabin-individual-img" %>
               </div>
             <% end %>
-            <button class="img-scroll-btn pull-left" onclick="plusDivs(-1)">&#10094;</button>
-            <button class="img-scroll-btn pull-right" onclick="plusDivs(1)">&#10095;</button>
+            <button id="leftButton" class="img-scroll-btn pull-left" >&#10094;</button>
+            <button id="rightButton" class="img-scroll-btn pull-right" >&#10095;</button>
           </div>
         <% end %>
         <br><br>
@@ -66,5 +66,4 @@
       <% end %>
     </div>
   </div>
-  <script src="cabins.js"></script>
 </div>
