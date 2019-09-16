@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_195803) do
+ActiveRecord::Schema.define(version: 2019_09_16_204256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 2019_09_10_195803) do
     t.boolean "washerdryer", default: false
     t.boolean "dock", default: false
     t.string "description"
+    t.integer "price_per_week"
+    t.integer "price_per_day"
   end
 
   create_table "comments", force: :cascade do |t|

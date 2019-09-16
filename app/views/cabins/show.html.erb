@@ -28,6 +28,14 @@
             <p><i class="fa fa-check"></i> washer/dryer</p>
           <% end %>
         </div>
+        <div class="washerdryer">
+          <% if @cabin.price_per_day %>
+            <p>$<%= @cabin.price_per_day %> per day</p>
+          <% end %>
+          <% if @cabin.price_per_week %>
+            <p>$<%= @cabin.price_per_week %> per week</p>
+          <% end %>
+        </div>
         <div class="description">
           <p><%= @cabin.description %></p>
         </div>

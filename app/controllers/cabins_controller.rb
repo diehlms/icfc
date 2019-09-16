@@ -41,8 +41,10 @@ class CabinsController < ApplicationController
     def update
         set_cabin
         if @cabin.update(cabin_params)
-            params[:cabin_attachments]['image'].each do |i|
-                @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
+            if params[:cabin_attachments]
+                params[:cabin_attachments]['image'].each do |i|
+                    @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
+                end
             end
             flash[:notice] = "cabin updated"
             redirect_to cabins_path
@@ -66,7 +68,7 @@ class CabinsController < ApplicationController
     private
 
         def cabin_params
-            params.require(:cabin).permit(:name, :bedrooms, :washerdryer, :dock, :user_id, :description, cabin_attachments_attributes: [:id, :cabin_id, :image])
+            params.require(:cabin).permit(:name, :bedrooms, :washerdryer, :dock, :user_id, :price_per_week, :price_per_day, :description, cabin_attachments_attributes: [:id, :cabin_id, :image])
         end
 
         def set_cabin
