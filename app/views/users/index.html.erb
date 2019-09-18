@@ -13,14 +13,14 @@
             </thead>
             <tbody>
                 <% @users.each do |user| %>
-                    <% will_paginate @users %>
+                    <% will_paginate @users, class: "pagination-style" %>
                     <tr>
                         <td><%= user.lastname %></td>
                         <td><%= user.firstname %></td>
                         <td><%= user.email %></td>
                         <td><%= user.phone_number %></td>
                     </tr>
-                    <% will_paginate @users %>
+                    <% will_paginate @users, class: "pagination-style" %>
                 <% end %>
             </tbody>
         </table>

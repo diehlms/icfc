@@ -90,17 +90,17 @@
 @media only screen and (max-width: 400px) {
     .parallax.first {
         background-image: url("DSC_0345.jpg") no-repeat center center fixed;
-        background-size: 375px auto;
+        background-size: 375px 700px;
         overflow: hidden;
     }
     .parallax.second {
         background-image: url("DSC_0323.jpg") no-repeat center center fixed;
-        background-size: 375px auto;
+        background-size: 375px 300px;
         overflow: hidden;
     }
     .parallax.third {
         background-image: url("DSC_0311.jpg") no-repeat center center fixed;
-        background-size: 375px auto;
+        background-size: 375px 700px;
         overflow: hidden;
     }
 }
