@@ -281,8 +281,8 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+  let slideIndex = 1;
   if ($('.cabin-individual-img').length > 0 ) {
-    let slideIndex = 1;
     
     showDivs(slideIndex);
 

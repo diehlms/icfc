@@ -1,6 +1,6 @@
 $(document).ready(function() {
     const card = document.querySelector('#breakfast-card-text');
-    if (card && card.length >= 0) {
+    if (card) {
         let p = document.createElement('p');
         let d = new Date().getDay();
         switch(d) {

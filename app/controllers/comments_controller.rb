@@ -12,10 +12,10 @@ class CommentsController < ApplicationController
     @articleid = params[:article_id]
         if @comment.save
             flash[:notice] = "Comment saved"
-            redirect_to articles_path
+            redirect_back(fallback_location: root_path)
         else
             flash[:error] = "Error saving comment"
-            redirect_to articles_path
+            redirect_back(fallback_location: root_path)
         end
   end
 

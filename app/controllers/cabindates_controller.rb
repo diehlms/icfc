@@ -17,10 +17,10 @@ class CabindatesController < ApplicationController
         set_cabindate
         if @cabindate.destroy
             flash[:notice] = "dates deleted"
-            redirect_to cabins_path
+            redirect_back(fallback_location: root_path)
         else
             flash[:notice] = "something went wrong"
-            redirect_to cabins_path
+            redirect_back(fallback_location: root_path)
         end
     end
 
@@ -29,9 +29,10 @@ class CabindatesController < ApplicationController
         @cabinid = params[:id]
         if @cabindate.save
             flash[:notice] = "date added"
-            redirect_to @cabindate
+            redirect_back(fallback_location: root_path)
         else
             render 'new'
+            redirect_back(fallback_location: root_path)
         end
     end
 
