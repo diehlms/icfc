@@ -31,7 +31,7 @@
         <div class="comment card">
             <div class="comment card-body">
                 <% @comments.each do |c| %>
-                    <span><em><small>Posted by: <strong><%= link_to c.user.username %></strong> <%= time_ago_in_words(c.created_at) %> ago</small></em></span>
+                    <span><em><small>Posted by: <strong><%= c.user.username %></strong> <%= time_ago_in_words(c.created_at) %> ago</small></em></span>
                     <p><%= c.content %> </p>
                     <% if logged_in? && c.user_id == current_user.id %>
                         <span class="UIbutton"><%= button_to comment_path(c), method: :delete, class: "btn btn-xs btn-danger pull-right" do %>

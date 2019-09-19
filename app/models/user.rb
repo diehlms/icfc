@@ -27,7 +27,6 @@ class User < ActiveRecord::Base
       BCrypt::Password.create(string, cost: cost)
     end
 
-
     def email_activate
       self.email_confirmed = true
       self.confirm_token = nil
