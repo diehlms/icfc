@@ -1,13 +1,15 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h1 class="section-title"><%= @user.username %></h1>
+  <p>
+    <%= @user.email %>
+  </p>
+  <% if @user.articles.any? %>
+    <p>Posts by <%= @user.firstname %>:</p>
+    <ul>
+      <% @user.articles.each do |f| %>
+        <li><%= link_to f.title, article_path %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

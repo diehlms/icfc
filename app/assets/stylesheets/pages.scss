@@ -88,19 +88,54 @@
 }
 
 @media only screen and (max-width: 400px) {
-    .parallax.first {
-        background-image: url("DSC_0345.jpg");
-        background-size: 375px auto;
-        overflow: hidden;
+
+    .parallax.first:after {
+        content:"";
+        position:fixed; /* stretch a fixed position to the whole screen */
+        top:0;
+        height:100vh; /* fix for mobile browser address bar appearing disappearing */
+        left:0;
+        right:0;
+        z-index:-1; /* needed to keep in the background */
+        background: url("DSC_0345.jpg") center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
     }
-    .parallax.second {
-        background-image: url("DSC_0323.jpg");
-        background-size: 375px auto;
-        overflow: hidden;
+
+    .parallax.second:after {
+        content:"";
+        position:fixed; /* stretch a fixed position to the whole screen */
+        top:0;
+        height:100vh; /* fix for mobile browser address bar appearing disappearing */
+        left:0;
+        right:0;
+        z-index:-1; /* needed to keep in the background */
+        background: url("DSC_0323.jpg") center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
     }
-    .parallax.third {
-        background-image: url("DSC_0311.jpg");
-        background-size: 375px auto;
-        overflow: hidden;
+
+    .parallax.third:after {
+        content:"";
+        position:fixed; /* stretch a fixed position to the whole screen */
+        top:0;
+        height:100vh; /* fix for mobile browser address bar appearing disappearing */
+        left:0;
+        right:0;
+        z-index:-1; /* needed to keep in the background */
+        background: url("DSC_0311.jpg") center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .UIlinks, .Intro , .Contacts {
+        background-color: white;
+        z-index: 2;
     }
 }
