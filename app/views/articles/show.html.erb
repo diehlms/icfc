@@ -15,7 +15,7 @@
                     <div class="modal-dialog">
                         <div class="model-content">
                             <div class="img modal-body">
-                                <%= image_tag(@article.image.url, class: "picture-modal-whole")%>
+                                <%= image_tag(@article.image.url, class: "picture-modal-whole") if @article.image?%>
                             </div>
                         </div>
                     </div>

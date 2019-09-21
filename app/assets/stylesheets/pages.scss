@@ -4,9 +4,11 @@
 
 .parallax.first {
     background-image: url("DSC_0345.jpg");
+    height: 100vh;
 }
 .parallax.second {
-    background-image: url("DSC_0323.jpg");
+    background-image: url("bruce2.jpg");
+
 }
 .parallax.third {
     background-image: url("DSC_0311.jpg");
@@ -39,16 +41,19 @@
 .home-UIbuttons {
     margin: 0 auto;
     font-family: 'Domine', serif;
+    color: black;
 }
 
 #title {
     font-family: 'Amatic SC', cursive;
     font-size: 65px;
+    color: black;
 }
 
 #subtitle {
     font-size: 30px;
     font-family: 'Domine', serif;
+    color: black;
 }
 
 .swim-test-subtext {
@@ -90,48 +95,15 @@
 @media only screen and (max-width: 400px) {
 
     .parallax.first:after {
-        content:"";
-        position:fixed; /* stretch a fixed position to the whole screen */
-        top:0;
-        height:100vh; /* fix for mobile browser address bar appearing disappearing */
-        left:0;
-        right:0;
-        z-index:-1; /* needed to keep in the background */
-        background: url("DSC_0345.jpg") center center;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        background: scroll;
     }
 
     .parallax.second:after {
-        content:"";
-        position:fixed; /* stretch a fixed position to the whole screen */
-        top:0;
-        height:100vh; /* fix for mobile browser address bar appearing disappearing */
-        left:0;
-        right:0;
-        z-index:-1; /* needed to keep in the background */
-        background: url("DSC_0323.jpg") center center;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        background: scroll;
     }
 
     .parallax.third:after {
-        content:"";
-        position:fixed; /* stretch a fixed position to the whole screen */
-        top:0;
-        height:100vh; /* fix for mobile browser address bar appearing disappearing */
-        left:0;
-        right:0;
-        z-index:-1; /* needed to keep in the background */
-        background: url("DSC_0311.jpg") center center;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        background: scroll;
     }
 
     .UIlinks, .Intro , .Contacts {
