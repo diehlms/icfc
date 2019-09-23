@@ -38,8 +38,10 @@
     <div class="row">
         <div class="col-sm-9" align="center">
             <%= form.submit(@user.new_record?  ? "Sign up" : "Update account", class: 'btn btn-success btn-block') %>
-            <p>Have an account? <%= link_to "Sign in here", login_path %></p>
-            <p><%= link_to "forgot password?", new_password_reset_path %></p>
+            <% if !logged_in? && !current_user %>
+                <p>Have an account? <%= link_to "Sign in here", login_path %></p>
+                <p><%= link_to "forgot password?", new_password_reset_path %></p>
+            <% end %>
         </div>
     </div>
     <% end %>

@@ -95,15 +95,33 @@
 @media only screen and (max-width: 400px) {
 
     .parallax.first:after {
+        background-image: url("DSC_0345.jpg");
+        z-index:-2;
+        position:fixed !important;
+        top:0;
         background: scroll;
+        height:100%;
+        width:100%;
     }
 
     .parallax.second:after {
+        background-image: url("bruce2.jpg");
+        z-index:-2;
+        position:fixed !important;
+        top:0;
         background: scroll;
+        height:100%;
+        width:100%;
     }
 
     .parallax.third:after {
+        background-image: url("DSC_0311.jpg");
+        z-index:-2;
+        position:fixed !important;
+        top:0;
         background: scroll;
+        height:100%;
+        width:100%;
     }
 
     .UIlinks, .Intro , .Contacts {

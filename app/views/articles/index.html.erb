@@ -14,7 +14,7 @@
         <% if @articles.any? %>
             <% @articles.each do |article| %>
                 <div class="article-card">               
-                    <div class="article card-body">
+                    <div class="<%= article.image? ? 'article card-body' : 'article card-body-no-image' %>">
                         <div class="col md-6">
                             <h4><%= link_to article.title, article_path(article), :class => "card-title" %></h4>
                             <small>
