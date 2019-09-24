@@ -4,12 +4,12 @@
 
 .parallax.first {
     background-image: url("DSC_0345.jpg");
-    height: 100vh;
 }
+
 .parallax.second {
     background-image: url("bruce2.jpg");
-
 }
+
 .parallax.third {
     background-image: url("DSC_0311.jpg");
 }
@@ -93,32 +93,33 @@
 }
 
 @media only screen and (max-width: 400px) {
-
-    .parallax.first:after {
+    #para-one {
         background-image: url("DSC_0345.jpg");
-        z-index:-2;
-        position:fixed !important;
-        top:0;
-        background: scroll;
-        width:100%;
     }
 
-    .parallax.second:after {
+    #para-two {
         background-image: url("bruce2.jpg");
-        z-index:-2;
-        position:fixed !important;
-        top:0;
-        background: scroll;
-        width:100%;
     }
 
-    .parallax.third:after {
+    #para-three {
         background-image: url("DSC_0311.jpg");
-        z-index:-2;
+    }
+    
+    #para-one #para-two #para-three {
+        background-size:cover;
+        height:100%;
         position:fixed !important;
-        top:0;
-        background: scroll;
         width:100%;
+        z-index:-2;
+        top:0;
+    }
+
+
+    .home-section {
+        display: table;
+        position: relative;
+        width: 100%;
+        height: 100%; 
     }
 
     .UIlinks, .Intro , .Contacts {
