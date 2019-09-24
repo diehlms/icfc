@@ -2,19 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.parallax.first {
+#para-one {
     background-image: url("DSC_0345.jpg");
 }
 
-.parallax.second {
+#para-two {
     background-image: url("bruce2.jpg");
 }
 
-.parallax.third {
+#para-three {
     background-image: url("DSC_0311.jpg");
 }
 
-.parallax {
+.parallax-img {
     min-height: 500px;
     background-attachment: fixed;
     background-position: center;
@@ -94,28 +94,29 @@
 
 @media only screen and (max-width: 400px) {
     #para-one {
-        background-image: url("DSC_0345.jpg");
+        background-image: url("DSC_0345.jpg") no-repeat center center;
     }
 
     #para-two {
-        background-image: url("bruce2.jpg");
+        background-image: url("bruce2.jpg") no-repeat center center;
     }
 
     #para-three {
-        background-image: url("DSC_0311.jpg");
+        background-image: url("DSC_0311.jpg") no-repeat center center;
     }
 
     #para-one, #para-two, #para-three {
         background-size:cover;
         height:100%;
-        position:fixed !important;
+        position:relative !important;
         width:100%;
+        display: block;
         z-index:-2;
         top:0;
     }
 
     .home-section {
-        display: table;
+        display: block;
         position: relative;
         width: 100%;
         height: 100%; 
