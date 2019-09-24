@@ -104,8 +104,8 @@
     #para-three {
         background-image: url("DSC_0311.jpg");
     }
-    
-    #para-one #para-two #para-three {
+
+    #para-one, #para-two, #para-three {
         background-size:cover;
         height:100%;
         position:fixed !important;
@@ -113,7 +113,6 @@
         z-index:-2;
         top:0;
     }
-
 
     .home-section {
         display: table;
