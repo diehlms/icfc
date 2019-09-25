@@ -92,7 +92,7 @@
     padding: 15px;
 }
 
-@media only screen and (max-width: 414px) {
+@media only screen and (max-width: 414px) {    
     #para-one {
         background-image: url("DSC_0345.jpg") no-repeat center center;
     }
@@ -112,7 +112,6 @@
         position:relative !important;
         width:100%;
         display: block;
-        z-index:-2;
         top:0;
     }
 
