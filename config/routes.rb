@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/users', to: 'users#index'
   get '/signup', to: 'users#new', as: 'signup'
   get '/login', to: 'sessions#new', as: 'login'
+  get '/search', to: 'pages#search', as: 'search'
   get '/forms', to: 'pages#forms', as: 'forms'
   get '/bylaws', to: 'pages#bylaws', as: 'bylaws'
   get '/chartiable_gift', to: 'pages#charitable_gift', as: 'charitable_gift'

@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     def home
         @encampment = Date.today.year - 1881
     end
-    
+
     def forms
     end
 
