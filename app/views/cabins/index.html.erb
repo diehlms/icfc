@@ -21,7 +21,7 @@
                                 <%= button_to "Delete Cabin", cabin_path(cabin), method: :delete, class: "btn btn-danger btn-block cabin-delete"%>
                             <% elsif logged_in? && current_user.admin? %>
                                 <%= link_to "Edit Cabin", edit_cabin_path(cabin), class: "btn btn-info btn-block"%>
-                                <%= button_to "Delete Cabin", cabin_path(cabin), method: :delete, class: "btn btn-danger btn-block cabin-delete"%>
+                                <%= button_to "Delete Cabin", cabin_path(cabin), method: :delete, data: { confirm: "are you sure you want to delete this cabin?" }, class: "btn btn-danger btn-block cabin-delete"%>
                             <% end %>
                         </div>
                     </div>

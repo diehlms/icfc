@@ -8,7 +8,7 @@
     <p>Posts by <%= @user.firstname %>:</p>
     <ul>
       <% @user.articles.each do |f| %>
-        <li><%= link_to f.title, article_path %></li>
+        <li><%= link_to f.title, article_path(f) %>, posted <%= time_ago_in_words(f.created_at) %></li>
       <% end %>
     </ul>
   <% end %>
