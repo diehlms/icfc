@@ -8,7 +8,12 @@
                 <%= link_to "blog", articles_path, class: "btn btn-primary home-button" %>
                 <%= link_to "directory", users_path, class: "btn btn-primary home-button" %>
                 <%= link_to "calendar", events_path, class: "btn btn-primary home-button" %>
-                <%= link_to "cabin reservations", cabins_path, class: "btn btn-primary home-button" %>            </div>
+                <%= link_to "cabin reservations", cabins_path, class: "btn btn-primary home-button" %>            
+            </div>
+            <div class="home-UIbuttons">
+                <%= link_to 'in season reservations', 'https://www.pronto2.com/icfc/', target: :blank, class: "btn btn-primary home-button" %>
+                <%= link_to 'out of season reservations', 'https://www.pronto2.com/icfc/offseason.php', target: :blank, class: "btn btn-primary home-button" %>
+            </div>
         <% else %>
             <div class="home-UIbuttons">
                 <%= link_to "log in", login_path, class: "btn btn-primary home-button" %>
