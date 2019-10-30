@@ -31,6 +31,8 @@ gem 'sorcery'
 gem 'leaflet-rails'
 gem 'will_paginate', '~> 3.1.1'
 gem 'will_paginate-bootstrap'
+gem 'webpacker'
+gem 'react-rails'
 # storage
 
 gem 'fog'

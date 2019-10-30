@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       @user = User.new(user_params)
         if @user.save
           UserMailer.registration_confirmation(@user).deliver
-          flash[:notice] = "Please confirm your email address to continue. If not in your main inbox, please check your spam folder."
+          flash[:notice] = "A registration link was just emailed to you. Please follow the link in your inbox to continue. If not in your main inbox, please check your spam folder."
           redirect_to root_url
         else
           respond_to do |format|

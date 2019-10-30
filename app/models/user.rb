@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
     uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX}
     validates :phone_number, presence: true, format: { with: VALID_PHONE_REGEX }
     validates :username, presence: true, length: { minimum: 6, maximum: 20}
-    validates :password, presence: true, length: {minimum: 6}
     
     def User.digest(string)
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
