@@ -55,12 +55,11 @@
             <div class="emergency-contacts col-md-6">
                 <h5 class="section-title">Emergency Contacts</h5>
                 <ul class="list-group list-group-flush emergency-contact-list">
-                    <li class="list-group-item">Office Telephone (in-season-only): 705-375-2300</li>
-                    <li class="list-group-item">Office Fax Machine: 705-375-0405</li>
-                    <li class="list-group-item">Gregoire Home Telephone: 705-375-0855</li>
-                    <li class="list-group-item">Kitchen Business Telephone: 705-375-0854</li>
-                    <li class="list-group-item">Pay Telephone: 705-375-9907</li>
-                    <li class="list-group-item"><%= ENV['TEST_CONTACT'] %></li>
+                    <li class="list-group-item">Office Telephone: <%= ENV['FP_CONTACT_1'] %></li>
+                    <li class="list-group-item">Office Fax Machine: <%= ENV['FP_CONTACT_2'] %></li>
+                    <li class="list-group-item">Gregoire Home Telephone: <%= ENV['FP_CONTACT_3'] %></li>
+                    <li class="list-group-item">Kitchen Business Telephone: <%= ENV['FP_CONTACT_4'] %></li>
+                    <li class="list-group-item">Pay Telephone: <%= ENV['FP_CONTACT_5'] %></li>
                 <ul>
             </div>
             <div class="emergency-contacts col-md-6">
