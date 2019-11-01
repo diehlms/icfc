@@ -51,14 +51,15 @@ ul {
     margin: 0 px auto;
     width: 75%;
 }
+
 /* container */
 
 .form-container {
     width: 70%;
     margin: 0 auto;
     padding: 15px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border: 0px solid black;
+    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    // border: 0px solid black;
     border-radius: 5px;
     .form-group {
         width: 70%;
@@ -179,6 +180,13 @@ ul {
     margin-bottom: 50px;
     top: 0;
     width: 100%;
+}
+
+.date {
+    color: white;
+    &:hover {
+        color: white;
+    }
 }
 
 @media only screen and (max-width: 400px) {

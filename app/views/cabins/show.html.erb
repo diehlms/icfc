@@ -42,12 +42,19 @@
       <% end %>
     </div>
     <div class="cabin-dates">
-      <h3>Dates of Availability:</h3>
       <p>Contact info:</p>
+      <hr>
       <p><%= @cabin.user.firstname %> <%= @cabin.user.lastname %></p>
       <p><%= @cabin.user.email %>
       <p><%= @cabin.user.phone_number %>
+      <hr>
+      <% if logged_in? && @cabin.user_id == current_user.id %>
+        <h3>Add dates</h3>
+        <%= render partial: "cabindates/form", cabin_id: @cabin_id %>
+      <% end %>
+      <br>
       <% if @cabindates.any? %>
+        <h3>Dates of Availability:</h3>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -67,11 +74,9 @@
               </tr>
             <% end %>
           </tbody>
+      <% else %>
+        <p>Cabin owner has not posted rental dates yet.</p>
       <% end%>
-      <% if logged_in? && @cabin.user_id == current_user.id %>
-        <h3>Add dates</h3>
-        <%= render partial: "cabindates/form", cabin_id: @cabin_id %>
-      <% end %>
     </div>
   </div>
 </div>

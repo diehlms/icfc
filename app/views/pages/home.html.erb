@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-md-8 home-section" id="home-intro">
             <h2 class="section-title">Welcome to ICFC</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in imperdiet tortor, sit amet placerat mauris. Mauris varius facilisis ex at facilisis. Aliquam at consequat arcu, non rhoncus purus. Aenean ut libero vel dui rutrum sagittis. Ut vel hendrerit leo. In hac habitasse platea dictumst. Sed elit ante, maximus id risus a, aliquam interdum ex. Mauris ut velit vulputate, finibus dui ac, luctus quam. In eu lectus libero.</p>
+            <p>Iron City Fishing Club is a private fishing encampment on Georgian Bay, south of Parry Sound, Ontario. Its members have been vacationing on its shores since ICFC's forefather's first voyage in 1881. Since its inception, the club has remained steadfast in its devotion and pursuit of friendship and family.</p>
         </div>
         <div class="col-md-2 home-section" id="weather">
             <h2 class="section-title">Current Weather</h2>
@@ -41,12 +41,11 @@
 <div id="para-two" class="parallax-img">
 </div>
 <section class="home-section Intro container">
-    <h1 class="section-title">The <%= @encampment %> year</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Suspendisse sed nisi lacus sed. Elementum sagittis vitae et leo duis ut diam quam. Tellus integer feugiat scelerisque varius morbi enim nunc. Tincidunt tortor aliquam nulla facilisi cras.</p> 
-    <p>Vestibulum morbi blandit cursus risus at ultrices mi. Quis risus sed vulputate odio ut enim blandit volutpat maecenas. Eget aliquet nibh praesent tristique magna sit amet.</p>
-    <p>Tellus elementum sagittis vitae et leo duis ut. Nullam ac tortor vitae purus faucibus ornare suspendisse sed nisi. Semper viverra nam libero justo laoreet. Euismod lacinia at quis risus sed. Vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique. Tellus orci ac auctor augue mauris augue. Aliquam etiam erat velit scelerisque.</p>
-    <p>Id aliquet lectus proin nibh. Pellentesque habitant morbi tristique senectus et. Elementum nibh tellus molestie nunc non. Pretium quam vulputate dignissim suspendisse in. Arcu cursus vitae congue mauris rhoncus. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Pulvinar neque laoreet suspendisse interdum consectetur libero id.</p>
-    <p>Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Lobortis feugiat vivamus at augue eget. Urna id volutpat lacus laoreet non. Semper viverra nam libero justo laoreet sit.
+    <div align="center">
+        <h5 class="section-title">Current Traffic</h5>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1459440.1988828832!2d-80.56660371920148!3d44.403018062644065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x882b394ac02dd491%3A0xb41d5de9c4030ec5!2sToronto%20Pearson%20International%20Airport%2C%20Silver%20Dart%20Drive%2C%20Mississauga%2C%20ON%2C%20Canada!3m2!1d43.6777176!2d-79.6248197!4m5!1s0x4d2af89d9f168371%3A0xf170c239ee53f14c!2sMacTier%2C%20ON%2C%20Canada!3m2!1d45.139272999999996!2d-79.771827!5e0!3m2!1sen!2sus!4v1572568118601!5m2!1sen!2sus" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+        <p>Note: traffic times are automated and subject to rapid change</p>
+    </div>
 </section>
 <div id="para-three" class="parallax-img">
 </div>
@@ -56,12 +55,12 @@
             <div class="emergency-contacts col-md-6">
                 <h5 class="section-title">Emergency Contacts</h5>
                 <ul class="list-group list-group-flush emergency-contact-list">
-                    <li class="list-group-item">Contact 1</li>
-                    <li class="list-group-item">Contact 2</li>
-                    <li class="list-group-item">Contact 3</li>
-                    <li class="list-group-item">Contact 4</li>
-                    <li class="list-group-item">Contact 5</li>
-                    <li class="list-group-item">Contact 6</li>
+                    <li class="list-group-item">Office Telephone (in-season-only): 705-375-2300</li>
+                    <li class="list-group-item">Office Fax Machine: 705-375-0405</li>
+                    <li class="list-group-item">Gregoire Home Telephone: 705-375-0855</li>
+                    <li class="list-group-item">Kitchen Business Telephone: 705-375-0854</li>
+                    <li class="list-group-item">Pay Telephone: 705-375-9907</li>
+                    <li class="list-group-item"><%= ENV['TEST_CONTACT'] %></li>
                 <ul>
             </div>
             <div class="emergency-contacts col-md-6">
