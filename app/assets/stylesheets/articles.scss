@@ -41,3 +41,17 @@
 .article-image {
     cursor: pointer;
 }
+
+@media only screen and (max-width: 414px) {
+    .article.card-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        .card-text {
+            width: 100%;
+        }
+        .pull-right.article-image {
+            width: 100%;
+        }
+    }
+}

@@ -97,6 +97,10 @@
     height: 450px;
 }
 
+.homepage-map {
+    max-width: 90%;
+}
+
 @media only screen and (max-width: 414px) {    
     #para-one {
         background-image: url("DSC_0345.jpg") no-repeat center center;
@@ -118,6 +122,7 @@
         width:100%;
         display: block;
         top:0;
+        padding-bottom: 350px;
     }
 
     .home-section {
@@ -130,5 +135,16 @@
     .UIlinks, .Intro , .Contacts {
         background-color: white;
         z-index: 2;
+    }
+
+    .home-button {
+        display: block;
+        margin-top: 5px;
+    }
+
+    .home-UIbuttons>li {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
     }
 }
