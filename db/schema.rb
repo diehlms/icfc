@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_17_225526) do
+ActiveRecord::Schema.define(version: 2019_11_05_233549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2019_09_17_225526) do
   add_foreign_key "cabin_attachments", "cabins"
   add_foreign_key "cabindates", "cabins"
   add_foreign_key "cabins", "users"
+  add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
   add_foreign_key "events", "users"
 end
