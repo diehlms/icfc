@@ -28,10 +28,9 @@ def create
 end
 
 def update
-    set_article
     @article = current_user.articles.find(params[:id])
     if @article.update(article_params)
-        redirect_to article_path(@article), notice: "Article updated"
+        redirect_to articles_path, notice: "Article updated"
     else
         render 'edit', notice: "There was a problem with updating the article"
     end
