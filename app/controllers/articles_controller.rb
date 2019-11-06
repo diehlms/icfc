@@ -11,9 +11,7 @@ def show
     user = session[:user_id]
     @comment = Comment.new(article_id: params[:id])
     set_article
-    if @article.comments
-        @comments = @article.comments.paginate(page: params[:page]).reorder("created_at DESC")
-    end
+    @comments = @article.comments.paginate(page: params[:page]).reorder("created_at DESC")
 end
 
 def index
@@ -30,8 +28,8 @@ def create
 end
 
 def update
-    @article = current_user.articles.find(params[:id])
-    if @article.update(article_params)
+    @article = current_user.articles.find_by_id(params[:id])
+    if @article.update!(article_params)
         redirect_to article_path(@article), notice: "Article updated"
     else
         render 'edit', notice: "There was a problem with updating the article"
