@@ -10,7 +10,7 @@ end
 def show
     user = session[:user_id]
     @comment = Comment.new(article_id: params[:id])
-    set_article
+    @article = Article.find_by_id(params[:id])
     @comments = @article.comments.paginate(page: params[:page]).reorder("created_at DESC")
 end
 
@@ -30,7 +30,7 @@ end
 def update
     @article = current_user.articles.find(params[:id])
     if @article.update(article_params)
-        redirect_to articles_path, notice: "Article updated"
+        redirect_to article_path(@article), notice: "Article updated"
     else
         render 'edit', notice: "There was a problem with updating the article"
     end
