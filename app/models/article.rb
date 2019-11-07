@@ -5,7 +5,6 @@ class Article < ApplicationRecord
     belongs_to :user
 
     mount_uploader :image, ImageUploader
-    serialize :image, JSON
 
     accepts_nested_attributes_for :comments
     

@@ -5,5 +5,4 @@ class Gallery < ApplicationRecord
     validates :user_id, presence: true
     
     mount_uploader :image, ImageUploader
-    serialize :image, JSON
 end
