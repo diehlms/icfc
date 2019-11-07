@@ -6,6 +6,8 @@ class Article < ApplicationRecord
 
     mount_uploader :image, ImageUploader
     serialize :image, JSON
+
+    accepts_nested_attributes_for :comments
     
     validates :title, presence: true, length: { maximum: 50 }
     validates :content, presence: true, length: { maximum: 10000 }
