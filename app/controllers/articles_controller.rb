@@ -28,11 +28,8 @@ def create
 end
 
 def update
-    @article = current_user.articles.find_by_id(params[:id])
-    if @article.update!(article_params)
-        if params[:comments]
-            @comments = @article.comments.paginate(page: params[:page]).reorder("created_at DESC")
-        end
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
         redirect_to article_path(@article), notice: "Article updated"
     else
         render 'edit', notice: "There was a problem with updating the article"
@@ -56,7 +53,7 @@ end
 private
 
     def article_params
-        params.require(:article).permit(:title, :content, :image)
+        params.require(:article).permit(:title, :content, :image, :user_id)
     end
 
     def set_article
