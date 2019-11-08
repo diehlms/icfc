@@ -12,7 +12,7 @@ class CabinsController < ApplicationController
     end
 
     def edit
-        set_cabin
+        @cabin = current_user.articles.find(params[:id])
     end
 
     def create
@@ -39,7 +39,7 @@ class CabinsController < ApplicationController
     end
 
     def update
-        set_cabin
+        @cabin = current_user.articles.find(params[:id])
         if @cabin.update(cabin_params)
             if params[:cabin_attachments]
                 params[:cabin_attachments]['image'].each do |i|

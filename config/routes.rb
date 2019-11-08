@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :families
   
   root 'pages#home'
-  
+
   get '/articles', to: 'articles#index'
   get '/blog', to: 'articles#index'
   get '/users', to: 'users#index'

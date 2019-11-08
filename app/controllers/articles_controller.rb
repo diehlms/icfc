@@ -28,7 +28,7 @@ def create
 end
 
 def update
-    @article = Article.find(params[:id])
+    @article = current_user.articles.find(params[:id])
     if @article.update(article_params)
         redirect_to article_path(@article), notice: "Article updated"
     else
@@ -37,7 +37,7 @@ def update
 end
 
 def edit
-    set_article
+    @article = current_user.articles.find(params[:id])
 end
 
 def destroy
