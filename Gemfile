@@ -37,7 +37,7 @@ gem 'exception_handler', '~> 0.8.0.0'
 
 # storage
 
-gem 'fog'
+gem 'carrierwave-aws'
 gem 'aws-sdk-s3', require: false
 gem 'fog-aws', group: :production
 
