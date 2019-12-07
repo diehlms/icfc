@@ -39,7 +39,11 @@ class CabinsController < ApplicationController
     end
 
     def update
-        @cabin = current_user.articles.find(params[:id])
+        if current_user.admin?
+            set_cabin
+        else
+            @cabin = current_user.articles.find(params[:id])
+        end
         if @cabin.update(cabin_params)
             if params[:cabin_attachments]
                 params[:cabin_attachments]['image'].each do |i|

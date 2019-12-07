@@ -36,6 +36,9 @@
                         <div class="UIactions">                  
                             <span class="a"><%= button_to "Delete", article_path(article), method: :delete, data: { confirm: "are you sure you want to delete this article?"}, class: "btn btn-danger" %></span>
                             <span class="a"><%= link_to "Edit", edit_article_path(article), class: "btn btn-primary"%></span>
+                            <% #if current_user.admin? %>
+                                <span class="a"><%= button_to "Pin this post", toggle_pinned_article_url(article.id), class: "btn btn-info" %></span>
+                            <% #end %>
                         </div>
                     <% end %>
                     <div id="imgModal-<%= dom_id(article) %>" class="modal fade">

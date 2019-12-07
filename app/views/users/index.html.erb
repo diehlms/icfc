@@ -6,19 +6,18 @@
         <% end %>
         <table class="users-table table">
             <thead>
-                <th>Last Name</th>
-                <th>First Name</th>
+                <th>Name</th>
                 <th>Email Address</th>
                 <th>Phone Number</th>
             </thead>
             <tbody>
+            <%= will_paginate @users, class: "pagination-style" %>
                 <% @users.each do |user| %>
                     <% will_paginate @users, class: "pagination-style" %>
                     <tr>
-                        <td><%= user.lastname %></td>
-                        <td><%= user.firstname %></td>
+                        <td><%= link_to "#{user.firstname} #{user.lastname}", user_path(user) %></td>
                         <td><%= user.email %></td>
-                        <td><%= number_to_phone(user.phone_number, pattern: /(\d{1,4})(\d{4})(\d{4})$/) %></td>
+                        <td><%= number_to_phone(user.phone_number) %></td>
                     </tr>
                     <% will_paginate @users, class: "pagination-style" %>
                 <% end %>

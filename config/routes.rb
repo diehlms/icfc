@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   resources :cabin_attachments
-  resources :articles
+  resources :articles do
+    member do
+      post :toggle_pinned
+    end
+  end
   resources :comments
   resources :users do
     member do
@@ -13,7 +17,7 @@ Rails.application.routes.draw do
   resources :password_resets
   resources :cabins
   resources :cabindates
-  resources :galleries, only: [:new, :index, :create, :destroy]
+  resources :galleries
   resources :families
   
   root 'pages#home'

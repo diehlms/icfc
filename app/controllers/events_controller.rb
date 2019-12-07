@@ -39,7 +39,11 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    @event = current_user.events.find(params[:id])
+    if current_user.admin?
+      set_event
+    else
+      @event = current_user.events.find(params[:id])
+    end
     if @event.update(event_params)
       flash[:notice] = "Event updated"
       redirect_to events_path
