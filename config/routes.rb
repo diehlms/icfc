@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   get '/membership', to: 'pages#membership', as: 'membership'
   get '/planned_giving', to: 'pages#planned_giving', as: 'planned_giving'
   get '/familyagreements', to: 'pages#familyagreements', as: 'familyagreements'
+  get '/archives', to: 'pages#archives', as: 'archives'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
 

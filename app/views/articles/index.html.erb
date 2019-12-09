@@ -1,7 +1,10 @@
 <div class="container">
     <h1 class="section-title">Fishchat</h1>
-    <% if logged_in? %>
-        <%= link_to "<i class='fa fa-plus'></i> write an article".html_safe, new_article_path, class: "btn btn-success btn-block" %>
+    <% if logged_in? %>   
+        <%= link_to "<i class='fa fa-plus'></i> write an article".html_safe, new_article_path, class: "btn btn-success article-banner-action" %>
+        <%= form_tag(articles_path, method: :get, class: "article-banner-action") do %>
+            <%= text_field_tag(:search, params[:search], class: "form-control article-search-form", placeholder: "search all posts", aria: "search") %>
+        <% end %>
     <% else %>
         <p> Please <%= link_to "log in", login_path %> to post articles and comment</p>
     <% end %>
@@ -13,7 +16,7 @@
     <% if logged_in? %>
         <% if @articles.any? %>
             <% @articles.each do |article| %>
-                <div class="article-card">               
+                <div class="<%= article.pinned ? 'article-card-pinned' : 'article-card' %>">               
                     <div class="<%= article.image? ? 'article card-body' : 'article card-body-no-image' %>">
                         <div class="col md-6">
                             <h4><%= link_to article.title, article_path(article), :class => "card-title" %></h4>

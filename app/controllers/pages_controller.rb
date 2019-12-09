@@ -29,5 +29,8 @@ class PagesController < ApplicationController
 
     def planned_giving
     end
+
+    def archives
+    end
     
 end

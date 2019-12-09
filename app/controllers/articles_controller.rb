@@ -15,7 +15,11 @@ def show
 end
 
 def index
-    @articles = Article.paginate(page: params[:page]).reorder("pinned DESC", "created_at DESC") 
+    if params[:search]
+        @articles = Article.where('title LIKE ? OR content LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%").paginate(page: params[:page])
+    else
+        @articles = Article.paginate(page: params[:page]).reorder("pinned DESC", "created_at DESC")
+    end
 end
 
 def create
@@ -63,7 +67,7 @@ end
 private
 
     def article_params
-        params.require(:article).permit(:title, :content, :pinned, :image, :user_id)
+        params.require(:article).permit(:title, :content, :pinned, :image, :user_id, :search)
     end
 
     def set_article

@@ -8,7 +8,23 @@
     <p>Posts by <%= @user.firstname %>:</p>
     <ul>
       <% @user.articles.each do |f| %>
-        <li><%= link_to f.title, article_path(f) %>, posted <%= time_ago_in_words(f.created_at) %></li>
+        <li><%= link_to f.title, article_path(f) %>, posted <%= time_ago_in_words(f.created_at) %> ago</li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% if @user.events.any? %>
+    <p><%= "#{@user.firstname}'s events:" %></p>
+    <ul>
+      <% @user.events.each do |e| %>
+        <li><%= link_to e.events, event_path(e) %>, <%= e.start_time %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% if @user.cabins.any? %>
+    <p><%= "#{@user.firstname}'s cabins:" %></p>
+    <ul>
+      <% @user.cabins.each do |c| %>
+        <li><%= link_to c.name, cabin_path(c) %></li>
       <% end %>
     </ul>
   <% end %>
