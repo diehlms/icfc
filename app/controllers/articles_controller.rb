@@ -16,7 +16,7 @@ end
 
 def index
     if params[:search]
-        @articles = Article.where('title LIKE ? OR content LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%").paginate(page: params[:page])
+        @articles = Article.where('lower(title) LIKE ? OR lower(content) LIKE ?', "%#{params[:search].downcase}%", "%#{params[:search].downcase}%").paginate(page: params[:page])
     else
         @articles = Article.paginate(page: params[:page]).reorder("pinned DESC", "created_at DESC")
     end

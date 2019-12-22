@@ -3,9 +3,9 @@ $(document).ready(function() {
     if (card) {
         let p = document.createElement('p');
         let d = new Date().getDay();
-        if (d === 2 || d === 5) {
+        if (d === 2 || d === 4 || d === 6) {
             p.innerHTML = 'Egg Day'
-        } else if (d === 1 || d === 6) {
+        } else if (d === 1 || d === 5) {
             p.innerHTML = 'Pancake Day'
         } else if (d === 3) {
             p.innerHTML = 'French Toast Day'
