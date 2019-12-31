@@ -51,9 +51,16 @@
             <li><%= link_to 'GBLT', 'https://www.gblt.org/', target: :blank %></li>
           </ul>
         </li>
-       <li class="dropdown">
+        <li class="dropdown">
           <a class="date">Encampment <%= Date.today.year - 1881 %></a>
         </li>
+        <% if logged_in? %>
+          <li id="searchbar" class="dropdown">
+            <%= form_tag(search_path, method: :get, class: "article-banner-action") do %>
+              <%= text_field_tag(:search, params[:search], class: "form-control article-search-form", placeholder: "search", aria: "search") %>
+            <% end %>
+          </li>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

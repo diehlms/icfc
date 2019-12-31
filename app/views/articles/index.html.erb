@@ -2,9 +2,6 @@
     <h1 class="section-title">Fishchat</h1>
     <% if logged_in? %>   
         <%= link_to "<i class='fa fa-plus'></i> write an article".html_safe, new_article_path, class: "btn btn-success article-banner-action" %>
-        <%= form_tag(articles_path, method: :get, class: "article-banner-action") do %>
-            <%= text_field_tag(:search, params[:search], class: "form-control article-search-form", placeholder: "search all posts", aria: "search") %>
-        <% end %>
     <% else %>
         <p> Please <%= link_to "log in", login_path %> to post articles and comment</p>
     <% end %>

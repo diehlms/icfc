@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :cabindates
   resources :galleries
   resources :families
+  resources :search, only: [:index]
   
   root 'pages#home'
 
