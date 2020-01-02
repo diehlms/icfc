@@ -13,7 +13,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-2">
                             <ul class="meta-search">
                                 <li><i class="glyphicon glyphicon-calendar"></i> <span><%= a.created_at %></span></li>
-                                <li><i class="glyphicon glyphicon-tags"></i> <span><%= a.user %></span></li>
+                                <li><i class="glyphicon glyphicon-tags"></i> <span><%= a.user.username %></span></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
@@ -32,7 +32,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-2">
                             <ul class="meta-search">
                                 <li><i class="glyphicon glyphicon-calendar"></i> <span><%= "#{e.start_time} - #{e.end_time}" %></span></li>
-                                <li><i class="glyphicon glyphicon-tags"></i> <span><%= e.user %></span></li>
+                                <li><i class="glyphicon glyphicon-tags"></i> <span><%= e.user.username %></span></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
@@ -69,7 +69,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-2">
                             <ul class="meta-search">
                                 <li><i class="glyphicon glyphicon-calendar"></i> <span><%= c.created_at %></span></li>
-                                <li><i class="glyphicon glyphicon-tags"></i> <span><%= c.user %></span></li>
+                                <li><i class="glyphicon glyphicon-tags"></i> <span><%= c.user.username %></span></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
