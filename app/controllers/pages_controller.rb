@@ -4,6 +4,8 @@ class PagesController < ApplicationController
     require 'open_weather'
     
     def home
+        @articles = Article.take(3)
+        @events = Event.take(3)
     end
 
     def forms
