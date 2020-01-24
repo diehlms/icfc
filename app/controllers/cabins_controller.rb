@@ -12,7 +12,7 @@ class CabinsController < ApplicationController
     end
 
     def edit
-        @cabin = current_user.articles.find(params[:id])
+        @cabin = current_user.cabins.find(params[:id])
     end
 
     def create
@@ -42,7 +42,7 @@ class CabinsController < ApplicationController
         if current_user.admin?
             set_cabin
         else
-            @cabin = current_user.articles.find(params[:id])
+            @cabin = current_user.cabins.find(params[:id])
         end
         if @cabin.update(cabin_params)
             if params[:cabin_attachments]
