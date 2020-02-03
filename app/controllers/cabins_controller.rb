@@ -17,17 +17,21 @@ class CabinsController < ApplicationController
 
     def create
         @cabin = current_user.cabins.build(cabin_params)
-        if @cabin.save
-            if params[:cabin_attachments]
-                params[:cabin_attachments]['image'].each do |i|
-                    @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
+        respond_to do |format|
+            if @cabin.save
+                if params[:cabin_attachments]
+                    params[:cabin_attachments]['image'].each do |i|
+                        @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
+                    end
                 end
+                flash[:notice] = "cabin added"
+                format.html { redirect_to cabin_path(@cabin) }
+                format.json { render :show, status: :ok, location: @cabin}
+            else
+                flash[:notice] = "Something went wrong with the upload. Please try again."
+                format.html { render :new }
+                format.json { render json: @cabin.errors, status: :unprocessable_entity }
             end
-            flash[:notice] = "cabin added"
-            redirect_to cabins_path
-        else
-            flash[:notice] = "Something went wrong with the upload. Please try again."
-            render 'new'
         end
     end
 
@@ -44,28 +48,35 @@ class CabinsController < ApplicationController
         else
             @cabin = current_user.cabins.find(params[:id])
         end
-        if @cabin.update(cabin_params)
-            if params[:cabin_attachments]
-                params[:cabin_attachments]['image'].each do |i|
-                    @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
+        respond_to do |format|
+            if @cabin.update(cabin_params)
+                if params[:cabin_attachments]
+                    params[:cabin_attachments]['image'].each do |i|
+                        @cabin_attachment = @cabin.cabin_attachments.create!(:image => i, :cabin_id => @cabin.id)
+                    end
                 end
+                flash[:notice] = "cabin updated"
+                format.html { redirect_to cabins_path }
+                format.json { render :show, status: :ok, location: @cabin}
+            else
+                flash[:notice] = "something went wrong"
+                format.html { render :edit }
+                format.json { render json: @cabin.errors, status: :unprocessable_entity}
             end
-            flash[:notice] = "cabin updated"
-            redirect_to cabins_path
-        else
-            flash[:notice] = "something went wrong"
-            redirect_to cabins_path
-        end
     end
 
     def destroy
         set_cabin
-        if @cabin.destroy
-            flash[:notice] = "cabin deleted"
-            redirect_to cabins_path
-        else
-            flash[:notice] = "something went wrong"
-            redirect_to cabins_path
+        respond_to do |format|
+            if @cabin.destroy
+                flash[:notice] = "cabin deleted"
+                format.html { redirect_to cabins_path}
+                format.json { head :no_content }
+            else
+                flash[:notice] = "something went wrong"
+                format.html { redirect_to cabins_path }
+                format.json { render :json, @cabin.errors, status: :unprocessable_entity}
+            end
         end
     end
 

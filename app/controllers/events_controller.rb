@@ -27,12 +27,16 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = current_user.events.new(event_params)
-      if @event.save
-        flash[:notice] = "Event added"
-        redirect_to events_path
-      else
-        flash[:notice] = "Something went wrong with the upload. Please try again."
-        redirect_to new_event_path
+      respond_to do |format|
+        if @event.save
+          flash[:notice] = "Event added"
+          format.html { redirect_to events_path }
+          format.json { render :show, status: :ok, location: @event}
+        else
+          flash[:notice] = "Something went wrong with the upload. Please try again."
+          format.html { redirect_to new_event_path }
+          format.json { render json: @event.errors, status: :unprocessable_entity }
+        end
       end
   end
 
@@ -44,12 +48,16 @@ class EventsController < ApplicationController
     else
       @event = current_user.events.find(params[:id])
     end
-    if @event.update(event_params)
-      flash[:notice] = "Event updated"
-      redirect_to events_path
-    else
-      flash[:notice] = "Something went wrong with the upload. Please try again."
-      redirect_to new_event_path
+    respond_to do |format|
+      if @event.update(event_params)
+        flash[:notice] = "Event updated"
+        format.html { redirect_to events_path }
+        format.json { render :show, status: :ok, location: @event}
+      else
+        flash[:notice] = "Something went wrong with the upload. Please try again."
+        format.html { redirect_to new_event_path }
+        format.json { render json: @event.errors, status: :unprocessable_entity}
+      end
     end
   end
 

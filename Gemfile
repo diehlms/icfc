@@ -34,6 +34,8 @@ gem 'will_paginate-bootstrap'
 gem 'webpacker'
 gem 'react-rails'
 gem 'exception_handler', '~> 0.8.0.0'
+gem 'jwt'
+gem 'rack-cors'
 
 # storage
 

@@ -10,6 +10,13 @@ class UsersController < ApplicationController
     # GET /users/1
     # GET /users/1.json
     def show
+      respond_to do |format|
+        if recipe
+          render json: recipe
+        else
+          render json: recipe.errors
+        end
+      end
     end
   
     # GET /users/new
@@ -25,17 +32,17 @@ class UsersController < ApplicationController
     # POST /users.json
     def create
       @user = User.new(user_params)
+      respond_to do |format|
         if @user.save
           UserMailer.registration_confirmation(@user).deliver
           flash[:notice] = "A registration link was just emailed to you. Please follow the link in your inbox to continue. If not in your main inbox, please check your spam folder."
-          redirect_to root_url
+          format.html { redirect_to root_url }
         else
-          respond_to do |format|
-            flash.now[:error] = "Something went wrong! Try again."
-            format.html { render :new }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
-          end
+          flash.now[:error] = "Something went wrong! Try again."
+          format.html { render :new }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
+      end
     end
   
     # PATCH/PUT /users/1

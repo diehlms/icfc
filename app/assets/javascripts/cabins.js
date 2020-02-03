@@ -43,7 +43,7 @@ $(document).ready(function() {
           {
             "lat": 45.109854,
             "long": -80.048091,
-            "family": "Rodifer"
+            "family": "Scott/Rodefer"
           },
           {
             "lat": 45.110015,

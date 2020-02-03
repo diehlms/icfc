@@ -15,19 +15,28 @@ def show
 end
 
 def index
-    if params[:search]
-        @articles = Article.where('lower(title) LIKE ? OR lower(content) LIKE ?', "%#{params[:search].downcase}%", "%#{params[:search].downcase}%").paginate(page: params[:page])
-    else
-        @articles = Article.paginate(page: params[:page]).reorder("pinned DESC", "created_at DESC")
+    respond_to do |format|
+        if params[:search]
+            format.html { @articles = Article.where('lower(title) LIKE ? OR lower(content) LIKE ?', "%#{params[:search].downcase}%", "%#{params[:search].downcase}%").paginate(page: params[:page]) }
+            format.json { render json: @articles }
+        else
+            format.html { @articles = Article.paginate(page: params[:page]).reorder("pinned DESC", "created_at DESC") }
+            format.json { render json: @articles.errors, status: :unprocessable_entity}
+        end
     end
 end
 
 def create
     @article = current_user.articles.new(article_params)
-    if @article.save
-        redirect_to article_path(@article), notice: "Article created"
-    else
-        render 'new'
+    respond_to do |format|
+        if @article.save
+            format.html { redirect_to article_path(@article), notice: "Article created" }
+            format.json { render :show, status: :ok, location: @article}
+        else
+            flash.now[:error] = "Something went wrong! Try again soon"
+            format.html { render :new }
+            format.json { render json: @article.errors, status: :unprocessable_entity}
+        end
     end
 end
 
@@ -37,10 +46,14 @@ def update
     else
         @article = current_user.articles.find(params[:id])
     end
-    if @article.update(article_params)
-        redirect_to article_path(@article), notice: "Article updated"
-    else
-        render 'edit', notice: "There was a problem with updating the article"
+    respond_to do |format|
+        if @article.update(article_params)
+            format.html { redirect_to article_path(@article), notice: "Article updated" } 
+            format.json { render :show, status: :ok, location: @article}
+        else
+            format.html { render :edit}
+            format.json { render json: @article.errors, status: :unprocessable_entity }
+        end
     end
 end
 
@@ -57,10 +70,14 @@ end
 def destroy
     set_article
     @article = current_user.articles.find(params[:id])
-    if @article.destroy
-        redirect_to articles_path, notice: "Article was deleted"
-    else
-        redirect_to articles_path
+    respond_to do |format|
+        if @article.destroy
+            format.html { redirect_to articles_path, notice: "Article was deleted" }
+            format.json { head :no_content }
+        else
+            format.html { redirect_to articles_path }
+            format.json { render json: @article.errors, status: :unprocessable_entity}
+        end
     end
 end
 
