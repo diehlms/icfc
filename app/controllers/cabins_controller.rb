@@ -63,6 +63,7 @@ class CabinsController < ApplicationController
                 format.html { render :edit }
                 format.json { render json: @cabin.errors, status: :unprocessable_entity}
             end
+        end
     end
 
     def destroy
