@@ -10,13 +10,13 @@ class UsersController < ApplicationController
     # GET /users/1
     # GET /users/1.json
     def show
-      respond_to do |format|
-        if recipe
-          render json: recipe
-        else
-          render json: recipe.errors
-        end
-      end
+      # respond_to do |format|
+      #   if @user
+      #     format.json { render json: user }
+      #   else
+      #     format.json { render json: @user.errors }
+      #   end
+      # end
     end
   
     # GET /users/new
