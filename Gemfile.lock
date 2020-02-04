@@ -65,10 +65,6 @@ GEM
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.1.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
-    babel-source (5.8.35)
-    babel-transpiler (0.7.0)
-      babel-source (>= 4.0, < 6)
-      execjs (~> 2.0)
     bcrypt (3.1.13)
     better_errors (2.5.1)
       coderay (>= 1.0.0)
@@ -112,7 +108,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
-    connection_pool (2.2.2)
     crass (1.0.6)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
@@ -262,12 +257,6 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    react-rails (2.6.1)
-      babel-transpiler (>= 0.7.0)
-      connection_pool
-      execjs
-      railties (>= 3.2)
-      tilt
     regexp_parser (1.6.0)
     responders (3.0.0)
       actionpack (>= 5.0)
@@ -367,7 +356,6 @@ DEPENDENCIES
   puma (~> 3.11)
   rack-cors
   rails (~> 5.2.3)
-  react-rails
   sass-rails (~> 5.0)
   selenium-webdriver
   simple_calendar (~> 2.0)
