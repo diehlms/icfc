@@ -31,7 +31,7 @@ class CabindatesController < ApplicationController
             flash[:notice] = "date added"
             redirect_back(fallback_location: root_path)
         else
-            render 'new'
+            flash[:notice] = "You must add start and end dates to process request."
             redirect_back(fallback_location: root_path)
         end
     end
