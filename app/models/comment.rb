@@ -1,7 +1,6 @@
 class Comment < ApplicationRecord
-    belongs_to :user, optional: true
+    belongs_to :user
     belongs_to :article
-    has_many :comments, dependent: :destroy
 
     self.per_page = 20
 

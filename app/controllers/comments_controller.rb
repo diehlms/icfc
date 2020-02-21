@@ -21,8 +21,13 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy
-    redirect_to '/articles'
+    if @comment.destroy
+        flash[:notice] = "Comment saved"
+        redirect_back(fallback_location: root_path)
+    else
+        flash[:error] = "Error saving comment"
+        redirect_back(fallback_location: root_path)
+    end
   end
 
   private 
