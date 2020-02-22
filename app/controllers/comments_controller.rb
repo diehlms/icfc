@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     if @comment.destroy
-        flash[:notice] = "Comment saved"
+        flash[:notice] = "Comment deleted"
         redirect_back(fallback_location: root_path)
     else
         flash[:error] = "Error saving comment"

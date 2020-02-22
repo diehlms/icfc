@@ -5,4 +5,5 @@ class Cabin < ApplicationRecord
     belongs_to :user
     has_many :cabin_attachments, dependent: :destroy
     accepts_nested_attributes_for :cabin_attachments
+    validates :user_id, presence: true
 end

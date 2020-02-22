@@ -19,6 +19,12 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  def auto_orient
+    manipulate! do |img|
+      img = img.auto_orient
+    end
+  end 
+
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
@@ -36,7 +42,12 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
+    process :auto_orient
     process :resize_to_fit => [200, 200]
+  end
+
+  version :large do
+    process :auto_orient
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
