@@ -35,5 +35,7 @@ class PagesController < ApplicationController
 
     def archives
     end
-    
+
+    def committee_primer 
+    end
 end

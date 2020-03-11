@@ -27,3 +27,8 @@ $(document).ready(function() {
 })
 
 $('.alert').alert()
+
+$('#committee-primer button a').click(function(){
+    $(this).next('ul').slideToggle('500');
+    $(this).find('i').toggleClass('fa-toggle-on fa-toggle-off')
+});

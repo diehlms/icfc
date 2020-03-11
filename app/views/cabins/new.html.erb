@@ -1,4 +1,6 @@
-<div class="container col-sm-offset-4">
-    <h1 class="section-title">Add a cabin</h1>
-    <%= render "cabins/form" %>
-</div>
+<% if logged_in? %>
+    <div class="container col-sm-offset-4">
+        <h1 class="section-title">Add a cabin</h1>
+        <%= render "cabins/form" %>
+    </div>
+<% end %>

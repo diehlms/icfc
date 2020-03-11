@@ -35,6 +35,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         if @user.save
           UserMailer.registration_confirmation(@user).deliver
+          UserMailer.new_member_notification(@user).deliver
           flash[:notice] = "A registration link was just emailed to you. Please follow the link in your inbox to continue. If not in your main inbox, please check your spam folder."
           format.html { redirect_to root_url }
         else
@@ -73,12 +74,25 @@ class UsersController < ApplicationController
       user = User.find_by_confirm_token(params[:id])
       if user
         user.email_activate
-        flash[:success] = "Welcome to ICFC! Your email has been confirmed. Please sign in to continue"
+        # flash[:success] = "Welcome to ICFC! Your email has been confirmed. Please sign in to continue"
+        flash[:alert] = "Thanks for signing up with ICFC! If you are known to the ICFC community, an admin user will verify your account. Then you will be able to sign in to access the page."
         redirect_to login_url
       else
         flash[:error] = "Sorry. User information does not exist."
         redirect_to root_url
       end
+    end
+
+    def verified_email
+      set_user
+      user.send_verified_email
+    end
+
+    def toggle_verified
+      set_user
+      @user.toggle(:verified).save
+      UserMailer.verified_confirmation(@user).deliver
+      redirect_back(fallback_location: root_path)
     end
   
     private
@@ -89,6 +103,6 @@ class UsersController < ApplicationController
   
       # Never trust parameters from the scary internet, only allow the white list through.
       def user_params
-        params.require(:user).permit(:username, :firstname, :lastname, :email, :phone_number, :password, :password_confirmation, :confirm_token, :password_reset_token)
+        params.require(:user).permit(:username, :firstname, :lastname, :email, :phone_number, :password, :password_confirmation, :confirm_token, :password_reset_token, :verified)
       end
   end

@@ -10,4 +10,14 @@ class UserMailer < ApplicationMailer
         @user = user
         mail(to: user.email, :subject => "Password Reset")
     end
+
+    def verified_confirmation(user)
+        @user = user
+        mail(to: user.email, :subject => "ICFC Account Verified")
+    end
+
+    def new_member_notification(user)
+        @user = user
+        mail(to: 'diehlstx@gmail.com', :subject => "A new member is awaiting your approval.")
+    end
 end

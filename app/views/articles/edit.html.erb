@@ -1,2 +1,6 @@
-<h1>Edit Article</h1>
-<%= render 'form' %>
+<% if logged_in? %>
+    <h1>Edit Article</h1>
+    <%= render 'form' %>
+<% else %>
+    <p>Account not verified</p>
+<% end %>

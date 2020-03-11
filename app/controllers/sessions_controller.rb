@@ -6,6 +6,11 @@ class SessionsController < ApplicationController
     def create 
         user = User.find_by(email: params[:session][:email].downcase)
         if user && user.authenticate(params[:session][:password])
+          # if user.email_confirmed && !user.verified
+          #     session[:user_id] = user.id
+          #     redirect_to root_path, notice: "Your account is recognized but your account has not been verified. Please wait for an admin user to grant you access"
+          #     remember user
+          #     params[:session][:remember_me] == '1' ? remember(user) : forget(user)
           if user.email_confirmed
               session[:user_id] = user.id
               redirect_to root_path, notice: "You have logged in"

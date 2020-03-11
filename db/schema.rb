@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_31_051050) do
+ActiveRecord::Schema.define(version: 2020_02_28_044406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 2019_12_31_051050) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.string "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "image"
     t.boolean "pinned", default: false
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2019_12_31_051050) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.integer "article_id"
+    t.integer "commentable_id"
+    t.string "commentable_type"
   end
 
   create_table "events", force: :cascade do |t|
@@ -124,6 +126,7 @@ ActiveRecord::Schema.define(version: 2019_12_31_051050) do
     t.string "firstname"
     t.string "lastname"
     t.string "remember_digest"
+    t.boolean "verified", default: false
     t.index ["email_id"], name: "index_users_on_email_id"
   end
 

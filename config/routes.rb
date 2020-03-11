@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :confirm_email
+      post :toggle_verified
     end
   end
   resources :search, only: [:index]
@@ -72,5 +73,6 @@ Rails.application.routes.draw do
   get '/planned_giving', to: 'pages#planned_giving', as: 'planned_giving'
   get '/familyagreements', to: 'pages#familyagreements', as: 'familyagreements'
   get '/archives', to: 'pages#archives', as: 'archives'
+  get '/committee_primer', to: 'pages#committee_primer', as: 'committee_primer'
 
 end

@@ -1,3 +1,5 @@
-<%= render 'form', event: @event %>
+<% if logged_in? %>
+    <%= render 'form', event: @event %>
 
-<%= link_to 'Back', events_path %>
+    <%= link_to 'Back', events_path %>
+<% end %>

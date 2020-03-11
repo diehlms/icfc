@@ -1,6 +1,10 @@
-<div class="container">
-    <h1>Edit information</h1>
+<% if current_user.id == @user.id %>
+    <div class="container">
+        <h1>Edit information</h1>
 
-    <%= render 'form', user: @user %>
+        <%= render 'form', user: @user %>
 
-</div>
+    </div>
+<% else %>
+    <strong>You are not allowed to edit this user's information</strong>
+<% end %>
