@@ -32,6 +32,8 @@ gem 'leaflet-rails'
 gem 'will_paginate', '~> 3.1.1'
 gem 'will_paginate-bootstrap'
 gem 'exception_handler', '~> 0.8.0.0'
+gem 'webpacker'
+gem 'react-rails'
 
 # storage
 

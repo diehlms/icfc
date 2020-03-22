@@ -74,18 +74,13 @@ class UsersController < ApplicationController
       user = User.find_by_confirm_token(params[:id])
       if user
         user.email_activate
-        # flash[:success] = "Welcome to ICFC! Your email has been confirmed. Please sign in to continue"
-        flash[:alert] = "Thanks for signing up with ICFC! If you are known to the ICFC community, an admin user will verify your account. Then you will be able to sign in to access the page."
+        flash[:success] = "Welcome to ICFC! Your email has been confirmed. Please sign in to continue"
+        # flash[:alert] = "Thanks for signing up with ICFC! If you are known to the ICFC community, an admin user will verify your account. Then you will be able to sign in to access the page."
         redirect_to login_url
       else
         flash[:error] = "Sorry. User information does not exist."
         redirect_to root_url
       end
-    end
-
-    def verified_email
-      set_user
-      user.send_verified_email
     end
 
     def toggle_verified

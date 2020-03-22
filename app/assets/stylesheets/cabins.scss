@@ -16,7 +16,8 @@
 
 .cabin-grid {
     display: flex;
-    flex-wrap: auto;
+    flex-wrap: wrap;
+    justify-content: center;
 
 }
 

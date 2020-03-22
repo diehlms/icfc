@@ -18,6 +18,9 @@ class UserMailer < ApplicationMailer
 
     def new_member_notification(user)
         @user = user
-        mail(to: 'diehlstx@gmail.com', :subject => "A new member is awaiting your approval.")
+        users = ['diehlstx@gmail.com', 'richard@hugessen.ca']
+        users.each do |ad_user|
+            mail(to: "#{ad_user}", :subject => "A new member is awaiting your approval.")
+        end
     end
 end
