@@ -35,6 +35,7 @@ gem 'exception_handler', '~> 0.8.0.0'
 gem 'webpacker'
 gem 'react-rails'
 gem 'trix-rails', require: 'trix'
+gem 'rails-controller-testing'
 
 # storage
 
