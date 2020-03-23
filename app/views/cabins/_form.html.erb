@@ -1,44 +1,42 @@
-<div class="cabin-form">
+<div id="cabin-form" class="form-container">
     <%= form_for @cabin do |f| %>
         <%= render 'layouts/error_messages', object: @cabin %>
         <div class="row">
-            <div class="form-group col-sm-4">
+            <div class="form-group">
                 <%= f.label :name %>
                 <%= f.text_field :name, class: "form-control" %>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-1 form-group">
+            <div class="form-group">
                 <%= f.label :bedrooms %>
                 <%= f.text_field :bedrooms, class: "form-control" %>
             </div>
-            <div class="col-sm-2 form-group">
+            <div class="form-group">
                 <%= f.label :washerdryer, "Washer/Dryer?" %>
                 <%= f.check_box :washerdryer, class: "form-control" %>
             </div>
-            <div class="col-sm-1 form-group">
+            <div class="form-group">
                 <%= f.label :dock, "Dock?" %>
                 <%= f.check_box :dock, class: "form-control" %>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-1 form-group">
+            <div class="form-group">
                 <%= f.label :price_per_day, "Price Per Day" %>
                 <%= f.text_field :price_per_day, class: "form-control" %>
             </div>
-            <div class="col-sm-1 form-group">
+            <div class="form-group">
                 <%= f.label :price_per_week, "Price Per Week" %>
                 <%= f.text_field :price_per_week, class: "form-control" %>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 form-group">
+            <div class="form-group">
                 <%= f.label :description %>
-                <%= f.text_field :description, class: "form-control" %>
+                <%= trix_editor :cabin, :description %>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 form-group">
+            <div class="form-group">
                 <%= f.fields_for :cabin_attachments do |p| %>
                     <div class="field">
                         <%= p.label :image, "Pictures" %><br>

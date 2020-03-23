@@ -74,5 +74,6 @@ Rails.application.routes.draw do
   get '/familyagreements', to: 'pages#familyagreements', as: 'familyagreements'
   get '/archives', to: 'pages#archives', as: 'archives'
   get '/committee_primer', to: 'pages#committee_primer', as: 'committee_primer'
+  get '/landing', to: 'pages#landing', as: 'landing'
 
 end

@@ -14,7 +14,7 @@
       </div>
       <div>
         <%= f.label :description, "Description" %>
-        <%= f.text_area :description, rows: 10, placeholder: "limit: 10000 characters", class: "form-control" %>
+        <%= trix_editor :event, :description, placeholder: "limit: 10000 characters" %>
       </div>
       <div>
         <%= f.label :start_time, "From:"%>

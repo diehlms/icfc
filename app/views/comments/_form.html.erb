@@ -1,7 +1,7 @@
 <div id="comment-form">
     <%= form_for @comment do |f| %>
         <%= render 'layouts/error_messages', object: @comment %>
-        <%= f.text_area :content, class: 'form-control' %>
+        <%= trix_editor :comment, :content, required: true %>
         <%= f.hidden_field :article_id %>
         <br>
         <%= f.submit "post comment", class: 'btn btn-success' %>

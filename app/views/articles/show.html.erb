@@ -7,7 +7,7 @@
                         <% if @article.user %>
                             <small><p class="card-subtitle mb-2 text-muted">Created by: <%= link_to @article.user.username, user_path(@article.user) if @article.user_id %></p></small>
                         <% end %>
-                        <%= simple_format(@article.content) %>
+                        <%= @article.content.html_safe %>
                     </div>
                     <div class="col md-6">
                         <%= image_tag(@article.image.url(:thumb), alt: 'Image', :class => "pull-right article-image", id: "image=#{dom_id(@article)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(@article)}"}) if @article.image? %>

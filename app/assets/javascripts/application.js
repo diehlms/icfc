@@ -17,6 +17,7 @@
 //= require jquery-ui/widgets/datepicker
 //= require bootstrap
 //= require activestorage
+//= require trix
 //= require_tree .
 
 
@@ -31,4 +32,8 @@ $('.alert').alert()
 $('#committee-primer button a').click(function(){
     $(this).next('ul').slideToggle('500');
     $(this).find('i').toggleClass('fa-toggle-on fa-toggle-off')
+});
+
+document.addEventListener("trix-file-accept", function(event) {
+    event.preventDefault();
 });

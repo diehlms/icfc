@@ -1,6 +1,9 @@
 {
   "dependencies": {
-    "@rails/webpacker": "5.0.0"
+    "@rails/webpacker": "5.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react_ujs": "^2.6.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.3"
