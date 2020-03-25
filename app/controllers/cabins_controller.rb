@@ -37,9 +37,11 @@ class CabinsController < ApplicationController
 
     def show
         set_cabin
-        @cabin_attachments = @cabin.cabin_attachments.all
-        @cabindate = Cabindate.new(cabin_id: params[:id])
-        @cabindates = @cabin.cabindates
+        if @cabin
+            @cabin_attachments = @cabin.cabin_attachments.all
+            @cabindate = Cabindate.new(cabin_id: params[:id])
+            @cabindates = @cabin.cabindates
+        end
     end
 
     def update
@@ -88,7 +90,7 @@ class CabinsController < ApplicationController
         end
 
         def set_cabin
-            @cabin = Cabin.find(params[:id])
+            @cabin = Cabin.find_by_id(params[:id])
         end
 
         def cabindate_params

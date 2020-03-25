@@ -10,6 +10,8 @@
     <% end %>
     <br><br>
     <%= will_paginate @articles, class: "pagination-style" %>
+    <br>
+    <br>
     <% if logged_in? && current_user %>
         <% if @articles.any? %>
             <% @articles.each do |article| %>

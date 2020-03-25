@@ -11,7 +11,9 @@ def show
     user = session[:user_id]
     @comment = Comment.new(article_id: params[:id])
     set_article
-    @comments = @article.comments.paginate(page: params[:page]).order("created_at DESC")
+    if @article
+        @comments = @article.comments.paginate(page: params[:page]).order("created_at DESC")
+    end
 end
 
 def index

@@ -85,8 +85,8 @@ class UsersController < ApplicationController
 
     def toggle_verified
       set_user
-      @user.toggle(:verified).save
-      UserMailer.verified_confirmation(@user).deliver
+      @user.toggle!(:verified)
+      # UserMailer.verified_confirmation(@user).deliver
       redirect_back(fallback_location: root_path)
     end
   

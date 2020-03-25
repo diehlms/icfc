@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 
 class App extends React.Component {
   render () {
@@ -8,9 +7,5 @@ class App extends React.Component {
     );
   }
 }
-
-HelloWorld.propTypes = {
-  greeting: PropTypes.string
-};
 
 export default App
