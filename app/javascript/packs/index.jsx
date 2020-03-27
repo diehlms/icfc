@@ -1,11 +1,45 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../src/App'
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import ArticleReducer from '../src/store/reducers/articles';
+import CommentReducer from '../src/store/reducers/comments';
+import CabinReducer from '../src/store/reducers/cabins';
+import PictureReducer from '../src/store/reducers/pictures';
+import EventReducer from '../src/store/reducers/events';
+import UserReducer from '../src/store/reducers/users';
+import AuthReducer from '../src/store/reducers/auth'
+import SearchReducer from '../src/store/reducers/search'
+import CabinImageReducer from '../src/store/reducers/cabinImage'
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const rootReducer = combineReducers({
+    articles: ArticleReducer,
+    comments: CommentReducer,
+    cabins: CabinReducer,
+    pictures: PictureReducer,
+    events: EventReducer,
+    users: UserReducer,
+    auth: AuthReducer,
+    search: SearchReducer,
+    cabinImage: CabinImageReducer
+})
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-        <App />,
-    document.body.appendChild(document.createElement('div')),
+        <Provider 
+            store={store}>
+            <BrowserRouter>
+                <App 
+                />
+            </BrowserRouter>
+        </Provider>,
+        document.body.appendChild(document.createElement('div')),
     )
 })

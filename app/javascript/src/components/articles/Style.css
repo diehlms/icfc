@@ -1,0 +1,13 @@
+.articleCard {
+    margin: 12px 50px;
+    padding: 15px;
+    border: 1px solid red;
+}
+
+.articleList {
+
+}
+
+.articleList>h2 {
+    margin-top: 15px;
+}

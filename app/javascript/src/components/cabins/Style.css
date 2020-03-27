@@ -1,0 +1,10 @@
+#cabinsMap {
+    height: 240px;
+    z-index: -99;
+}
+
+.leaflet-container {
+    margin: 0 auto;
+    width: 80%;
+    height: 240px;
+}
