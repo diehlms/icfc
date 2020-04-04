@@ -28,7 +28,7 @@ export class Create extends Component {
     
     render() {
         return (
-            <div>
+            <div className="modalMain">
                 <h1>Add an Event</h1>
                 <form onSubmit={this.onSubmit}>
                     <FormGroup>

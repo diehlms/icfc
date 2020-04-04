@@ -1,1 +1,8 @@
-<%= javascript_pack_tag 'index' %>
+<% if current_user && logged_in? %>
+    <%= javascript_pack_tag 'index' %>
+    <%= content_tag :div,
+        id: "session_id_tag",
+        data: current_user.id.to_json do 
+    %>
+    <% end %>
+<% end %>

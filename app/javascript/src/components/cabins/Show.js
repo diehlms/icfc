@@ -38,7 +38,6 @@ export class Show extends Component {
                     cabinImageList.push(image)
                 }
             });
-            console.log(cabinImageList);
         }
 
         if (!this.props.loading && this.props.cabins[1] && this.props.cabins[1].cabins) {
@@ -68,7 +67,7 @@ export class Show extends Component {
         }
 
         return (
-            <div>
+            <div className="containerMain">
                 {text}
                 {imageUpload}
             </div>

@@ -37,7 +37,14 @@
 
 #add-pic-button {
     text-align: center;
-    display: block;
-    max-width: 300px;
     margin: auto;
+}
+
+.picture-links-row {
+    margin: 0 auto;
+}
+
+.picture-link {
+    color: white;
+    text-decoration: none;
 }

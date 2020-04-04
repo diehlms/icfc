@@ -1,5 +1,7 @@
 #cabinsMap {
     height: 240px;
+    margin: 0;
+    width: 79%;
     z-index: -99;
 }
 

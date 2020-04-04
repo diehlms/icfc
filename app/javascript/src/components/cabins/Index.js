@@ -7,7 +7,9 @@ import CreateCabin from './Create'
 import { Link } from 'react-router-dom';
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import { Icon } from "leaflet";
+import CabinCard from "./components/CabinCard";
 import './Style.css'
+import { Typography } from '@material-ui/core';
 
 class Index extends React.Component {
     state = {
@@ -31,42 +33,70 @@ class Index extends React.Component {
     }
 
     render() {
-        // var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-
-        let cabins = 'articles not loaded yet'
+        let cabins = 'cabins not loaded yet'
 
         if (!this.props.loading && this.props.cabins && this.props.cabins[1] && this.props.cabins[1].cabins) {
             cabins = this.props.cabins[1].cabins.map((cabin, index) => {
                 return (
-                    <div key={index}>
-                        <Link to={`/cabins/${cabin.id}`}>{cabin.name}</Link>
-                        <button onClick={this.removeCabin.bind(this, cabin.id)}>X</button>
-                    </div>
+                    <CabinCard
+                        key={index}
+                        name={cabin.name}
+                        bedrooms={cabin.bedrooms}
+                        id={cabin.id}
+                        removeCabin={this.removeCabin.bind(this, cabin.id)}
+                    />
                 )
             })
         }
 
         return (
-            <div>
-                <h1>Cabins</h1>
-                <Button onClick={this.openModal}>
-                    Add Cabin
-                </Button>
-                <Map center={[45.4, -75.7]} zoom={12}>
-                    <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    />
-                </Map>
-                {cabins}
-                <Modal
-                    isOpen={this.state.createCabinModalOpen}
-                    onRequestClose={this.closeModal}
-                    contentLabel="Example Modal"
-                    ariaHideApp={false}
-                >
-                    <CreateCabin />
-                </Modal>
+            <div className="containerMain">
+                <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "10% 90%"
+                }}>
+                    <div>
+                        <h1>Cabins</h1>
+                        <Button onClick={this.openModal}>
+                            Add Cabin
+                        </Button>
+                    </div>
+                    <div>
+                        <Map 
+                            style={{
+                                zIndex: "0",
+                                width: "77%",
+                                display: "flex",
+                                flex: "1"
+                            }}
+                        center={[45.4, -75.7]} zoom={12}>
+                            <TileLayer
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            />
+                        </Map>
+                        <div
+                            style={{
+                                margin: "0 auto",
+                                width: "77%",
+                                display: "flex",
+                                flex: "1",
+                                flexWrap: "wrap",
+                                flexDirection: "row",
+                            }}
+                        >
+                            {cabins}
+                        </div>
+                        <Modal
+                            isOpen={this.state.createCabinModalOpen}
+                            onRequestClose={this.closeModal}
+                            contentLabel="Example Modal"
+                            ariaHideApp={false}
+                        >
+                            <CreateCabin />
+                        </Modal>
+                    </div>
+                </div>
             </div>
         )
     }

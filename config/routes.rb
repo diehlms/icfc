@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     end
   end
 
+  # make sure to comment this line out when not using react in dev
+
   get '/login', to: 'sessions#new', as: 'login'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
   post '/login', to: 'sessions#create'

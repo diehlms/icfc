@@ -26,12 +26,6 @@ class Api::V1::CabinsController < ApplicationController
         render json: { message: 'Post deleted!'}
     end
 
-    # def edit
-    # end
-
-    # def update
-    # end
-
     private
 
     def cabin_params

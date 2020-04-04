@@ -1,35 +1,55 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index'
-import Modal from 'react-modal';
-import Button from 'react-bootstrap/Button';
-import { Link} from 'react-router-dom'
+import UserTable from './UserTable';
+import { Typography } from '@material-ui/core';
 
-class Index extends React.Component {
+export class Index extends Component {
+
     componentDidMount() {
-        this.props.onFetchUsers()
+        this.props.onFetchUsers();
     }
 
     render() {
-        let users = 'users not loaded yet'
+        const users = [];
+
+        console.log(users);
+
         if (!this.props.loading && this.props.users && this.props.users[1] && this.props.users[1].users) {
-            users = this.props.users[1].users.map((user, index) => {
-                return (
-                    <div key={index}>
-                        <Link to={`/user/${user.id}`}>{user.username}</Link>
-                    </div>
-                )
+            this.props.users[1].users.map((user, index) => {
+                const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+                const cleanedPhoneNumber = user.phone_number.replace(phoneRegex, "$1-$2-$3");
+                
+                users.push({
+                    username: user.username,
+                    name: `${user.firstname} ${user.lastname}`,
+                    email: user.email,
+                    phoneNumber: cleanedPhoneNumber
+                })
             })
         }
 
         return (
-            <div>
-                <h1>Users</h1>
-                {users}
+            <div className="containerMain">
+                <Typography 
+                    variant="h3"
+                    style={{ 
+                        textAlign: "center"
+                    }}>
+                    Users
+                </Typography>
+                <br/><br/>
+                {this.props.loading && users.length === 0 ? (
+                    <h1>Loading</h1>
+                ) : (
+                    <UserTable
+                        users={users}
+                    />
+                )}
             </div>
         )
     }
-}
+};
 
 const mapStateToProps = state => {
     return {

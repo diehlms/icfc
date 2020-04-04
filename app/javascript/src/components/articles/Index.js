@@ -14,6 +14,7 @@ import './Style.css'
 
 function TabPanel(props) {
     const { children, value, index } = props;
+
     return (
       <Typography
         component="div"
@@ -51,6 +52,7 @@ class Index extends React.Component {
 
     render() {
         let articles = 'articles not loaded yet';
+
         if (!this.props.loading && this.props.articles && this.props.articles[1] && this.props.articles[1].articles) {
             this.state.value === 0 ? 
                 articles = this.props.articles[1].articles.map((article, index) => {
@@ -84,7 +86,7 @@ class Index extends React.Component {
         };
 
         return (
-            <div className='articleList'>
+            <div className='containerMain'>
                 <Typography 
                     align='center'
                     variant='h2'>
@@ -93,14 +95,27 @@ class Index extends React.Component {
                 <Button onClick={this.openModal}>
                     Add Article
                 </Button>
-                <AppBar position="static">
-                    <Tabs value={this.state.value} onChange={handleTabChange} aria-label="simple tabs example">
-                        <Tab 
+                <AppBar 
+                    position="static"
+                    style={{ 
+                        background: "white",
+                        boxShadow: "0 0 0 0"
+                    }}
+                >
+                    <Tabs 
+                        className="tabs"
+                        value={this.state.value} 
+                        onChange={handleTabChange} 
+                        aria-label="simple tabs example"
+                    >
+                        <Tab
+                            className="tab" 
                             label="All Articles"
                             id="allArticles"
                             aria-controls="allArticlesTabControl" 
                         />
-                        <Tab 
+                        <Tab
+                            className="tab" 
                             label="My Articles" 
                             id="myArticles"
                             aria-controls="myArticlesTabControl"

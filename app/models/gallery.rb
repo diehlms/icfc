@@ -1,4 +1,6 @@
 class Gallery < ApplicationRecord
+    self.per_page = 30
+    
     belongs_to :user
     
     validates :caption, length: { maximum: 30}

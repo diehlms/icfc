@@ -31,7 +31,7 @@ export class Create extends Component {
 
     render() {
         return (
-            <div>
+            <div className="modalName">
                 <h1>Add a Cabin</h1>
                 <form onSubmit={this.onSubmit}>
                     <FormGroup>

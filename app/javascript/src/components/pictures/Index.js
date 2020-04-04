@@ -41,11 +41,24 @@ class Index extends React.Component {
         }
 
         return (
-            <div>
+            <div className="containerMain">
                 <h1>Pictures</h1>
-                <Button onClick={this.openModal}>
-                    Add Picture
-                </Button>
+                <div style={{
+                    margin: "0 auto"
+                }}>
+                    <Button onClick={this.openModal}>
+                        Add Picture
+                    </Button>
+                    <Button>
+                        <a href="https://photos.google.com/share/AF1QipNldgWsKvgyEBv2udxYVNwlVIWJ4Mn_aY2a41SPHoM6c6LMm4HeMmwqZGuIJ4hOXA?key=QmluMS00ZHZfS1JMN1dDTktQb0pwRWNiM003cERn">2019 Pictures</a>
+                    </Button>
+                    <Button>
+                        <a href="https://photos.google.com/share/AF1QipNjfWzCYu2JrV3CQ_NIlUbf8APffI3Af2HHTn4RRq9laySkz-OGckBgAvmqAfxrCQ?key=OEVmYVNtSy1FcEpCVktlSTA2QngtQk5tMEliNE9n">2018 Pictures, Part 1</a>
+                    </Button>
+                    <Button>
+                        <a href="https://photos.google.com/share/AF1QipPJGncCbqieSG8bhndZLja0FfEVf4KaFlRatt6FWk-AmUAWAWF1pup9qcroOXCh8A?key=NzllQXN0LWtZOFZyQUt1X21ETHBOWnZ5dndadm53">2018 Pictures, Part 2</a>
+                    </Button>
+                </div>
                 {pictures}
                 <Modal
                     isOpen={this.state.createPictureModalOpen}

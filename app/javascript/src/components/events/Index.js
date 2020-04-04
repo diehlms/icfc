@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
+import './Style.css'
 
 const localizer = momentLocalizer(moment)
 
@@ -77,11 +78,14 @@ class Index extends React.Component {
         }
 
         return (
-            <div>
+            <div className="containerMain">
                 <h1>Events</h1>
+                <br/>
                 <Button onClick={this.openModal}>
                     Add Event
                 </Button>
+                <br/>
+                <br/>
                 <Basic
                     events={eventList}
                 />

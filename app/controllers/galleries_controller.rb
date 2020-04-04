@@ -15,10 +15,9 @@ class GalleriesController < ApplicationController
         end
     end
 
-
     def index
         @gallery = Gallery.new
-        @galleries = Gallery.all
+        @galleries = Gallery.paginate(page: params[:page])
     end
 
     def destroy

@@ -5,7 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { connect } from 'react-redux'
@@ -14,7 +13,6 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link as RouterLink } from 'react-router-dom';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-import { useDispatch } from "react-redux";
 import * as actions from '../store/actions/index'
 import './Style.css'
 

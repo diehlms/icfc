@@ -1,0 +1,32 @@
+.containerMain {
+    margin: 80px 50px 100px 50px;
+    min-height: 78vh;
+    max-height: 180vh;
+    padding-bottom: 140px;
+}
+
+.body {
+    background-color: white;
+}
+
+.modalMain {
+    width: 66%;
+    margin: 0 auto;
+}
+
+.ReactModal__Content.ReactModal__Content--after-open {
+    width: 33%;
+    height: 70%;
+    margin: 0 auto;
+    z-index: 9999;
+    opacity: 1;
+}
+
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+    margin-top: 60px;
+}
+
+.rbc-calendar {
+    z-index: 0;
+    bottom: 20%;
+}

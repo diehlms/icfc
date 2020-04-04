@@ -22,7 +22,7 @@ class Show extends React.Component {
         let text = 'hello'
 
         if (!this.props.loading && this.props.articles[1] && this.props.articles[1].articles) {
-            const {id, title, content, user_id, image} = this.props.articles[1].articles.find(article => 
+            const {id, title, content, image} = this.props.articles[1].articles.find(article => 
                 article.id.toString() === this.props.match.params.id.toString()
             )
             let imageTag = ''
@@ -33,18 +33,38 @@ class Show extends React.Component {
                 )
             }
 
+            function createMarkup(text) {
+                return {__html: text};
+            }
+            
+            function ArticleContent(props) {
+                return (
+                    <div className="articleContent">
+                        <div dangerouslySetInnerHTML={createMarkup(props.content)} />
+                    </div>
+                )
+            }
+
+
             text = (
                 <div>
-                    <h1>{title}</h1>
-                    <p>{content}</p>
-                    <p>{user_id}</p>
                     <div>
-                        {imageTag}
+                        <h1>{title}</h1>
+                        <div>
+                            <ArticleContent 
+                                content={content}
+                            />
+                        </div>
+                        <div>
+                            {imageTag}
+                        </div>
                     </div>
+                    <div>
                     <CreateComment 
                         user_id={this.props.user_id}
                         article_id={id}
                     />
+                    </div>
                 </div>
             )
         }
@@ -72,11 +92,16 @@ class Show extends React.Component {
         }
 
         return (
-            <div>
-                {text}
-                <div>
-                    <h4>Comments:</h4>
-                    {comments}
+            <div className="containerMain">
+                <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "66% 33%"
+                }}>
+                    {text}
+                    <div>
+                        <h4>Comments:</h4>
+                        {comments}
+                    </div>
                 </div>
             </div>
         )

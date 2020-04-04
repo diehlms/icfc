@@ -1,39 +1,51 @@
 <% if logged_in? %>
     <div class="container">
         <h1 class="section-title" align="center">Pictures</h1>
-        <div id="add-pic-button">
-            <% if logged_in? %>
-                <%= link_to "post a picture <i class='fa fa-plus'></i>".html_safe, "#", data: {toggle: "modal", target: "#galleryModal"}, class: 'btn btn-success' %>
-            <% end %>
+        <div class="pictures-links">
+            <div class="pictures-link-row" id="add-pic-button">
+                <% if logged_in? %>
+                    <%= link_to "post a picture <i class='fa fa-plus'></i>".html_safe, "#", data: {toggle: "modal", target: "#galleryModal"}, class: 'btn btn-success' %>
+                <% end %>
+                <div class="btn btn-success pictures-link-row">
+                    <a class="picture-link" href="https://photos.google.com/share/AF1QipNldgWsKvgyEBv2udxYVNwlVIWJ4Mn_aY2a41SPHoM6c6LMm4HeMmwqZGuIJ4hOXA?key=QmluMS00ZHZfS1JMN1dDTktQb0pwRWNiM003cERn">2019 Pictures</a>
+                </div>
+                <div class="btn btn-success pictures-link-row">
+                    <a class="picture-link" href="https://photos.google.com/share/AF1QipNjfWzCYu2JrV3CQ_NIlUbf8APffI3Af2HHTn4RRq9laySkz-OGckBgAvmqAfxrCQ?key=OEVmYVNtSy1FcEpCVktlSTA2QngtQk5tMEliNE9n">2018 Pictures, Part 1</a>
+                </div>
+                <div class="btn btn-success pictures-link-row">
+                    <a class="picture-link" href="https://photos.google.com/share/AF1QipPJGncCbqieSG8bhndZLja0FfEVf4KaFlRatt6FWk-AmUAWAWF1pup9qcroOXCh8A?key=NzllQXN0LWtZOFZyQUt1X21ETHBOWnZ5dndadm53">2018 Pictures, Part 2</a>
+                </div>
+            </div>
         </div>
-        <div id="pictures">
-        </div>
-        <% if @galleries %>
-            <div class="picture-container">
-                <% @galleries.each do |picture| %>
-                    <div class="card picture">
-                        <div class="card card-body picture">
-                            <%= image_tag(picture.image.url(:thumb), class: "gallery-img", id: "image=#{dom_id(picture)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(picture)}"}) if picture.image? %>
-                            <% if logged_in? && picture.user_id == current_user.id || logged_in? && current_user.admin? %>
-                                <%= button_to "delete", gallery_path(picture), method: :delete, data: { confirm: "are you sure you want to delete this picture? "}, class: "btn btn-xs btn-block btn-danger" %>
-                            <% end %>
-                            <div id="imgModal-<%= dom_id(picture) %>" class="modal fade">
-                                <div class="modal-dialog">
-                                    <div class="model-content">
-                                        <div class="img modal-body">
-                                            <%= image_tag(picture.image.url, class: "picture-modal-whole")%>
-                                            <p class="img-caption"><%= picture.caption %></p>
+        <%= will_paginate @galleries, class: "pagination-style" %>
+        <br><br>
+            <% if @galleries %>
+                <div class="picture-container">
+                    <% @galleries.each do |picture| %>
+                        <div class="card picture">
+                            <div class="card card-body picture">
+                                <%= image_tag(picture.image.url(:thumb), class: "gallery-img", id: "image=#{dom_id(picture)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(picture)}"}) if picture.image? %>
+                                <% if logged_in? && picture.user_id == current_user.id || logged_in? && current_user.admin? %>
+                                    <%= button_to "delete", gallery_path(picture), method: :delete, data: { confirm: "are you sure you want to delete this picture? "}, class: "btn btn-xs btn-block btn-danger" %>
+                                <% end %>
+                                <div id="imgModal-<%= dom_id(picture) %>" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <div class="model-content">
+                                            <div class="img modal-body">
+                                                <%= image_tag(picture.image.url, class: "picture-modal-whole")%>
+                                                <p class="img-caption"><%= picture.caption %></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <% end %>
-            </div>
-        <% end %>
-    </div>
-
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    <br><br>
+    <%= will_paginate @galleries, class: "pagination-style" %>
     <div id="galleryModal" class="modal fade">
         <div class="modal-dialog modal-login">
             <div class="model-content">
