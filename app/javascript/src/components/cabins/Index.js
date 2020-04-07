@@ -20,6 +20,12 @@ class Index extends React.Component {
         this.props.onFetchCabins()
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.loading !== prevProps.loading) {
+            this.props.onFetchCabins()
+        }
+    }
+
     openModal = () => {
         this.setState({createCabinModalOpen: true});
     }
@@ -35,7 +41,7 @@ class Index extends React.Component {
     render() {
         let cabins = 'cabins not loaded yet'
 
-        if (!this.props.loading && this.props.cabins && this.props.cabins[1] && this.props.cabins[1].cabins) {
+        if (!this.props.cabins.loading && this.props.cabins && this.props.cabins[1] && this.props.cabins[1].cabins) {
             cabins = this.props.cabins[1].cabins.map((cabin, index) => {
                 return (
                     <CabinCard
@@ -104,7 +110,8 @@ class Index extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        cabins: state.cabins
+        cabins: state.cabins,
+        loading: state.loading
     }
 }
 

@@ -20,10 +20,14 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    width: "5%",
+    left: "0"
   },
   appBar: {
     top: '50px',
+    width: "5%",
+    left: "0",
     backgroundColor: 'white',
     display: 'flex',
     boxShadow: 'none',
@@ -53,6 +57,8 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
   },
   drawerPaper: {
+    height: '84vh',
+    top: '52px',
     width: drawerWidth,
   },
   drawerHeader: {
@@ -94,6 +100,45 @@ function Sidebar() {
         setOpen(false);
     };
 
+    const staticPages = [
+      {
+        displayName: "Archives",
+        link: "archives"
+      },
+      {
+        displayName: "By Laws",
+        link: "bylaws"
+      },
+      {
+        displayName: "Charitable Gift Fund",
+        link: "charitablegiftfund"
+      },
+      {
+        displayName: "Customs & Traditions",
+        link: "customstraditions"
+      },
+      {
+        displayName: "Family Agreements Policy",
+        link: "familyagreements"
+      },
+      {
+        displayName: "Forms",
+        link: "forms"
+      },
+      {
+        displayName: "History",
+        link: "history"
+      },
+      {
+        displayName: "Membership",
+        link: "membership"
+      },
+      {
+        displayName: "Planned Giving",
+        link: "plannedgiving"
+      }
+    ];
+
     return (
       <div className="sidebar">
           <div className={classes.root}>
@@ -131,14 +176,21 @@ function Sidebar() {
                   </IconButton>
                 </div>
                 <Divider />
-                  <List>
-                  {['articles', 'cabins', 'events', 'pictures', 'users'].map((text, index) => (
-                      <ListItem button key={text}>
-                          <ListItemText><Link to={`/${text}`}>{text}</Link></ListItemText>
-                      </ListItem>
-                  ))}
-                  </List>
+                <List>
+                {['articles', 'cabins', 'events', 'pictures', 'users'].map((text, index) => (
+                    <ListItem button key={index}>
+                        <ListItemText><Link to={`/${text}`}>{text}</Link></ListItemText>
+                    </ListItem>
+                ))}
+                </List>
                 <Divider />
+                <List>
+                  {staticPages.map((text, index) => (
+                    <ListItem button key={index}>
+                      <ListItemText><Link to={`/${text.link}`}>{text.displayName}</Link></ListItemText>
+                    </ListItem>
+                  ))}
+                </List>
             </Drawer>
         </div>
       </div>

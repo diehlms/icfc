@@ -24,13 +24,6 @@ export default function(state = initialState, action) {
                 }
             ]
         }
-        case actions.FETCH_ARTICLES: {
-            return [
-                state, {
-                    loading: true
-                }
-            ]
-        }
         case actions.CREATE_ARTICLE_SUCCESS: {
             return [
                 state, {
@@ -38,7 +31,7 @@ export default function(state = initialState, action) {
                 }
             ]
         }
-        case actions.CREATE_ARTICLE: {
+        case actions.CREATE_ARTICLE_INIT: {
             return [
                 state, {
                     loading: true
@@ -49,13 +42,6 @@ export default function(state = initialState, action) {
             return [
                 state, {
                     loading: false
-                }
-            ]
-        }
-        case actions.DELETE_ARTICLE: {
-            return [
-                state, {
-                    loading: true
                 }
             ]
         }
@@ -71,6 +57,13 @@ export default function(state = initialState, action) {
             return [
                 state, {
                     loading: false
+                }
+            ]
+        }
+        case actions.DELETE_ARTICLE_INIT: {
+            return [
+                state, {
+                    loading: true
                 }
             ]
         }

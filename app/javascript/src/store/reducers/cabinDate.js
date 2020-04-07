@@ -1,29 +1,29 @@
 import * as actions from '../actions/actionTypes'
 
 const initialState = {
-    comments: [],
+    cabin_dates: [],
     loading: false,
     err: null
 }
 
 export default function(state = initialState, action) {
     switch(action.type) {
-        case actions.FETCH_COMMENTS_SUCCESS: {
+        case actions.FETCH_CABIN_DATES_SUCCESS: {
             return [
                 state, {
-                    comments: action.res,
+                    cabin_dates: action.res,
                     loading: false
                 }
             ]
         }
-        case actions.FETCH_COMMENTS_FAIL: {
+        case actions.FETCH_CABIN_DATES_FAIL: {
             return [
                 state, {
                     loading: false
                 }
             ]
         }
-        case actions.FETCH_COMMENTS: {
+        case actions.FETCH_CABIN_DATES: {
             return [
                 state, {
                     loading: true

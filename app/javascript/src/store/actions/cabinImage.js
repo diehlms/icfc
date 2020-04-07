@@ -54,29 +54,13 @@ export const addCabinImage = (cabin_id, image) => {
 
 export const addCabinImageSuccess = () => {
     return {
-        type: actions.ADD_CABIN_IMAGE_SUCCESS
+        type: actions.LOADING_FINISH
     }
 }
 
 export const addCabinImageFail = () => {
     return {
-        type: actions.ADD_CABIN_IMAGE_FAIL
-    }
-}
-
-export const editCabinImage = () => {
-    return {
-    }
-}
-
-export const editCabinImageSuccess = () => {
-    return {
-    }
-}
-
-export const editCabinImageFail = () => {
-    return {
-
+        type: actions.LOADING_FINISH
     }
 }
 
@@ -101,12 +85,12 @@ export const deleteCabinImage = id => {
 
 export const deleteCabinImageSuccess = () => {
     return {
-        type: actions.DELETE_CABIN_IMAGE_SUCCESS
+        type: actions.LOADING_FINISH
     }
 }
 
 export const deleteCabinImageFail = () => {
     return {
-        type: actions.DELETE_CABIN_IMAGE_FAIL
+        type: actions.LOADING_FINISH
     }
 }

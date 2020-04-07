@@ -71,7 +71,7 @@ ul {
 }
 
 .container {
-    margin-top: 30px;
+    margin-top: 60px !important;
     margin-bottom: 200px;
 }
 
@@ -163,6 +163,12 @@ ul {
     margin-left: 20px;
     padding: 0px;
     height: 30px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 /* footer */

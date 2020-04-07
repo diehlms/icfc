@@ -30,6 +30,7 @@ export const fetchCommentsFail = () => {
 
 export const createComment = (user_id, article_id, content) => {
     return dispatch => {
+        dispatch(createCommentInit())
         const url = "/api/v1/comments/create";
         let body = {
             'user_id': user_id,
@@ -53,21 +54,25 @@ export const createComment = (user_id, article_id, content) => {
                 dispatch(createCommentFail())
             }
         })
-        .then(res => dispatch(createCommentSuccess(res)))
+        .then(res => dispatch(createCommentSuccess()))
     }
 }
 
-
-export const createCommentSuccess = res => {
+export const createCommentInit = () => {
     return {
-        type: actions.CREATE_COMMENT_SUCCESS,
-        res
+        type: actions.LOADING_START
     }
 }
 
-export const createCommentFail = err => {
+export const createCommentSuccess = () => {
     return {
-        type: actions.CREATE_COMMENT_FAIL,
+        type: actions.LOADING_FINISH
+    }
+}
+
+export const createCommentFail = () => {
+    return {
+        type: actions.LOADING_FINISH,
     }
 }
 
@@ -90,14 +95,20 @@ export const deleteComment = id => {
     }
 }
 
+export const deleteCommentInit = () => {
+    return {
+        type: actions.LOADING_START
+    }
+}
+
 export const deleteCommentSuccess = () => {
     return {
-        type: actions.DELETE_COMMENT_SUCCESS
+        type: actions.LOADING_FINISH
     }
 }
 
 export const deleteCommentFail = () => {
     return {
-        type: actions.DELETE_COMMENT_FAIL
+        type: actions.LOADING_FINISH
     }
 }

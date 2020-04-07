@@ -14,6 +14,12 @@ class Index extends React.Component {
         this.props.onFetchPictures()
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.loading !== prevProps.loading) {
+            this.props.onFetchPictures();
+        }
+    }
+
     openModal = () => {
         this.setState({createPictureModalOpen: true});
     }
@@ -23,17 +29,17 @@ class Index extends React.Component {
     }
 
     removePicture = id => {
-        this.props.removePicture(id)
+        this.props.onRemovePicture(id)
     }
 
     render() {
         let pictures = 'pictures not loaded yet'
-        if (!this.props.loading && this.props.pictures && this.props.pictures[1] && this.props.pictures[1].pictures) {
+        if (!this.props.pictures.loading && this.props.pictures && this.props.pictures[1] && this.props.pictures[1].pictures) {
             pictures = this.props.pictures[1].pictures.map((picture, index) => {
                 return (
                     <div key={index}>
                         <p>{picture.caption}</p>
-                        <img src={picture.image.thumb.url} alt={picture.caption} />
+                        <img src={picture.image.url} alt={picture.caption} />
                         <button onClick={this.removePicture.bind(this, picture.id)}>X</button>
                     </div>
                 )
@@ -75,7 +81,8 @@ class Index extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        pictures: state.pictures
+        pictures: state.pictures,
+        loading: state.loading
     }
 }
 

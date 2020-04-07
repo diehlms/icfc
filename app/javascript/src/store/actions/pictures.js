@@ -54,33 +54,22 @@ export const createPicture = (caption, image, user_id) => {
     }
 }
 
+export const createPictureInit = () => {
+    return {
+        type: actions.LOADING_START
+    }
+}
 
 export const createPictureSuccess = res => {
     return {
-        type: actions.CREATE_PICTURE_SUCCESS,
+        type: actions.LOADING_FINISH,
         res
     }
 }
 
 export const createPictureFail = err => {
     return {
-        type: actions.CREATE_PICTURE_FAIL,
-    }
-}
-
-export const editPicture = () => {
-    return {
-    }
-}
-
-export const editPictureSuccess = () => {
-    return {
-    }
-}
-
-export const editPictureFail = () => {
-    return {
-
+        type: actions.LOADING_FINISH,
     }
 }
 
@@ -88,6 +77,7 @@ export const deletePicture = id => {
     const url = `/api/v1/pictures/destroy/${id}`;
     const token = document.querySelector('meta[name="csrf-token"]').content;
     return dispatch => {
+        dispatch(deletePictureInit())
         axios.delete(url, {
               headers: {
                 "X-CSRF-Token": token,
@@ -103,14 +93,20 @@ export const deletePicture = id => {
     }
 }
 
+export const deletePictureInit = () => {
+    return {
+        type: actions.LOADING_START
+    }
+}
+
 export const deletePictureSuccess = () => {
     return {
-        type: actions.DELETE_PICTURE_SUCCESS
+        type: actions.LOADING_FINISH
     }
 }
 
 export const deletePictureFail = () => {
     return {
-        type: actions.DELETE_PICTURE_FAIL
+        type: actions.LOADING_FINISH
     }
 }

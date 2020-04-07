@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Input from '@material-ui/core/Input';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
@@ -26,7 +24,12 @@ export class Create extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        this.props.addArticle(this.state.title, this.state.content, this.state.user_id, this.state.image)
+        this.props.addArticle(this.state.title, this.state.content, this.state.user_id, this.state.image);
+        this.setState({
+            title: "",
+            content: "",
+            image: null
+        })
     }
     
     render() {

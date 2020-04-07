@@ -40,6 +40,7 @@ export const createEvent = (events, location, start_time, end_time, user_id, des
     }
     const token = document.querySelector('meta[name="csrf-token"]').content;
     return dispatch => {
+        dispatch(createEventInit())
         fetch(url, {
             method: "POST",
             headers: {
@@ -59,33 +60,22 @@ export const createEvent = (events, location, start_time, end_time, user_id, des
     }
 }
 
+export const createEventInit = () => {
+    return {
+        type: actions.LOADING_START
+    }
+}
 
 export const createEventSuccess = res => {
     return {
-        type: actions.CREATE_EVENT_SUCCESS,
+        type: actions.LOADING_FINISH,
         res
     }
 }
 
 export const createEventFail = err => {
     return {
-        type: actions.CREATE_EVENT_FAIL,
-    }
-}
-
-export const editEvent = () => {
-    return {
-    }
-}
-
-export const editEventSuccess = () => {
-    return {
-    }
-}
-
-export const editEventFail = () => {
-    return {
-
+        type: actions.LOADING_FINISH
     }
 }
 
@@ -93,6 +83,7 @@ export const deleteEvent = id => {
     const url = `/api/v1/events/destroy/${id}`;
     const token = document.querySelector('meta[name="csrf-token"]').content;
     return dispatch => {
+        dispatch(deleteEventInit())
         axios.delete(url, {
               headers: {
                 "X-CSRF-Token": token,
@@ -108,14 +99,20 @@ export const deleteEvent = id => {
     }
 }
 
+export const deleteEventInit = () => {
+    return {
+        type: actions.LOADING_START
+    }
+}
+
 export const deleteEventSuccess = () => {
     return {
-        type: actions.DELETE_EVENT_SUCCESS
+        type: actions.LOADING_FINISH
     }
 }
 
 export const deleteEventFail = () => {
     return {
-        type: actions.DELETE_EVENT_FAIL
+        type: actions.LOADING_FINISH
     }
 }

@@ -30,27 +30,6 @@ export default function(state = initialState, action) {
                 }
             ]
         }
-        case actions.ADD_CABIN_IMAGE_SUCCESS: {
-            return [
-                state, {
-                    loading: false
-                }
-            ]
-        }
-        case actions.ADD_CABIN_IMAGE: {
-            return [
-                state, {
-                    loading: true
-                }
-            ]
-        }
-        case actions.ADD_CABIN_IMAGE_FAIL: {
-            return [
-                state, {
-                    loading: false
-                }
-            ]
-        }
         default: return state
     }
 }

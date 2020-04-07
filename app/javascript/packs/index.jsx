@@ -11,9 +11,11 @@ import CabinReducer from '../src/store/reducers/cabins';
 import PictureReducer from '../src/store/reducers/pictures';
 import EventReducer from '../src/store/reducers/events';
 import UserReducer from '../src/store/reducers/users';
-import AuthReducer from '../src/store/reducers/auth'
-import SearchReducer from '../src/store/reducers/search'
-import CabinImageReducer from '../src/store/reducers/cabinImage'
+import AuthReducer from '../src/store/reducers/auth';
+import SearchReducer from '../src/store/reducers/search';
+import CabinImageReducer from '../src/store/reducers/cabinImage';
+import LoadingReducer from '../src/store/reducers/loading';
+import CabinDateReducer from '../src/store/reducers/cabinDate';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -26,7 +28,9 @@ const rootReducer = combineReducers({
     users: UserReducer,
     auth: AuthReducer,
     search: SearchReducer,
-    cabinImage: CabinImageReducer
+    cabinImage: CabinImageReducer,
+    loading: LoadingReducer,
+    cabinDate: CabinDateReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))

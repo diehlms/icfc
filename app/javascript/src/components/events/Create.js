@@ -6,6 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Input from '@material-ui/core/Input';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
+import './Style.css'
 
 export class Create extends Component {
     state = {
@@ -28,12 +29,13 @@ export class Create extends Component {
     
     render() {
         return (
-            <div className="modalMain">
+            <div>
                 <h1>Add an Event</h1>
                 <form onSubmit={this.onSubmit}>
                     <FormGroup>
                         Title:
                         <Input
+                            className="inputField"
                             type="text" 
                             onChange={this.onChange}
                             value={this.state.events}
@@ -43,6 +45,7 @@ export class Create extends Component {
                     <FormGroup>
                         Content:
                         <Input
+                            className="inputField"
                             type="textbox" 
                             onChange={this.onChange}
                             value={this.state.description}
@@ -51,7 +54,8 @@ export class Create extends Component {
                     </FormGroup>
                     <FormGroup>
                         Location
-                        <Input 
+                        <Input
+                            className="inputField" 
                             type="text" 
                             onChange={this.onChange}
                             value={this.state.location}
@@ -61,13 +65,15 @@ export class Create extends Component {
                     <FormGroup>
                         Start Date:
                         <Input
+                            className="inputField"
                             type="date" 
                             onChange={this.onChange}
                             value={this.state.start_time}
                             name="start_time"
                         />
                         End Date:
-                        <Input 
+                        <Input
+                            className="inputField" 
                             type="date" 
                             onChange={this.onChange}
                             value={this.state.end_time}

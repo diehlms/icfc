@@ -1,5 +1,4 @@
 import * as actions from './actionTypes';
-import axios from 'axios';
 
 export const fetchArticles = () => {
     const url = "/api/v1/articles/index";
@@ -12,6 +11,12 @@ export const fetchArticles = () => {
                     dispatch(fetchArticlesFail())
                 }})
             .then(res => dispatch(fetchArticlesSuccess(res)))
+    }
+}
+
+export const fetchArticlesInit = () => {
+    return {
+        type: actions.LOADING_START
     }
 }
 
@@ -30,6 +35,7 @@ export const fetchArticlesFail = () => {
 
 export const createArticle = (title, content, userId, image) => {
     return dispatch => {
+        dispatch(createArticleInit());
         const url = "/api/v1/articles/create";
         const token = document.querySelector('meta[name="csrf-token"]').content;
         if(image !== null){
@@ -79,38 +85,22 @@ export const createArticle = (title, content, userId, image) => {
         }   
 }
 
-export const postImage = () => {
+export const createArticleInit = () => {
     return {
-
+        type: actions.LOADING_START
     }
 }
 
 export const createArticleSuccess = res => {
     return {
-        type: actions.CREATE_ARTICLE_SUCCESS,
+        type: actions.LOADING_FINISH,
         res
     }
 }
 
 export const createArticleFail = err => {
     return {
-        type: actions.CREATE_ARTICLE_FAIL,
-    }
-}
-
-export const editArticle = () => {
-    return {
-    }
-}
-
-export const editArticleSuccess = () => {
-    return {
-    }
-}
-
-export const editArticleFail = () => {
-    return {
-
+        type: actions.LOADING_FINISH,
     }
 }
 
@@ -118,31 +108,39 @@ export const deleteArticle = id => {
     const url = `/api/v1/articles/destroy/${id}`;
     const token = document.querySelector('meta[name="csrf-token"]').content;
     return dispatch => {
-        axios.delete(url, {
-              headers: {
-                "X-CSRF-Token": token,
-                "Content-Type": "application/json"
-              }
-            })
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                } else {
-                    dispatch(deleteArticleFail())
-                }
-            dispatch(deleteArticleSuccess())
+        dispatch(deleteArticleInit())
+        fetch(url, {
+            method: "DELETE",
+            headers: {
+              "X-CSRF-Token": token,
+              "Content-Type": "application/json"
+            }
         })
+        .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+            dispatch(deleteArticleFail())
+        })
+        .then(dispatch(deleteArticleSuccess()))
+        .catch(error => console.log(error.message));
+    }
+}
+
+export const deleteArticleInit = () => {
+    return {
+        type: actions.LOADING_START
     }
 }
 
 export const deleteArticleSuccess = () => {
     return {
-        type: actions.DELETE_ARTICLE_SUCCESS
+        type: actions.LOADING_FINISH
     }
 }
 
 export const deleteArticleFail = () => {
     return {
-        type: actions.DELETE_ARTICLE_FAIL
+        type: actions.LOADING_FINISH
     }
 }

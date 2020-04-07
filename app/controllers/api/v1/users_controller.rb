@@ -1,11 +1,11 @@
 class Api::V1::UsersController < ApplicationController
     def index
         user = User.all
-        render json: user
+        render json: user unless !logged_in?
     end
 
     def create
-        user = User.create!(user_params)
+        user = User.create!(user_params) unless !logged_in?
         if user
             render json: user
         else
@@ -15,22 +15,16 @@ class Api::V1::UsersController < ApplicationController
 
     def show
         if user
-            render json: user
+            render json: user unless !logged_in?
         else
             render json: user.errors
         end
     end
 
     def destroy
-        user&.destroy
+        user&.destroy unless !logged_in?
         render json: { message: 'User deleted!'}
     end
-
-    # def edit
-    # end
-
-    # def update
-    # end
 
     private
 

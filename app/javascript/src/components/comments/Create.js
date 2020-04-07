@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+import { TrixEditor } from "react-trix";
 
 export class Create extends Component {
     state = {
@@ -12,12 +13,19 @@ export class Create extends Component {
     }
     
     onChange = e => {
-        this.setState({[e.target.name]: e.target.value })
+        this.setState({content: e })
     }
 
     onSubmit = e => {
         e.preventDefault();
-        this.props.onCreateComment(this.state.user_id, this.state.article_id, this.state.content)
+        this.props.onCreateComment(this.state.user_id, this.state.article_id, this.state.content);
+        this.setState({
+            content: ""
+        })
+    }
+
+    handleEditorReady(editor) {
+        editor.insertString("");
     }
 
     render() {
@@ -25,11 +33,12 @@ export class Create extends Component {
             <div>
                 <h1>Post a comment</h1>
                 <form onSubmit={this.onSubmit}>
-                    <Input 
-                        type="text" 
+                    <TrixEditor 
                         onChange={this.onChange}
+                        fileParamName="content"
                         value={this.state.content}
-                        name="content"
+                        onEditorReady={this.handleEditorReady} 
+
                     />
                     <Button variant="primary" type="submit">
                         Submit

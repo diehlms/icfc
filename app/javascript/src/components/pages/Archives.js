@@ -1,13 +1,20 @@
 import React from 'react'
+import Title from '../../shared/Title'
+import HorizontalLine from '../../shared/HorizontalLine'
 
 export default function Archives() {
-    const handleSelect = eventKey => {
-
-    }
-
     return (
-        <div>
-            
+        <div className="containerMain">
+            <Title
+                text="Archives"
+            />
+            <HorizontalLine />
+            <div className="panel panel-default">
+                <div className="panel-heading">Daily Bilges</div>
+            </div>
+            <div className="panel panel-default">
+                <div className="panel-heading">Back Bay Bilges</div>
+            </div>
         </div>
     )
 }

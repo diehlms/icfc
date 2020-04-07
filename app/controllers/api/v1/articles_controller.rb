@@ -2,28 +2,32 @@ class Api::V1::ArticlesController < ApplicationController
 
     def index
         article = Article.all.order(created_at: :desc)
-        render json: article
+        render json: article unless !logged_in?
     end
 
     def create
-        article = Article.create!(article_params)
-        if article
-            render json: article
-        else
-            render json: article.errors
+        if logged_in? 
+            article = Article.create!(article_params) 
+            if article
+                render json: article 
+            else
+                render json: article.errors
+            end
+        else 
+            return nil
         end
     end
 
     def show
         if article
-            render json: article
+            render json: article unless !logged_in?
         else
             render json: article.errors
         end
     end
 
     def destroy
-        article&.destroy
+        article&.destroy unless !logged_in?
         render json: { message: 'Post deleted!'}
     end
 

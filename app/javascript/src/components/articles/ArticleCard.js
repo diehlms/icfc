@@ -13,7 +13,7 @@ function ArticleHeader(props) {
             <div className="subheader">
                 <span>
                     <Typography variant="small">
-                        by: {props.user_id}, written 3 days ago
+                        by: {props.user_id}
                     </Typography>
                 </span>
             </div>

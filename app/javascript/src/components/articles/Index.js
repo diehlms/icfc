@@ -6,36 +6,43 @@ import Button from '@material-ui/core/Button';
 import CreateArticle from './Create'
 import ArticleCard from './ArticleCard';
 import Typography from '@material-ui/core/Typography';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import AppBar from '@material-ui/core/AppBar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import './Style.css'
 
-function TabPanel(props) {
-    const { children, value, index } = props;
-
+function CircularDeterminate() {
+    const [progress, setProgress] = React.useState(0);
+  
+    React.useEffect(() => {
+      function tick() {
+        // reset when reaching 100%
+        setProgress((oldProgress) => (oldProgress >= 100 ? 0 : oldProgress + 1));
+      }
+  
+      const timer = setInterval(tick, 20);
+      return () => {
+        clearInterval(timer);
+      };
+    }, []);
+  
     return (
-      <Typography
-        component="div"
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-      >
-        {value === index && children}
-      </Typography>
+        <CircularProgress variant="determinate" value={progress} />
     );
-}
+  }
 
 class Index extends React.Component {
     state = {
-        createArticleModalOpen: false,
-        value: 0
+        createArticleModalOpen: false
     }
 
     componentDidMount() {
         this.props.onFetchArticles()
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.loading !== prevProps.loading) {
+            this.props.onFetchArticles(); 
+        }
     }
 
     openModal = () => {
@@ -51,39 +58,21 @@ class Index extends React.Component {
     }
 
     render() {
-        let articles = 'articles not loaded yet';
+        let articles = <CircularDeterminate />;
 
-        if (!this.props.loading && this.props.articles && this.props.articles[1] && this.props.articles[1].articles) {
-            this.state.value === 0 ? 
-                articles = this.props.articles[1].articles.map((article, index) => {
-                    return (
-                        <ArticleCard key={index}
-                            article_id={article.id}
-                            title={article.title}
-                            content={article.content}
-                            user_id={article.user_id}
-                            removeArticle={this.removeArticle.bind(this, article.id)}
-                        />
-                    )
-                }) : 
-                articles = this.props.articles[1].articles.map((article, index) => {
-                    if (this.props.user_id === article.user_id) {
-                        return (
-                            <ArticleCard key={index}
-                                article_id={article.id}
-                                title={article.title}
-                                content={article.content}
-                                user_id={article.user_id}
-                                removeArticle={this.removeArticle.bind(this, article.id)}
-                            />
-                        )
-                    }
-                })
+        if (!this.props.articles.loading && this.props.articles && this.props.articles[1] && this.props.articles[1].articles) {
+            articles = this.props.articles[1].articles.map((article, index) => {
+                return (
+                    <ArticleCard key={index}
+                        article_id={article.id}
+                        title={article.title}
+                        content={article.content.substring(0, 250)}
+                        user_id={article.user_id}
+                        removeArticle={this.removeArticle.bind(this, article.id)}
+                    />
+                )
+            })
         }
-
-        const handleTabChange = (event, newValue) => {
-            this.setState({ value: newValue })
-        };
 
         return (
             <div className='containerMain'>
@@ -95,39 +84,13 @@ class Index extends React.Component {
                 <Button onClick={this.openModal}>
                     Add Article
                 </Button>
-                <AppBar 
-                    position="static"
-                    style={{ 
-                        background: "white",
-                        boxShadow: "0 0 0 0"
-                    }}
-                >
-                    <Tabs 
-                        className="tabs"
-                        value={this.state.value} 
-                        onChange={handleTabChange} 
-                        aria-label="simple tabs example"
-                    >
-                        <Tab
-                            className="tab" 
-                            label="All Articles"
-                            id="allArticles"
-                            aria-controls="allArticlesTabControl" 
-                        />
-                        <Tab
-                            className="tab" 
-                            label="My Articles" 
-                            id="myArticles"
-                            aria-controls="myArticlesTabControl"
-                        />
-                    </Tabs>
-                </AppBar>
-                <TabPanel value={this.state.value} index={0}>
-                    {articles}
-                </TabPanel>
-                <TabPanel value={this.state.value} index={1}>
-                    {articles}
-                </TabPanel>
+                { this.props.loading ? (
+                    <div>
+                        {articles}
+                    </div>
+                ) : (
+                    <CircularDeterminate />
+                )}
                 <Modal
                     isOpen={this.state.createArticleModalOpen}
                     onRequestClose={this.closeModal}
@@ -145,7 +108,8 @@ class Index extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        articles: state.articles
+        articles: state.articles,
+        loading: state.loading
     }
 }
 

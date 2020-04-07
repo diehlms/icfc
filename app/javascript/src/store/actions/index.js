@@ -2,15 +2,15 @@ export {
     fetchArticles,
     fetchArticlesSuccess,
     fetchArticlesFail,
+    fetchArticlesInit,
     createArticle,
     createArticleSuccess,
     createArticleFail,
-    editArticle,
-    editArticleSuccess,
-    editArticleFail,
+    createArticleInit,
     deleteArticle,
     deleteArticleSuccess,
-    deleteArticleFail
+    deleteArticleFail,
+    deleteArticleInit
 } from './articles'
 export {
     fetchCabins,
@@ -19,12 +19,11 @@ export {
     createCabin,
     createCabinSuccess,
     createCabinFail,
-    editCabin,
-    editCabinSuccess,
-    editCabinFail,
+    createCabinInit,
     deleteCabin,
     deleteCabinSuccess,
-    deleteCabinFail
+    deleteCabinFail,
+    deleteCabinInit,
 } from './cabins'
 export {
     fetchEvents,
@@ -33,12 +32,11 @@ export {
     createEvent,
     createEventSuccess,
     createEventFail,
-    editEvent,
-    editEventSuccess,
-    editEventFail,
+    createEventInit,
     deleteEvent,
     deleteEventSuccess,
-    deleteEventFail
+    deleteEventFail,
+    deleteEventInit
 } from './events'
 export {
     fetchPictures,
@@ -47,9 +45,11 @@ export {
     createPicture,
     createPictureSuccess,
     createPictureFail,
+    createPictureInit,
     deletePicture,
     deletePictureSuccess,
-    deletePictureFail
+    deletePictureFail,
+    deletePictureInit
 } from './pictures'
 export {
     fetchUsers,
@@ -64,11 +64,12 @@ export {
     fetchCommentsSuccess,
     fetchCommentsFail,
     createComment,
+    createCommentInit,
     createCommentSuccess,
     createCommentFail,
     deleteComment,
     deleteCommentSuccess,
-    deleteCommentFail
+    deleteCommentFail,
 } from './comments'
 export {
     logout,
@@ -94,3 +95,12 @@ export {
     deleteCabinImageFail,
     deleteCabinImageSuccess
 } from './cabinImage'
+export {
+    loadingStart,
+    loadingFinish
+} from './loading'
+export {
+    fetchCabinDates,
+    addCabinDate,
+    deleteCabinDate,
+} from './cabinDate'

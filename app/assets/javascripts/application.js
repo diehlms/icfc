@@ -20,7 +20,6 @@
 //= require trix
 //= require_tree .
 
-
 $(document).ready(function() {
     $('.collapsible').click(function(){
         $(this).next().hasClass('collapse-table') ? $(this).next().removeClass('collapse-table') : $(this).next().addClass('collapse-table')
@@ -37,3 +36,20 @@ $('#committee-primer button a').click(function(){
 document.addEventListener("trix-file-accept", function(event) {
     event.preventDefault();
 });
+
+$(document).ready(function() {
+    window.onscroll = function() {
+        myFunction()
+    };
+    
+    var navbar = document.querySelector("#primary-nav");
+    var sticky = navbar.offsetTop;
+    
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky");
+      } else {
+        $("#primary-nav").removeClass("sticky");
+      }
+    }
+})

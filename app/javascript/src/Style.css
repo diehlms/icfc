@@ -1,5 +1,5 @@
 .containerMain {
-    margin: 80px 50px 100px 50px;
+    margin: 80px 40px 100px 70px;
     min-height: 78vh;
     max-height: 180vh;
     padding-bottom: 140px;
@@ -24,9 +24,4 @@
 
 .ReactModal__Overlay.ReactModal__Overlay--after-open {
     margin-top: 60px;
-}
-
-.rbc-calendar {
-    z-index: 0;
-    bottom: 20%;
 }

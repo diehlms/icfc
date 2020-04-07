@@ -45,6 +45,12 @@ class Index extends React.Component {
         this.props.onFetchEvents()
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.loading !== prevProps.loading) {
+            this.props.onFetchEvents();
+        }
+    }
+
     openModal = () => {
         this.setState({createEventModalOpen: true});
     }
@@ -60,7 +66,7 @@ class Index extends React.Component {
     render() {
         let events = '';
         let eventList = [];
-        if (!this.props.loading && this.props.events && this.props.events[1] && this.props.events[1].events) {
+        if (!this.props.events.loading && this.props.events && this.props.events[1] && this.props.events[1].events) {
             events = this.props.events[1].events.map((event, index) => {
                 eventList.push({
                     title: <Link to={`/events/${event.id}`}>{event.events}</Link>,
@@ -79,13 +85,25 @@ class Index extends React.Component {
 
         return (
             <div className="containerMain">
-                <h1>Events</h1>
-                <br/>
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '20% 70%'
+                }}>
+                    <div>
+                        <h1>Events</h1>
+                        <CreateEvent />
+                        {/* <Button onClick={this.openModal}>
+                            Add Event
+                        </Button> */}
+                    </div>
+                    <Basic
+                        events={eventList}
+                    />
+                </div>
+                {/* <h1>Events</h1>
                 <Button onClick={this.openModal}>
                     Add Event
                 </Button>
-                <br/>
-                <br/>
                 <Basic
                     events={eventList}
                 />
@@ -96,7 +114,7 @@ class Index extends React.Component {
                     ariaHideApp={false}
                 >
                     <CreateEvent />
-                </Modal>
+                </Modal> */}
             </div>
         )
     }
@@ -104,7 +122,8 @@ class Index extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        events: state.events
+        events: state.events,
+        loading: state.loading
     }
 }
 

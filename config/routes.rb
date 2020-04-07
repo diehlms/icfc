@@ -7,18 +7,32 @@ Rails.application.routes.draw do
       get '/cabins/index'
       get '/search/index'
       get '/pictures/index'
+      get '/comments/index'
+      get '/cabin_image/index'
+      get '/cabin_date/index'
 
       post '/articles/create'
       post '/users/create'
       post '/events/create'
       post '/cabins/create'
       post '/pictures/create'
+      post '/cabin_image/create'
+      post '/comments/create'
+      post '/cabin_date/create'
       
       get '/articles/:id', to: 'articles#show'
       get '/users/:id', to: 'users#show'
       get '/events/:id', to: 'events#show'
       get '/cabins/:id', to: 'cabins#show'
       get '/pictures/:id', to: 'pictures#show'
+
+      delete '/articles/destroy/:id', to: 'articles#destroy'
+      delete '/cabins/destroy/:id', to: 'cabins#destroy'
+      delete '/events/destroy/:id', to: 'events#destroy'
+      delete '/pictures/destroy/:id', to: 'pictures#destroy'
+      delete '/comments/destroy/:id', to: 'comments#destroy'
+      delete '/cabin_image/destroy/:id', to: 'cabin_image#destroy'
+      delete '/cabin_date/destroy/:id', to: 'cabin_date#destroy'
 
       post '/login', to: 'auth#create'
       delete '/logout', to: 'auth#destroy'
@@ -29,7 +43,8 @@ Rails.application.routes.draw do
   end
 
   # make sure to comment this line out when not using react in dev
-
+  # get '/*path' => 'pages#landing'
+  
   get '/login', to: 'sessions#new', as: 'login'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
   post '/login', to: 'sessions#create'

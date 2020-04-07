@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import ArticlesIndex from '../components/articles/Index';
 import CabinsIndex from '../components/cabins/Index';
 import EventsIndex from '../components/events/Index';
@@ -26,6 +26,7 @@ export default function Index(props) {
     let user_id = props.user_id;
     return (
           <Switch>
+            <Route path="/landing" component={Home} />
             <Route exact path='/articles' render={(props) => <ArticlesIndex {...props} user_id={user_id} />} />
             <Route exact path='/cabins' render={(props) => <CabinsIndex {...props} user_id={user_id} />} />
             <Route exact path='/events' render={(props) => <EventsIndex {...props} user_id={user_id} />} />
@@ -51,6 +52,7 @@ export default function Index(props) {
             <Route exact path='/home' render={(props) => <Home {...props} user_id={user_id} />} />
             
             <Route exact path='/search' render={(props) => <Search {...props} user_id={user_id} />} />
+            <Redirect to="/landing" component={Home} />
         </Switch>
     )
 }

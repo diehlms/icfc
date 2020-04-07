@@ -1,9 +1,14 @@
 import React from 'react'
+import Title from '../../shared/Title'
+import HorizontalLine from '../../shared/HorizontalLine'
 
 export default function ByLaws() {
     return (
-        <div>
-            <h1>By Laws</h1>
+        <div className="containerMain">
+            <Title
+                text="By Laws"
+            />
+            <HorizontalLine />
         </div>
     )
 }

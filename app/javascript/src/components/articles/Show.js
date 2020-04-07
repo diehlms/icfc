@@ -1,31 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types';
 import * as actions from '../../store/actions/index'
 import CreateComment from '../comments/Create'
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
 
 class Show extends React.Component {
-
     componentDidMount = () => {
         this.props.onFetchArticles()
         this.props.onFetchComments()
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.loading !== prevProps.loading) {
+            this.props.onFetchArticles();
+            this.props.onFetchComments();
+        }
+    }
+
     render() {
         let text = 'hello'
 
-        if (!this.props.loading && this.props.articles[1] && this.props.articles[1].articles) {
+        if (this.props.articles[1] && this.props.articles[1].articles) {
             const {id, title, content, image} = this.props.articles[1].articles.find(article => 
                 article.id.toString() === this.props.match.params.id.toString()
             )
-            let imageTag = ''
+
+            let imageTag = '';
 
             if ({image}) {
                 imageTag = (
@@ -48,33 +47,25 @@ class Show extends React.Component {
 
             text = (
                 <div>
-                    <div>
-                        <h1>{title}</h1>
-                        <div>
-                            <ArticleContent 
-                                content={content}
-                            />
-                        </div>
-                        <div>
-                            {imageTag}
-                        </div>
-                    </div>
-                    <div>
+                    <h1>{title}</h1>
+                    <ArticleContent 
+                        content={content}
+                    />
+                    {imageTag}
                     <CreateComment 
                         user_id={this.props.user_id}
                         article_id={id}
                     />
-                    </div>
                 </div>
             )
         }
 
         let comments = 'no comments added yet'
-        let commentList = []
+        let commentList = [];
 
-        if (!this.props.loading && this.props.comments[1] && this.props.comments[1].comments) {
+        if (this.props.comments[1] && this.props.comments[1].comments) {
             this.props.comments[1].comments.map(indComment => {
-                if (indComment.recipeId === this.props.recipeId) {
+                if (indComment.article_id.toString() === this.props.match.params.id.toString()) {
                     commentList.push({
                         content: indComment.content,
                         user_id: indComment.user_id
@@ -86,7 +77,7 @@ class Show extends React.Component {
         if (commentList.length > 0) {
             comments = commentList.map(indComment => {
                 return (
-                    <li key={indComment}>{indComment.content}, posted by {indComment.user_id}</li>
+                    <li key={indComment}>{indComment.content}</li>
                 )
             })
         }
