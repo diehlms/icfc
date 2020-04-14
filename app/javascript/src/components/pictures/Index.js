@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index'
 import Modal from 'react-modal';
-import Button from 'react-bootstrap/Button';
+import Button from '@material-ui/core/Button';
+import Title from '../../shared/Title'
 import CreatePicture from './Create'
+import HorizontalLine from '../../shared/HorizontalLine';
 
 class Index extends React.Component {
     state = {
@@ -48,7 +50,7 @@ class Index extends React.Component {
 
         return (
             <div className="containerMain">
-                <h1>Pictures</h1>
+                <Title text="Pictures" />
                 <div style={{
                     margin: "0 auto"
                 }}>
@@ -65,6 +67,7 @@ class Index extends React.Component {
                         <a href="https://photos.google.com/share/AF1QipPJGncCbqieSG8bhndZLja0FfEVf4KaFlRatt6FWk-AmUAWAWF1pup9qcroOXCh8A?key=NzllQXN0LWtZOFZyQUt1X21ETHBOWnZ5dndadm53">2018 Pictures, Part 2</a>
                     </Button>
                 </div>
+                <HorizontalLine />
                 {pictures}
                 <Modal
                     isOpen={this.state.createPictureModalOpen}

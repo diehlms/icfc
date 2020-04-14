@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import FormGroup from '@material-ui/core/FormGroup';
 import Input from '@material-ui/core/Input';
 import * as actions from '../../store/actions/index';
+import StyledInput from '../../shared/StyledInput'
+import Title from '../../shared/Title'
 import { connect } from 'react-redux';
 
 export class Create extends Component {
@@ -29,11 +31,11 @@ export class Create extends Component {
     render() {
         return (
             <div className="modalMain">
-                <h1>Add a Picture</h1>
+                <Title text="Add a Picture" />
                 <form onSubmit={this.onSubmit}>
                     <FormGroup>
-                        Caption
-                        <Input 
+                        <StyledInput 
+                            placeholder="caption"
                             type="text" 
                             onChange={this.onChange}
                             value={this.state.caption}
@@ -41,8 +43,7 @@ export class Create extends Component {
                         />
                     </FormGroup>
                     <FormGroup>
-                        Image:
-                        <Input
+                        <StyledInput
                             type="file"
                             onChange={this.imageUpload}
                         />

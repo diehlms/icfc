@@ -5,13 +5,13 @@
             <div class="row">
                 <div class="form-group">
                     <%= f.label :title %>
-                    <%= f.text_field :title, placeholder: "Title", autofocus: true, class: "form-control" %>
+                    <%= f.text_field :title, placeholder: "50 Character Limit", autofocus: true, class: "form-control" %>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
                     <%= f.label :content %>
-                    <%= trix_editor :article, :content, required: true %>
+                    <%= trix_editor :article, :content, required: true, placeholder: "limit: 10000 characters" %>
                 </div>
             </div>
             <div class="row">

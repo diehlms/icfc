@@ -8,11 +8,26 @@ import Title from '../../shared/Title'
 import SubTitle from '../../shared/SubTitle'
 import HorizontalLine from '../../shared/HorizontalLine'
 
+function createMarkup(text) {
+    return {__html: text};
+}
+
+const Image = (props) => {
+    return (
+        <div style={{
+            margin: '0 auto',
+            maxWidth: '80%',
+            maxHeight: '40%'
+        }}>
+            <img
+                src={props.url}
+                alt="Blog post image"
+            />
+        </div>
+    )
+}
+
 class Show extends React.Component {
-    state = {
-
-    }
-
     componentDidMount = () => {
         this.props.onFetchArticles()
         this.props.onFetchComments()
@@ -26,23 +41,11 @@ class Show extends React.Component {
     }
 
     render() {
-        let text = 'hello'
+        let text = '';
         if (this.props.articles[1] && this.props.articles[1].articles) {
             const {title, content, image} = this.props.articles[1].articles.find(article => 
                 article.id.toString() === this.props.match.params.id.toString()
             )
-
-            let imageTag = '';
-
-            if ({image}) {
-                imageTag = (
-                    <img src={image.url} width='100'/>
-                )
-            }
-
-            function createMarkup(text) {
-                return {__html: text};
-            }
             
             function ArticleContent(props) {
                 return (
@@ -52,17 +55,23 @@ class Show extends React.Component {
                 )
             }
 
+            console.log(image)
 
             text = (
                 <div>
                     <Title text={title} />
                     <HorizontalLine />
+                    {image.url ? 
+                        <Image 
+                            src={image.url}
+                            alt={title}
+                        /> : null
+                    }
                     <ArticleContent 
                         content={content}
                     />
-                    {imageTag}
                 </div>
-            )
+            );
         }
 
         let comments = 'no comments added yet'
@@ -79,10 +88,21 @@ class Show extends React.Component {
             })
         }
 
+        function CommentContent(props) {
+            return (
+                <div className="commentContent">
+                    <div dangerouslySetInnerHTML={createMarkup(props.content)} />
+                </div>
+            )
+        }
+
         if (commentList.length > 0) {
             comments = commentList.map(indComment => {
                 return (
-                    <li key={indComment}>{indComment.content}</li>
+                    <CommentContent
+                        key={indComment}
+                        content={indComment.content}
+                    />
                 )
             })
         }
@@ -91,18 +111,19 @@ class Show extends React.Component {
             <div className="containerMain">
                 <div style={{
                     display: "grid",
-                    gridTemplateColumns: "56% 33%",
+                    gridTemplateColumns: "46% 43%",
                     gridColumnGap: 50
                 }}>
                     <div>
                         {text}
                     </div>
                     <div>
-                        <SubTitle text="comments" />
                         <CreateComment 
                             user_id={this.props.user_id}
                             article_id={this.props.match.params.id}
                         />
+                        <SubTitle text="comments" />
+                        <HorizontalLine />
                         {comments}
                     </div>
                 </div>

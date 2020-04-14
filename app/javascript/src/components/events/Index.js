@@ -92,7 +92,7 @@ class Index extends React.Component {
             <div className="containerMain">
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: '33% 60%'
+                    gridTemplateColumns: '46% 50%'
                 }}>
                     <div>
                         <Title text="Events" />

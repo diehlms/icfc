@@ -1,15 +1,3 @@
 .dateWrapper {
     display: inline-block;
 }
-
-trix-editor {
-    border-radius: 3px;
-    border-right: 1px solid lightgrey;
-    border-left: 1px solid lightgrey;
-    border-top: 1px solid lightgrey;
-    border-bottom: 2px solid darkgrey;
-    padding: 5;
-    margin-top: 6;
-    margin-bottom: 5;
-    min-height: 100px;
-}

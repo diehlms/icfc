@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
-import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import { TrixEditor } from "react-trix";
 
@@ -32,7 +31,7 @@ export class Create extends Component {
         return (
             <div>
                 <form onSubmit={this.onSubmit}>
-                    <TrixEditor 
+                    <TrixEditor
                         onChange={this.onChange}
                         fileParamName="content"
                         value={this.state.content}
