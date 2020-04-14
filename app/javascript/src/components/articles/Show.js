@@ -2,8 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
 import CreateComment from '../comments/Create'
+import BodyText from '../../shared/BodyText'
+import SmallText from '../../shared/SmallText'
+import Title from '../../shared/Title'
+import SubTitle from '../../shared/SubTitle'
+import HorizontalLine from '../../shared/HorizontalLine'
 
 class Show extends React.Component {
+    state = {
+
+    }
+
     componentDidMount = () => {
         this.props.onFetchArticles()
         this.props.onFetchComments()
@@ -18,9 +27,8 @@ class Show extends React.Component {
 
     render() {
         let text = 'hello'
-
         if (this.props.articles[1] && this.props.articles[1].articles) {
-            const {id, title, content, image} = this.props.articles[1].articles.find(article => 
+            const {title, content, image} = this.props.articles[1].articles.find(article => 
                 article.id.toString() === this.props.match.params.id.toString()
             )
 
@@ -47,15 +55,12 @@ class Show extends React.Component {
 
             text = (
                 <div>
-                    <h1>{title}</h1>
+                    <Title text={title} />
+                    <HorizontalLine />
                     <ArticleContent 
                         content={content}
                     />
                     {imageTag}
-                    <CreateComment 
-                        user_id={this.props.user_id}
-                        article_id={id}
-                    />
                 </div>
             )
         }
@@ -86,11 +91,18 @@ class Show extends React.Component {
             <div className="containerMain">
                 <div style={{
                     display: "grid",
-                    gridTemplateColumns: "66% 33%"
+                    gridTemplateColumns: "56% 33%",
+                    gridColumnGap: 50
                 }}>
-                    {text}
                     <div>
-                        <h4>Comments:</h4>
+                        {text}
+                    </div>
+                    <div>
+                        <SubTitle text="comments" />
+                        <CreateComment 
+                            user_id={this.props.user_id}
+                            article_id={this.props.match.params.id}
+                        />
                         {comments}
                     </div>
                 </div>

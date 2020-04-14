@@ -1,7 +1,6 @@
 .containerMain {
     margin: 80px 40px 100px 70px;
     min-height: 78vh;
-    max-height: 180vh;
     padding-bottom: 140px;
 }
 
@@ -15,7 +14,7 @@
 }
 
 .ReactModal__Content.ReactModal__Content--after-open {
-    width: 33%;
+    width: 50%;
     height: 70%;
     margin: 0 auto;
     z-index: 9999;

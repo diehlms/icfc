@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import FormGroup from '@material-ui/core/FormGroup';
-import Input from '@material-ui/core/Input';
+import SubTitle from '../../shared/SubTitle';
+import HorizontalLine from '../../shared/HorizontalLine';
 import * as actions from '../../store/actions/index';
+import StyledInput from "../../shared/StyledInput";
+import { TrixEditor } from "react-trix";
 import { connect } from 'react-redux';
 
 export class Create extends Component {
@@ -22,6 +25,10 @@ export class Create extends Component {
         this.setState({image: e.target.files[0]})
     }
 
+    handleEditorReady(editor) {
+        editor.insertString("description: ");
+    }
+
     onSubmit = e => {
         e.preventDefault();
         this.props.addArticle(this.state.title, this.state.content, this.state.user_id, this.state.image);
@@ -35,29 +42,30 @@ export class Create extends Component {
     render() {
         return (
             <div className="modalMain">
-                <h1>Add an Article</h1>
+                <SubTitle text="Add an Article" />
+                <HorizontalLine />
                 <form onSubmit={this.onSubmit}>
                     <FormGroup>
-                        Title:
-                        <Input 
+                        <StyledInput 
                             type="text" 
                             onChange={this.onChange}
                             value={this.state.title}
                             name="title"
+                            placeholder="title"
                         />
                     </FormGroup>
                     <FormGroup>
-                        Content:
-                        <Input 
-                            type="textbox" 
-                            onChange={this.onChange}
-                            value={this.state.content}
-                            name="content"
+                        <TrixEditor
+                            placeholder="content"
+                            onChange={this.onTrixChange}
+                            fileParamName="description"
+                            value={this.state.description}
+                            onEditorReady={this.handleEditorReady} 
                         />
                     </FormGroup>
                     <FormGroup>
                         Image:
-                        <Input
+                        <StyledInput
                             type="file"
                             onChange={this.imageUpload}
                         />

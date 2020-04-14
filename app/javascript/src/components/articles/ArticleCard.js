@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import './Style.css'
 
 function ArticleHeader(props) {
+    console.log(props)
     return (
         <div className="articleHeader">
             <Typography variant="h6">
@@ -13,7 +14,7 @@ function ArticleHeader(props) {
             <div className="subheader">
                 <span>
                     <Typography variant="small">
-                        by: {props.user_id}
+                        by: {props.author}
                     </Typography>
                 </span>
             </div>
@@ -39,7 +40,7 @@ export default function ArticleCard(props) {
             <ArticleHeader 
                 title={props.title}
                 article_id={props.article_id}
-                user_id={props.user_id}
+                author={props.author}
             />
             <ArticleContent
                 content={props.content}

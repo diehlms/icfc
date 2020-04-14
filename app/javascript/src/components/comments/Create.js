@@ -8,7 +8,7 @@ import { TrixEditor } from "react-trix";
 export class Create extends Component {
     state = {
         user_id: this.props.user_id,
-        article_id: this.props.article_id,
+        article_id: parseInt(this.props.article_id),
         content: ""
     }
     
@@ -31,14 +31,12 @@ export class Create extends Component {
     render() {
         return (
             <div>
-                <h1>Post a comment</h1>
                 <form onSubmit={this.onSubmit}>
                     <TrixEditor 
                         onChange={this.onChange}
                         fileParamName="content"
                         value={this.state.content}
                         onEditorReady={this.handleEditorReady} 
-
                     />
                     <Button variant="primary" type="submit">
                         Submit

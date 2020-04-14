@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import Typography from '@material-ui/core/Typography'
 
-export default function SubTitle() {
+export default function SubTitle(props) {
     return (
-        <div>
-            
-        </div>
+        <Typography id={props.id} variant="h4">
+            {props.text}
+        </Typography>
     )
 }

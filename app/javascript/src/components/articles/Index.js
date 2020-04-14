@@ -28,7 +28,7 @@ function CircularDeterminate() {
     return (
         <CircularProgress variant="determinate" value={progress} />
     );
-  }
+}
 
 class Index extends React.Component {
     state = {
@@ -36,12 +36,14 @@ class Index extends React.Component {
     }
 
     componentDidMount() {
-        this.props.onFetchArticles()
+        this.props.onFetchArticles();
+        this.props.onFetchUsers();
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.loading !== prevProps.loading) {
-            this.props.onFetchArticles(); 
+            this.props.onFetchArticles();
+            this.props.onFetchUsers(); 
         }
     }
 
@@ -62,15 +64,22 @@ class Index extends React.Component {
 
         if (!this.props.articles.loading && this.props.articles && this.props.articles[1] && this.props.articles[1].articles) {
             articles = this.props.articles[1].articles.map((article, index) => {
-                return (
-                    <ArticleCard key={index}
-                        article_id={article.id}
-                        title={article.title}
-                        content={article.content.substring(0, 250)}
-                        user_id={article.user_id}
-                        removeArticle={this.removeArticle.bind(this, article.id)}
-                    />
-                )
+                if (!this.props.users.loading && this.props.users && this.props.users[1] && this.props.users[1].users) {
+                    const { username } = this.props.users[1].users.find(user => {
+                        return user.id.toString() === article.user_id.toString()
+                    });
+
+                    return (
+                        <ArticleCard key={index}
+                            article_id={article.id}
+                            title={article.title}
+                            content={article.content.substring(0, 250)}
+                            author={username}
+                            user_id={article.user_id}
+                            removeArticle={this.removeArticle.bind(this, article.id)}
+                        />
+                    )
+                }
             })
         }
 
@@ -109,14 +118,16 @@ class Index extends React.Component {
 const mapStateToProps = state => {
     return {
         articles: state.articles,
-        loading: state.loading
+        loading: state.loading,
+        users: state.users
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onFetchArticles: () => dispatch(actions.fetchArticles()),
-        onRemoveArticle: (id) => dispatch(actions.deleteArticle(id))
+        onRemoveArticle: (id) => dispatch(actions.deleteArticle(id)),
+        onFetchUsers: () => dispatch(actions.fetchUsers())
     }
 }
 

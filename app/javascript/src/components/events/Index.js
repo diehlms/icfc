@@ -7,6 +7,10 @@ import CreateEvent from './Create'
 import { Link } from 'react-router-dom'
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
+import Title from "../../shared/Title"
+import HorizontalLine from '../../shared/HorizontalLine'
+import SubTitle from "../../shared/SubTitle"
+import BodyText from "../../shared/BodyText"
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import './Style.css'
 
@@ -36,6 +40,15 @@ let Basic = props => (
 
 let allViews = Object.keys(Views).map(k => Views[k])
 
+const CalendarWrapper = ({ children }) => {
+    return (
+        <div style={{
+            padding: 15
+        }}>
+            {children}
+        </div>
+    )
+}
 class Index extends React.Component {
     state = {
         createEventModalOpen: false
@@ -49,14 +62,6 @@ class Index extends React.Component {
         if (this.props.loading !== prevProps.loading) {
             this.props.onFetchEvents();
         }
-    }
-
-    openModal = () => {
-        this.setState({createEventModalOpen: true});
-    }
-    
-    closeModal = () => {
-        this.setState({createEventModalOpen: false});
     }
 
     removeEvent = id => {
@@ -87,34 +92,19 @@ class Index extends React.Component {
             <div className="containerMain">
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: '20% 70%'
+                    gridTemplateColumns: '33% 60%'
                 }}>
                     <div>
-                        <h1>Events</h1>
+                        <Title text="Events" />
+                        <HorizontalLine />
                         <CreateEvent />
-                        {/* <Button onClick={this.openModal}>
-                            Add Event
-                        </Button> */}
                     </div>
-                    <Basic
-                        events={eventList}
-                    />
+                    <CalendarWrapper>
+                        <Basic
+                            events={eventList}
+                        />
+                    </CalendarWrapper>
                 </div>
-                {/* <h1>Events</h1>
-                <Button onClick={this.openModal}>
-                    Add Event
-                </Button>
-                <Basic
-                    events={eventList}
-                />
-                <Modal
-                    isOpen={this.state.createEventModalOpen}
-                    onRequestClose={this.closeModal}
-                    contentLabel="Example Modal"
-                    ariaHideApp={false}
-                >
-                    <CreateEvent />
-                </Modal> */}
             </div>
         )
     }

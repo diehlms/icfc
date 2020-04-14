@@ -11,8 +11,8 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get landing" do
-    get landing_url
-    assert_response :success
-  end
+  # test "should get landing" do
+  #   get landing_url
+  #   assert_response :success
+  # end
 end
