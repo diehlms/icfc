@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import FormGroup from '@material-ui/core/FormGroup';
-import Input from '@material-ui/core/Input';
 import * as actions from '../../store/actions/index';
 import StyledInput from '../../shared/StyledInput'
 import Title from '../../shared/Title'
@@ -48,7 +47,7 @@ export class Create extends Component {
                             onChange={this.imageUpload}
                         />
                     </FormGroup>
-                    <Button variant="primary" type="submit">
+                    <Button variant="text" type="submit">
                         Submit
                     </Button>
                 </form>

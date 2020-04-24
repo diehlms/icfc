@@ -6,7 +6,7 @@ class Api::V1::PicturesController < ApplicationController
 
     def create
         picture = Gallery.create!(picture_params) unless !logged_in?
-        if cabin
+        if picture
             render json: picture
         else
             render json: picture.errors

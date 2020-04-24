@@ -2,11 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
 import CreateComment from '../comments/Create'
-import BodyText from '../../shared/BodyText'
-import SmallText from '../../shared/SmallText'
 import Title from '../../shared/Title'
 import SubTitle from '../../shared/SubTitle'
 import HorizontalLine from '../../shared/HorizontalLine'
+import CommentCard from '../comments/CommentCard'
 
 function createMarkup(text) {
     return {__html: text};
@@ -54,9 +53,7 @@ class Show extends React.Component {
                     </div>
                 )
             }
-
-            console.log(image)
-
+            
             text = (
                 <div>
                     <Title text={title} />
@@ -81,6 +78,7 @@ class Show extends React.Component {
             this.props.comments[1].comments.map(indComment => {
                 if (indComment.article_id.toString() === this.props.match.params.id.toString()) {
                     commentList.push({
+                        id: indComment.id,
                         content: indComment.content,
                         user_id: indComment.user_id
                     })
@@ -88,19 +86,14 @@ class Show extends React.Component {
             })
         }
 
-        function CommentContent(props) {
-            return (
-                <div className="commentContent">
-                    <div dangerouslySetInnerHTML={createMarkup(props.content)} />
-                </div>
-            )
-        }
-
         if (commentList.length > 0) {
             comments = commentList.map(indComment => {
                 return (
-                    <CommentContent
+                    <CommentCard
+                        current_user_id={this.props.user_id}
+                        id={indComment.id}
                         key={indComment}
+                        user_id={indComment.user_id}
                         content={indComment.content}
                     />
                 )

@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   end
 
   # make sure to comment this line out when not using react in dev
+  # get '/*path' => 'pages#landing'
   
   get '/login', to: 'sessions#new', as: 'login'
   delete '/logout', to: 'sessions#destroy', as: 'logout'

@@ -74,7 +74,7 @@ class Index extends React.Component {
         if (!this.props.events.loading && this.props.events && this.props.events[1] && this.props.events[1].events) {
             events = this.props.events[1].events.map((event, index) => {
                 eventList.push({
-                    title: <Link to={`/events/${event.id}`}>{event.events}</Link>,
+                    title: <Link className="calendarLink" to={`/events/${event.id}`}>{event.events}</Link>,
                     allDay: true,
                     start: new Date(event.start_time),
                     end: new Date(event.end_time)
@@ -97,7 +97,9 @@ class Index extends React.Component {
                     <div>
                         <Title text="Events" />
                         <HorizontalLine />
-                        <CreateEvent />
+                        <CreateEvent 
+                            user_id={this.props.user_id}
+                        />
                     </div>
                     <CalendarWrapper>
                         <Basic

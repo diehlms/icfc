@@ -29,6 +29,10 @@ export class Create extends Component {
         editor.insertString("description: ");
     }
 
+    onTrixChange = e => {
+        this.setState({content: e })
+    }
+    
     onSubmit = e => {
         e.preventDefault();
         this.props.addArticle(this.state.title, this.state.content, this.state.user_id, this.state.image);
@@ -70,7 +74,7 @@ export class Create extends Component {
                             onChange={this.imageUpload}
                         />
                     </FormGroup>
-                    <Button variant="primary" type="submit">
+                    <Button variant="text" type="submit">
                         Submit
                     </Button>
                 </form>

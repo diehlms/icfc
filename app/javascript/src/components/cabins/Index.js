@@ -2,14 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index'
 import Modal from 'react-modal';
-import Button from 'react-bootstrap/Button';
+import Button from '@material-ui/core/Button';
 import CreateCabin from './Create'
-import { Link } from 'react-router-dom';
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
-import { Icon } from "leaflet";
+import Title from '../../shared/Title'
+import { Map, TileLayer } from "react-leaflet";
 import CabinCard from "./components/CabinCard";
+import HorizontalLine from '../../shared/HorizontalLine'
 import './Style.css'
-import { Typography } from '@material-ui/core';
 
 class Index extends React.Component {
     state = {
@@ -62,7 +61,8 @@ class Index extends React.Component {
                     gridTemplateColumns: "10% 90%"
                 }}>
                     <div>
-                        <h1>Cabins</h1>
+                        <Title text="Cabins" />
+                        <HorizontalLine />
                         <Button onClick={this.openModal}>
                             Add Cabin
                         </Button>
@@ -75,7 +75,7 @@ class Index extends React.Component {
                                 display: "flex",
                                 flex: "1"
                             }}
-                        center={[45.4, -75.7]} zoom={12}>
+                            center={[45.4, -75.7]} zoom={12}>
                             <TileLayer
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -99,7 +99,9 @@ class Index extends React.Component {
                             contentLabel="Example Modal"
                             ariaHideApp={false}
                         >
-                            <CreateCabin />
+                            <CreateCabin 
+                                user_id={this.props.user_id}
+                            />
                         </Modal>
                     </div>
                 </div>

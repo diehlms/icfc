@@ -49,6 +49,7 @@ export const addCabinImage = (cabin_id, image) => {
                 dispatch(addCabinImageFail())
             }
         })
+        dispatch(addCabinImageSuccess())
     }
 }
 

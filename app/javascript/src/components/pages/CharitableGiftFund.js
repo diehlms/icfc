@@ -3,8 +3,25 @@ import Title from "../../shared/Title"
 import HorizontalLine from '../../shared/HorizontalLine'
 import SubTitle from "../../shared/SubTitle"
 import BodyText from "../../shared/BodyText"
+import { makeStyles } from '@material-ui/core/styles';
+import Link from '@material-ui/core/Link';
+import Chip from '@material-ui/core/Chip';
+import Typography from '@material-ui/core/Typography';
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: 15,
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 export default function CharitableGiftFund() {
+    const classes = useStyles();
+
     return (
         <div className="containerMain">
             <Title
@@ -22,7 +39,6 @@ export default function CharitableGiftFund() {
                 <SubTitle
                     text="Iron City Fishing Club Endowment Fund"
                 />
-                {/* <em><p>Our Fund for the Future</p></em> */}
                 <BodyText
                     text="The ICFC Endowment Fund was established to ensure the sustained health of ICFC and serve as a reserve should an unexpected expenditure arise and/or monies be needed to help in the operation of the Club. All monies are collected and maintained in US currency. Many large capital projects have received loans from the Endowment Fund in the past: for example, the dining hall renovation, water tower repair, and the purchase of land. Monies borrowed from the Endowment Fund to meet these expenses are repaid from operational income."
                 />
@@ -32,12 +48,9 @@ export default function CharitableGiftFund() {
                 <BodyText
                     text="Donations can be made at any time of the year in either check form or transfer of marketable securities. Donations are not tax deductible. Checks, should be made payable to ICFC Endowment Fund and mailed to:"
                 />
-                    {/* <em><p>Brian Huber</p>
-                    <p>135 High Point Walk</p>
-                    <p>Sandy Springs, GA 30342</p></em>
-                    <p>or phone him at: <em>404-240-5464</em></p>
-                    <p>or email him at: <em>brian.huber@wellsfargoadvisors.com</em></p> */}
-                <br />
+                <div className={classes.root}>
+                    <Chip label="Brian Huber, 135 High Point Walk, Sandy Springs, GA 30342, 404-240-5464, brian.huber@wellsfargoadvisors.com" />
+                </div>
                 <SubTitle
                     text="Iron City Fishing Club Charitable Gift Fund"
                 />
@@ -48,8 +61,19 @@ export default function CharitableGiftFund() {
                     text="This fund is used for charitable purposes that benefit the Georgian Bay area. The Fund has contributed to community projects such as Parry Sound High School “First Generation” scholarships, the West Parry Sound Health Centre’s Nurses’ Skills Upgrade Program, the Festival of the Sound, the Georgian Bay Land Trust, and Georgian Bay Forever."
                 />
                 <BodyText
-                    text="Donations to this Fund, managed by The Pittsburgh Foundation ('TPF'), are tax deductible when made directly to TPF for Iron City Fishing Club Charitable Gift Fund. Contributions can be made in US funds online at  'https://community.pittsburghfoundation.org/page.aspx?pid=298&fid=UFxl2d4w9r8%3d&fdesc=akeoWcyY1DqiNZlcPVg5IG4X%2b9z3rivZsbvCHuNZCfGARFwY%2bSFiStdrINVJsG5w' using Visa or MasterCard, or via a transfer of marketable securities, or by check mailed to The Pittsburgh Foundation, attn.: Kelly Uranker, Five PPG Place, Suite 250, Pittsburgh, PA 15222-5414. Her phone number there is 412-394-2604, ext. 204, and her email urankerk@pghfdn.org."
+                    text="Donations to this Fund, managed by The Pittsburgh Foundation ('TPF'), are tax deductible when made directly to TPF for Iron City Fishing Club Charitable Gift Fund. Contributions can be made in US funds online here:"
                 />
+                <Typography className={classes.root}>
+                    <Link href="https://community.pittsburghfoundation.org/page.aspx?pid=298&fid=UFxl2d4w9r8%3d&fdesc=akeoWcyY1DqiNZlcPVg5IG4X%2b9z3rivZsbvCHuNZCfGARFwY%2bSFiStdrINVJsG5w">
+                        PittsburghFoundation.org
+                    </Link>
+                </Typography>
+                <BodyText
+                    text="Or by a transfer of marketable securities, or by check mailed to The Pittsburgh Foundation:"
+                />
+                <div className={classes.root}>
+                    <Chip label="Kelly Uranker, Five PPG Place, Suite 250, Pittsburgh, PA 15222-5414, 412-394-2604, ext. 204, urankerk@pghfdn.org" />
+                </div>
         </div>
     )
 }

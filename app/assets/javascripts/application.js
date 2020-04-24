@@ -53,3 +53,10 @@ $(document).ready(function() {
       }
     }
 })
+
+$(document).ready(function() {
+  const trixFileButtons = document.querySelectorAll(".trix-button-group--file-tools");
+  trixFileButtons.forEach(function(trixButton) {
+    trixButton.style.visibility = "hidden"
+  })
+})

@@ -5,7 +5,38 @@ import Modal from 'react-modal';
 import Button from '@material-ui/core/Button';
 import Title from '../../shared/Title'
 import CreatePicture from './Create'
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import HorizontalLine from '../../shared/HorizontalLine';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import IconButton from '@material-ui/core/IconButton';
+
+function PictureCard(props) {
+    return (
+        <Card>
+            <CardContent>
+                <img src={props.src} alt={props.alt} />
+            </CardContent>
+            <CardActions>
+                <IconButton onClick={props.removePicture}>
+                        <HighlightOffIcon />
+                </IconButton>
+            </CardActions>
+        </Card>
+    );
+}
+
+function PictureWrapper(props) {
+    return (
+        <div style={{
+            display: 'flex',
+            flex: 1
+        }}>
+            {props.children}
+        </div>
+    )
+}
 
 class Index extends React.Component {
     state = {
@@ -39,11 +70,14 @@ class Index extends React.Component {
         if (!this.props.pictures.loading && this.props.pictures && this.props.pictures[1] && this.props.pictures[1].pictures) {
             pictures = this.props.pictures[1].pictures.map((picture, index) => {
                 return (
-                    <div key={index}>
-                        <p>{picture.caption}</p>
-                        <img src={picture.image.url} alt={picture.caption} />
-                        <button onClick={this.removePicture.bind(this, picture.id)}>X</button>
-                    </div>
+                    <PictureCard
+                        key={picture.id}
+                        removePicture={this.removePicture.bind(this, picture.id)}
+                        src={picture.image.url}
+                        alt={picture.caption}
+                        id={picture.id}
+                        author={picture.user_id}
+                    />
                 )
             })
         }
@@ -68,7 +102,9 @@ class Index extends React.Component {
                     </Button>
                 </div>
                 <HorizontalLine />
-                {pictures}
+                <PictureWrapper>
+                    {pictures}
+                </PictureWrapper>
                 <Modal
                     isOpen={this.state.createPictureModalOpen}
                     onRequestClose={this.closeModal}

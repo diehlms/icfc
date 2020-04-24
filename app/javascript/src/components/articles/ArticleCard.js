@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography'
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import IconButton from '@material-ui/core/IconButton';
 import './Style.css'
 
+
 function ArticleHeader(props) {
-    console.log(props)
     return (
         <div className="articleHeader">
             <Typography variant="h6">
@@ -13,7 +15,7 @@ function ArticleHeader(props) {
             </Typography>
             <div className="subheader">
                 <span>
-                    <Typography variant="small">
+                    <Typography>
                         by: {props.author}
                     </Typography>
                 </span>
@@ -45,11 +47,9 @@ export default function ArticleCard(props) {
             <ArticleContent
                 content={props.content}
             />
-            <Button 
-                onClick={props.removeArticle}
-            >
-                X
-            </Button>
+            <IconButton onClick={props.removeArticle}>
+                <HighlightOffIcon />
+            </IconButton>
         </div>
     )
 }

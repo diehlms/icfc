@@ -55,7 +55,7 @@ export default function PlannedGiving() {
                 text="Planned Giving"
             />
             <HorizontalLine />
-            <BodyText text="Dear Iron Citiizens," />
+            <BodyText text="Dear Iron Citizens," />
             <BodyText text="Iron City holds a special place in the hearts and minds of all of us. The deep connection we feel for one another and the remarkable Georgian Bay landscape have created a unique combination that makes Iron City a “must” destination in members’ annual vacation planning. We hope you will take a moment to consider this request for your support." />
             <BodyText text="The cost of maintaining our club on an annual basis seems to rise at a rate faster than inflation, and many Iron Citizens have taken more active leadership roles in issues around the health and wellbeing of the Georgian Bay community. We are writing to ask you to consider investing in the future of our Club by supporting the Iron City Endowment Fund and/or the Iron City Charitable Gift Fund." />
             <SubTitle text="Endowment Fund" />

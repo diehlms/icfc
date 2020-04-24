@@ -37,7 +37,7 @@ export class Create extends Component {
                         value={this.state.content}
                         onEditorReady={this.handleEditorReady} 
                     />
-                    <Button variant="primary" type="submit">
+                    <Button variant="text" type="submit">
                         Submit
                     </Button>
                 </form>

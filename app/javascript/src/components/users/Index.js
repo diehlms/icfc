@@ -13,13 +13,10 @@ export class Index extends Component {
     render() {
         const users = [];
 
-        console.log(users);
-
         if (!this.props.loading && this.props.users && this.props.users[1] && this.props.users[1].users) {
-            this.props.users[1].users.map((user, index) => {
+            this.props.users[1].users.map((user) => {
                 const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
                 const cleanedPhoneNumber = user.phone_number.replace(phoneRegex, "$1-$2-$3");
-                
                 users.push({
                     username: user.username,
                     name: `${user.firstname} ${user.lastname}`,

@@ -21,14 +21,14 @@ export default function StyledInput(props) {
 
     return (
         <Input
-            disableUnderline="true"
+            disableUnderline={true}
             placeholder={props.placeholder}
             className={classes.root}
             type={props.type}
             onChange={props.onChange}
             value={props.value}
             name={props.name}
-            startAdornment={<InputAdornment position="start">{props.startAdornment}</InputAdornment>}
+            startAdornment={ props.startAdornment ? <InputAdornment position="start">{props.startAdornment}</InputAdornment> : null }
         />
     )
 }

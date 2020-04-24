@@ -12,10 +12,16 @@ export class Create extends Component {
     state = {
         events: "",
         location: "",
-        start_time: "3",
-        user_id: 3,
+        start_time: "",
+        user_id: null,
         end_time: "",
         description: ""
+    }
+
+    componentDidMount() {
+        this.setState({
+            user_id: this.props.user_id
+        })
     }
 
     onChange = e => {
@@ -23,7 +29,7 @@ export class Create extends Component {
     }
 
     onTrixChange = e => {
-        this.setState({content: e })
+        this.setState({description: e })
     }
 
     onSubmit = e => {
@@ -72,7 +78,7 @@ export class Create extends Component {
                         />
                     </FormGroup>
                     <FormGroup>
-                        <React.Fragment className="dateWrapper">
+                        <React.Fragment>
                             <Grid container>
                                 <StyledInput
                                     type="date" 
@@ -91,12 +97,12 @@ export class Create extends Component {
                                     name="end_time"
                                     startAdornment="to:"
                                 />
+                                <Button variant="text" type="submit">
+                                    add an event
+                                </Button>
                             </Grid>
                         </React.Fragment>
                     </FormGroup>
-                    <Button variant="primary" type="submit">
-                        add an event
-                    </Button>
                 </form>
             </div>
         )
