@@ -1,0 +1,15 @@
+<div class="sidebar rooms">
+    <div class="sidebar-header">
+        Rooms:
+        <%= link_to new_room_path, class: "btn btn-success btn-xs pull-right" do %>
+            <i class="fa fa-edit"></i>
+        <% end %>
+    </div>
+    <% if @rooms %>
+        <div class="rooms-list-wrapper">
+            <% @rooms.each do |room| %>
+                <li class="rooms-list"><%= link_to room.name, room_path(room), class: "room-link" %></li>
+            <% end %>
+        </div>
+    <% end %>
+</div>

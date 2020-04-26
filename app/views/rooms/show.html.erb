@@ -1,0 +1,62 @@
+<div id="#rooms-show-container">
+    <h1 class="room-title">
+        <%= @room.name %>
+    </h1>
+    <hr>
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <%= render partial: "rooms" %>
+        </div>
+        <div class="chat-column">
+            <div class="chat" data-channel-subscribe="room" data-room-id="<%= @room.id %>" >
+                <% @room_messages.each do |room_message| %>
+                    <div class="chat-message-container">
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <div class="message-content <%= room_message.user_id == current_user.id ? 'own-message' : 'other-message' %>">
+                                    <small><em><%= room_message.user.username %>:</em></small>
+                                    <%= room_message.message.html_safe %>
+                                    <div class="text-right">
+                                        <small>
+                                            <span class="a">
+                                                <%= room_message.created_at.strftime('%Y/%m/%d at: %H:%M:%S') %>
+                                            </span>
+                                            <% if room_message.user_id == current_user.id %>
+                                                <span class="a"><%= button_to "Delete", room_message_path(room_message), method: :delete, data: { confirm: "Are you sure you want to delete this message?"}, class: "btn-xs btn btn-danger" %></span>
+                                            <% end %>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <%= simple_form_for @room_message, remote: true do |f| %>
+                <div class="chat-message">
+                    <%= trix_editor :room_message, :message, as: :string, wrapper: false, label: false, input_html: { class: "chat-input" } %>
+                    <%= button_tag class: "pt-3 btn btn-success btn-xs pull-right" do %>
+                        Send Message
+                    <% end %>
+                </div>
+                <%= f.input :room_id, as: :hidden %>
+            <% end %>
+        </div>
+    </div>
+    <div class="hidden">
+        <div class="d-none" data-role="message-template">
+            <div class="chat-message-container">
+                <div class="row no-gutters">
+                    <div class="col">
+                        <div class="message-content own-message">
+                            <div data-role="message-text">
+                            <div class="text-right">
+                                <small data-role="message-date"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

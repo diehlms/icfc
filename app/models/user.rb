@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+    extend FriendlyId
     attr_accessor :remember_token
     before_create :confirmation_token
     has_secure_password
@@ -19,6 +20,8 @@ class User < ActiveRecord::Base
     validates :email, presence: true, length: { maximum: 105 },
     uniqueness: { case_sensitive: false }, format: { with: VALID_EMAIL_REGEX}
     validates :username, presence: true, length: { minimum: 6, maximum: 20}
+
+    friendly_id :username, use: :slugged
     
     def User.digest(string)
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost

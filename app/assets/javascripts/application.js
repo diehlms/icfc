@@ -28,6 +28,14 @@ $(document).ready(function() {
 
 $('.alert').alert()
 
+$(document).ready(function(){
+  $('.navbar .dropdown').hover(function() {
+      $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
+  }, function() {
+      $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp()
+  });
+})
+
 $('#committee-primer button a').click(function(){
     $(this).next('ul').slideToggle('500');
     $(this).find('i').toggleClass('fa-toggle-on fa-toggle-off')

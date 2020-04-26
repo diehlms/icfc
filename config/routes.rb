@@ -71,6 +71,8 @@ Rails.application.routes.draw do
   resources :cabins
   resources :cabindates
   resources :galleries
+  resources :rooms
+  resources :room_messages
 
   get '/articles', to: 'articles#index'
   get '/blog', to: 'articles#index'

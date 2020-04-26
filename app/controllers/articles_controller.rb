@@ -90,7 +90,7 @@ private
     end
 
     def set_article
-        @article = Article.find_by_id(params[:id])
+        @article = Article.friendly.find(params[:id])
     end
 
     def comment_params

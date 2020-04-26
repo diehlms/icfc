@@ -1,0 +1,159 @@
+// Place all the styles related to the rooms controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.room-nav-link {
+    & + .room-nav-link {
+        border-top: 0 none;
+    }
+}
+
+.room-title {
+    margin-left: 5%;
+}
+
+.chat {
+    height: 45vh;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    overflow: scroll;
+    margin-left: 22%;
+    min-width: 60%;
+    margin-right: 30px;
+    padding: 15px;
+    border: 1px solid rgb(172, 172, 172);
+}
+
+#rooms-show-container {
+    margin-left: 15px;
+    margin-right: 60px;
+    margin-top: 45px;
+    padding: 0 45px 45px 0;
+    overflow: hidden;
+}
+
+.chat-message {
+    margin-left: 25%;
+    min-width: 60%;
+    margin-right: 30px;
+}
+
+trix-editor.formatted_content.trix-content {
+    margin-bottom: 5px;
+}
+
+.rooms-form {
+    width: 100%;
+}
+
+#basic-addon1 {
+    padding-right: 0;
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#room_name {
+    width: 100%;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+#room-save-btn {
+    width: 100%;
+    padding-left: 0;
+    margin-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#basic-addon {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+input[type=room_message_message_trix_input_room_message] {
+    border-radius: 0 0 3px 3px;
+}
+
+.chat-input {
+    border-top: 0 none;
+    border-radius: 0 0 5px 5px;
+    width: 100%;
+    background-color: rgb(172, 172, 172);
+}
+
+.chat-message-container {
+    padding: 5px;
+  
+    .message-content {
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .message-content.own-message {
+        border: 1px solid rgba(172, 247, 250, 0.9);
+        background-color: rgba(172, 247, 250, 0.1);
+        float: right;
+        width: 75%;
+    }
+
+    .message-content.other-message {
+        border: 1px solid rgba(187, 187, 187, 0.9);
+        background-color: rgba(187, 187, 187, 0.1);
+        float: left;
+        color: black;
+        width: 75%;
+    }
+  
+    .hidden {
+        display: none;
+    }
+    & + .chat-message-container {
+      margin-top: 10px;
+    }
+}
+
+.rooms {
+    border: 1px solid rgba(172, 250, 172, 0.9);
+    background-color: rgba(172, 250, 172, 0.1);
+    position: fixed;
+    left: 5%;
+    width: 25%;
+    max-width: 190px;
+    height: 60vh;
+    overflow: scroll;
+    border-radius: 5px;
+    box-shadow:  0 6px 20px 0 rgba(0, 0, 0, 0.05);
+    padding: 6px 6px 15px 6px;
+}
+
+.room-link, .room-link:active, .room-link:hover, .room-link:visited {
+    text-decoration: none;
+}
+
+.rooms-list {
+    list-style: none;
+}
+
+.rooms-list:nth-child(odd) {
+    background-color: white;
+    padding: 3px 4px 4px 15px;
+}
+
+.rooms-list:nth-child(even) {
+    background-color: #f2f2f2;
+    padding: 3px 4px 4px 15px;
+}
+
+.rooms-list-wrapper {
+    border: 1px solid #f2f2f2;
+    border-radius: 3px;
+}
+
+.sidebar-header {
+    display: block;
+    font-size: 22px;
+}
