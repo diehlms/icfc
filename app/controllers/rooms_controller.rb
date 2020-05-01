@@ -51,7 +51,7 @@ class RoomsController < ApplicationController
      
         def load_entities
             @rooms = Room.all
-            @room = Room.find(params[:id]) if params[:id]
+            @room = Room.friendly.find(params[:id]) if params[:id]
         end
 
         def permitted_parameters

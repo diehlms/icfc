@@ -1,6 +1,8 @@
 $(document).ready(function() {
-    let galleryImage = document.querySelector(".picture-modal-whole");
+    let galleryImage = document.querySelectorAll(".picture-modal-whole");
     if (galleryImage) {
-        $(galleryImage).closest(".img.modal-body").css("max-width", galleryImage.width);
+        galleryImage.forEach(function(img) {
+            $(img).closest(".img.modal-body").css("max-width", img.width);
+        })
     }
 })

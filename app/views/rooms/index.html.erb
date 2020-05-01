@@ -1,7 +1,11 @@
 <div class="container">
-    <div class="row">
-        <div class="col-12 col-md-3">
-            <%= render partial: "rooms" %>
+    <% if logged_in? && current_user %>
+        <div class="row">
+            <div class="col-12 col-md-3">
+                <%= render partial: "rooms" %>
+            </div>
         </div>
-    </div>
+    <% else %>
+        <h1>You must be logged in to view this page.</h1>
+    <% end %>
 </div>

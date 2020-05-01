@@ -66,12 +66,11 @@ def toggle_pinned
 end
 
 def edit
-    @article = current_user.articles.find(params[:id])
+    @article = current_user.articles.friendly.find(params[:id])
 end
 
 def destroy
-    set_article
-    @article = current_user.articles.find(params[:id])
+    @article = current_user.articles.friendly.find(params[:id])
     respond_to do |format|
         if @article.destroy
             format.html { redirect_to articles_path, notice: "Article was deleted" }

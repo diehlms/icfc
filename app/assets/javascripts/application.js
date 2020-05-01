@@ -29,11 +29,13 @@ $(document).ready(function() {
 $('.alert').alert()
 
 $(document).ready(function(){
-  $('.navbar .dropdown').hover(function() {
-      $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
-  }, function() {
-      $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp()
-  });
+  if (window.innerWidth > 756) {
+    $('.navbar .dropdown').hover(function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).delay(250).slideDown();
+    }, function() {
+        $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp()
+    });
+  }
 })
 
 $('#committee-primer button a').click(function(){
