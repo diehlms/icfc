@@ -9,8 +9,8 @@ end
 
 def show
     user = session[:user_id]
-    @comment = Comment.new(article_id: params[:id])
     set_article
+    @comment = Comment.new(article_id: @article.id)
     if @article
         @comments = @article.comments.paginate(page: params[:page]).order("created_at DESC")
     end
