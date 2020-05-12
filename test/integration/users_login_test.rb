@@ -5,14 +5,10 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
         @user = users(:diehl)
     end
 
-    # test "login with valid info followed by logout" do
-    #     get login_path
-    #     post login_path, params: { session: { email: @user.email,
-    #                                           password: 'password' } }
-    #     assert_redirected_to root_path
-    #     delete session
-    #     assert_redirect_to root_path
-    #     delete session
-    # end
+    def log_in_as(user, password: 'password', remember_me: '1')
+        post login_path, params: { session: { email: user.email,
+                                              password: password,
+                                              remember_me: remember_me } }
+    end
 
 end

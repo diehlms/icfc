@@ -11,14 +11,24 @@
                 </ul>
             </div>
         <% end %>
+        <p><small>Password must:</small></p>
+        <ul>
+            <li><small>Be more than 8 characters</small></li>
+            <li><small>Contain at least one digit</small></li>
+            <li><small>Contain a lower case letter</small></li>
+            <li><small>Contain an upper case letter </small></li>
+        </ul>
         <div class="field">
             <%= f.label :password %>
-            <%= f.password_field :password %>
+            <%= f.password_field :password, class: "form-control" %>
         </div>
         <div class="field">
             <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation %>
+            <%= f.password_field :password_confirmation, class: "form-control" %>
         </div>
-        <div class="actions"><%= f.submit "Update password" %></div>
+        <br>
+        <div class="actions">
+            <%= f.submit "Update password", class: 'btn btn-success btn-block' %>
+        </div>
     <% end %>
 </div>

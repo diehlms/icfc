@@ -2,4 +2,5 @@ diehl:
   username: diehlsillers
   email: diehlstx@gmail.com
   password_digest: <%= User.digest('password') %>
-
+  admin: true
+  email_confirmed: true

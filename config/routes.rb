@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy', as: 'logout'
   post '/login', to: 'sessions#create'
   get '/signup', to: 'users#new', as: 'signup'
-  resources :password_resets
+  resources :password_resets, only: [:new, :create, :edit, :update]
   resources :users do
     member do
       get :confirm_email

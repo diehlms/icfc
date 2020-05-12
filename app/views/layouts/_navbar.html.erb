@@ -34,6 +34,8 @@
               <li><%= link_to 'Archives', archives_path %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to 'Committee Primer', committee_primer_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to '2020 Yearbook', "/ICFC 2020 Yearbook.pdf", target: "_blank" %></li>
             </ul>
           </li>
         <% end %>
@@ -61,6 +63,9 @@
           <a class="date">Encampment <%= Date.today.year - 1881 %></a>
         </li>
         <% if logged_in? %>
+          <li class="dropdown">
+            <%= link_to '2020 Yearbook', "/ICFC 2020 Yearbook.pdf", target: "_blank" %>
+          </li>
           <li id="searchbar" class="dropdown">
             <%= form_tag(search_path, method: :get, class: "article-banner-action") do %>
               <%= text_field_tag(:search, params[:search], class: "form-control article-search-form", placeholder: "search", aria: "search") %>
