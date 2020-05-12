@@ -12,7 +12,7 @@ class Article < ApplicationRecord
     accepts_nested_attributes_for :comments
     
     validates :title, presence: true, length: { maximum: 50 }
-    validates :content, presence: true, length: { maximum: 10000 }
+    validates :content, presence: true, length: { maximum: 50000 }
     validates :user_id, presence: true
 
     friendly_id :title, use: :slugged

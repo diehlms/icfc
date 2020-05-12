@@ -25,8 +25,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
                                                 lastname: "Last",
                                                 phone_number: "1111111111",
                                                 email: "user@example.com",
-                                                password:              "password",
-                                                password_confirmation: "password" } }
+                                                password:              "Blahblah1",
+                                                password_confirmation: "Blahblah1" } }
         end
         assert_equal 2, ActionMailer::Base.deliveries.size
         user = assigns(:user)

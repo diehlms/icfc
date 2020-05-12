@@ -19,7 +19,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
                                 <h3><a href="#" title=""><%= link_to a.title, article_path(a) %></a></h3>
-                                <p><%= truncate(a.content, length: 200) %></p>						
+                                <p><%= sanitize(a.content.truncate(200, tags: %w(strong em p br div ul ol li))) %></p>						
                             </div>
                             <span class="clearfix borda"></span>
                         </article>
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
                                 <h3><a href="#" title=""><%= link_to e.events, event_path(e) %></a></h3>
-                                <p><%= truncate(e.description, length: 200) %></p>						
+                                <p><%= sanitize(e.description.truncate(200, tags: %w(strong em p br div ul ol li))) %></p>						
                             </div>
                             <span class="clearfix borda"></span>
                         </article>
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
                                 <h3><a href="#" title=""><%= link_to c.name, cabin_path(c) %></a></h3>
-                                <p><%= truncate(c.description, length: 200) %></p>						
+                                <p><%= sanitize(c.description.truncate(200, tags: %w(strong em p br div ul ol li))) %></p>						
                             </div>
                             <span class="clearfix borda"></span>
                         </article>
