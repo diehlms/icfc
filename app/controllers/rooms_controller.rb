@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
-    before_action :load_entities
+    helper_method :require_user
+    before_action :load_entities, :require_user
     
     def index
         @rooms = Room.all

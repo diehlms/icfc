@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy]
+    helper_method :require_user
+    before_action :require_user, only: [:show, :edit, :update, :destroy, :index]
   
     def index
       @users = User.all.paginate(page: params[:page]).reorder('lastname ASC')

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-    helper_method :logged_in?, :current_user
+    helper_method :logged_in?, :current_user, :validate_user
+    include SessionsHelper
     
     def login!
         session[:user_id] = @user.id
@@ -35,8 +36,9 @@ class ApplicationController < ActionController::Base
 
     def require_user
         if !logged_in?
-            flash[:danger] = 'You must be logged in'
+            flash[:notice] = 'Your session has expired. Please log in again'
             redirect_to root_path
         end
     end
+
 end

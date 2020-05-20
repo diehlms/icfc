@@ -1,4 +1,4 @@
-<% if logged_in? %>
+
   <% if @event %>
     <div class="container">
       <div class="event-card">
@@ -23,11 +23,10 @@
         </div>
       </div>
     </div>
-    <% if logged_in? && current_user.admin? || logged_in? && current_user.id == @event.user_id%>
+    <% if current_user.admin? || current_user.id == @event.user_id%>
       <div class="UIactions">
         <span class="a"><%= link_to 'Edit', edit_event_path(@event), class: "btn btn-primary" %></span>
         <span class="a"><%= button_to 'Delete', event_path(@event), method: :delete, data: {confirm: 'are you sure?'}, class: "btn btn-danger" %></span>
       </div>
     <% end %>
   <% end %>
-<% end %>

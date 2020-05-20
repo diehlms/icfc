@@ -1,6 +1,8 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-
+  helper_method :require_user
+  before_action :require_user
+  
   # GET /events
   # GET /events.json
   def index

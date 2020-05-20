@@ -1,61 +1,23 @@
-<% if logged_in? %>
-  <div class="calendar container">
-    <h1 class="section-title" align="center">Events</h1>
-    <% if logged_in? %>
-      <div id="articles">
-        <h2 id="month">
-          <%= link_to "<", date: @date.prev_month %>
-          <%= @date.strftime("%B %Y") %>
-          <%= link_to ">", date: @date.next_month %>
-        </h2>
-        <%= calendar @date do |date| %>
-          <%= date.day %>
-          <% if @events_by_date[date] %>
-            <ul>
-              <% @events_by_date[date].each do |event| %>
-                <li><%= link_to "#{event.events}", event %></li>
-              <% end %>
-            </ul>
-          <% end %>
-        <% end %>
-      </div>
-      <br>
-      <% if logged_in? %>
-            <%= link_to 'Add an Event', new_event_path, class: "btn btn-block btn-success" %>
-        <% end %>
-      <!-- <table class="table">
-        <thead>
-          <tr>
-            <th>Event</th>
-            <th>Location</th>
-            <th>Start time</th>
-            <th>End time</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-        <br>
-      <tbody>
-          <div class="events-display">
-            <% @events.each do |event| %>
-              <tr>
-                <td><%= link_to event.events, event_path(event) %></td>
-                <td><%= event.location %></td>
-                <td><%= event.start_time %></td>
-                <td><%= event.end_time %></td>
-                <% if logged_in? && current_user.admin? %>
-                  <td><%= link_to 'Edit', edit_event_path(event), class: "btn btn-sm btn-info" %></td>
-                  <td><%= button_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %></td>
-                <% end %>
-              </tr>
+<div class="calendar container">
+  <h1 class="section-title" align="center">Events</h1>
+    <div id="articles">
+      <h2 id="month">
+        <%= link_to "<", date: @date.prev_month %>
+        <%= @date.strftime("%B %Y") %>
+        <%= link_to ">", date: @date.next_month %>
+      </h2>
+      <%= calendar @date do |date| %>
+        <%= date.day %>
+        <% if @events_by_date[date] %>
+          <ul>
+            <% @events_by_date[date].each do |event| %>
+              <li><%= link_to "#{event.events}", event %></li>
             <% end %>
-          </div>
-        </tbody>
-        -->
-      </table>
-    <% else %>
-      <p>Please <%= link_to "log in", login_path %> to view the events page. </p>
-    <% end %>
-  </div>
-<% else %>
-  <p>Account not verified</p>
-<% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+    <br>
+    <%= link_to 'Add an Event', new_event_path, class: "btn btn-block btn-success" %>
+    </table>
+</div>

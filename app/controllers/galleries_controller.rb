@@ -1,5 +1,7 @@
 class GalleriesController < ApplicationController
-
+    helper_method :require_user
+    before_action :require_user
+    
     def new
         @gallery = current_user.galleries.build
     end

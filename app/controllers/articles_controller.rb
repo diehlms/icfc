@@ -1,7 +1,8 @@
 class ArticlesController < ApplicationController
 
 before_action :set_article, only: [:edit, :update, :show, :destroy]
-helper_method :current_user, :logged_in?
+before_action :require_user
+helper_method :current_user, :logged_in?, :require_user
 
 def new
     @article = current_user.articles.build

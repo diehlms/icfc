@@ -1,4 +1,7 @@
 class SearchController < ApplicationController
+    helper_method :require_user
+    before_action :require_user
+    
     def index
         if params[:search]
             @articles = Article.where('lower(title) LIKE ? OR lower(content) LIKE ?', "%#{params[:search].downcase}%", "%#{params[:search].downcase}%")

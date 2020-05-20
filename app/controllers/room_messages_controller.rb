@@ -1,6 +1,7 @@
 class RoomMessagesController < ApplicationController
     before_action :load_entities, only: :create
-    helper_method :current_user
+    helper_method :current_user, :require_user
+    before_action :require_user
 
     def create
         @room_message = RoomMessage.create user: current_user,

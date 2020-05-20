@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  helper_method :require_user
+  before_action :require_user
 
   def new
     user = session[:user_id]
@@ -14,7 +16,7 @@ class CommentsController < ApplicationController
             flash[:notice] = "Comment saved"
             redirect_back(fallback_location: root_path)
         else
-            flash[:error] = "Error saving comment"
+            flash[:notice] = "Error saving comment"
             redirect_back(fallback_location: root_path)
         end
   end
@@ -25,7 +27,7 @@ class CommentsController < ApplicationController
         flash[:notice] = "Comment deleted"
         redirect_back(fallback_location: root_path)
     else
-        flash[:error] = "Error saving comment"
+        flash[:notice] = "Error deleting comment"
         redirect_back(fallback_location: root_path)
     end
   end

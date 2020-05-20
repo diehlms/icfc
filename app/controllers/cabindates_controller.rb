@@ -1,4 +1,5 @@
 class CabindatesController < ApplicationController
+    before_action :require_user
     
     def new
         @cabindate = Cabindate.new(cabin_id: params[:cabin_id])

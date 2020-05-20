@@ -1,10 +1,9 @@
-<% if logged_in? %>
+
   <% if @cabin %>
     <div class="container">
       <h1 class="section-title" align="center"><%= @cabin.name %></h1>
       <div class="individual-cabin">
         <div class="cabin-info">
-          <% if @cabin %>
             <% if @cabin_attachments %>
               <div class="cabin-attachment-container">
                 <% @cabin_attachments.each do |p| %>
@@ -41,7 +40,6 @@
             <div class="description">
               <p><%= @cabin.description.html_safe %></p>
             </div>
-          <% end %>
         </div>
         <div class="cabin-dates">
           <p>Contact info:</p>
@@ -50,7 +48,7 @@
           <p><%= @cabin.user.email %>
           <p><%= @cabin.user.phone_number %>
           <hr>
-          <% if logged_in? && @cabin.user_id == current_user.id %>
+          <% if @cabin.user_id == current_user.id %>
             <h3>Add dates</h3>
             <%= render partial: "cabindates/form", cabin_id: @cabin_id %>
           <% end %>
@@ -70,7 +68,7 @@
                   <tr>
                     <td><%= date.startdate.strftime("%B %e, %Y") %><td>
                     <td><%= date.enddate.strftime("%B %e, %Y") %><td>
-                    <% if logged_in? && current_user.id == @cabin.user_id %>
+                    <% if current_user.id == @cabin.user_id %>
                       <td><%= button_to "delete", cabindate_path(date), method: :delete, class: "btn btn-xs btn-danger" %></td>
                     <% end%>
                   </tr>
@@ -83,6 +81,3 @@
       </div>
     </div>
   <% end %>
-<% else %>
-  <p>Account not verified</p>
-<% end %>

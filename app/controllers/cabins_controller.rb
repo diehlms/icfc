@@ -1,6 +1,7 @@
 class CabinsController < ApplicationController
-    helper_method :current_user, :logged_in?
+    helper_method :current_user, :logged_in?, :require_user
     before_action :set_cabin, only: [:update, :show, :edit, :destroy]
+    before_action :require_user
     
     def index
         @cabins = Cabin.all

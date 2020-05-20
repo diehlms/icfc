@@ -5,7 +5,7 @@ $(function() {
             messageTemplate = $('[data-role="message-template"]');
 
         $element.animate({ scrollTop: $element.prop("scrollHeight")}, 1000)        
-
+        console.log(App);
         App.cable.subscriptions.create(
         {
             channel: "RoomChannel",

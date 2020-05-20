@@ -37,7 +37,7 @@ ul {
 }
 
 .alert.alert-secondary {
-    position: absolute;
+    position: fixed;
     z-index: 999;
     width: 80%;
     font-family: 'Domine', serif;
@@ -45,6 +45,8 @@ ul {
     color: black;
     background-color: lightblue;
     border: 1px solid lightblue;
+    background-color: rgba($color: lightblue, $alpha: 0.5);
+    border: 1px solid rgb(153, 210, 230);
     margin-left: 10vw;
     margin-top: 10px;
 }
@@ -182,13 +184,6 @@ ul {
         display: inline-block;
     }
 }
-
-// .sticky {
-//     position: fixed;
-//     margin-bottom: 50px;
-//     top: 0;
-//     width: 100%;
-// }
 
 .date {
     color: white;

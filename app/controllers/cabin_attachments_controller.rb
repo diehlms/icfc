@@ -1,28 +1,20 @@
 class CabinAttachmentsController < ApplicationController
   before_action :set_cabin_attachment, only: [:show, :edit, :update, :destroy]
 
-  # GET /cabin_attachments
-  # GET /cabin_attachments.json
   def index
     @cabin_attachments = CabinAttachment.all
   end
 
-  # GET /cabin_attachments/1
-  # GET /cabin_attachments/1.json
   def show
   end
 
-  # GET /cabin_attachments/new
   def new
     @cabin_attachment = CabinAttachment.new
   end
 
-  # GET /cabin_attachments/1/edit
   def edit
   end
 
-  # POST /cabin_attachments
-  # POST /cabin_attachments.json
   def create
     @cabin_attachment = CabinAttachment.new(cabin_attachment_params)
 
@@ -37,8 +29,6 @@ class CabinAttachmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /cabin_attachments/1
-  # PATCH/PUT /cabin_attachments/1.json
   def update
     respond_to do |format|
       if @cabin_attachment.update(cabin_attachment_params)
@@ -51,8 +41,6 @@ class CabinAttachmentsController < ApplicationController
     end
   end
 
-  # DELETE /cabin_attachments/1
-  # DELETE /cabin_attachments/1.json
   def destroy
     @cabin_attachment.destroy
     respond_to do |format|
@@ -62,12 +50,10 @@ class CabinAttachmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_cabin_attachment
       @cabin_attachment = CabinAttachment.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def cabin_attachment_params
       params.require(:cabin_attachment).permit(:cabin_id, :image)
     end
