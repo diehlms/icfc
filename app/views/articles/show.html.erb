@@ -33,7 +33,7 @@
         <h3>Leave a Reply:</h3>
         <%= render partial: "comments/form", article_id: @article_id %>
         <% if @comments.any? %>
-            <%= will_paginate @comments %>
+            <%= will_paginate @comments, renderer: BootstrapPagination::Rails %>
             <%= render partial: "comment" %>
         <% end %>
     </div>

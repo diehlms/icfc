@@ -43,7 +43,6 @@ Rails.application.routes.draw do
   end
 
   # make sure to comment this line out when not using react in dev
-  # get '/*path' => 'pages#landing'
   
   get '/login', to: 'sessions#new', as: 'login'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
@@ -88,6 +87,6 @@ Rails.application.routes.draw do
   get '/familyagreements', to: 'pages#familyagreements', as: 'familyagreements'
   get '/archives', to: 'pages#archives', as: 'archives'
   get '/committee_primer', to: 'pages#committee_primer', as: 'committee_primer'
-  # get '/*path' => 'pages#landing'
+  get '/*path' => 'pages#landing'
 
 end

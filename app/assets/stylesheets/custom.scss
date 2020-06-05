@@ -4,7 +4,9 @@
 
 /* fonts */
 
-
+* {
+    font-family: 'Roboto' !important;
+}
 
 .history-section {
     font-family: 'Amatic SC', cursive;
@@ -74,58 +76,14 @@ ul {
 
 .container {
     margin-top: 60px !important;
-    margin-bottom: 200px;
+    margin-bottom: 200px !important;
 }
 
 /* pagination */
 
-.pagination-style {
-    text-align: center;
-    padding: 0.3em;
-    cursor: default; 
-}
-
-.pagination-style a, .pagination-style span, .pagination-style em {
-    padding: 0.2em 0.5em; 
-}
-
-.pagination-style .disabled {
-    color: #aaaaaa; 
-}
-
-.pagination-style .current {
-    font-style: normal;
-    font-weight: bold;
-    color: #ff0084; 
-}
-
-.pagination-style a {
-    border: 1px solid #dddddd;
-    color: #0063dc;
-    text-decoration: none; 
-}
-
-.pagination-style a:hover, .pagination-style a:focus {
-    border-color: #003366;
-    background: #0063dc;
-    color: white; 
-}
-
-.pagination-style .page_info {
-    color: #aaaaaa;
-    padding-top: 0.8em; 
-}
-
-.pagination-style .previous_page, .pagination-style .next_page {
-    border-width: 2px; 
-}
-
-.pagination-style .previous_page {
-    margin-right: 1em; 
-}
-
-.pagination-style .next_page {
-    margin-left: 1em; 
+.pagination.pagination {
+    display: block;
+    margin: 10 0 10 0 auto;
 }
 
 /* articles */
@@ -200,6 +158,10 @@ ul {
 
     .home-UIbuttons {
         font-size: 2px;
+    }
+
+    .navbar-extra-links {
+        display: none !important;
     }
 }
 

@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <%= will_paginate @galleries, class: "pagination-style" %>
+    <%= will_paginate @galleries, renderer: BootstrapPagination::Rails %>
     <br><br>
         <% if @galleries %>
             <div class="picture-container">
@@ -42,7 +42,7 @@
         <% end %>
     </div>
 <br><br>
-<%= will_paginate @galleries, class: "pagination-style" %>
+<%= will_paginate @galleries, renderer: BootstrapPagination::Rails %>
 <div id="galleryModal" class="modal fade">
     <div class="modal-dialog modal-login">
         <div class="model-content">

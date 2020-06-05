@@ -5,7 +5,7 @@
         <p class="alert alert-notice"><%= notice %></p>
     <% end %>
     <br><br>
-    <%= will_paginate @articles, class: "pagination-style" %>
+    <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
     <br><br>
     <% if @articles.any? %>
         <% @articles.each do |article| %>
@@ -50,5 +50,5 @@
         <% end %>
     <% end %>
     <br>
-    <%= will_paginate @articles, class: "pagination-style" %>
+    <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
 </div>
