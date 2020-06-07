@@ -37,7 +37,7 @@
               <li role="separator" class="divider"></li>
               <li><%= link_to '2020 Yearbook', "/ICFC 2020 Yearbook.pdf", target: "_blank" %></li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to '2020 Survey Results', "/2020_Survey_Results.docx", target: "_blank" %></li>
+              <li><%= link_to '2020 Survey Results', "/ICFC_Survey_Results.docx", target: "_blank" %></li>
             </ul>
           </li>
         <% end %>
@@ -69,8 +69,11 @@
             <%= link_to '2020 Yearbook', "/ICFC 2020 Yearbook.pdf", target: "_blank" %>
           </li>
           <li class="dropdown navbar-extra-links">
-            <%= link_to '2020 Survey', "/2020_Survey_Results.docx", target: "_blank" %>
+            <%= link_to '2020 Survey', "/ICFC_Survey_Results.docx", target: "_blank" %>
           </li>
+          <li class="drodown navbar-extra-links">
+            <%= link_to 'Back Bay Bilge', "/backbaybilges/ICFC_Back_Bay_Bilge_2020.docx", target: "_blank" %></li>
+          <li>
           <li id="searchbar" class="dropdown">
             <%= form_tag(search_path, method: :get, class: "article-banner-action") do %>
               <%= text_field_tag(:search, params[:search], class: "form-control article-search-form", placeholder: "search", aria: "search") %>

@@ -16,6 +16,7 @@ import SearchReducer from '../src/store/reducers/search';
 import CabinImageReducer from '../src/store/reducers/cabinImage';
 import LoadingReducer from '../src/store/reducers/loading';
 import CabinDateReducer from '../src/store/reducers/cabinDate';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
