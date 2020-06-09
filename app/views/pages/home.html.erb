@@ -37,19 +37,21 @@
             <p class="card-text" id="breakfast-card-text"></p>
         </div>
     </div>
-    <div class="pictures-links">
-        <div class="pictures-link-row" id="add-pic-button">
-            <div class="btn btn-success pictures-link-row">
-                <a class="picture-link" href="https://photos.google.com/share/AF1QipNldgWsKvgyEBv2udxYVNwlVIWJ4Mn_aY2a41SPHoM6c6LMm4HeMmwqZGuIJ4hOXA?key=QmluMS00ZHZfS1JMN1dDTktQb0pwRWNiM003cERn">2019 Pictures</a>
-            </div>
-            <div class="btn btn-success pictures-link-row">
-                <a class="picture-link" href="https://photos.google.com/share/AF1QipNjfWzCYu2JrV3CQ_NIlUbf8APffI3Af2HHTn4RRq9laySkz-OGckBgAvmqAfxrCQ?key=OEVmYVNtSy1FcEpCVktlSTA2QngtQk5tMEliNE9n">2018 Pictures, Part 1</a>
-            </div>
-            <div class="btn btn-success pictures-link-row">
-                <a class="picture-link" href="https://photos.google.com/share/AF1QipPJGncCbqieSG8bhndZLja0FfEVf4KaFlRatt6FWk-AmUAWAWF1pup9qcroOXCh8A?key=NzllQXN0LWtZOFZyQUt1X21ETHBOWnZ5dndadm53">2018 Pictures, Part 2</a>
+    <% if logged_in? %>
+        <div class="pictures-links">
+            <div class="pictures-link-row" id="add-pic-button">
+                <div class="btn btn-success pictures-link-row">
+                    <a class="picture-link" href="https://photos.google.com/share/AF1QipNldgWsKvgyEBv2udxYVNwlVIWJ4Mn_aY2a41SPHoM6c6LMm4HeMmwqZGuIJ4hOXA?key=QmluMS00ZHZfS1JMN1dDTktQb0pwRWNiM003cERn">2019 Pictures</a>
+                </div>
+                <div class="btn btn-success pictures-link-row">
+                    <a class="picture-link" href="https://photos.google.com/share/AF1QipNjfWzCYu2JrV3CQ_NIlUbf8APffI3Af2HHTn4RRq9laySkz-OGckBgAvmqAfxrCQ?key=OEVmYVNtSy1FcEpCVktlSTA2QngtQk5tMEliNE9n">2018 Pictures, Part 1</a>
+                </div>
+                <div class="btn btn-success pictures-link-row">
+                    <a class="picture-link" href="https://photos.google.com/share/AF1QipPJGncCbqieSG8bhndZLja0FfEVf4KaFlRatt6FWk-AmUAWAWF1pup9qcroOXCh8A?key=NzllQXN0LWtZOFZyQUt1X21ETHBOWnZ5dndadm53">2018 Pictures, Part 2</a>
+                </div>
             </div>
         </div>
-    </div>
+    <% end %>
 </section>
 <div id="para-two" class="parallax-img">
 </div>
