@@ -48,23 +48,6 @@ document.addEventListener("trix-file-accept", function(event) {
 });
 
 $(document).ready(function() {
-    window.onscroll = function() {
-        myFunction()
-    };
-    
-    var navbar = document.querySelector("#primary-nav");
-    var sticky = navbar.offsetTop;
-    
-    function myFunction() {
-      if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky");
-      } else {
-        $("#primary-nav").removeClass("sticky");
-      }
-    }
-})
-
-$(document).ready(function() {
   const trixFileButtons = document.querySelectorAll(".trix-button-group--file-tools");
   trixFileButtons.forEach(function(trixButton) {
     trixButton.style.visibility = "hidden"

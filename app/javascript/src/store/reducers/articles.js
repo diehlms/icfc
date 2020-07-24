@@ -17,6 +17,17 @@ export default function(state = initialState, action) {
                 }
             ]
         }
+        case actions.FETCH_ARTICLES_FOR_USER_SUCCESS: {
+            const filteredArticles = action.res.filter(article => {
+                return article.user_id === action.user_id;
+            });
+            return [
+                state, {
+                    articles: filteredArticles,
+                    loading: false
+                }
+            ]
+        }
         case actions.FETCH_ARTICLES_FAIL: {
             return [
                 state, {

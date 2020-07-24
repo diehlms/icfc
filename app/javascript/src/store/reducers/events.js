@@ -16,6 +16,17 @@ export default function(state = initialState, action) {
                 }
             ]
         }
+        case actions.FETCH_EVENTS_FOR_USER_SUCCESS: {
+            const filteredEvents = action.res.filter(event => {
+                return event.user_id === action.user_id;
+            });
+            return [
+                state, {
+                    events: filteredEvents,
+                    loading: false
+                }
+            ]
+        }
         case actions.FETCH_EVENTS_FAIL: {
             return [
                 state, {

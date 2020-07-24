@@ -1,6 +1,6 @@
 import * as actions from './actionTypes';
 
-export const fetchArticles = () => {
+export const fetchArticles = user_id => {
     const url = "/api/v1/articles/index";
     return dispatch => {
         fetch(url)
@@ -10,7 +10,14 @@ export const fetchArticles = () => {
                 } else {
                     dispatch(fetchArticlesFail())
                 }})
-            .then(res => dispatch(fetchArticlesSuccess(res)))
+            .then(res => {
+                if (user_id) {
+                    dispatch(fetchArticlesSuccessForUser(res, user_id))
+                } else {
+                    dispatch(fetchArticlesSuccess(res))
+                }
+            }
+        )
     }
 }
 
@@ -24,6 +31,14 @@ export const fetchArticlesSuccess = res => {
     return {
         type: actions.FETCH_ARTICLES_SUCCESS,
         res
+    }
+}
+
+export const fetchArticlesSuccessForUser = (res, user_id) => {
+    return {
+        type: actions.FETCH_ARTICLES_FOR_USER_SUCCESS,
+        res,
+        user_id
     }
 }
 

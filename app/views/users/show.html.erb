@@ -1,4 +1,13 @@
-<div class="container">
+<%= content_tag :div,
+    id: "session_id_tag",
+    data: current_user.id.to_json do 
+%>
+<% end %>
+<%= react_component("components/users/Show", 
+  { data: current_user.id.to_json }) 
+%>
+
+<!-- <div class="container">
   <p id="notice"><%= notice %></p>
   <h1 class="section-title"><%= @user.username %></h1>
   <p>
@@ -28,4 +37,4 @@
       <% end %>
     </ul>
   <% end %>
-</div>
+</div> -->

@@ -1,7 +1,7 @@
 import * as actions from './actionTypes';
 import axios from 'axios'
 
-export const fetchEvents = () => {
+export const fetchEvents = user_id => {
     const url = "/api/v1/events/index";
     return dispatch => {
         fetch(url)
@@ -11,7 +11,15 @@ export const fetchEvents = () => {
                 } else {
                     dispatch(fetchEventsFail())
                 }})
-            .then(res => dispatch(fetchEventsSuccess(res)))
+            .then(
+                res => {
+                    if (user_id) {
+                        dispatch(fetchEventsForUserSuccess(res, user_id))
+                    } else {
+                        dispatch(fetchEventsSuccess(res))   
+                    }
+                }
+            )
     }
 }
 
@@ -19,6 +27,14 @@ export const fetchEventsSuccess = res => {
     return {
         type: actions.FETCH_EVENTS_SUCCESS,
         res
+    }
+}
+
+export const fetchEventsForUserSuccess = (res, user_id) => {
+    return {
+        type: actions.FETCH_EVENTS_FOR_USER_SUCCESS,
+        res,
+        user_id
     }
 }
 

@@ -1,7 +1,7 @@
 import * as actions from './actionTypes';
 import axios from 'axios'
 
-export const fetchCabins = () => {
+export const fetchCabins = user_id => {
     const url = "/api/v1/cabins/index";
     return dispatch => {
         fetch(url)
@@ -11,14 +11,29 @@ export const fetchCabins = () => {
                 } else {
                     dispatch(fetchCabinsFail())
                 }})
-            .then(res => dispatch(fetchCabinsSuccess(res)))
-    }
+            .then(res => {
+                if (user_id) {
+                    dispatch(fetchCabinsForUserSuccess(res, user_id))
+                } else {
+                    dispatch(fetchCabinsSuccess(res))
+                }
+            }
+        )
+    }   
 }
 
 export const fetchCabinsSuccess = res => {
     return {
         type: actions.FETCH_CABINS_SUCCESS,
         res
+    }
+}
+
+export const fetchCabinsForUserSuccess = (res, user_id) => {
+    return {
+        type: actions.FETCH_CABINS_FOR_USER_SUCCESS,
+        res,
+        user_id
     }
 }
 

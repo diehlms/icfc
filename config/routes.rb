@@ -41,8 +41,6 @@ Rails.application.routes.draw do
       resources :users, only: [:create, :show, :index]
     end
   end
-
-  # make sure to comment this line out when not using react in dev
   
   get '/login', to: 'sessions#new', as: 'login'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
@@ -87,6 +85,5 @@ Rails.application.routes.draw do
   get '/familyagreements', to: 'pages#familyagreements', as: 'familyagreements'
   get '/archives', to: 'pages#archives', as: 'archives'
   get '/committee_primer', to: 'pages#committee_primer', as: 'committee_primer'
-  get '/*path' => 'pages#landing'
 
 end

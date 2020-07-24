@@ -16,6 +16,17 @@ export default function(state = initialState, action) {
                 }
             ]
         }
+        case actions.FETCH_CABINS_FOR_USER_SUCCESS: {
+            const filteredCabins = action.res.filter(cabin => {
+                return cabin.user_id === action.user_id;
+            });
+            return [
+                state, {
+                    cabins: filteredCabins,
+                    loading: false
+                }
+            ]
+        }
         case actions.FETCH_CABINS_FAIL: {
             return [
                 state, {

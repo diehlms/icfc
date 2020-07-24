@@ -7,7 +7,6 @@ class App extends React.Component {
     render() {
         return (
             <div className="body">
-                <Sidebar />
                 <Routes 
                     user_id={this.props.user_id}
                 />
