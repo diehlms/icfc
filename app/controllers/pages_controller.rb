@@ -3,10 +3,8 @@ class PagesController < ApplicationController
     helper_method :logged_in?, :current_user
     require 'open_weather'
     
-    def landing
-    end
-    
     def home
+        @articles = Article.last(5)
     end
 
     def forms

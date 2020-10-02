@@ -1,0 +1,10 @@
+.ReactModal__Content.ReactModal__Content--after-open {
+    z-index: 9999;
+    height: 45vh;
+    margin-top: 10vh;
+    background-color: #ffff;
+}
+
+.rbc-row-content {
+    z-index: 0 !important;
+}

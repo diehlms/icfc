@@ -75,14 +75,6 @@ export {
     deleteCommentFail,
 } from './comments'
 export {
-    logout,
-    logoutSuccess,
-    logoutFail,
-    checkAuthState,
-    checkAuthStateSuccess,
-    checkAuthStateFail
-} from './auth'
-export {
     search,
     searchLoading,
     searchComplete

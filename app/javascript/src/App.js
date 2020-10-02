@@ -1,7 +1,8 @@
 import React from 'react';
-import Sidebar from './shared/Sidebar';
 import Routes from './routes/Index';
-import './Style.css'
+
+// global styles
+import './App.scss';
 
 class App extends React.Component {
     render() {

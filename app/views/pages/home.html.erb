@@ -1,3 +1,13 @@
+<% if current_user && @articles %>
+    <div class="article-marque">
+        <span class="recent-updates">Recent Updates:</span>
+        <% @articles.each do |article| %>
+            <div class="link">
+                <span><%= link_to article.title.truncate(35), article_path(article) %></span>
+            </div>
+        <% end %>
+    </div>
+<% end %>
 <div id="para-one" class="parallax-img">
     <div class=" parallax-text">
     <br><br>

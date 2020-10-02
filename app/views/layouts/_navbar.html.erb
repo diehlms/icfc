@@ -36,8 +36,6 @@
               <li><%= link_to 'Committee Primer', committee_primer_path %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to '2020 Yearbook', "/ICFC 2020 Yearbook.pdf", target: "_blank" %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to '2020 Survey Results', "/ICFC_Survey_Results.docx", target: "_blank" %></li>
             </ul>
           </li>
         <% end %>
@@ -67,9 +65,6 @@
         <% if logged_in? %>
           <li class="dropdown navbar-extra-links">
             <%= link_to '2020 Yearbook', "/ICFC 2020 Yearbook.pdf", target: "_blank" %>
-          </li>
-          <li class="dropdown navbar-extra-links">
-            <%= link_to '2020 Survey', "/ICFC_Survey_Results.docx", target: "_blank" %>
           </li>
           <li class="drodown navbar-extra-links">
             <%= link_to 'Back Bay Bilge', "/backbaybilges/ICFC_Back_Bay_Bilge_2020.docx", target: "_blank" %></li>

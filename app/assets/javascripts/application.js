@@ -26,8 +26,6 @@ $(document).ready(function() {
     })
 })
 
-$('.alert').alert()
-
 $(document).ready(function(){
   if (window.innerWidth > 756) {
     $('.navbar .dropdown').hover(function() {

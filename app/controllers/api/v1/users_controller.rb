@@ -1,6 +1,12 @@
 class Api::V1::UsersController < ApplicationController
     def index
-        user = User.all
+        user = User.all.except(
+            :password, 
+            :password_digest,
+            :password_confirmation, 
+            :password_reset_token,
+            :admin
+        )
         render json: user unless !logged_in?
     end
 
@@ -29,7 +35,7 @@ class Api::V1::UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:username, :firstname, :lastname, :email, :phone_number, :password, :password_confirmation, :confirm_token, :password_reset_token)
+        params.require(:user).permit(:username, :firstname, :lastname, :email, :phone_number)
     end
 
     def user

@@ -86,4 +86,6 @@ Rails.application.routes.draw do
   get '/archives', to: 'pages#archives', as: 'archives'
   get '/committee_primer', to: 'pages#committee_primer', as: 'committee_primer'
 
+  match '*path' => 'pages#home', via: :all
+
 end

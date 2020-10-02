@@ -1,7 +1,7 @@
 import * as actions from './actionTypes';
 
 export const fetchUsers = () => {
-    const url = "/api/v1/users/index";
+    const url = "/api/v1/users";
     return dispatch => {
         dispatch(fetchUsersInit());
         fetch(url)
