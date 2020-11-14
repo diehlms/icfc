@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
     has_many :cabins, dependent: :destroy
     has_many :galleries, dependent: :destroy
     has_many :events, dependent: :destroy
+    has_many :charts, dependent: :destroy
     
     before_save { self.email = email.downcase }
   

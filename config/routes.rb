@@ -3,42 +3,23 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/articles/index'
       get '/users/index'
-      get '/events/index'
-      get '/cabins/index'
-      get '/search/index'
-      get '/pictures/index'
-      get '/comments/index'
-      get '/cabin_image/index'
-      get '/cabin_date/index'
+      get '/charts/index'
 
       post '/articles/create'
       post '/users/create'
-      post '/events/create'
-      post '/cabins/create'
-      post '/pictures/create'
-      post '/cabin_image/create'
-      post '/comments/create'
-      post '/cabin_date/create'
+      post '/charts/create'
       
       get '/articles/:id', to: 'articles#show'
       get '/users/:id', to: 'users#show'
-      get '/events/:id', to: 'events#show'
-      get '/cabins/:id', to: 'cabins#show'
       get '/pictures/:id', to: 'pictures#show'
+      get '/charts/:id', to: 'chart#show'
 
       delete '/articles/destroy/:id', to: 'articles#destroy'
-      delete '/cabins/destroy/:id', to: 'cabins#destroy'
-      delete '/events/destroy/:id', to: 'events#destroy'
-      delete '/pictures/destroy/:id', to: 'pictures#destroy'
-      delete '/comments/destroy/:id', to: 'comments#destroy'
-      delete '/cabin_image/destroy/:id', to: 'cabin_image#destroy'
-      delete '/cabin_date/destroy/:id', to: 'cabin_date#destroy'
-
-      post '/login', to: 'auth#create'
-      delete '/logout', to: 'auth#destroy'
-      get '/logged_in', to: 'auth#is_logged_in?'
+      delete '/charts/destroy/:id', to: 'charts#destroy'
       
       resources :users, only: [:create, :show, :index]
+      resources :articles, only: [:create, :show, :index, :destroy]
+      resources :charts, only: [:create, :show, :index, :destroy]
     end
   end
   
@@ -70,6 +51,7 @@ Rails.application.routes.draw do
   resources :galleries
   resources :rooms
   resources :room_messages
+  resources :charts
 
   get '/articles', to: 'articles#index'
   get '/blog', to: 'articles#index'

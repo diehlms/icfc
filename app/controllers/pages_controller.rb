@@ -4,7 +4,7 @@ class PagesController < ApplicationController
     require 'open_weather'
     
     def home
-        @articles = Article.last(5)
+        @articles = Article.last(4).reverse
     end
 
     def forms

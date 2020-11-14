@@ -1,12 +1,9 @@
 <div class="container">
-    <h1 class="section-title">Fishchat</h1>
-    <%= link_to "<i class='fa fa-plus'></i> write an article".html_safe, new_article_path, class: "btn btn-success article-banner-action" %>
+    <h1 class="section-title">Fishchat <%= link_to "write an article", new_article_path, class: "btn btn-success article-banner-action" %></h1>
     <% if notice %>
         <p class="alert alert-notice"><%= notice %></p>
     <% end %>
-    <br><br>
     <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
-    <br><br>
     <% if @articles.any? %>
         <% @articles.each do |article| %>
             <div class="<%= article.pinned ? 'article-card-pinned' : 'article-card' %>">               

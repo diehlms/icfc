@@ -13,8 +13,8 @@
                         <article class="search-result row">
                             <div class="col-xs-12 col-sm-12 col-md-2">
                                 <ul class="meta-search">
-                                    <li><i class="glyphicon glyphicon-calendar"></i> <span><%= a.created_at %></span></li>
-                                    <li><i class="glyphicon glyphicon-tags"></i> <span><%= a.user ? a.user.username : "Original Poster Deleted"%></span></li>
+                                    <li><span><%= a.created_at %></span></li>
+                                    <li><span><%= a.user ? a.user.username : "Original Poster Deleted"%></span></li>
                                 </ul>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
@@ -32,8 +32,8 @@
                         <article class="search-result row">
                             <div class="col-xs-12 col-sm-12 col-md-2">
                                 <ul class="meta-search">
-                                    <li><i class="glyphicon glyphicon-calendar"></i> <span><%= "#{e.start_time} - #{e.end_time}" %></span></li>
-                                    <li><i class="glyphicon glyphicon-tags"></i> <span><%= e.user ? e.user.username : "Original Poster Deleted" %></span></li>
+                                    <li><span><%= "#{e.start_time} - #{e.end_time}" %></span></li>
+                                    <li><span><%= e.user ? e.user.username : "Original Poster Deleted" %></span></li>
                                 </ul>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
@@ -51,8 +51,8 @@
                         <article class="search-result row">
                             <div class="col-xs-12 col-sm-12 col-md-2">
                                 <ul class="meta-search">
-                                    <li><i class="glyphicon glyphicon-calendar"></i> <span><%= u.created_at %></span></li>
-                                    <li><i class="glyphicon glyphicon-tags"></i> <span><%= u.username %></span></li>
+                                    <li><span><%= u.created_at %></span></li>
+                                    <li><span><%= u.username %></span></li>
                                 </ul>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
@@ -69,8 +69,8 @@
                         <article class="search-result row">
                             <div class="col-xs-12 col-sm-12 col-md-2">
                                 <ul class="meta-search">
-                                    <li><i class="glyphicon glyphicon-calendar"></i> <span><%= c.created_at %></span></li>
-                                    <li><i class="glyphicon glyphicon-tags"></i> <span><%= c.user ? c.user.username : "Original Poster Deleted"%></span></li>
+                                    <li><span><%= c.created_at %></span></li>
+                                    <li><span><%= c.user ? c.user.username : "Original Poster Deleted"%></span></li>
                                 </ul>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-7 excerpet">
