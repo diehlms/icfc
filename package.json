@@ -8,7 +8,7 @@
     "axios": "^0.19.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.4.1",
-    "dompurify": "^2.0.12",
+    "dompurify": "^2.0.17",
     "draft-js": "^0.11.4",
     "es6-shim": "^0.35.5",
     "leaflet": "^1.6.0",
