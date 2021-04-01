@@ -4,6 +4,7 @@
         <p class="alert alert-notice"><%= notice %></p>
     <% end %>
     <%= will_paginate @articles, renderer: BootstrapPagination::Rails %>
+    <br><br>
     <% if @articles.any? %>
         <% @articles.each do |article| %>
             <div class="<%= article.pinned ? 'article-card-pinned' : 'article-card' %>">               

@@ -5,6 +5,8 @@ class PagesController < ApplicationController
     
     def home
         @articles = Article.last(4).reverse
+        @inseason_res_link = ENV['INSEASON_RESERVATION_LINK']
+        @outseason_res_link = ENV['OUTSEASON_RESERVATION_LINK']
     end
 
     def forms

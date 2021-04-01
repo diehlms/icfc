@@ -21,8 +21,8 @@
                 <%= link_to "cabin reservations", cabins_path, class: "btn btn-primary home-button" %>            
             </div>
             <div class="home-UIbuttons">
-                <li class="btn btn-primary home-button" style="text-decoration:none;"><a href=<%= ENV['INSEASON_RESERVATION_LINK'] %>>In Season Reservations</a></li>
-                <li class="btn btn-primary home-button" style="text-decoration:none;"><a href=<%= ENV['OUTSEASON_RESERVATION_LINK'] %>>Out of Season Reservations</a></li>
+                <%= link_to "In Season Reservations", "#{@inseason_res_link}", class: "btn btn-primary home-button" %>
+                <%= link_to "Out of Season Reservations", "#{@outseason_res_link}", class: "btn btn-primary home-button" %>
             </div>
         <% else %>
             <div class="home-UIbuttons">
