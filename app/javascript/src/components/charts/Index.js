@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Breadcrumb, Table, FormControl, FormGroup } from 'react-bootstrap';
+import { Breadcrumb, Table, FormControl, FormGroup, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import BarLoader from 'react-spinners/BarLoader';
 
@@ -22,6 +22,11 @@ const Validator = styled.span`
     text-size: 8px;
     margin: 7px;
 `;
+
+const Link = styled.a`
+    text-decoration: none;
+    color: white;
+`
 
 function ChartList(props) {
     const fileName = url => {
@@ -196,6 +201,9 @@ export class Index extends Component {
                     <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                     <Breadcrumb.Item active>Charts</Breadcrumb.Item>
                 </Breadcrumb>
+                <h1>Family Trees</h1>
+                <p>Please find the link to the shared google drive below. Feel free to share your family's tree there using templates provided by Sophia Crawford.</p>
+                <Button><Link href="https://drive.google.com/drive/folders/10dEUl82hW_-4PH_enwEUKngWz3HAjzys">Family Trees</Link></Button>
                 <h1>Charts</h1>
                 <Form 
                     user_id={this.state.sessionId}
