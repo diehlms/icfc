@@ -40,26 +40,6 @@
           </li>
         <% end %>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">External Links <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to 'Fishing Resources', 'https://www.takemefishing.org/how-to-fish/how-to-catch-fish/national-fishing-and-boating-week/', target: :blank %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Snake Guide', 'https://www.scisnake.com/', target: :blank %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Water Levels', 'https://www.glerl.noaa.gov/data/dashboard/GLD_HTML5.html', target: :blank %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Webcam', 'http://www.thebowens.name/', target: :blank %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Ice Coverage', 'https://coastwatch.glerl.noaa.gov/glsea/cur/glsea_cur.png', target: :blank %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'GBLT', 'https://www.gblt.org/', target: :blank %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Sans Souci & Copperhead Association', 'https://www.ssca.info/', target: :blank %></li>
-            <li role="separator" class="divider"></li>
-            <li><%= link_to 'Georgian Bay Association', 'https://georgianbay.ca/', target: :blank %></li>
-          </ul>
-        </li>
-        <li class="dropdown">
           <a class="date">Encampment <%= Date.today.year - 1881 %></a>
         </li>
         <% if logged_in? %>
@@ -78,34 +58,16 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= logged_in? ? current_user.username : "Not logged in" %> 
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
             <% if logged_in? %>
               <li><%= link_to "log out", logout_path, method: :delete %></li>
               <li role="separator" class="divider"></li>
-              <li><%= link_to 'events', events_path %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to 'pictures', galleries_path %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to 'directory', users_path %><li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to "blog", articles_path %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to "cabins", cabins_path %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to "charts", charts_path %></li>
-              <li role="separator" class="divider"></li>
-              <li><a href=<%= ENV['INSEASON_RESERVATION_LINK'] %>>In Season Reservations</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href=<%= ENV['OUTSEASON_RESERVATION_LINK'] %>>Out of Season Reservations</a></li>
             <% else %>
-              <li><%= link_to 'log in', "#", data: {toggle: "modal", target: "#myModal"} %></li>
+              <li><%= link_to 'log in', "#", id: 'login-btn', data: {toggle: "modal", target: "#myModal"} %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "sign up", new_user_path %></li>
             <% end %>
-          </ul>
         </li>
       </ul>
     </div>

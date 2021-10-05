@@ -1,4 +1,13 @@
-<% if current_user && @articles %>
+<%= content_tag :div,
+    id: "session_id_tag",
+    data: current_user ? current_user.id.to_json : nil do 
+%>
+<% end %>
+<%= react_component("components/home/Home", 
+  { data: current_user ? current_user.id.to_json : nil }) 
+%>
+
+<!-- <% if current_user && @articles %>
     <div class="article-marque">
         <span class="recent-updates">Recent Updates:</span>
         <% @articles.each do |article| %>
@@ -99,4 +108,4 @@
             </div>
         </div>
     </section>
-<% end %>
+<% end %> -->

@@ -20,14 +20,13 @@ const rootReducer = combineReducers({
     events: EventReducer,
     users: UserReducer,
     loading: LoadingReducer,
-
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 document.addEventListener('DOMContentLoaded', () => {
-    const node = document.getElementById('session_id_tag')
-    const data = JSON.parse(node.getAttribute('data'))
+    const node = document.getElementById('session_id_tag');
+    const data = JSON.parse(node.getAttribute('data'));
     ReactDOM.render(
         <Provider 
             store={store}>
