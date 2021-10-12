@@ -26,7 +26,7 @@
                             <% if article.image && File.extname(article.image.url).downcase.in?(['.jpg','.jpeg','.gif','.png']) %>
                                 <%= image_tag(article.image.url, alt: 'Image', :class => "pull-right article-image", id: "image=#{dom_id(article)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(article)}"}) %>
                             <% elsif article.image %>
-                                <span><%= link_to File.basename(article.image.url), article.image.url, class: "pull-right article-image btn btn-primary" %></span>
+                                <span><%= link_to File.basename(article.image.url, ".*"), article.image.url, class: "pull-right article-image btn btn-primary" %></span>
                             <% end %>
                             <br><br>
                         </div>
