@@ -21,10 +21,16 @@
                         </small>
                         <p class="card-text"><%= sanitize(article.content.truncate(200, tags: %w(strong em p br div ul ol li))) %></p>
                     </div>
-                    <div class="col md-6">
-                        <%= image_tag(article.image.url(:thumb), alt: 'Image', :class => "pull-right article-image", id: "image=#{dom_id(article)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(article)}"}) if article.image? %>
-                        <br><br>
-                    </div>
+                    <% if article.image && article.image.url %>
+                        <div class="col md-6">
+                            <% if article.image && File.extname(article.image.url).downcase.in?(['.jpg','.jpeg','.gif','.png']) %>
+                                <%= image_tag(article.image.url, alt: 'Image', :class => "pull-right article-image", id: "image=#{dom_id(article)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(article)}"}) %>
+                            <% elsif article.image %>
+                                <span><%= link_to File.basename(article.image.url), article.image.url, class: "pull-right article-image btn btn-primary" %></span>
+                            <% end %>
+                            <br><br>
+                        </div>
+                    <% end %>
                 </div>
                 <% if article.user_id == current_user.id %>
                     <div class="UIactions">                  

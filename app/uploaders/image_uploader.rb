@@ -41,19 +41,19 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :thumb do
+  version :thumb, :if => :image? do
     process :auto_orient
     process :resize_to_fit => [200, 200]
   end
 
-  version :large do
+  version :large, :if => :image? do
     process :auto_orient
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-    %w(jpg jpeg gif png)
+    %w(jpg jpeg gif png pdf docx)
   end
 
   # Override the filename of the uploaded files:
@@ -61,5 +61,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def image?(new_file)
+    File.extname(new_file.filename).in?(['jpg','jpeg','gif','png'])
+  end
 
 end

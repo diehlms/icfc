@@ -10,7 +10,11 @@
                         <%= @article.content.html_safe %>
                     </div>
                     <div class="col md-6">
-                        <%= image_tag(@article.image.url(:thumb), alt: 'Image', :class => "pull-right article-image", id: "image=#{dom_id(@article)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(@article)}"}) if @article.image? %>
+                        <% if @article.image && File.extname(@article.image.url).downcase.in?(['.jpg','.jpeg','.gif','.png']) %>
+                            <%= image_tag(@article.image.url, alt: 'Image', :class => "pull-right article-image", id: "image=#{dom_id(@article)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(@article)}"}) %>
+                        <% elsif @article.image %>
+                            <span><%= link_to File.basename(@article.image.url), @article.image.url, class: "pull-right article-image btn btn-primary" %></span>
+                        <% end %>
                     </div>
                     <div id="imgModal-<%= dom_id(@article) %>" class="modal fade">
                         <div class="modal-dialog">
