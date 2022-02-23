@@ -13,7 +13,11 @@ class CabinsController < ApplicationController
     end
 
     def edit
-        @cabin = current_user.cabins.find(params[:id])
+        if current_user.admin?
+            set_cabin
+        else
+            @cabin = current_user.cabins.find(params[:id])
+        end
     end
 
     def create
