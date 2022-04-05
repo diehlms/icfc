@@ -52,21 +52,22 @@ Rails.application.routes.draw do
   resources :rooms
   resources :room_messages
   resources :charts
+  resources :rideshares
 
   get '/articles', to: 'articles#index'
   get '/blog', to: 'articles#index'
   get '/users', to: 'users#index'
   get '/search', to: 'pages#search', as: 'search'
-  get '/forms', to: 'pages#forms', as: 'forms'
-  get '/bylaws', to: 'pages#bylaws', as: 'bylaws'
-  get '/chartiable_gift', to: 'pages#charitable_gift', as: 'charitable_gift'
-  get '/customs', to: 'pages#customs', as: 'customs'
-  get '/history', to: 'pages#history', as: 'history'
-  get '/membership', to: 'pages#membership', as: 'membership'
-  get '/planned_giving', to: 'pages#planned_giving', as: 'planned_giving'
-  get '/familyagreements', to: 'pages#familyagreements', as: 'familyagreements'
-  get '/archives', to: 'pages#archives', as: 'archives'
-  get '/committee_primer', to: 'pages#committee_primer', as: 'committee_primer'
+  # get '/forms', to: 'pages#forms', as: 'forms'
+  # get '/bylaws', to: 'pages#bylaws', as: 'bylaws'
+  # get '/chartiable_gift', to: 'pages#charitable_gift', as: 'charitable_gift'
+  # get '/customs', to: 'pages#customs', as: 'customs'
+  # get '/history', to: 'pages#history', as: 'history'
+  # get '/membership', to: 'pages#membership', as: 'membership'
+  # get '/planned_giving', to: 'pages#planned_giving', as: 'planned_giving'
+  # get '/familyagreements', to: 'pages#familyagreements', as: 'familyagreements'
+  # get '/archives', to: 'pages#archives', as: 'archives'
+  # get '/committee_primer', to: 'pages#committee_primer', as: 'committee_primer'
 
   match '*path' => 'pages#home', via: :all
 

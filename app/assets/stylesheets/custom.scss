@@ -99,6 +99,7 @@ ul {
 /* navbar */
 
 .navbar {
+    position: sticky !important;
     width: 100%;
     opacity: 1.0;
     z-index: 999;
@@ -121,12 +122,6 @@ ul {
     margin-left: 20px;
     padding: 0px;
     height: 30px;
-}
-
-.sticky {
-    position: fixed;
-    top: 0;
-    width: 100%;
 }
 
 /* footer */

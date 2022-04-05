@@ -1,4 +1,7 @@
 class Api::V1::UsersController < ApplicationController
+    before_action :require_user
+    helper_method :current_user, :logged_in?, :require_user
+
     def index
         user = User.all.except(
             :password, 

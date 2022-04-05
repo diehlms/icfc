@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_002501) do
+ActiveRecord::Schema.define(version: 2022_04_05_042124) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -124,6 +125,33 @@ ActiveRecord::Schema.define(version: 2020_10_06_002501) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "point_of_arrivals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "rideshare_id"
+    t.index ["rideshare_id"], name: "index_point_of_arrivals_on_rideshare_id"
+  end
+
+  create_table "point_of_departures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "rideshare_id"
+    t.index ["rideshare_id"], name: "index_point_of_departures_on_rideshare_id"
+  end
+
+  create_table "rideshares", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "departing_at"
+    t.datetime "arriving_at"
+    t.integer "number_of_passengers"
+    t.string "additional_information"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "room_messages", force: :cascade do |t|
     t.bigint "room_id"
     t.bigint "user_id"
@@ -179,6 +207,8 @@ ActiveRecord::Schema.define(version: 2020_10_06_002501) do
   add_foreign_key "comments", "users"
   add_foreign_key "events", "users"
   add_foreign_key "galleries", "users"
+  add_foreign_key "point_of_arrivals", "rideshares"
+  add_foreign_key "point_of_departures", "rideshares"
   add_foreign_key "room_messages", "rooms"
   add_foreign_key "room_messages", "users"
 end

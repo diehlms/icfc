@@ -1,0 +1,2 @@
+class PointOfArrival < ApplicationRecord
+end

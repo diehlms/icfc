@@ -1,0 +1,2 @@
+web: rails s
+webpacker: export NODE_OPTIONS=--openssl-legacy-provider &&./bin/webpack-dev-server

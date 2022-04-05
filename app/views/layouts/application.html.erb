@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <%= favicon_link_tag asset_path ('icfc.png')%>
     <%= javascript_include_tag 'application' %>
+    <%= stylesheet_pack_tag 'application', media: 'all'%>
     <%= javascript_pack_tag 'index' %>
   </head>
 
@@ -25,7 +26,6 @@
         </p>
       <% end %>
       <%= yield %>
-    <%= render 'layouts/footer' %>
   </body>
   <script>
       setTimeout("$('.alert-secondary').fadeOut('slow')", 3000)

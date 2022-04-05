@@ -8,3 +8,36 @@
 .rbc-row-content {
     z-index: 0 !important;
 }
+
+.reactPageAppContainer {
+    min-height: 80vh;
+}
+
+.ui.inverted.vertical.labeled.icon.ui.overlay.left.thin.visible.sidebar.sidebar.menu {
+    background-color: white;
+    padding: 10px;
+    .item {
+        color: black;
+        text-align: left;
+    }
+    .sidebar-link {
+        color: black;
+        text-align: left;
+        padding: 3px;
+    }
+}
+
+.ui.inverted.menu .item, .ui.inverted.menu .item>a:not(.ui) {
+    color: black !important;
+}
+
+.centered-login-portal.ui.card {
+    margin: 0px auto;
+    .login-portal-image.image {
+        img {
+            height: 300px;
+            object-fit: cover; 
+            object-position: 100% 100%;
+        }
+    }
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Breadcrumb, Table, FormControl, FormGroup, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import BarLoader from 'react-spinners/BarLoader';
+import { Link } from 'react-router-dom';
 
 import * as moment from 'moment';
 import * as axios from 'axios';
@@ -22,11 +23,6 @@ const Validator = styled.span`
     text-size: 8px;
     margin: 7px;
 `;
-
-const Link = styled.a`
-    text-decoration: none;
-    color: white;
-`
 
 function ChartList(props) {
     const fileName = url => {
@@ -145,7 +141,6 @@ class Form extends Component {
                             name="caption"
                             placeholder="caption"
                             onChange={this.onChange}
-                            value={this.state.caption}
                         />
                         <Validator>Accepted file extensions: .gpx, .shp, .zip</Validator>
                         <FormControl
@@ -196,14 +191,14 @@ export class Index extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="reactPageAppContainer">
                 <Breadcrumb>
-                    <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+                    <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
                     <Breadcrumb.Item active>Charts</Breadcrumb.Item>
                 </Breadcrumb>
-                <h1>Family Trees</h1>
+                {/* <h1>Family Trees</h1>
                 <p>Please find the link to the shared google drive below. Feel free to share your family's tree there using templates provided by Sophia Crawford.</p>
-                <Button><Link href="https://drive.google.com/drive/folders/10dEUl82hW_-4PH_enwEUKngWz3HAjzys">Family Trees</Link></Button>
+                <Button><Link href="https://drive.google.com/drive/folders/10dEUl82hW_-4PH_enwEUKngWz3HAjzys">Family Trees</Link></Button> */}
                 <h1>Charts</h1>
                 <Form 
                     user_id={this.state.sessionId}
