@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components';
 import { Grid, Card, Image, Button, List } from 'semantic-ui-react'
 import Header from "../shared/PageTitle";
+import "./entry.css";
 
 const NonAuthWrapper = styled.div`
     padding-top: 30px;
@@ -73,8 +74,8 @@ export class Index extends Component {
                             text="Iron City Fishing Club"
                         />
                         <Grid divided='vertically'>
-                            <Grid.Row columns={2} stretched>
-                                <Grid.Column floated="left">
+                            <Grid.Row columns={3} stretched>
+                                <Grid.Column>
                                     <Card>
                                         <Card.Content>
                                             <Card.Header>Who's in Camp?</Card.Header>
@@ -84,7 +85,10 @@ export class Index extends Component {
                                         </Card.Content>
                                     </Card>
                                 </Grid.Column>
-                                <Grid.Column floated="right">
+                                <Grid.Column>                              
+                                    <Image className='front-page-img' src='DSC_0323.jpg' />
+                                </Grid.Column>
+                                <Grid.Column>
                                     <Card>
                                         <Card.Content>
                                             <Card.Header>Emergency Contact Information</Card.Header>
@@ -130,21 +134,9 @@ export class Index extends Component {
                                             </Card.Description>
                                         </Card.Content>
                                     </Card>
-                                    <Card>                                
-                                        <Card.Content>
-                                            <Card.Header>What's for Breakfast?</Card.Header>
-                                            <Card.Description>
-                                                {getBreakfast()}
-                                            </Card.Description>
-                                        </Card.Content>
-                                    </Card>
                                 </Grid.Column>
                                 <Grid.Column>
-                                    <Card>                                
-                                        <Card.Content>
-                                            <Image src='DSC_0311.jpg' />
-                                        </Card.Content>
-                                    </Card>
+                                    <Image className='front-page-img' src='DSC_0311.jpg' />
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
