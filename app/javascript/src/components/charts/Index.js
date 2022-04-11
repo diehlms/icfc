@@ -109,7 +109,7 @@ class Form extends Component {
         let body = new FormData();
         body.append('chart', this.state.chart);
         body.append('caption', this.state.caption);
-        body.append('user_id', this.props.user_id);
+        body.append('user_id', this.props.userId);
         fetch('/api/v1/charts', {
             method: "POST",
             headers: {
@@ -172,7 +172,7 @@ export class Index extends Component {
     getCharts() {
         this.setState({
             isLoading: true,
-            sessionId: this.props.user_id
+            sessionId: this.props.userId
         });
         axios.get('/api/v1/charts')
         .then(res => {

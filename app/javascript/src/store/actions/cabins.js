@@ -1,7 +1,7 @@
 import * as actions from './actionTypes';
 import axios from 'axios'
 
-export const fetchCabins = user_id => {
+export const fetchCabins = userId => {
     const url = "/api/v1/cabins/index";
     return dispatch => {
         fetch(url)
@@ -12,8 +12,8 @@ export const fetchCabins = user_id => {
                     dispatch(fetchCabinsFail())
                 }})
             .then(res => {
-                if (user_id) {
-                    dispatch(fetchCabinsForUserSuccess(res, user_id))
+                if (userId) {
+                    dispatch(fetchCabinsForUserSuccess(res, userId))
                 } else {
                     dispatch(fetchCabinsSuccess(res))
                 }
@@ -29,11 +29,11 @@ export const fetchCabinsSuccess = res => {
     }
 }
 
-export const fetchCabinsForUserSuccess = (res, user_id) => {
+export const fetchCabinsForUserSuccess = (res, userId) => {
     return {
         type: actions.FETCH_CABINS_FOR_USER_SUCCESS,
         res,
-        user_id
+        userId
     }
 }
 
@@ -43,13 +43,13 @@ export const fetchCabinsFail = () => {
     }
 }
 
-export const createCabin = (name, bedrooms, description, user_id, washerdryer, dock, price_per_day, price_per_week) => {
+export const createCabin = (name, bedrooms, description, userId, washerdryer, dock, price_per_day, price_per_week) => {
     const url = "/api/v1/cabins/create";
     const body = {
         "name": name,
         "bedrooms": bedrooms,
         "description": description,
-        "user_id": user_id,
+        "userId": userId,
         "washerdryer": washerdryer,
         "dock": dock,
         "price_per_day": price_per_day,

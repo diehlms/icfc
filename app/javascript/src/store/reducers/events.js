@@ -18,7 +18,7 @@ export default function(state = initialState, action) {
         }
         case actions.FETCH_EVENTS_FOR_USER_SUCCESS: {
             const filteredEvents = action.res.filter(event => {
-                return event.user_id === action.user_id;
+                return event.userId === action.userId;
             });
             return [
                 state, {

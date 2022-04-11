@@ -21,7 +21,8 @@ const ContentContainer = styled.div`
 class App extends React.Component {
     state = { 
         activeIndex: 0,
-        isAuthenticated: false
+        isAuthenticated: false,
+        isAdmin: false
     }
 
     handleClick = (e, titleProps) => {
@@ -33,12 +34,14 @@ class App extends React.Component {
 
     componentDidMount = () => {
         const initialPayload = this.props;
-        if (!!initialPayload.user_id && initialPayload.user_id !== null) {
-            this.isAuthenticated = true;
+        if (!!initialPayload.userId && initialPayload.userId !== null) {
             this.setState({
                 isAuthenticated: true
-            })
+            });
         }
+        this.setState({
+            isAdmin: initialPayload.isAdmin
+        });
     }
 
     render() {
@@ -131,7 +134,7 @@ class App extends React.Component {
             );
         })
 
-        const { isAuthenticated } = this.state;
+        const { isAuthenticated, isAdmin } = this.state;
 
         return (
             <React.Fragment>
@@ -151,19 +154,19 @@ class App extends React.Component {
                                 {
                                     sidebarLinks.map((keyName, i) => {
                                         return (
-                                            <React.Fragment>
-                                                <h3 id={i}>{keyName['sectionName']}</h3>
+                                            <React.Fragment key={i}>
+                                                <h3 key={i}>{keyName['sectionName']}</h3>
                                                 {
                                                     keyName['links'].map((keyName, i) => {
                                                         return keyName['railsLink'] === true ? (
-                                                            <React.Fragment>
+                                                            <React.Fragment key={i}>
                                                                 <Menu.Item id={i} className="sidebar-link" as='a' href={keyName['link']}>
                                                                     {keyName['displayName']}
                                                                 </Menu.Item>
                                                                 <Divider fitted />
                                                             </React.Fragment>
                                                         ) : (
-                                                            <React.Fragment>
+                                                            <React.Fragment key={i}>
                                                                 <Menu.Item id={i} className="sidebar-link">
                                                                     <Link to={keyName['link']}>{keyName['displayName']}</Link>
                                                                 </Menu.Item>
@@ -181,7 +184,8 @@ class App extends React.Component {
                                 <ContentContainer>
                                     <Routes 
                                         isAuthenticated={isAuthenticated}
-                                        user_id={this.props.user_id}
+                                        userId={this.props.userId}
+                                        isAdmin={isAdmin}
                                     />
                                 </ContentContainer>
                             </Sidebar.Pusher>
@@ -192,7 +196,7 @@ class App extends React.Component {
                         <ContentContainer centered>
                             <Routes 
                                 isAuthenticated={isAuthenticated}
-                                user_id={this.props.user_id}
+                                userId={this.props.userId}
                             />
                         </ContentContainer>
                 </AppContainer>

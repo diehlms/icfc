@@ -1,0 +1,20 @@
+.location-dropdown {
+    margin-top: 24px;
+    margin-right: 5px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    padding: 10px 12px 6px 12px;
+}
+
+.rideshare-date-pickers {
+    margin-left: 6px;
+}
+
+.delete-location-btn {
+    float: right;
+    margin-bottom: 6px;
+}
+
+.ui.upward.dropdown>.menu {
+    left: -100px;
+}

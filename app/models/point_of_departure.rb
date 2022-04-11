@@ -1,2 +1,0 @@
-class PointOfDeparture < ApplicationRecord
-end

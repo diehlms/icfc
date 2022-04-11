@@ -19,7 +19,7 @@ export default function(state = initialState, action) {
         }
         case actions.FETCH_ARTICLES_FOR_USER_SUCCESS: {
             const filteredArticles = action.res.filter(article => {
-                return article.user_id === action.user_id;
+                return article.userId === action.userId;
             });
             return [
                 state, {

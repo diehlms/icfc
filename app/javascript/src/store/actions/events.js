@@ -1,7 +1,7 @@
 import * as actions from './actionTypes';
 import axios from 'axios'
 
-export const fetchEvents = user_id => {
+export const fetchEvents = userId => {
     const url = "/api/v1/events/index";
     return dispatch => {
         fetch(url)
@@ -13,8 +13,8 @@ export const fetchEvents = user_id => {
                 }})
             .then(
                 res => {
-                    if (user_id) {
-                        dispatch(fetchEventsForUserSuccess(res, user_id))
+                    if (userId) {
+                        dispatch(fetchEventsForUserSuccess(res, userId))
                     } else {
                         dispatch(fetchEventsSuccess(res))   
                     }
@@ -30,11 +30,11 @@ export const fetchEventsSuccess = res => {
     }
 }
 
-export const fetchEventsForUserSuccess = (res, user_id) => {
+export const fetchEventsForUserSuccess = (res, userId) => {
     return {
         type: actions.FETCH_EVENTS_FOR_USER_SUCCESS,
         res,
-        user_id
+        userId
     }
 }
 
@@ -44,14 +44,14 @@ export const fetchEventsFail = () => {
     }
 }
 
-export const createEvent = (events, location, start_time, end_time, user_id, description) => {
+export const createEvent = (events, location, start_time, end_time, userId, description) => {
     const url = "/api/v1/events/create";
     const body = {
         "events": events,
         "location": location,
         "start_time": start_time,
         "end_time": end_time,
-        "user_id": user_id,
+        "userId": userId,
         "description": description
     }
     const token = document.querySelector('meta[name="csrf-token"]').content;

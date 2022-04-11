@@ -26,17 +26,23 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 document.addEventListener('DOMContentLoaded', () => {
-    const node = document.getElementById('session_id_tag');
-    let data;
-    if (!!node) {
-        data = JSON.parse(node.getAttribute('data'));
+    const user_id_node = document.getElementById('session_id_tag');
+    const admin_node = document.getElementById('admin_tag');
+    let userId;
+    let isAdmin
+    if (!!user_id_node) {
+        userId = JSON.parse(user_id_node.getAttribute('data'));
+    }
+    if (!!admin_node) {
+        isAdmin = JSON.parse(admin_node.getAttribute('data'));
     }
     ReactDOM.render(
         <Provider 
             store={store}>
             <BrowserRouter>
                 <App
-                    user_id={data}
+                    userId={userId}
+                    isAdmin={isAdmin}
                 />
             </BrowserRouter>
         </Provider>,

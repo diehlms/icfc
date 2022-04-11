@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
-import { Grid, Card, Image, Button } from 'semantic-ui-react'
+import { Grid, Card, Image, Button, List } from 'semantic-ui-react'
 import Header from "../shared/PageTitle";
 
 const NonAuthWrapper = styled.div`
     padding-top: 30px;
-    margin: 0px auto;
-`;
-
-const Portal = styled.div`
     margin: 0px auto;
 `;
 
@@ -77,8 +73,8 @@ export class Index extends Component {
                             text="Iron City Fishing Club"
                         />
                         <Grid divided='vertically'>
-                            <Grid.Row columns={2}>
-                                <Grid.Column>
+                            <Grid.Row columns={2} stretched>
+                                <Grid.Column floated="left">
                                     <Card>
                                         <Card.Content>
                                             <Card.Header>Who's in Camp?</Card.Header>
@@ -88,12 +84,18 @@ export class Index extends Component {
                                         </Card.Content>
                                     </Card>
                                 </Grid.Column>
-                                <Grid.Column>
+                                <Grid.Column floated="right">
                                     <Card>
                                         <Card.Content>
                                             <Card.Header>Emergency Contact Information</Card.Header>
                                             <Card.Description>
-                                                Looks like no one is in camp today!
+                                                <List>
+                                                    <List.Item>Office Telephone: 705-375-2300 (in season only)</List.Item>
+                                                    <List.Item>Moe's Number: 705-375-0405</List.Item>
+                                                    <List.Item>Lisa's Number:  705-375-0854</List.Item>
+                                                    <List.Item>Gregoire Home Telephone: 705-375-5633</List.Item>
+                                                    <List.Item>Pay Telephone: 705-375-9907</List.Item>
+                                                </List>
                                             </Card.Description>
                                         </Card.Content>
                                     </Card>
@@ -120,6 +122,14 @@ export class Index extends Component {
                                     </Card>
                                 </Grid.Column>
                                 <Grid.Column>
+                                    <Card>                                
+                                        <Card.Content>
+                                            <Card.Header>What's for Breakfast?</Card.Header>
+                                            <Card.Description>
+                                                {getBreakfast()}
+                                            </Card.Description>
+                                        </Card.Content>
+                                    </Card>
                                     <Card>                                
                                         <Card.Content>
                                             <Card.Header>What's for Breakfast?</Card.Header>
@@ -165,9 +175,9 @@ export class Index extends Component {
                                 </Card.Description>
                                 </Card.Content>
                                 <Card.Content extra>
-                                <a href="/users/new">
-                                    Dont Have an Account Yet? Sign Up Here
-                                </a>
+                                    <a href="/users/new">
+                                        Dont Have an Account Yet? Sign Up Here
+                                    </a>
                                 </Card.Content>
                             </Card>
                         </NonAuthWrapper>

@@ -3,13 +3,13 @@ class Api::V1::UsersController < ApplicationController
     helper_method :current_user, :logged_in?, :require_user
 
     def index
-        user = User.all.except(
+        user = User.except(
             :password, 
             :password_digest,
             :password_confirmation, 
             :password_reset_token,
             :admin
-        )
+        ).all
         render json: user unless !logged_in?
     end
 
@@ -23,10 +23,20 @@ class Api::V1::UsersController < ApplicationController
     end
 
     def show
-        if user
-            render json: user unless !logged_in?
+        user_to_return = User.select(
+            'id',
+            'admin',
+            'email',
+            'firstname',
+            'lastname',
+            'phone_number',
+            'username',
+            'username'
+        ).find(params[:id])
+        if user_to_return
+            render json: user_to_return unless !logged_in?
         else
-            render json: user.errors
+            render json: user_to_return.errors
         end
     end
 

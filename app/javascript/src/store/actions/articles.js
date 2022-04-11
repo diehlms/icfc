@@ -1,6 +1,6 @@
 import * as actions from './actionTypes';
 
-export const fetchArticles = user_id => {
+export const fetchArticles = userId => {
     const url = "/api/v1/articles/index";
     return dispatch => {
         fetch(url)
@@ -11,8 +11,8 @@ export const fetchArticles = user_id => {
                     dispatch(fetchArticlesFail())
                 }})
             .then(res => {
-                if (user_id) {
-                    dispatch(fetchArticlesSuccessForUser(res, user_id))
+                if (userId) {
+                    dispatch(fetchArticlesSuccessForUser(res, userIid))
                 } else {
                     dispatch(fetchArticlesSuccess(res))
                 }
@@ -34,11 +34,11 @@ export const fetchArticlesSuccess = res => {
     }
 }
 
-export const fetchArticlesSuccessForUser = (res, user_id) => {
+export const fetchArticlesSuccessForUser = (res, userId) => {
     return {
         type: actions.FETCH_ARTICLES_FOR_USER_SUCCESS,
         res,
-        user_id
+        userId
     }
 }
 
@@ -57,7 +57,7 @@ export const createArticle = (title, content, userId, image) => {
             let body = new FormData();
             body.append('title', title);
             body.append('content', content);
-            body.append('user_id', userId);
+            body.append('userId', userId);
             body.append('image', image);
             fetch(url, {
                 method: "POST",
@@ -78,7 +78,7 @@ export const createArticle = (title, content, userId, image) => {
             let body = {
                 "title": title,
                 "content": content,
-                "user_id": userId,
+                "userId": userId,
             }
             fetch(url, {
                 method: "POST",

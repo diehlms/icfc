@@ -1,25 +1,100 @@
 import React, { Component } from 'react'
-import { Breadcrumb } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import Header from '../shared/PageTitle';
-import { Table, Form, Dropdown, Input } from 'semantic-ui-react'
+import BarLoader from 'react-spinners/BarLoader';
+import { Table, Form, Input, Grid } from 'semantic-ui-react';
+import { Breadcrumb } from 'react-bootstrap';
+import * as axios from 'axios';
+import "./rideshare.css";
 
-const options = [
-    { key: 'torontoAirport', text: 'Toronto Airport', value: 'torontoAirport' },
-    { key: 'buffaloAirport', text: 'Buffalo Airport', value: 'buffaloAirport' },
-    { key: 'pittsburgh', text: 'Pittsburgh', value: 'pittsburgh' },
-]
+import RideshareRow from './RideshareItem';
+import LocationDropdown from './LocationDropdown';
 
 export class Index extends Component {
-    state = {}
+    state = {
+        isLoading: false,
+        uploading: false,
+        sessionId: null,
+        rideshares: null,
+        departureLocationId: null,
+        arrivalLocationId: null
+    }
 
-    handleChange = (e, { value }) => this.setState({ value });
+    componentDidMount() {
+        this.getRideshares();
+    }
+
+    handleChange = (e, value) => {
+        this.setState({[value.content]: value.value });
+    };
+
+    getRideshares() {
+        this.setState({
+            isLoading: true,
+            sessionId: this.props.userId
+        });
+        axios.get('/api/v1/rideshares')
+        .then(res => {
+            this.setState({
+                rideshares: res.data,
+                isLoading: false
+            });
+        })
+        .catch(err => {
+            this.setState({
+                errorMessage: "We're having trouble finding rideshares for your request. Please try again later",
+                isLoading: false
+            });
+        });
+    }
+
+    updateDate = (e, inputName) => {
+        e.preventDefault();
+        this.setState({
+            [inputName]: e.target.value
+        });
+    }
+
+    addRideshare = (e) => {
+        e.preventDefault();
+        this.setState({
+            uploading: true
+        });
+        const token = document.querySelector('meta[name="csrf-token"]').content;
+        let body = {
+            number_of_passengers: this.state.numberOfPassengers,
+            additional_information: this.state.additionalInformation,
+            point_of_arrival_id: this.state.departureLocationId, 
+            point_of_departure_id: this.state.arrivalLocationId,
+            user_id: this.props.userId,
+            arriving_at: this.state.arrivingAt,
+            departing_at: this.state.leavingAt
+        }
+        axios({
+            method: 'post',
+            url: `/api/v1/rideshares/create`,
+            headers: {
+                "X-CSRF-Token": token,
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify(body)
+        }).then(() => {
+            this.getRideshares();
+        })
+        .catch(err => {
+            this.getRideshares();
+        });
+    }
+
+    setLocationInState = (locationId, locationType) => {
+        const key = locationType + 'LocationId';
+        this.setState({[key]: locationId});
+    }
 
     render() {
         return (
             <div className="reactPageAppContainer">
                 <Breadcrumb>
-                    <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
+                    <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
                     <Breadcrumb.Item active>Rideshare</Breadcrumb.Item>
                 </Breadcrumb>
                 <Header 
@@ -32,78 +107,77 @@ export class Index extends Component {
                             width='7'
                             type='number' 
                             fluid 
-                            label='Number of Passengers' 
+                            label='Number of Passengers'
+                            content='numberOfPassengers' 
+                            onChange={this.handleChange} 
                             placeholder='0' 
+                        />
+                        <LocationDropdown
+                            isAdmin={this.props.isAdmin}
+                            displayText='Point Of Departure'
+                            locationType='departure'
+                            onChange={this.setLocationInState}
+                        />
+                        <LocationDropdown
+                            isAdmin={this.props.isAdmin}
+                            displayText='Point Of Arrival'
+                            locationType='arrival'
+                            onChange={this.setLocationInState}
                         />
                     </Form.Group>
                     <Form.Group>
-                        <Dropdown
-                                text='From'
-                                floating
-                                selection
-                                className='inputSelect'
-                            >
-                            <Dropdown.Menu>
-                                <Dropdown.Header content='Search Issues' />
-                                <Input icon='search' iconPosition='left' name='search' />
-                                <Dropdown.Header icon='tags' content='Filter by tag' />
-                                <Dropdown.Divider />
-                                <Dropdown.Item
-                                    text='Important'
+                        <Grid>
+                            <Grid.Column floated="left" width={3}>
+                                <Input
+                                    className="rideshare-date-pickers"
+                                    label="Leaving At" 
+                                    type="date" 
+                                    onChange={e => this.updateDate(e, 'leavingAt')} 
                                 />
-                                <Dropdown.Item
-                                    text='Announcement'
+                            </Grid.Column>
+                            <Grid.Column floated="right" width={3}>
+                                <Input
+                                    className="rideshare-date-pickers"
+                                    label="Arriving At"
+                                    type="date" 
+                                    onChange={e => this.updateDate(e, 'arrivingAt')} 
                                 />
-                                <Dropdown.Item
-                                    text='Discussion'
-                                />
-                            </Dropdown.Menu>
-                        </Dropdown>
-                        <Dropdown
-                            text='To'
-                            floating
-                            selection
-                            className='inputSelect'
-                        >
-                            <Dropdown.Menu>
-                                <Dropdown.Header content='Search Issues' />
-                                <Input icon='search' iconPosition='left' name='search' />
-                                <Dropdown.Header icon='tags' content='Filter by tag' />
-                                <Dropdown.Divider />
-                                <Dropdown.Item
-                                    text='Important'
-                                />
-                                <Dropdown.Item
-                                    text='Announcement'
-                                />
-                                <Dropdown.Item
-                                    text='Discussion'
-                                />
-                            </Dropdown.Menu>
-                        </Dropdown>
+                            </Grid.Column>
+                        </Grid>
                     </Form.Group>
-                    <Form.TextArea label='Additional Information' placeholder='What else should people know about your trip...' />
-                    <Form.Button>Submit</Form.Button>
+                    <Form.TextArea
+                        content='additionalInformation' 
+                        onChange={this.handleChange}
+                        label='Additional Information' 
+                        placeholder='What else should people know about your trip...' 
+                    />
+                    <Form.Button onClick={e => this.addRideshare(e)}>Submit</Form.Button>
                 </Form>
                 <Table celled>
                     <Table.Header>
                     <Table.Row>
+                        <Table.HeaderCell>Contact</Table.HeaderCell> 
                         <Table.HeaderCell>Point of Departure</Table.HeaderCell>
                         <Table.HeaderCell>Point of Arrival</Table.HeaderCell>
                         <Table.HeaderCell>Number of Seats Available</Table.HeaderCell>
                         <Table.HeaderCell>Leaving at</Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
+                        <Table.HeaderCell>Arriving at</Table.HeaderCell>
                     </Table.Row>
                     </Table.Header>
-                    <Table.Body>
-                        <Table.Row>
-                            <Table.Cell>Cell</Table.Cell>
-                            <Table.Cell>Cell</Table.Cell>
-                            <Table.Cell>Cell</Table.Cell>
-                            <Table.Cell>Cell</Table.Cell>
-                            <Table.Cell>Edit</Table.Cell>
-                        </Table.Row>
-                    </Table.Body>
+                    {
+                        this.state.loading ? (
+                            <BarLoader />
+                        ) : (
+                            <Table.Body>
+                                {this.state.rideshares && this.state.rideshares.map((rideshare, i) => (
+                                    <RideshareRow
+                                        key={i}
+                                        rideshare={rideshare}
+                                    />
+                                ))}
+                            </Table.Body>
+                        )
+                    }
                 </Table>
             </div>
         )

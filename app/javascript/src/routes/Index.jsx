@@ -16,27 +16,28 @@ import PlannedGiving from '../components/staticPages/PlannedGiving';
 import Forms from '../components/staticPages/Forms';
   
 export default function Index(props) {
-    let user_id = props.user_id;
+    let userId = props.userId;
+    let isAdmin = props.isAdmin;
     let isAuthenticated = props.isAuthenticated;
     return (
         <Switch>
-            <Route exact path='/' render={(props) => <Entry {...props} user_id={user_id} isAuthenticated={isAuthenticated} />} />
+            <Route exact path='/' render={(props) => <Entry {...props} userId={userId} isAuthenticated={isAuthenticated} />} />
             {
                 props.isAuthenticated &&
                 <React.Fragment>
-                    <Route exact path='/rideshare' render={(props) => <RideShare {...props} user_id={user_id} />} />
-                    <Route exact path='/users/:id' render={(props) => <UsersShow {...props} user_id={user_id} />} />
-                    <Route exact path='/charts' render={(props) => <ChartsIndex {...props} user_id={user_id} />} />
-                    <Route exact path='/archives' render={(props) => <Archives {...props} user_id={user_id} />} />
-                    <Route exact path='/by-laws' render={(props) => <ByLaws {...props} user_id={user_id} />} />
-                    <Route exact path='/membership' render={(props) => <Membership {...props} user_id={user_id} />} />
-                    <Route exact path='/customs' render={(props) => <Customs {...props} user_id={user_id} />} />
-                    <Route exact path='/charitable-gifts' render={(props) => <CharitableGiving {...props} user_id={user_id} />} />
-                    <Route exact path='/planned-giving' render={(props) => <PlannedGiving {...props} user_id={user_id} />} />
-                    <Route exact path='/committee-primer' render={(props) => <CommitteePrimer {...props} user_id={user_id} />} />
-                    <Route exact path='/family-agreements' render={(props) => <FamilyAgreements {...props} user_id={user_id} />} />
-                    <Route exact path='/history' render={(props) => <History {...props} user_id={user_id} />} />
-                    <Route exact path='/forms' render={(props) => <Forms {...props} user_id={user_id} />} />
+                    <Route exact path='/rideshare' render={(props) => <RideShare {...props} userId={userId} isAdmin={isAdmin} />} />
+                    <Route exact path='/users/:id' render={(props) => <UsersShow {...props} userId={userId} />} />
+                    <Route exact path='/charts' render={(props) => <ChartsIndex {...props} userId={userId} />} />
+                    <Route exact path='/archives' render={(props) => <Archives {...props} userId={userId} />} />
+                    <Route exact path='/by-laws' render={(props) => <ByLaws {...props} userId={userId} />} />
+                    <Route exact path='/membership' render={(props) => <Membership {...props} userId={userId} />} />
+                    <Route exact path='/customs' render={(props) => <Customs {...props} userId={userId} />} />
+                    <Route exact path='/charitable-gifts' render={(props) => <CharitableGiving {...props} userId={userId} />} />
+                    <Route exact path='/planned-giving' render={(props) => <PlannedGiving {...props} userId={userId} />} />
+                    <Route exact path='/committee-primer' render={(props) => <CommitteePrimer {...props} userId={userId} />} />
+                    <Route exact path='/family-agreements' render={(props) => <FamilyAgreements {...props} userId={userId} />} />
+                    <Route exact path='/history' render={(props) => <History {...props} userId={userId} />} />
+                    <Route exact path='/forms' render={(props) => <Forms {...props} userId={userId} />} />
                 </React.Fragment>
             }   
         </Switch>
