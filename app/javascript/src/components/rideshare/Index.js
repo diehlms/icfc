@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../shared/PageTitle';
 import BarLoader from 'react-spinners/BarLoader';
-import { Table, Form, Input, Grid } from 'semantic-ui-react';
+import { Table, Form, Input, Grid, Container } from 'semantic-ui-react';
 import { Breadcrumb } from 'react-bootstrap';
 import * as axios from 'axios';
 import "./rideshare.css";
@@ -101,84 +101,86 @@ export class Index extends Component {
                     size="h1"
                     text="Rideshares"
                 />
-                <Form>
-                    <Form.Group widths='equal'>
-                        <Form.Input 
-                            width='7'
-                            type='number' 
-                            fluid 
-                            label='Number of Passengers'
-                            content='numberOfPassengers' 
-                            onChange={this.handleChange} 
-                            placeholder='0' 
-                        />
-                        <LocationDropdown
-                            isAdmin={this.props.isAdmin}
-                            displayText='Point Of Departure'
-                            locationType='departure'
-                            onChange={this.setLocationInState}
-                        />
-                        <LocationDropdown
-                            isAdmin={this.props.isAdmin}
-                            displayText='Point Of Arrival'
-                            locationType='arrival'
-                            onChange={this.setLocationInState}
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Grid>
-                            <Grid.Column floated="left" width={3}>
-                                <Input
-                                    className="rideshare-date-pickers"
-                                    label="Leaving At" 
-                                    type="date" 
-                                    onChange={e => this.updateDate(e, 'leavingAt')} 
-                                />
-                            </Grid.Column>
-                            <Grid.Column floated="right" width={3}>
-                                <Input
-                                    className="rideshare-date-pickers"
-                                    label="Arriving At"
-                                    type="date" 
-                                    onChange={e => this.updateDate(e, 'arrivingAt')} 
-                                />
-                            </Grid.Column>
-                        </Grid>
-                    </Form.Group>
-                    <Form.TextArea
-                        content='additionalInformation' 
-                        onChange={this.handleChange}
-                        label='Additional Information' 
-                        placeholder='What else should people know about your trip...' 
-                    />
-                    <Form.Button onClick={e => this.addRideshare(e)}>Submit</Form.Button>
-                </Form>
-                <Table celled>
-                    <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Contact</Table.HeaderCell> 
-                        <Table.HeaderCell>Point of Departure</Table.HeaderCell>
-                        <Table.HeaderCell>Point of Arrival</Table.HeaderCell>
-                        <Table.HeaderCell>Number of Seats Available</Table.HeaderCell>
-                        <Table.HeaderCell>Leaving at</Table.HeaderCell>
-                        <Table.HeaderCell>Arriving at</Table.HeaderCell>
-                    </Table.Row>
-                    </Table.Header>
-                    {
-                        this.state.loading ? (
-                            <BarLoader />
-                        ) : (
-                            <Table.Body>
-                                {this.state.rideshares && this.state.rideshares.map((rideshare, i) => (
-                                    <RideshareRow
-                                        key={i}
-                                        rideshare={rideshare}
+                <Container>
+                    <Form>
+                        <Form.Group widths='equal'>
+                            <Form.Input 
+                                width='7'
+                                type='number' 
+                                fluid 
+                                label='Number of Passengers'
+                                content='numberOfPassengers' 
+                                onChange={this.handleChange} 
+                                placeholder='0' 
+                            />
+                            <LocationDropdown
+                                isAdmin={this.props.isAdmin}
+                                displayText='Point Of Departure'
+                                locationType='departure'
+                                onChange={this.setLocationInState}
+                            />
+                            <LocationDropdown
+                                isAdmin={this.props.isAdmin}
+                                displayText='Point Of Arrival'
+                                locationType='arrival'
+                                onChange={this.setLocationInState}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Grid stackable>
+                                <Grid.Column floated="left" width={4}>
+                                    <Input
+                                        className="rideshare-date-pickers"
+                                        label="Leaving At" 
+                                        type="date" 
+                                        onChange={e => this.updateDate(e, 'leavingAt')} 
                                     />
-                                ))}
-                            </Table.Body>
-                        )
-                    }
-                </Table>
+                                </Grid.Column>
+                                <Grid.Column floated="right" width={4}>
+                                    <Input
+                                        className="rideshare-date-pickers"
+                                        label="Arriving At"
+                                        type="date" 
+                                        onChange={e => this.updateDate(e, 'arrivingAt')} 
+                                    />
+                                </Grid.Column>
+                            </Grid>
+                        </Form.Group>
+                        <Form.TextArea
+                            content='additionalInformation' 
+                            onChange={this.handleChange}
+                            label='Additional Information' 
+                            placeholder='What else should people know about your trip... (max 500 characters)' 
+                        />
+                        <Form.Button onClick={e => this.addRideshare(e)}>Submit</Form.Button>
+                    </Form>
+                    <Table celled>
+                        <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Contact</Table.HeaderCell> 
+                            <Table.HeaderCell>Point of Departure</Table.HeaderCell>
+                            <Table.HeaderCell>Point of Arrival</Table.HeaderCell>
+                            <Table.HeaderCell>Number of Seats Available</Table.HeaderCell>
+                            <Table.HeaderCell>Leaving at</Table.HeaderCell>
+                            <Table.HeaderCell>Arriving at</Table.HeaderCell>
+                        </Table.Row>
+                        </Table.Header>
+                        {
+                            this.state.loading ? (
+                                <BarLoader />
+                            ) : (
+                                <Table.Body>
+                                    {this.state.rideshares && this.state.rideshares.map((rideshare, i) => (
+                                        <RideshareRow
+                                            key={i}
+                                            rideshare={rideshare}
+                                        />
+                                    ))}
+                                </Table.Body>
+                            )
+                        }
+                    </Table>
+                </Container>
             </div>
         )
     }

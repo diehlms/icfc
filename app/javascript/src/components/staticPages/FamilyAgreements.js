@@ -10,7 +10,7 @@ class Index extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className="reactPageAppContainer">
                 <Title
                     size="h1"
                     text="Family Agreements"

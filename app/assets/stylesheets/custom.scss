@@ -1,46 +1,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "font-awesome";
-
-* {
-    font-family: 'Lato', sans-serif !important;
-}
 
 .history-section {
-    font-family: 'Amatic SC', cursive;
     font-size: 34px;
 }
 
 .section-title {
-    font-family: 'Amatic SC', cursive;
     font-size: 34px;
-}
-
-p {
-    font-family: 'Domine', serif;
-}
-
-label {
-    font-family: 'Domine', serif;
-}
-
-ol {
-    li {
-        font-family: 'Domine', serif;
-    }
-}
-
-ul {
-    li {
-        font-family: 'Domine', serif;
-    }
 }
 
 .alert.alert-secondary {
     position: fixed;
     z-index: 999;
     width: 80%;
-    font-family: 'Domine', serif;
     text-align: center;
     color: black;
     background-color: lightblue;
@@ -62,8 +34,6 @@ ul {
     width: 70%;
     margin: 0 auto;
     padding: 15px;
-    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    // border: 0px solid black;
     border-radius: 5px;
     .form-group {
         width: 70%;
@@ -104,7 +74,6 @@ ul {
     opacity: 1.0;
     z-index: 999;
     margin-bottom: 0px;
-    font-family: 'Domine', serif;
 }
 
 .navbar.navbar-default {
@@ -122,18 +91,6 @@ ul {
     margin-left: 20px;
     padding: 0px;
     height: 30px;
-}
-
-/* footer */
-
-.footer {
-    background-color: black;
-    vertical-align: center;
-    font-size: 0.8em;
-    color: white;
-    .footer-left {
-        display: inline-block;
-    }
 }
 
 .date {

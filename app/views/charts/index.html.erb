@@ -1,8 +1,0 @@
-<%= content_tag :div,
-    id: "session_id_tag",
-    data: current_user.id.to_json do 
-%>
-<% end %>
-<%= react_component("components/charts/Index", 
-  { data: current_user.id.to_json }) 
-%>

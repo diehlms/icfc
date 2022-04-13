@@ -1,5 +1,5 @@
 <div class="calendar container">
-  <h1 class="section-title" align="center">Events</h1>
+  <%= link_to 'Add an Event', new_event_path, class: "btn btn-block btn-success" %>
     <div id="articles">
       <h2 id="month">
         <%= link_to "<", date: @date.prev_month %>
@@ -17,7 +17,5 @@
         <% end %>
       <% end %>
     </div>
-    <br>
-    <%= link_to 'Add an Event', new_event_path, class: "btn btn-block btn-success" %>
-    </table>
+    <br/><br/>
 </div>

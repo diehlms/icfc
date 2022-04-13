@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get '/charts/index'
       get '/rideshares/index'
       get '/location_points/index'
+      get '/entry/initial_payload', to: 'entry#initial_payload'
 
       post '/articles/create'
       post '/users/create'
@@ -20,8 +21,6 @@ Rails.application.routes.draw do
       get '/location_points/get_single/:id', to: 'location_points#single'
 
       delete '/rideshares/destroy/:id', to: 'rideshares#destroy'
-      delete '/rideshares/pod/:id', to: 'rideshares#destroy_pod'
-      delete '/rideshares/poa/:id', to: 'rideshares#destroy_poa'
       delete '/articles/destroy/:id', to: 'articles#destroy'
       delete '/charts/destroy/:id', to: 'charts#destroy'
       delete '/location_points/destroy/:id', to: 'location_points#destroy'
@@ -62,8 +61,6 @@ Rails.application.routes.draw do
   resources :galleries
   resources :rooms
   resources :room_messages
-  resources :charts
-  resources :rideshares
 
   get '/articles', to: 'articles#index'
   get '/blog', to: 'articles#index'

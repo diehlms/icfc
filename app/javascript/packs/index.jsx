@@ -19,8 +19,7 @@ const rootReducer = combineReducers({
     cabins: CabinReducer,
     events: EventReducer,
     users: UserReducer,
-    loading: LoadingReducer,
-
+    loading: LoadingReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))

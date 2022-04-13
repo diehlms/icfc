@@ -65,8 +65,7 @@ class Index extends React.Component {
                 <Container text>
                     <Header as="h4">Early Encampments</Header>
                     <p>The period in the history of the Club covering the wanderings in the wilderness before it came to the promised land which it has so delightfully occupied during the past thirty years, records this list of encampments:</p>
-                    <button class="collapsible btn btn-sm"><p>List of encampments <i class="fa fa-plus pull-right"></i></p></button>
-                    <table class="collapse-table table-content-collapse table table-bordered table-sm">
+                    <table class="ui celled table">
                         <tbody>
                             <tr>
                                 <td>1882</td>
@@ -258,7 +257,7 @@ class Index extends React.Component {
                 </Container>
                 <Container text>
                     <Header as="h4">ICFC Presidents</Header>
-                    <table class="collapse-table table table-content-collapse table-bordered table-sm">
+                    <table class="ui celled table">
                         <tbody>
                             <tr>
                                 <td>2018</td>
@@ -401,7 +400,7 @@ class Index extends React.Component {
                 </Container>
                 <Container text>
                     <Header as="h4">Paddle Award Winners</Header>
-                    <table class="collapse-table table table-content-collapse table-bordered table-sm">
+                    <table class="ui celled table">
                         <tbody>
                             <tr>
                                 <td>2018</td>

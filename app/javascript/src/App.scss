@@ -41,3 +41,16 @@
         }
     }
 }
+ 
+.ui.checkbox.mobile-sidebar-checkbox {
+    position: absolute;
+    z-index: 1000;
+    right: 10px;
+    top: 10vh;
+}
+
+@media screen and (min-width: 700px) {
+    .ui.checkbox.mobile-sidebar-checkbox {
+        display: none;
+    }
+}

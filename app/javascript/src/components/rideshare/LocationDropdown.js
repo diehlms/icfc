@@ -32,9 +32,11 @@ export default function LocationDropdown(props) {
                 "Content-Type": "application/json"
             }
         }).then(() => {
+            setLocations([]);
             getLocations();
         })
         .catch(err => {
+            setLocations([]);
             getLocations();
         });
     }

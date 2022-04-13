@@ -62,7 +62,6 @@ export default function RideshareRow(props) {
                 "Content-Type": "application/json"
             }
         }).then(res => {
-            console.log(res.data)
             setUser({
                 name: `${res.data.firstname} ${res.data.lastname} (${res.data.email})`,
                 email: res.data.email,
