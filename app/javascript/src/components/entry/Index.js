@@ -96,8 +96,8 @@ export class Index extends Component {
                                             <Card.Description>
                                                 <List>
                                                     <List.Item>Office Telephone: 705-375-2300 (in season only)</List.Item>
-                                                    <List.Item>Moe's Number: 705-375-0405</List.Item>
-                                                    <List.Item>Lisa's Number:  705-375-0854</List.Item>
+                                                    <List.Item>Moe's Number: 705-746-6699</List.Item>
+                                                    <List.Item>Lisa's Number:  705-346-1191</List.Item>
                                                     <List.Item>Gregoire Home Telephone: 705-375-5633</List.Item>
                                                     <List.Item>Pay Telephone: 705-375-9907</List.Item>
                                                 </List>

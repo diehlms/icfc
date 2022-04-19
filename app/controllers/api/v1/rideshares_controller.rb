@@ -8,11 +8,12 @@ class Api::V1::RidesharesController < ApplicationController
     end
 
     def create
-        @ridesharet = Rideshare.create!(rideshare_params) 
-        if @rideshare
+        @rideshare = Rideshare.create(rideshare_params) 
+        if @rideshare.save
             render json: Rideshare.all
         else
-            render json: @rideshare.errors
+            puts "HI DIEHL"
+            render json: @rideshare.errors, status: :bad_request
         end
     end
 

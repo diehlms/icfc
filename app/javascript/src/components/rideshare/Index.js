@@ -81,6 +81,7 @@ export class Index extends Component {
             this.getRideshares();
         })
         .catch(err => {
+            console.log(err.response);
             this.getRideshares();
         });
     }

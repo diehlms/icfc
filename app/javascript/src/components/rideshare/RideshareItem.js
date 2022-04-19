@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Button } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 import RideshareModal from './RideshareModal';
 import * as axios from 'axios';
 import * as moment from 'moment';
@@ -8,7 +8,6 @@ export default function RideshareRow(props) {
     const [arrivalLocationName, setArrivalLocationName] = useState('');
     const [departureLocationName, setDepartureLocationName] = useState('');
     const [user, setUser] = useState('');
-    const [loading, isLoading] = useState(false);
     const [open, setOpen] = useState(false);
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
