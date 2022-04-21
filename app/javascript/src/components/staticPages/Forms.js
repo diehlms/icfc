@@ -1,49 +1,88 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Title from '../shared/PageTitle';
-import { Tab } from 'semantic-ui-react';
+import { Tab, Divider } from 'semantic-ui-react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import { Container, Header } from 'semantic-ui-react';
-import { Message } from 'semantic-ui-react';
 import styled from 'styled-components';
+import DocumentUpload from '../shared/DocumentUpload';
+
+import * as axios from 'axios';
+
 const RailsLink = styled.a`
 `;
 
-const panes = [
-    {
-        menuItem: 'Miscellaneous',
-        render: () => 
-        <Tab.Pane>
-            <ListGroup>
-                <ListGroupItem><RailsLink href="/2019_LeaderTeam_Application.pdf" target="_blank">Leadership Team Application</RailsLink></ListGroupItem>
-                <ListGroupItem><RailsLink href="/2019_LeaderTeamApplicationInformation.pdf" target="_blank">Leadership Team Information</RailsLink></ListGroupItem>
-                <ListGroupItem><RailsLink href="/2020_Application for Wait Staff.doc" target="_blank">Wait Staff Application</RailsLink></ListGroupItem>
-                <ListGroupItem><RailsLink href="/2020_Application Information for Wait Staff.doc" target="_blank">Wait Staff Information</RailsLink></ListGroupItem>
-                <ListGroupItem><RailsLink href="/2020 Wait Staff Regulations.pdf" target="_blank">Wait Staff Regulations</RailsLink></ListGroupItem>
-                <ListGroupItem><RailsLink href="/2020_Emergency Medical Form for Wait Staff.doc" target="_blank">Emergency Medical Form for Wait Staff</RailsLink></ListGroupItem>
-                <ListGroupItem><RailsLink href="/2015_SpecialDietaryRequestForm.pdf" target="_blank">Dietary Request Forms</RailsLink></ListGroupItem>
-                <ListGroupItem><RailsLink href="/WorkOrder.pdf" target="_blank">Work Order Forms</RailsLink></ListGroupItem>
-            </ListGroup>
-        </Tab.Pane>
-    }
-]
-class Index extends React.Component {
-    state = {
-    }
+export default function Forms(props) {
+    const [forms, setForms] = useState([]);
+    const [error, setError] = useState('');
 
+    const panes = [
+        {
+            menuItem: 'Miscellaneous',
+            render: () => 
+            <Tab.Pane>
+                <ListGroup>
+                    <ListGroupItem><RailsLink href="/2019_LeaderTeam_Application.pdf" target="_blank">Leadership Team Application</RailsLink></ListGroupItem>
+                    <ListGroupItem><RailsLink href="/2019_LeaderTeamApplicationInformation.pdf" target="_blank">Leadership Team Information</RailsLink></ListGroupItem>
+                    <ListGroupItem><RailsLink href="/2020_Application for Wait Staff.doc" target="_blank">Wait Staff Application</RailsLink></ListGroupItem>
+                    <ListGroupItem><RailsLink href="/2020_Application Information for Wait Staff.doc" target="_blank">Wait Staff Information</RailsLink></ListGroupItem>
+                    <ListGroupItem><RailsLink href="/2020 Wait Staff Regulations.pdf" target="_blank">Wait Staff Regulations</RailsLink></ListGroupItem>
+                    <ListGroupItem><RailsLink href="/2020_Emergency Medical Form for Wait Staff.doc" target="_blank">Emergency Medical Form for Wait Staff</RailsLink></ListGroupItem>
+                    <ListGroupItem><RailsLink href="/2015_SpecialDietaryRequestForm.pdf" target="_blank">Dietary Request Forms</RailsLink></ListGroupItem>
+                    <ListGroupItem><RailsLink href="/WorkOrder.pdf" target="_blank">Work Order Forms</RailsLink></ListGroupItem>
+                    {
+                        !!forms && forms.length > 0 ? (
+                            <React.Fragment>
+                                {
+                                    forms.map((form, i) => (
+                                        <ListGroupItem
+                                            key={i}
+                                        >
+                                            <RailsLink 
+                                                href={form.document.url} 
+                                                target="_blank">
+                                                    {form.document_title}
+                                            </RailsLink>
+                                        </ListGroupItem>
+                                    ))
+                                }
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment />
+                        )
+                    }
+                </ListGroup>
+            </Tab.Pane>
+        }
+    ];
 
-    render() {
+    useEffect(() => {
+        axios.get(`/api/v1/documents/index/forms`)
+        .then(res => {
+            setForms(res.data)
+        })
+        .catch(err => {
+            setError(err);
+        });
+    }, []);
 
-        return (
-            <div className="reactPageAppContainer">
-                <Title 
-                    size="h1"
-                    text="Forms"
-                />
-                <Tab panes={panes} />
-            </div>
-        )
-    }
+    return (
+        <div className="reactPageAppContainer">
+            <Title 
+                size="h1"
+                text="Forms"
+            />
+            {
+                props.isAdmin ? (
+                    <React.Fragment>
+                        <DocumentUpload 
+                            folderName='forms'
+                        />
+                        <Divider />    
+                    </React.Fragment>   
+                ) : (
+                    <React.Fragment />
+                )
+            }              
+            <Tab panes={panes} />
+        </div>
+    )
 }
-
-
-export default Index;

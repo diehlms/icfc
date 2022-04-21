@@ -28,7 +28,7 @@ export default function Index(props) {
                         <Route exact path='/rideshare' render={(props) => <RideShare {...props} userId={userId} isAdmin={isAdmin} />} />
                         <Route exact path='/users/:id' render={(props) => <UsersShow {...props} userId={userId} />} />
                         <Route exact path='/charts' render={(props) => <ChartsIndex {...props} userId={userId} />} />
-                        <Route exact path='/archives' render={(props) => <Archives {...props} userId={userId} />} />
+                        <Route exact path='/archives' render={(props) => <Archives {...props} userId={userId} isAdmin={isAdmin} />} />
                         <Route exact path='/by-laws' render={(props) => <ByLaws {...props} userId={userId} />} />
                         <Route exact path='/membership' render={(props) => <Membership {...props} userId={userId} />} />
                         <Route exact path='/customs' render={(props) => <Customs {...props} userId={userId} />} />
@@ -37,7 +37,7 @@ export default function Index(props) {
                         <Route exact path='/committee-primer' render={(props) => <CommitteePrimer {...props} userId={userId} />} />
                         <Route exact path='/family-agreements' render={(props) => <FamilyAgreements {...props} userId={userId} />} />
                         <Route exact path='/history' render={(props) => <History {...props} userId={userId} />} />
-                        <Route exact path='/forms' render={(props) => <Forms {...props} userId={userId} />} />
+                        <Route exact path='/forms' render={(props) => <Forms {...props} userId={userId} isAdmin={isAdmin} />} />
                     </React.Fragment>
                 )
             }   

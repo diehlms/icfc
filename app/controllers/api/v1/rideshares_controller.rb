@@ -12,8 +12,9 @@ class Api::V1::RidesharesController < ApplicationController
         if @rideshare.save
             render json: Rideshare.all
         else
-            puts "HI DIEHL"
-            render json: @rideshare.errors, status: :bad_request
+            render json: { 
+                :errors => @rideshare.errors.full_messages
+            }, status: :bad_request
         end
     end
 

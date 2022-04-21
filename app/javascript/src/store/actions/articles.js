@@ -12,7 +12,7 @@ export const fetchArticles = userId => {
                 }})
             .then(res => {
                 if (userId) {
-                    dispatch(fetchArticlesSuccessForUser(res, userIid))
+                    dispatch(fetchArticlesSuccessForUser(res, userId))
                 } else {
                     dispatch(fetchArticlesSuccess(res))
                 }

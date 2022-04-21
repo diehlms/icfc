@@ -6,6 +6,7 @@ import { Breadcrumb } from 'react-bootstrap';
 import * as axios from 'axios';
 import "./rideshare.css";
 
+import ErrorToast from '../shared/ErrorToast';
 import RideshareRow from './RideshareItem';
 import LocationDropdown from './LocationDropdown';
 
@@ -78,10 +79,11 @@ export class Index extends Component {
             },
             data: JSON.stringify(body)
         }).then(() => {
+            this.setState({errors: null});
             this.getRideshares();
         })
         .catch(err => {
-            console.log(err.response);
+            this.setState({errors: err.response.data.errors});
             this.getRideshares();
         });
     }
@@ -102,6 +104,15 @@ export class Index extends Component {
                     size="h1"
                     text="Rideshares"
                 />
+                {
+                    !!this.state.errors ? (
+                        <ErrorToast 
+                            errors={this.state.errors}
+                        />
+                    ) : (
+                        <React.Fragment />
+                    )
+                }
                 <Container>
                     <Form>
                         <Form.Group widths='equal'>
