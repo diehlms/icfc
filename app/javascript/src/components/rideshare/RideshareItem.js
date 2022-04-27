@@ -71,10 +71,12 @@ export default function RideshareRow(props) {
         });
     }, []);
 
+    console.log(props.rideshare)
     return (
         <React.Fragment>
             { open ? (
                 <RideshareModal
+                    currentUserId={props.currentUserId}
                     user={user}
                     rideshare={props.rideshare}
                     arrivalLocationName={arrivalLocationName}
@@ -86,11 +88,12 @@ export default function RideshareRow(props) {
             ) : (
                 <Table.Row className="row-hover" onClick={() => setOpen(true)}key={props.rideshare.id}>
                     <Table.Cell>{user.name}</Table.Cell>
+                    <Table.Cell>{props.rideshare.seeking ? 'Seeking' : 'Offering'}</Table.Cell>
                     <Table.Cell>{arrivalLocationName}</Table.Cell>
                     <Table.Cell>{departureLocationName}</Table.Cell>
                     <Table.Cell>{props.rideshare.number_of_passengers}</Table.Cell>
-                    <Table.Cell>{moment(props.rideshare.departing_at).format("DD/MM/YYYY, h:mm a")}</Table.Cell>
-                    <Table.Cell>{moment(props.rideshare.arriving_at).format("DD/MM/YYYY, h:mm a")}</Table.Cell>
+                    <Table.Cell>{moment(props.rideshare.departing_at).format("DD/MM/YYYY")}</Table.Cell>
+                    <Table.Cell>{moment(props.rideshare.arriving_at).format("DD/MM/YYYY")}</Table.Cell>
                 </Table.Row>
             )}
         </React.Fragment>

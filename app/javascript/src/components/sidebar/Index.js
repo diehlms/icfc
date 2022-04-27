@@ -22,8 +22,7 @@ export default function App(props) {
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
 
-    useEffect(() => {
-        setIsLoading(true);
+    const initPage = () => {
         axios.get('/api/v1/entry/initial_payload')
         .then(res => {
             setReservationLinks({
@@ -35,6 +34,12 @@ export default function App(props) {
         .catch(err => {
             setIsLoading(false);
         });
+    }
+
+    useEffect(() => {
+        setIsLoading(true);
+        initPage();
+        setIsLoading(false);
     }, []);
 
 

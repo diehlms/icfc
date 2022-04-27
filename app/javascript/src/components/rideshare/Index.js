@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../shared/PageTitle';
 import BarLoader from 'react-spinners/BarLoader';
-import { Table, Form, Input, Grid, Container } from 'semantic-ui-react';
+import { Table, Form, Input, Grid, Container, Checkbox } from 'semantic-ui-react';
 import { Breadcrumb } from 'react-bootstrap';
 import * as axios from 'axios';
 import "./rideshare.css";
@@ -17,7 +17,8 @@ export class Index extends Component {
         sessionId: null,
         rideshares: null,
         departureLocationId: null,
-        arrivalLocationId: null
+        arrivalLocationId: null,
+        seeking: true
     }
 
     componentDidMount() {
@@ -48,6 +49,13 @@ export class Index extends Component {
         });
     }
 
+    updateTypeValue = (e) => {
+        e.preventDefault();
+        this.setState({
+            seeking: !this.state.seeking
+        })
+    }
+
     updateDate = (e, inputName) => {
         e.preventDefault();
         this.setState({
@@ -68,7 +76,8 @@ export class Index extends Component {
             point_of_departure_id: this.state.arrivalLocationId,
             user_id: this.props.userId,
             arriving_at: this.state.arrivingAt,
-            departing_at: this.state.leavingAt
+            departing_at: this.state.leavingAt,
+            seeking: this.state.seeking
         }
         axios({
             method: 'post',
@@ -156,6 +165,29 @@ export class Index extends Component {
                                         onChange={e => this.updateDate(e, 'arrivingAt')} 
                                     />
                                 </Grid.Column>
+                                <Grid.Column className="seeking-radios" width={2}>
+                                    <Form.Field>
+                                        Offering/Seeking?
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <Checkbox
+                                            radio
+                                            label='Offering'
+                                            name='checkboxRadioGroup'
+                                            checked={!this.state.seeking}
+                                            onChange={(e) => this.updateTypeValue(e)}
+                                        />
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <Checkbox
+                                            radio
+                                            label='Seeking'
+                                            name='checkboxRadioGroup'
+                                            checked={this.state.seeking}
+                                            onChange={(e) => this.updateTypeValue(e)}
+                                        />
+                                    </Form.Field>
+                                </Grid.Column>
                             </Grid>
                         </Form.Group>
                         <Form.TextArea
@@ -169,7 +201,8 @@ export class Index extends Component {
                     <Table celled>
                         <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell>Contact</Table.HeaderCell> 
+                            <Table.HeaderCell>Contact</Table.HeaderCell>
+                            <Table.HeaderCell>Offering/Seeking</Table.HeaderCell> 
                             <Table.HeaderCell>Point of Departure</Table.HeaderCell>
                             <Table.HeaderCell>Point of Arrival</Table.HeaderCell>
                             <Table.HeaderCell>Number of Seats Available</Table.HeaderCell>
@@ -185,6 +218,7 @@ export class Index extends Component {
                                     {this.state.rideshares && this.state.rideshares.map((rideshare, i) => (
                                         <RideshareRow
                                             key={i}
+                                            currentUserId={this.props.userId}
                                             rideshare={rideshare}
                                         />
                                     ))}

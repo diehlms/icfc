@@ -10,7 +10,7 @@ import { Checkbox } from 'semantic-ui-react';
 
 
 const AppContainer = styled.div`
-    'margin: 0px auto;'
+    margin: 0px auto;
 `;
 
 const ContentContainer = styled.div`

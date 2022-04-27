@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import * as axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse} from 'axios';
 import { Form, Button } from 'semantic-ui-react';
 
 
@@ -19,7 +19,7 @@ export default function FormUpload(props) {
         body.append('document', file);
         body.append('document_title', documentName);
         body.append('document_folder', props.folderName);
-        axios({
+        const config = {
             method: 'post',
             url: `/api/v1/documents/create`,
             headers: {
@@ -27,7 +27,8 @@ export default function FormUpload(props) {
                 "Content-Type": "application/json"
             },
             data: body
-        }).then(res => {
+        };
+        axios(config).then(res => {
             console.log(res)
         })
         .catch(err => {

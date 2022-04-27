@@ -1,5 +1,5 @@
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import UsersShow from '../components/users/Show';
 import ChartsIndex from '../components/charts/Index';
 import Entry from '../components/entry/Index';
@@ -16,9 +16,16 @@ import PlannedGiving from '../components/staticPages/PlannedGiving';
 import Forms from '../components/staticPages/Forms';
   
 export default function Index(props) {
-    let userId = props.userId;
-    let isAdmin = props.isAdmin;
-    let isAuthenticated = props.isAuthenticated;
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [userId, setUserId] = useState();
+
+    useEffect(() => {
+        setIsAuthenticated(props.isAuthenticated);
+        setIsAdmin(props.isAdmin);
+        setUserId(props.userId);
+    }, []);
+
     return (
         <Switch>
             <Route exact path='/' render={(props) => <Entry {...props} userId={userId} isAuthenticated={isAuthenticated} />} />

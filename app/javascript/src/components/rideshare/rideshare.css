@@ -7,8 +7,12 @@
     padding: 10px 12px 6px 12px;
 }
 
+.seeking-radios {
+    left: 60%;
+}
 .rideshare-date-pickers {
     margin-left: 7px;
+    max-width: 100px;
     padding: 20px 0px;
 }
 
@@ -18,6 +22,15 @@
         max-width: 50%;
         padding: 20px 0px;
     }
+}
+
+.row-hover:hover {
+    cursor: pointer;
+    background-color: lightskyblue;
+}
+
+.addt-info {
+    max-width: 50%;
 }
 
 .delete-location-btn {
