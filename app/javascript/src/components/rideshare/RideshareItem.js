@@ -71,7 +71,6 @@ export default function RideshareRow(props) {
         });
     }, []);
 
-    console.log(props.rideshare)
     return (
         <React.Fragment>
             { open ? (
@@ -88,7 +87,6 @@ export default function RideshareRow(props) {
             ) : (
                 <Table.Row className="row-hover" onClick={() => setOpen(true)}key={props.rideshare.id}>
                     <Table.Cell>{user.name}</Table.Cell>
-                    <Table.Cell>{props.rideshare.seeking ? 'Seeking' : 'Offering'}</Table.Cell>
                     <Table.Cell>{arrivalLocationName}</Table.Cell>
                     <Table.Cell>{departureLocationName}</Table.Cell>
                     <Table.Cell>{props.rideshare.number_of_passengers}</Table.Cell>

@@ -6,5 +6,6 @@ class Rideshare < ApplicationRecord
     }, :inclusion => 1..7
     validates :departing_at, presence: true
     validates :arriving_at, presence: true
+    validates :seeking, presence: true
     validates :additional_information, presence: true, length: { maximum: 500 }
 end

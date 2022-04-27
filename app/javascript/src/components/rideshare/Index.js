@@ -64,6 +64,7 @@ export class Index extends Component {
     }
 
     addRideshare = (e) => {
+        console.log(this.state.seeking)
         e.preventDefault();
         this.setState({
             uploading: true
@@ -76,8 +77,7 @@ export class Index extends Component {
             point_of_departure_id: this.state.arrivalLocationId,
             user_id: this.props.userId,
             arriving_at: this.state.arrivingAt,
-            departing_at: this.state.leavingAt,
-            seeking: this.state.seeking
+            departing_at: this.state.leavingAt
         }
         axios({
             method: 'post',
@@ -165,7 +165,7 @@ export class Index extends Component {
                                         onChange={e => this.updateDate(e, 'arrivingAt')} 
                                     />
                                 </Grid.Column>
-                                <Grid.Column className="seeking-radios" width={2}>
+                                {/* <Grid.Column className="seeking-radios" width={2}>
                                     <Form.Field>
                                         Offering/Seeking?
                                     </Form.Field>
@@ -187,7 +187,7 @@ export class Index extends Component {
                                             onChange={(e) => this.updateTypeValue(e)}
                                         />
                                     </Form.Field>
-                                </Grid.Column>
+                                </Grid.Column> */}
                             </Grid>
                         </Form.Group>
                         <Form.TextArea
@@ -202,7 +202,6 @@ export class Index extends Component {
                         <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Contact</Table.HeaderCell>
-                            <Table.HeaderCell>Offering/Seeking</Table.HeaderCell> 
                             <Table.HeaderCell>Point of Departure</Table.HeaderCell>
                             <Table.HeaderCell>Point of Arrival</Table.HeaderCell>
                             <Table.HeaderCell>Number of Seats Available</Table.HeaderCell>
