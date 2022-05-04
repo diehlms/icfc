@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       get '/location_points/index'
       get '/documents/index/:document_folder', to: 'documents#index'
       get '/entry/initial_payload', to: 'entry#initial_payload'
+      get '/entry/campers', to: 'entry#campers'
+      get '/entry/recent_articles', to: 'entry#recent_articles'
 
       post '/articles/create'
       post '/users/create'

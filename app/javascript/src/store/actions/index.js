@@ -53,3 +53,7 @@ export {
     loadingStart,
     loadingFinish
 } from './loading'
+export {
+    setErrors,
+    clearErrors
+} from './errors'

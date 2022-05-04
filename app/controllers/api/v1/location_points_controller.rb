@@ -22,12 +22,16 @@ class Api::V1::LocationPointsController < ApplicationController
     end
 
     def destroy
+        puts "HI DIEHL"
         if current_user.admin?
             set_location_point
             if @location.destroy
                 render json: LocationPoint.all
             else
-                render json: LocationPoint.all
+                puts "HI DIEHL"
+                render json: { 
+                    :errors => @location.errors.full_messages
+                }, status: :bad_request
             end
         end
     end

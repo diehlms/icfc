@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 2022_04_26_234243) do
     t.uuid "point_of_arrival_id"
     t.uuid "point_of_departure_id"
     t.string "user_id"
-    t.boolean "seeking"
+    t.boolean "seeking", default: false
   end
 
   create_table "room_messages", force: :cascade do |t|

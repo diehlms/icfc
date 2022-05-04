@@ -1,43 +1,50 @@
-import React, { useEffect, useState } from 'react'
-import { Dropdown, Input, Button, Grid, Label } from 'semantic-ui-react'
-import * as axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Dropdown, Input, Button } from 'semantic-ui-react';
+import axiosClient from '../../services/axios';
+
+import { useDispatch } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 export default function LocationDropdown(props) {
     const [location, setLocation] = useState('');
     const [locations, setLocations] = useState([]);
 
-    useEffect(() => {
-        getLocations();
-    }, []);
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        let isMounted = true;
+        axiosClient.get('location_points')
+        .then(res => {
+            if (isMounted) {
+                setLocations(res.data);
+            }
+        })
+        .catch(err => {
+            dispatch(actions.setErrors("We're having trouble finding locations for your request. Please try again later"));
+        });
+        return () => {
+            isMounted = false;
+        }
+    }, []);
+    
     const getLocations = () => {
-        axios.get('/api/v1/location_points')
+        axiosClient.get('location_points')
         .then(res => {
             setLocations(res.data);
         })
         .catch(err => {
-            console.log("We're having trouble finding locations for your request. Please try again later")
+            dispatch(actions.setErrors("We're having trouble finding locations for your request. Please try again later"));
         });
     }
 
-    const token = document.querySelector('meta[name="csrf-token"]').content;
-
     const deleteLocation = (e, id) => {
         e.preventDefault();
-        axios({
-            method: 'delete',
-            url: `/api/v1/location_points/destroy/${id}`,
-            headers: {
-                "X-CSRF-Token": token,
-                "Content-Type": "application/json"
-            }
-        }).then(() => {
-            setLocations([]);
+        axiosClient.delete(`location_points/destroy/${id}`)
+        .then(() => {
             getLocations();
         })
         .catch(err => {
-            setLocations([]);
-            getLocations();
+            dispatch(actions.setErrors("Cant delete a location already being used. First delete the rideshare."));
         });
     }
     
@@ -48,24 +55,16 @@ export default function LocationDropdown(props) {
     }
 
     const addLocation = (e) => {
-        const token = document.querySelector('meta[name="csrf-token"]').content;
         let body = {
             location_name: location,
             location_description: ''
         }
-        axios({
-            method: 'post',
-            url: `/api/v1/location_points/create`,
-            headers: {
-                "X-CSRF-Token": token,
-                "Content-Type": "application/json"
-            },
-            data: JSON.stringify(body)
-        }).then(() => {
+        axiosClient.post('location_points/create', body)
+        .then(() => {
             getLocations();
         })
         .catch(err => {
-            getLocations();
+            dispatch(actions.setErrors(err.response.data.errors));
         });
     }
 

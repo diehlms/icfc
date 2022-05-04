@@ -10,7 +10,7 @@
     "sourceMap": true,
     "target": "es5",
     "jsx": "react",
-    "noEmit": true
+    "noEmit": false
   },
   "exclude": [
     "**/*.spec.ts",

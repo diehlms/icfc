@@ -9,11 +9,13 @@ class Api::V1::DocumentsController < ApplicationController
 
     def create
         if current_user.admin?
-            @document = Document.create!(documents_params) 
-            if @document
+            @document = Document.create(documents_params) 
+            if @document.save
                 render json: Document.all
             else
-                render json: Document.all
+                render json: { 
+                    :errors => @document.errors.full_messages
+                }, status: :bad_request
             end
         end
     end

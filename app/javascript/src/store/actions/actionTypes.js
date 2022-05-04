@@ -45,3 +45,6 @@ export const FETCH_USERS_FAIL = 'FETCH_USERS_FAIL';
 export const EDIT_USER = 'EDIT_USER';
 export const EDIT_USER_FAIL = 'EDIT_USER_FAIL';
 export const EDIT_USER_SUCCESS = 'EDIT_USER_SUCCESS';
+
+export const SET_ERRORS = 'SET_ERRORS';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';

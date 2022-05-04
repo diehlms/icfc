@@ -5,36 +5,13 @@ import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import styled from 'styled-components';
 import DocumentUpload from '../shared/DocumentUpload';
 import axios from 'axios';
-import { useCallback } from 'react';
+import axiosClient from '../../services/axios';
 
 const RailsLink = styled.a`
 `;
 
 export default function Forms(props) {
     const [forms, setForms] = useState([]);
-    const [error, setError] = useState('');
-
-    const token = document.querySelector('meta[name="csrf-token"]').content;
-
-    const deleteDoc = (e, formId) => {
-        e.preventDefault();
-        console.log(formId)
-        const config = {
-            method: 'delete',
-            url: `/api/v1/documents/destroy/${formId}`,
-            headers: {
-                "X-CSRF-Token": token,
-                "Content-Type": "application/json"
-            },
-        };
-        axios(config).then(res => {
-            initForms()
-        })
-        .catch(err => {
-            initForms()
-        });
-    }
-
 
     const panes = [
         {
@@ -85,18 +62,31 @@ export default function Forms(props) {
         }
     ];
 
-    const initForms = useCallback(() => {
-        axios.get(`/api/v1/documents/index/forms`)
+    const deleteDoc = (e, formId) => {
+        e.preventDefault();
+        axiosClient(`documents/destroy/${formId}`)
         .then(res => {
-            setForms(res.data)
+            // initForms(true)
         })
         .catch(err => {
-            setError(err);
+            setError(err.response.data.errors);
         });
-    });
+    }
 
     useEffect(() => {
-        initForms();
+        let isMounted = true;
+        axiosClient.get(`documents/index/forms`)
+        .then(res => {
+            if (isMounted) {
+                setForms(res.data)
+            }
+        })
+        .catch(err => {
+            setError(err.response.data.errors);
+        });
+        return () => {
+            isMounted = false;
+        }
     }, []);
 
     return (

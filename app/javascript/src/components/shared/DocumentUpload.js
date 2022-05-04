@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import axios, { AxiosRequestConfig, AxiosResponse} from 'axios';
 import { Form, Button } from 'semantic-ui-react';
-
+import { useDispatch } from 'react-redux'
+import * as actions from '../../store/actions/index';
+import axiosClient from '../../services/axios';
 
 export default function FormUpload(props) {
-    const [documents, setDocuments] = useState('');
     const [file, setFile] = useState(null);
     const [documentName, setDocumentName] = useState('');
-    const token = document.querySelector('meta[name="csrf-token"]').content;
+    const dispatch = useDispatch();
 
     const fileUpload = (e) => {
         setFile(e.target.files[0]);
@@ -19,20 +19,11 @@ export default function FormUpload(props) {
         body.append('document', file);
         body.append('document_title', documentName);
         body.append('document_folder', props.folderName);
-        const config = {
-            method: 'post',
-            url: `/api/v1/documents/create`,
-            headers: {
-                "X-CSRF-Token": token,
-                "Content-Type": "application/json"
-            },
-            data: body
-        };
-        axios(config).then(res => {
-            console.log(res)
+        axiosClient.post(`documents/create`, body)
+        .then(res => {
         })
         .catch(err => {
-            console.log(err)
+            dispatch(actions.setErrors(err.response.data.errors));
         });
     }
 

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Routes from './routes/Index';
 import Sidebar from './components/sidebar/Index';
+import ErrorToast from './components/shared/ErrorToast';
+import Loading from './components/shared/Loading';
 
 import './App.scss';
 import 'semantic-ui-css/semantic.min.css';
 import styled from 'styled-components';
+
+import { useSelector } from 'react-redux'
 
 import { Checkbox } from 'semantic-ui-react';
 
@@ -27,11 +31,13 @@ export default function App(props) {
     const [showSidebar, setShowSidebar] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
-
+    const [userId, setUserId] = useState(null);
+    
     useEffect(() => {
         const initialPayload = props;
         if (!!initialPayload.userId && initialPayload.userId !== null) {
             setIsAuthenticated(true);
+            setUserId(initialPayload.userId)
             setIsAdmin(initialPayload.isAdmin);
         }
     }, []);
@@ -41,9 +47,12 @@ export default function App(props) {
         setShowSidebar(!showSidebar);
     }
 
+    const errors = useSelector((state) => state.errors);
+    const loading = useSelector((state) => state.loading);
+
     return (
         <React.Fragment>
-            { isAuthenticated && !isLoading ? (
+            { isAuthenticated ? (
                     <AppContainer>
                         <Sidebar
                             setSidebarVisible={setSidebarVisible}
@@ -51,11 +60,22 @@ export default function App(props) {
                             isAdmin={props.isAdmin}
                         >
                             <ContentContainer>
-                                <Routes 
-                                    isAuthenticated={isAuthenticated}
-                                    userId={props.userId}
-                                    isAdmin={isAdmin}
-                                />
+                                {
+                                    !!loading && loading.loading === true ? (
+                                        <Loading />
+                                    ) : (
+                                        <React.Fragment>
+                                            <ErrorToast 
+                                                errors={errors}
+                                            />
+                                            <Routes 
+                                                isAuthenticated={isAuthenticated}
+                                                userId={props.userId}
+                                                isAdmin={isAdmin}
+                                            />
+                                        </React.Fragment>
+                                    )
+                                }
                             </ContentContainer>
                         </Sidebar>
                         <Checkbox
@@ -68,9 +88,10 @@ export default function App(props) {
                 ) : (
                     <AppContainer centered>
                         <ContentContainer centered>
-                            <Routes 
+                            <Routes
+                                isAdmin={isAdmin} 
                                 isAuthenticated={isAuthenticated}
-                                userId={props.userId}
+                                userId={userId}
                             />
                         </ContentContainer>
                 </AppContainer>

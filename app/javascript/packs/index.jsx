@@ -11,6 +11,7 @@ import CabinReducer from '../src/store/reducers/cabins';
 import EventReducer from '../src/store/reducers/events';
 import UserReducer from '../src/store/reducers/users';
 import LoadingReducer from '../src/store/reducers/loading';
+import ErrorsReducer from '../src/store/reducers/errors';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     cabins: CabinReducer,
     events: EventReducer,
     users: UserReducer,
-    loading: LoadingReducer
+    loading: LoadingReducer,
+    errors: ErrorsReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
