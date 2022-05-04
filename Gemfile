@@ -19,7 +19,7 @@ gem 'uglifier', '~> 3.0'
 # imported gems for this project
 
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
-gem 'carrierwave', '~> 0.11.2'
+gem 'carrierwave', '~> 1.3.2'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'simple_form', '~> 4.1'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
