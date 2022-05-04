@@ -31,7 +31,7 @@ class Api::V1::RidesharesController < ApplicationController
     private
 
     def rideshare_params
-        params.permit(:user_id, :number_of_passengers, :additional_information, :arriving_at, :departing_at, :point_of_arrival_id, :point_of_departure_id, :seeking)
+        params.require(:rideshare).permit(:user_id, :number_of_passengers, :additional_information, :arriving_at, :departing_at, :point_of_arrival_id, :point_of_departure_id, :seeking)
     end
 
     def set_rideshare
