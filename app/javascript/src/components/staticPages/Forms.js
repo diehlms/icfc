@@ -4,7 +4,6 @@ import { Tab, Divider, Button, Icon } from 'semantic-ui-react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import styled from 'styled-components';
 import DocumentUpload from '../shared/DocumentUpload';
-import axios from 'axios';
 import axiosClient from '../../services/axios';
 
 const RailsLink = styled.a`
@@ -66,7 +65,6 @@ export default function Forms(props) {
         e.preventDefault();
         axiosClient(`documents/destroy/${formId}`)
         .then(res => {
-            // initForms(true)
         })
         .catch(err => {
             setError(err.response.data.errors);

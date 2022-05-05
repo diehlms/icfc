@@ -12,6 +12,7 @@ import EventReducer from '../src/store/reducers/events';
 import UserReducer from '../src/store/reducers/users';
 import LoadingReducer from '../src/store/reducers/loading';
 import ErrorsReducer from '../src/store/reducers/errors';
+import SuccessMessagesReducer from '../src/store/reducers/successMessages';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     events: EventReducer,
     users: UserReducer,
     loading: LoadingReducer,
-    errors: ErrorsReducer
+    errors: ErrorsReducer,
+    successMessages: SuccessMessagesReducer
 });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))

@@ -92,6 +92,7 @@ export default function Rideshare(props) {
         .then(() => {
             getRideshares();
             setFormState(initialFormState);
+            dispatch(actions.setSuccessMessages("Rideshare Added!"))
         })
         .catch(err => {
             dispatch(actions.setErrors(err.response.data.errors));

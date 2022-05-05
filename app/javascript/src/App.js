@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Routes from './routes/Index';
 import Sidebar from './components/sidebar/Index';
-import ErrorToast from './components/shared/ErrorToast';
+import Toast from './components/shared/Toast';
 import Loading from './components/shared/Loading';
 
 import './App.scss';
@@ -27,7 +27,6 @@ const ContentContainer = styled.div`
 `;
 
 export default function App(props) {
-    const [isLoading, setIsLoading] = useState(false);
     const [showSidebar, setShowSidebar] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -48,6 +47,7 @@ export default function App(props) {
     }
 
     const errors = useSelector((state) => state.errors);
+    const successMessages = useSelector((state) => state.successMessages)
     const loading = useSelector((state) => state.loading);
 
     return (
@@ -65,7 +65,8 @@ export default function App(props) {
                                         <Loading />
                                     ) : (
                                         <React.Fragment>
-                                            <ErrorToast 
+                                            <Toast
+                                                successMessages={successMessages} 
                                                 errors={errors}
                                             />
                                             <Routes 

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Tab, Divider, Grid } from 'semantic-ui-react';
+import { Tab, Divider, Grid, Button, Icon } from 'semantic-ui-react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import Header from '../shared/PageTitle';
 import DocumentUpload from '../shared/DocumentUpload';
-
-import * as axios from 'axios';
+import axiosClient from '../../services/axios';
 
 import styled from 'styled-components';
 
@@ -14,7 +13,16 @@ const RailsLink = styled.a`
 export default function Index(props) {
     const [backBayBilges, setBackBayBilges] = useState([]);
     const [dailyBilges, setDailyBilges] = useState([]);
-    const [error, setError] = useState('');
+
+    const deleteDoc = (e, formId) => {
+        e.preventDefault();
+        axiosClient.delete(`documents/destroy/${formId}`)
+        .then(res => {
+        })
+        .catch(err => {
+            setError(err.response.data.errors);
+        });
+    }
 
     const panes = [
         {
@@ -54,6 +62,15 @@ export default function Index(props) {
                                                     target="_blank">
                                                         {backBayBilge.document_title}
                                                 </RailsLink>
+                                                {
+                                                    props.isAdmin ? (
+                                                        <Button onClick={e => deleteDoc(e, backBayBilge.id)} size='mini' circular color='red' floated='right' icon>
+                                                            <Icon name='trash' />
+                                                        </Button>
+                                                    ) : (
+                                                        <React.Fragment />
+                                                    )
+                                                }
                                             </ListGroupItem>
                                         ))
                                     }
@@ -90,15 +107,24 @@ export default function Index(props) {
                             !!dailyBilges && dailyBilges.length > 0 ? (
                                 <React.Fragment>
                                     {
-                                        dailyBilges.map((backBayBilge, i) => (
+                                        dailyBilges.map((dailyBilge, i) => (
                                             <ListGroupItem
                                                 key={i}
                                             >
                                                 <RailsLink 
-                                                    href={backBayBilge.document.url} 
+                                                    href={dailyBilge.document.url} 
                                                     target="_blank">
-                                                        {backBayBilge.document_title}
+                                                        {dailyBilge.document_title}
                                                 </RailsLink>
+                                                {
+                                                    props.isAdmin ? (
+                                                        <Button onClick={e => deleteDoc(e, dailyBilge.id)} size='mini' circular color='red' floated='right' icon>
+                                                            <Icon name='trash' />
+                                                        </Button>
+                                                    ) : (
+                                                        <React.Fragment />
+                                                    )
+                                                }
                                             </ListGroupItem>
                                         ))
                                     }
@@ -114,7 +140,7 @@ export default function Index(props) {
 
     useEffect(() => {
         ['backBayBilges', 'dailyBilges'].forEach(archive => {
-            axios.get(`/api/v1/documents/index/${archive}`)
+            axiosClient.get(`documents/index/${archive}`)
             .then(res => {
                 archive === 'backBayBilges' ? 
                     setBackBayBilges(res.data) :
