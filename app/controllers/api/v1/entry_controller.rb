@@ -4,6 +4,8 @@ class Api::V1::EntryController < ApplicationController
 
     def initial_payload
         render json: {
+            inseason_reservation_link: ENV['INSEASON_RESERVATION_LINK'],
+            outseason_reservation_link: ENV['OUTSEASON_RESERVATION_LINK'],
             logged_in: !!current_user
         }
     end
