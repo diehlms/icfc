@@ -92,8 +92,8 @@ export default function RideshareRow(props) {
                     <Table.Cell>{arrivalLocationName}</Table.Cell>
                     <Table.Cell>{departureLocationName}</Table.Cell>
                     <Table.Cell>{props.rideshare.number_of_passengers}</Table.Cell>
-                    <Table.Cell>{moment(props.rideshare.departing_at).format("DD/MM/YYYY")}</Table.Cell>
-                    <Table.Cell>{moment(props.rideshare.arriving_at).format("DD/MM/YYYY")}</Table.Cell>
+                    <Table.Cell>{moment(props.rideshare.departing_at).add(1, 'days').format("MM/DD/YYYY")}</Table.Cell>
+                    <Table.Cell>{moment(props.rideshare.arriving_at).add(1, 'days').format("MM/DD/YYYY")}</Table.Cell>
                 </Table.Row>
             )}
         </React.Fragment>

@@ -30,7 +30,7 @@ export default function Index(props) {
             render: () => 
                 <Tab.Pane>
                     <ListGroup>
-                        <ListGroupItem><RailsLink href="/backbaybilges/BBB_1993.pdf" target="_blank">1993</RailsLink></ListGroupItem>
+                        {/* <ListGroupItem><RailsLink href="/backbaybilges/BBB_1993.pdf" target="_blank">1993</RailsLink></ListGroupItem>
                         <ListGroupItem><RailsLink href="/backbaybilges/BBB_2000.htm" target="_blank">2000</RailsLink></ListGroupItem>
                         <ListGroupItem><RailsLink href="/backbaybilges/BBB_2001.htm" target="_blank">2001</RailsLink></ListGroupItem>
                         <ListGroupItem><RailsLink href="/backbaybilges/BBB_2002.htm" target="_blank">2002</RailsLink></ListGroupItem>
@@ -48,7 +48,7 @@ export default function Index(props) {
                         <ListGroupItem><RailsLink href="/backbaybilges/BBB_2017.pdf" target="_blank">2017</RailsLink></ListGroupItem>
                         <ListGroupItem><RailsLink href="/backbaybilges/BBB_2018.pdf" target="_blank">2018</RailsLink></ListGroupItem>
                         <ListGroupItem><RailsLink href="/backbaybilges/BBB_2019.pdf" target="_blank">2019</RailsLink></ListGroupItem>
-                        <ListGroupItem><RailsLink href="/backbaybilges/ICFC_Back_Bay_Bilge_2020.docx" target="_blank">2020</RailsLink></ListGroupItem>
+                        <ListGroupItem><RailsLink href="/backbaybilges/ICFC_Back_Bay_Bilge_2020.docx" target="_blank">2020</RailsLink></ListGroupItem> */}
                         {
                             !!backBayBilges && backBayBilges.length > 0 ? (
                                 <React.Fragment>
@@ -87,7 +87,7 @@ export default function Index(props) {
             render: () => 
             <Tab.Pane>
                 <ListGroup>
-                    <ListGroupItem><RailsLink href="/dailybilges/The_Daily_Bilge_2001.htm" target="_blank">2001</RailsLink></ListGroupItem>
+                    {/* <ListGroupItem><RailsLink href="/dailybilges/The_Daily_Bilge_2001.htm" target="_blank">2001</RailsLink></ListGroupItem>
                     <ListGroupItem><RailsLink href="/dailybilges/The_Daily_Bilge_2005.htm" target="_blank">2005</RailsLink></ListGroupItem>
                     <ListGroupItem><RailsLink href="/dailybilges/The_Daily_Bilge_2006.htm" target="_blank">2006</RailsLink></ListGroupItem>
                     <ListGroupItem><RailsLink href="/dailybilges/The_Daily_Bilge_2007.htm" target="_blank">2007</RailsLink></ListGroupItem>
@@ -102,7 +102,7 @@ export default function Index(props) {
                     <ListGroupItem><RailsLink href="/dailybilges/The_Daily_Bilge_2016.htm" target="_blank">2016</RailsLink></ListGroupItem>
                     <ListGroupItem><RailsLink href="/dailybilges/The_Daily_Bilge_2017.htm" target="_blank">2017</RailsLink></ListGroupItem>
                     <ListGroupItem><RailsLink href="/dailybilges/The_Daily_Bilge_2018.htm" target="_blank">2018</RailsLink></ListGroupItem>
-                    <ListGroupItem><RailsLink href="/dailybilges/The_Daily_Bilge_2019.htm" target="_blank">2019</RailsLink></ListGroupItem>
+                    <ListGroupItem><RailsLink href="/dailybilges/The_Daily_Bilge_2019.htm" target="_blank">2019</RailsLink></ListGroupItem> */}
                     {
                             !!dailyBilges && dailyBilges.length > 0 ? (
                                 <React.Fragment>

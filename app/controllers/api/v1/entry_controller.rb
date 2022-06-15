@@ -15,8 +15,6 @@ class Api::V1::EntryController < ApplicationController
         mactier_weather = OpenWeather::Current.geocode(45.34, -80.04, options)
         
         render json: { 
-            inseason_reservation_link: ENV['INSEASON_RESERVATION_LINK'],
-            outseason_reservation_link: ENV['OUTSEASON_RESERVATION_LINK'],
             humidity: mactier_weather["main"]["humidity"],
             max_temp: mactier_weather["main"]["temp_max"].floor,
             wind_speed: mactier_weather["wind"]["speed"],

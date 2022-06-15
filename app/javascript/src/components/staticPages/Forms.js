@@ -18,10 +18,10 @@ export default function Forms(props) {
             render: () => 
             <Tab.Pane>
                 <ListGroup>
-                    <ListGroupItem><RailsLink href="/2019_LeaderTeam_Application.pdf" target="_blank">Leadership Team Application</RailsLink></ListGroupItem>
+                    {/* <ListGroupItem><RailsLink href="/2019_LeaderTeam_Application.pdf" target="_blank">Leadership Team Application</RailsLink></ListGroupItem>
                     <ListGroupItem><RailsLink href="/2019_LeaderTeamApplicationInformation.pdf" target="_blank">Leadership Team Information</RailsLink></ListGroupItem>
                     <ListGroupItem><RailsLink href="/2020_Application for Wait Staff.doc" target="_blank">Wait Staff Application</RailsLink></ListGroupItem>
-                    <ListGroupItem><RailsLink href="/2020_Application Information for Wait Staff.doc" target="_blank">Wait Staff Information</RailsLink></ListGroupItem>
+                    <ListGroupItem><RailsLink href="/2020_Application Information for Wait Staff.doc" target="_blank">Wait Staff Information</RailsLink></ListGroupItem> */}
                     <ListGroupItem><RailsLink href="/2020 Wait Staff Regulations.pdf" target="_blank">Wait Staff Regulations</RailsLink></ListGroupItem>
                     <ListGroupItem><RailsLink href="/2020_Emergency Medical Form for Wait Staff.doc" target="_blank">Emergency Medical Form for Wait Staff</RailsLink></ListGroupItem>
                     <ListGroupItem><RailsLink href="/2015_SpecialDietaryRequestForm.pdf" target="_blank">Dietary Request Forms</RailsLink></ListGroupItem>
