@@ -206,7 +206,7 @@ export default function Rideshare(props) {
                                     <Table.HeaderCell>Offering/Seeking</Table.HeaderCell>
                                     <Table.HeaderCell>Point of Departure</Table.HeaderCell>
                                     <Table.HeaderCell>Point of Arrival</Table.HeaderCell>
-                                    <Table.HeaderCell>Number of Seats Available</Table.HeaderCell>
+                                    <Table.HeaderCell># of Seats Available/# of Seats Needed</Table.HeaderCell>
                                     <Table.HeaderCell>Leaving at</Table.HeaderCell>
                                     <Table.HeaderCell>Arriving at</Table.HeaderCell>
                                 </Table.Row>
