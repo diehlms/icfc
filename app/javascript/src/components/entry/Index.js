@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Grid, Card, Image, Button, List } from 'semantic-ui-react'
+import { Grid, Card, Image, Button, List, Message } from 'semantic-ui-react'
 import Header from '../shared/PageTitle';
 import axiosClient from '../../services/axios';
 
@@ -102,9 +102,11 @@ export default function Index(props) {
                                 text='Iron City Fishing Club'
                             />
                         </Grid.Row>
-
                     </Grid>
                     <Grid stackable divided='vertically'>
+                        <Message info>
+                            <Message.Header><a href="https://docs.google.com/spreadsheets/d/1NZjfzPO2p5lOkVMGsbiLtDPN6q-SlLwYF2Ad_vqGeSg/edit?usp=sharing">Click Here For Covid Dashboard</a></Message.Header>
+                        </Message>
                         <Grid.Row columns={3} stretched>
                             <Grid.Column>
                                 <Card>
