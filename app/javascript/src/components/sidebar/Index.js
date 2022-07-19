@@ -25,7 +25,6 @@ export default function App(props) {
     const initPage = () => {
         axios.get('/api/v1/entry/initial_payload')
         .then(res => {
-            console.log(res);
             setReservationLinks({
                 inSeasonResLink: res.data.inseason_reservation_link,
                 outSeasonResLink: res.data.outseason_reservation_link

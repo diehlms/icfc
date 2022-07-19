@@ -48,6 +48,7 @@ export default function Index(props) {
     const [campers, setCampers] = useState([]);
     const [recentArticles, setRecentArticles] = useState([]);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [thisWeeksEvents, setThisWeeksEvents] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -60,6 +61,7 @@ export default function Index(props) {
                 setIsAuthenticated(res.data.logged_in);
                 getArticles();
                 getCampers();
+                getThisWeeksEvents();
             }
         })
         .catch(err => {
@@ -91,6 +93,16 @@ export default function Index(props) {
         });
     }
 
+    const getThisWeeksEvents = () => {
+        axiosClient.get('entry/this_weeks_events')
+        .then(res => {
+            setThisWeeksEvents(res.data.events)
+        })
+        .catch(err => {
+            dispatch(actions.setErrors(err.response.data.errors));
+        });
+    }
+
     return (
         <React.Fragment>
             { isAuthenticated ? (
@@ -111,9 +123,17 @@ export default function Index(props) {
                             <Grid.Column>
                                 <Card>
                                     <Card.Content>
-                                        <Card.Header>Who's in Camp?</Card.Header>
+                                        <Card.Header>This Week's Events</Card.Header>
                                         <Card.Description>
-                                            Looks like no one is in camp today!
+                                            {
+                                                thisWeeksEvents && thisWeeksEvents.length > 0 ? (
+                                                    thisWeeksEvents.map((event, i) => (
+                                                        <a key={i} href={`/events/${event.id}`}>{event.events}</a>
+                                                    ))
+                                                ) : (
+                                                    <p>Looks like there are no events this week</p>
+                                                )
+                                            }
                                         </Card.Description>
                                     </Card.Content>
                                 </Card>

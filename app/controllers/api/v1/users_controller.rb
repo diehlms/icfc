@@ -33,11 +33,33 @@ class Api::V1::UsersController < ApplicationController
             'username',
             'username'
         ).find(params[:id])
-        if user_to_return
-            render json: user_to_return unless !logged_in?
-        else
-            render json: user_to_return.errors
-        end
+        
+        render json: user_to_return unless !logged_in?
+    end
+
+    def profile
+        user_to_return = User.select(
+            'id',
+            'admin',
+            'email',
+            'firstname',
+            'lastname',
+            'phone_number',
+            'username',
+            'username'
+        ).friendly.find(params[:id])
+        
+        articles = user_to_return.articles
+        events = user_to_return.events
+        cabins = user_to_return.cabins
+
+        payload = {
+            "user" => user_to_return,
+            "articles" => articles,
+            "events" => events,
+            "cabins" => cabins,
+        }
+        render json: payload unless !logged_in?
     end
 
     def destroy

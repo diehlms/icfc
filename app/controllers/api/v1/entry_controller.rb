@@ -34,4 +34,19 @@ class Api::V1::EntryController < ApplicationController
             articles: @articles
         }
     end
+
+    def this_weeks_events
+        nearest_sunday =     Time.now.sunday.to_s
+        last_sunday =        Time.now.last_week.sunday.to_s
+
+        puts nearest_sunday
+        puts last_sunday
+
+        @events = Event.where(
+            :start_time.to_s => last_sunday..nearest_sunday
+        )
+        render json: {
+            events: @events
+        }
+    end
 end

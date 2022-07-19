@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get '/entry/initial_payload', to: 'entry#initial_payload'
       get '/entry/campers', to: 'entry#campers'
       get '/entry/recent_articles', to: 'entry#recent_articles'
+      get '/entry/this_weeks_events', to: 'entry#this_weeks_events'
 
       post '/articles/create'
       post '/users/create'
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
       
       get '/articles/:id', to: 'articles#show'
       get '/users/:id', to: 'users#show'
+      get '/users/profile/:id', to: 'users#profile'
       get '/pictures/:id', to: 'pictures#show'
       get '/charts/:id', to: 'chart#show'
       get '/location_points/get_single/:id', to: 'location_points#single'
