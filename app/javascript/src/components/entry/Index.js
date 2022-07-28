@@ -107,18 +107,29 @@ export default function Index(props) {
         <React.Fragment>
             { isAuthenticated ? (
                 <div className='reactPageAppContainer'>
-                    <Grid>
-                        <Grid.Row>
-                            <Header 
-                                size='h1'
-                                text='Iron City Fishing Club'
-                            />
-                        </Grid.Row>
-                    </Grid>
                     <Grid stackable divided='vertically'>
-                        <Message info>
-                            <Message.Header><a href="https://docs.google.com/spreadsheets/d/1NZjfzPO2p5lOkVMGsbiLtDPN6q-SlLwYF2Ad_vqGeSg/edit?usp=sharing">Click Here For Covid Dashboard</a></Message.Header>
-                        </Message>
+                        <Grid.Row columns={3}>
+                            <Grid.Column>
+                                <Header 
+                                    size='h1'
+                                    text='Iron City Fishing Club'
+                                />
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Message info>
+                                    <Message.Header>
+                                        <a href="https://docs.google.com/spreadsheets/d/1NZjfzPO2p5lOkVMGsbiLtDPN6q-SlLwYF2Ad_vqGeSg/edit?usp=sharing">Click Here For Covid Dashboard</a>
+                                    </Message.Header>
+                                </Message>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Message success>
+                                    <Message.Header>
+                                        <a href="https://drive.google.com/drive/folders/1HDFlICr6Mmj4kJXy1RJ1-7BLwG4uApWb?usp=sharing">Click Here For Covid Protocols</a>
+                                    </Message.Header>
+                                </Message>
+                            </Grid.Column>
+                        </Grid.Row>
                         <Grid.Row columns={3} stretched>
                             <Grid.Column>
                                 <Card>
