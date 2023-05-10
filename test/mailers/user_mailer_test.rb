@@ -7,7 +7,7 @@ class UserMailerTest < ActionMailer::TestCase
     mail = UserMailer.registration_confirmation(user)
     assert_equal "Registration Confirmation", mail.subject
     assert_equal [user.email], mail.to
-    assert_equal ["diehlstx@gmail.com"], mail.from
+    assert_equal ["em5374.icfc.net"], mail.from
     assert_match user.username,               mail.body.encoded
     assert_match user.confirm_token,   mail.body.encoded
   end
@@ -18,7 +18,7 @@ class UserMailerTest < ActionMailer::TestCase
     mail = UserMailer.password_reset(user)
     assert_equal "Password Reset", mail.subject
     assert_equal [user.email], mail.to
-    assert_equal ["diehlstx@gmail.com"], mail.from
+    assert_equal ["em5374.icfc.net"], mail.from
     assert_match user.password_reset_token,        mail.body.encoded
   end
 
