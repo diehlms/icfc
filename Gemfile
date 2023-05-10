@@ -37,6 +37,7 @@ gem 'trix-rails', require: 'trix'
 gem 'rails-controller-testing'
 gem 'friendly_id', '~> 5.2.4'
 gem 'foreman'
+gem 'sendgrid-ruby'
 
 
 gem 'psych', '< 4'
