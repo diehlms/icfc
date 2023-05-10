@@ -1,6 +1,6 @@
 diehl:
   username: diehlsillers
-  email: em5374.icfc.net
+  email: icfc.net
   password_digest: <%= User.digest('password') %>
   remember_digest: "1"
   admin: true
