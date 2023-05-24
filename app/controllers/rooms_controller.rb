@@ -29,7 +29,7 @@ class RoomsController < ApplicationController
     end
 
     def update
-        if @room.update_attributes(permitted_parameters)
+        if @room.update(permitted_parameters)
             flash[:success] = "Room #{@room.name} updated successfully"
             redirect_to rooms_path
         else
