@@ -206,7 +206,7 @@ export default function Index(props) {
                                                 <List.Item>Moe's Number: 705-746-6699</List.Item>
                                                 <List.Item>Lisa's Number:  705-346-1191</List.Item>
                                                 <List.Item>Gregoire Home Telephone: 705-375-5633</List.Item>
-                                                <List.Item>Pay Telephone: 705-375-9907</List.Item>
+                                                <List.Item>Randy Grisdale: 705-774-4179</List.Item>
                                             </List>
                                         </Card.Description>
                                     </Card.Content>
