@@ -3,7 +3,7 @@ class Api::V1::RidesharesController < ApplicationController
     helper_method :current_user, :logged_in?, :require_user
     
     def index
-        rideshare = Rideshare.all
+        rideshare = Rideshare.all.where("arriving_at > ?", Date.today)
         render json: rideshare
     end
 

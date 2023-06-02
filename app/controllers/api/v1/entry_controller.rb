@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'nokogiri'
+
 class Api::V1::EntryController < ApplicationController
     before_action :require_user
     helper_method :current_user, :logged_in?, :require_user
@@ -23,6 +26,21 @@ class Api::V1::EntryController < ApplicationController
 
     def campers
         @campers = []
+        html_as_s = URI.open('https://www.pronto2.com/icfc/bookingslist.php').read
+        
+        doc = Nokogiri::HTML(html_as_s)
+        
+        table = doc.css('tr')
+        
+        table.each do | table_row |
+            camper = {
+                "name": table_row.css("td:nth-of-type(1)").text,
+                "arrival": table_row.css("td:nth-of-type(2)").text,
+                "departure": table_row.css("td:nth-of-type(3)").text
+            }
+            @campers.append(camper)
+        end
+            
         render json: {
             campers: @campers
         }

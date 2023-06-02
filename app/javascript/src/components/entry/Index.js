@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Grid, Card, Image, Button, List, Message } from 'semantic-ui-react'
 import Header from '../shared/PageTitle';
 import axiosClient from '../../services/axios';
@@ -86,7 +87,14 @@ export default function Index(props) {
     const getCampers = () => {
         axiosClient.get('entry/campers')
         .then(res => {
-            setCampers(res.data.campers)
+            const currentDate = new Date();
+
+            const filteredCampers = res.data.campers.filter(camp => {
+                const arrivalDate = new Date(camp.arrival);
+                const departureDate = new Date(camp.departure);
+                return arrivalDate <= currentDate && departureDate >= currentDate;
+            });
+            setCampers(filteredCampers)
         })
         .catch(err => {
             dispatch(actions.setErrors(err.response.data.errors));
@@ -116,18 +124,39 @@ export default function Index(props) {
                                 />
                             </Grid.Column>
                             <Grid.Column>
-                                <Message info>
+                                <Message success>
                                     <Message.Header>
-                                        <a href="https://docs.google.com/spreadsheets/d/1NZjfzPO2p5lOkVMGsbiLtDPN6q-SlLwYF2Ad_vqGeSg/edit?usp=sharing">Click Here For Covid Dashboard</a>
+                                        <a href="https://www.pronto2.com/icfc/bookingslist.php" target="_blank">Click Here For Current Summer Bookings</a>
                                     </Message.Header>
                                 </Message>
                             </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row columns={4} stretched>
                             <Grid.Column>
-                                <Message success>
-                                    <Message.Header>
-                                        <a href="https://drive.google.com/drive/folders/1HDFlICr6Mmj4kJXy1RJ1-7BLwG4uApWb?usp=sharing">Click Here For Covid Protocols</a>
-                                    </Message.Header>
-                                </Message>
+                                <Button class="ui positive basic button">
+                                    <a href="/events">Calendar</a>
+                                    <i class="icon arrow alternate circle right"></i>   
+                                </Button>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Button class="ui positive basic button">
+                                    <a href="/articles">Blog/Updates</a>
+                                    <i class="icon arrow alternate circle right"></i>   
+                                </Button>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Button class="ui positive basic button">
+                                    <Link to="/rideshare">
+                                        Rideshare
+                                    </Link>
+                                    <i class="icon arrow alternate circle right"></i>   
+                                </Button>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Button class="ui positive basic button">
+                                    <a href="/users">Directory</a>
+                                    <i class="icon arrow alternate circle right"></i>   
+                                </Button>
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row columns={3} stretched>
@@ -142,7 +171,7 @@ export default function Index(props) {
                                                         <a key={i} href={`/events/${event.id}`}>{event.events}</a>
                                                     ))
                                                 ) : (
-                                                    <p>Looks like there are no events this week</p>
+                                                    <p>Looks like there are no events this week!</p>
                                                 )
                                             }
                                         </Card.Description>
@@ -150,7 +179,22 @@ export default function Index(props) {
                                 </Card>
                             </Grid.Column>
                             <Grid.Column>                              
-                                <Image className='front-page-img' src='DSC_0323.jpg' />
+                                <Card>                                
+                                    <Card.Content>
+                                        <Card.Header>Who's in Camp?</Card.Header>
+                                        <Card.Description>
+                                            {
+                                                campers && campers.length > 0 ? (
+                                                    campers.map((camper, i) => (
+                                                        <li key={i}>{camper.name}</li>
+                                                    ))
+                                                ) : (
+                                                    <span>Look's like there are no campers today!</span>
+                                                )
+                                            }
+                                        </Card.Description>
+                                    </Card.Content>
+                                </Card>
                             </Grid.Column>
                             <Grid.Column>
                                 <Card>
@@ -175,7 +219,6 @@ export default function Index(props) {
                                     <iframe 
                                         src='https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1459440.1988828832!2d-80.56660371920148!3d44.403018062644065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x882b394ac02dd491%3A0xb41d5de9c4030ec5!2sToronto%20Pearson%20International%20Airport%2C%20Silver%20Dart%20Drive%2C%20Mississauga%2C%20ON%2C%20Canada!3m2!1d43.6777176!2d-79.6248197!4m5!1s0x4d2af89d9f168371%3A0xf170c239ee53f14c!2sMacTier%2C%20ON%2C%20Canada!3m2!1d45.139272999999996!2d-79.771827!5e0!3m2!1sen!2sus!4v1572568118601!5m2!1sen!2sus' 
                                         height='300px' 
-                                        frameBorder='0' 
                                         allowFullScreen=''>
                                     </iframe>
                                     <Card.Content>
