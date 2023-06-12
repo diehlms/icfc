@@ -21,7 +21,7 @@
                 <% @galleries.each do |picture| %>
                     <div class="card picture">
                         <div class="card card-body picture">
-                            <%= image_tag(picture.image.url(:thumb), class: "gallery-img", id: "image=#{dom_id(picture)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(picture)}"}) if picture.image? %>
+                            <%= image_tag(picture.image_url, class: "gallery-img", id: "image=#{dom_id(picture)}", data: {toggle: "modal", target: "#imgModal-#{dom_id(picture)}"}) if picture.image? %>
                             <% if logged_in? && picture.user_id == current_user.id || logged_in? && current_user.admin? %>
                                 <%= button_to "delete", gallery_path(picture), method: :delete, data: { confirm: "are you sure you want to delete this picture? "}, class: "btn btn-xs btn-block btn-danger" %>
                             <% end %>
@@ -29,7 +29,7 @@
                                 <div class="modal-dialog">
                                     <div class="model-content">
                                         <div class="img modal-body">
-                                            <%= image_tag(picture.image.url, class: "picture-modal-whole")%>
+                                            <%= image_tag(picture.image_url, class: "picture-modal-whole")%>
                                             <p class="img-caption"><%= picture.caption %></p>
                                         </div>
                                     </div>
