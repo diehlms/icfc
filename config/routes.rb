@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get '/entry/campers', to: 'entry#campers'
       get '/entry/recent_articles', to: 'entry#recent_articles'
       get '/entry/this_weeks_events', to: 'entry#this_weeks_events'
+      get '/committees', to: 'committees#index'
 
       post '/articles/create'
       post '/users/create'
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
       post '/documents/create'
       post '/rideshares/create'
       post '/location_points/create'
+      post '/committees/create'
       
       get '/articles/:id', to: 'articles#show'
       get '/users/:id', to: 'users#show'
@@ -31,12 +33,14 @@ Rails.application.routes.draw do
       delete '/articles/destroy/:id', to: 'articles#destroy'
       delete '/charts/destroy/:id', to: 'charts#destroy'
       delete '/location_points/destroy/:id', to: 'location_points#destroy'
+      delete '/committees/destroy/:id', to: 'committees#destroy'
       
       resources :users, only: [:create, :show, :index]
       resources :articles, only: [:create, :show, :index, :destroy]
       resources :charts, only: [:create, :show, :index, :destroy]
       resources :rideshares
       resources :location_points
+      resources :committees
     end
   end
   

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import UsersShow from '../components/users/Show';
+import CommitteesIndex from '../components/committees/Index';
 import ChartsIndex from '../components/charts/Index';
 import Entry from '../components/entry/Index';
 import RideShare from '../components/rideshare/Index';
@@ -14,7 +15,7 @@ import History from '../components/staticPages/History';
 import Membership from '../components/staticPages/Membership';
 import PlannedGiving from '../components/staticPages/PlannedGiving';
 import Forms from '../components/staticPages/Forms';
-  
+
 export default function Index(props) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -34,6 +35,7 @@ export default function Index(props) {
                     <React.Fragment>
                         <Route exact path='/rideshare' render={(props) => <RideShare {...props} userId={userId} isAdmin={isAdmin} />} />
                         <Route exact path='/users/:id' render={(props) => <UsersShow {...props} userId={userId} />} />
+                        <Route exact path='/committees' render={(props) => <CommitteesIndex {...props} userId={userId} isAdmin={isAdmin} />} />
                         <Route exact path='/charts' render={(props) => <ChartsIndex {...props} userId={userId} />} />
                         <Route exact path='/archives' render={(props) => <Archives {...props} userId={userId} isAdmin={isAdmin} />} />
                         <Route exact path='/by-laws' render={(props) => <ByLaws {...props} userId={userId} />} />

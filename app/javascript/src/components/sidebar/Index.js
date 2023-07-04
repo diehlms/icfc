@@ -121,6 +121,11 @@ export default function App(props) {
                 "link": "/rideshare",
                 "displayName": "Rideshare",
                 railsLink: false
+            },
+            {
+                "link": "/committees",
+                "displayName": "Committees",
+                railsLink: false
             }
         ]
     }];

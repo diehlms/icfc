@@ -130,6 +130,13 @@ export default function Index(props) {
                                     </Message.Header>
                                 </Message>
                             </Grid.Column>
+                            <Grid.Column>
+                                <Message info>
+                                    <Message.Header>
+                                        <a href="https://photos.app.goo.gl/ErhHXFFF366Hoc1m8" target="_blank">Click Here For Summer 2023 Photos!</a>
+                                    </Message.Header>
+                                </Message>
+                            </Grid.Column>
                         </Grid.Row>
                         <Grid.Row columns={4} stretched>
                             <Grid.Column>
@@ -168,7 +175,9 @@ export default function Index(props) {
                                             {
                                                 thisWeeksEvents && thisWeeksEvents.length > 0 ? (
                                                     thisWeeksEvents.map((event, i) => (
-                                                        <a key={i} href={`/events/${event.id}`}>{event.events}</a>
+                                                        <li key={i}>
+                                                            <a href={`/events/${event.id}`}>{event.events}</a>
+                                                        </li>
                                                     ))
                                                 ) : (
                                                     <p>Looks like there are no events this week!</p>
