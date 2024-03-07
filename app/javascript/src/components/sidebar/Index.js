@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Routes from '../../routes/Index';
 
 import '../../App.scss';
 import 'semantic-ui-css/semantic.min.css';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { Menu, Segment, Sidebar, Divider } from 'semantic-ui-react';
+import { Menu, Segment, Sidebar, Divider, Button } from 'semantic-ui-react';
 import * as axios from 'axios';
 
 
@@ -14,10 +13,8 @@ const AppContainer = styled.div`
     'margin: 0px auto;'
 `;
 
-
 export default function App(props) {
     const [reservationLinks, setReservationLinks] = useState({})
-    const [initialPayload, setInitialPayload] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
     const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -152,12 +149,15 @@ export default function App(props) {
                     visible={props.showSidebar}
                     width='thin'
                 >
+                    <Button color='yellow' size="medium" target="_blank" as='a' href="https://www.paypal.com/ncp/payment/95N2K7CA3CPF4">
+                        Payments
+                    </Button>
                     <h3>Reservations</h3>
-                    <Menu.Item className="sidebar-link" as='a' href={reservationLinks.inSeasonResLink}>
+                    <Menu.Item className="sidebar-link" target="_blank" as='a' href={reservationLinks.inSeasonResLink}>
                         In-Season Reservations
                     </Menu.Item>
                     <Divider fitted />
-                    <Menu.Item className="sidebar-link" as='a' href={reservationLinks.outSeasonResLink}>
+                    <Menu.Item className="sidebar-link" target="_blank" as='a' href={reservationLinks.outSeasonResLink}>
                         Out of Season Reservations
                     </Menu.Item>
                     <Divider fitted />

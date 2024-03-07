@@ -14,3 +14,14 @@ With this updated site, users who are activated will be able to:
 * Read up on history and the culture of ICFC
 
 The site is still a work in progress, and any contributions for design would be much appreciated.
+
+## Getting started
+
+Installation:
+
+* Prereqs: ruby 3.2.2, node:18, postgres@>=12
+* `bundle install`
+* `yarn install`
+* `foreman start -f Procfile.dev`
+* `rails db:create`
+* `rails db:migrate`

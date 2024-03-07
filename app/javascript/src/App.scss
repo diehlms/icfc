@@ -49,6 +49,10 @@
     top: 10vh;
 }
 
+.paypal-wrapper {
+    overflow: hidden;
+}
+
 @media screen and (min-width: 700px) {
     .ui.checkbox.mobile-sidebar-checkbox {
         display: none;
