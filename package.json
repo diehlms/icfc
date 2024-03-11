@@ -1,4 +1,10 @@
 {
+  "engines": {
+    "node": "20.9.0"
+  },
+  "name": "frontend",
+  "version": "0.0.0",
+  "scripts": {},
   "dependencies": {
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.16.7",
