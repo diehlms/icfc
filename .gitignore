@@ -46,3 +46,5 @@ yarn-debug.log*
 /public/uploads/*
 
 .env
+/.cache
+/.bin
