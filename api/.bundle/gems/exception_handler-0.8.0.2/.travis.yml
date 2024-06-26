@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+ - 2.2.4
+ - 2.3.7
+ - 2.4.4
+ - 2.5.1
+ - ruby-head
+notifications:
+    - false
+scripts:
+  - bundle exec rspec
+after_script:
+  - bundle exec rake coveralls:push

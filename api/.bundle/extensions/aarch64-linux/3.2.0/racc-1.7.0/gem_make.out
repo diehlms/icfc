@@ -1,0 +1,22 @@
+current directory: /app/.bundle/gems/racc-1.7.0/ext/racc/cparse
+/usr/local/bin/ruby extconf.rb
+checking for rb_block_call()... yes
+checking for rb_ary_subseq()... yes
+creating Makefile
+
+current directory: /app/.bundle/gems/racc-1.7.0/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-sfc24g sitelibdir\=./.gem.20240612-6-sfc24g clean
+
+current directory: /app/.bundle/gems/racc-1.7.0/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-sfc24g sitelibdir\=./.gem.20240612-6-sfc24g
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /app/.bundle/gems/racc-1.7.0/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-sfc24g sitelibdir\=./.gem.20240612-6-sfc24g install
+make: Warning: File 'cparse.so' has modification time 0.0058 s in the future
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20240612-6-sfc24g/racc
+make: warning:  Clock skew detected.  Your build may be incomplete.
+
+current directory: /app/.bundle/gems/racc-1.7.0/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-sfc24g sitelibdir\=./.gem.20240612-6-sfc24g clean

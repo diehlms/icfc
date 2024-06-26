@@ -1,0 +1,80 @@
+require 'swagger_helper'
+
+RSpec.describe 'api/v1/location_points', type: :request do
+  path '/v1/location_points' do
+    get('list location_points') do
+      tags 'Location Points'
+      consumes 'application/json'
+      produces 'application/json'
+      response(200, 'successful') do
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+
+    post('create location_point') do
+      tags 'Location Points'
+      consumes 'application/json'
+      produces 'application/json'
+      response(200, 'successful') do
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/v1/location_points/{id}' do
+    # You'll want to customize the parameter types...
+    parameter name: 'id', in: :path, type: :string, description: 'id'
+
+    get('show location_point') do
+      tags 'Location Points'
+      consumes 'application/json'
+      produces 'application/json'
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+
+    delete('delete location_point') do
+      tags 'Location Points'
+      consumes 'application/json'
+      produces 'application/json'
+      response(200, 'successful') do
+        let(:id) { '123' }
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+end

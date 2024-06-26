@@ -1,0 +1,1083 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/v1/articles":
+    get:
+      summary: list articles
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create article
+      tags:
+      - Articles
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/articleIn"
+  "/v1/articles/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+  "/v1/articles/destroy/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    delete:
+      summary: delete article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+  "/v1/auth/login":
+    post:
+      summary: login authentication
+      tags:
+      - Auth
+      description: login, get new session
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/loginPayload"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/loginPayload"
+  "/v1/auth/signup":
+    post:
+      summary: signup authentication
+      tags:
+      - Auth
+      description: sign up
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/signupPayload"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/signupPayload"
+  "/v1/cabin_attachments":
+    get:
+      summary: list cabin_attachments
+      tags:
+      - Cabin Attachments
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create cabin_attachment
+      tags:
+      - Cabin Attachments
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/cabinAttachmentIn"
+  "/v1/cabin_attachments/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show cabin_attachment
+      tags:
+      - Cabin Attachments
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete cabin_attachment
+      tags:
+      - Cabin Attachments
+      responses:
+        '200':
+          description: successful
+  "/v1/cabin_dates":
+    get:
+      summary: list cabin_dates
+      tags:
+      - Cabin Dates
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create cabin_date
+      tags:
+      - Cabin Dates
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/cabinDateIn"
+  "/v1/cabin_dates/{id}":
+    delete:
+      summary: delete cabin_date
+      tags:
+      - Cabin Dates
+      responses:
+        '200':
+          description: successful
+  "/v1/cabins":
+    get:
+      summary: list cabins
+      tags:
+      - Cabins
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create cabin
+      tags:
+      - Cabins
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/cabinIn"
+  "/v1/cabins/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show cabin
+      tags:
+      - Cabins
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update cabin
+      tags:
+      - Cabins
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update cabin
+      tags:
+      - Cabins
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete cabin
+      tags:
+      - Cabins
+      responses:
+        '200':
+          description: successful
+  "/v1/charts":
+    get:
+      summary: list charts
+      tags:
+      - Charts
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create chart
+      tags:
+      - Charts
+      responses:
+        '200':
+          description: successful
+  "/v1/charts/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show chart
+      tags:
+      - Charts
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update chart
+      tags:
+      - Charts
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update chart
+      tags:
+      - Charts
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete chart
+      tags:
+      - Charts
+      responses:
+        '200':
+          description: successful
+  "/v1/comments":
+    get:
+      summary: list comments
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create comment
+      tags:
+      - Comments
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/commentIn"
+  "/v1/comments/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    delete:
+      summary: delete comment
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: successful
+  "/v1/committees":
+    get:
+      summary: list committees
+      tags:
+      - Committees
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create committee
+      tags:
+      - Committees
+      responses:
+        '200':
+          description: successful
+  "/v1/committees/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show committee
+      tags:
+      - Committees
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update committee
+      tags:
+      - Committees
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update committee
+      tags:
+      - Committees
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete committee
+      tags:
+      - Committees
+      responses:
+        '200':
+          description: successful
+  "/v1/documents":
+    get:
+      summary: list documents
+      tags:
+      - Documents
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create document
+      tags:
+      - Documents
+      responses:
+        '200':
+          description: successful
+  "/v1/documents/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show document
+      tags:
+      - Documents
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update document
+      tags:
+      - Documents
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update document
+      tags:
+      - Documents
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete document
+      tags:
+      - Documents
+      responses:
+        '200':
+          description: successful
+  "/v1/entry":
+    get:
+      summary: list entries
+      tags:
+      - Entry
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create entry
+      tags:
+      - Entry
+      responses:
+        '200':
+          description: successful
+  "/v1/entry/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show entry
+      tags:
+      - Entry
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update entry
+      tags:
+      - Entry
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update entry
+      tags:
+      - Entry
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete entry
+      tags:
+      - Entry
+      responses:
+        '200':
+          description: successful
+  "/v1/events":
+    get:
+      summary: list events
+      tags:
+      - Events
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create event
+      tags:
+      - Events
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/eventIn"
+  "/v1/events/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show event
+      tags:
+      - Events
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update event
+      tags:
+      - Events
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update event
+      tags:
+      - Events
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete event
+      tags:
+      - Events
+      responses:
+        '200':
+          description: successful
+  "/v1/family_members":
+    get:
+      summary: list family_members
+      tags:
+      - Family Members
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create family_member
+      tags:
+      - Family Members
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/familyMemberIn"
+  "/v1/family_members/{id}":
+    patch:
+      summary: update family_member
+      tags:
+      - Family Members
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update family_member
+      tags:
+      - Family Members
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete family_member
+      tags:
+      - Family Members
+      responses:
+        '200':
+          description: successful
+  "/v1/family_trees":
+    get:
+      summary: list family_trees
+      tags:
+      - Family Trees
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create family_tree
+      tags:
+      - Family Trees
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$refs": "#/components/schemas/familyTreeIn"
+  "/v1/family_trees/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show family_tree
+      tags:
+      - Family Trees
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update family_tree
+      tags:
+      - Family Trees
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update family_tree
+      tags:
+      - Family Trees
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete family_tree
+      tags:
+      - Family Trees
+      responses:
+        '200':
+          description: successful
+  "/v1/galleries":
+    get:
+      summary: list galleries
+      tags:
+      - Galleries
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create gallery
+      tags:
+      - Galleries
+      responses:
+        '200':
+          description: successful
+  "/v1/galleries/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show gallery
+      tags:
+      - Galleries
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update gallery
+      tags:
+      - Galleries
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update gallery
+      tags:
+      - Galleries
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete gallery
+      tags:
+      - Galleries
+      responses:
+        '200':
+          description: successful
+  "/v1/location_points":
+    get:
+      summary: list location_points
+      tags:
+      - Location Points
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create location_point
+      tags:
+      - Location Points
+      responses:
+        '200':
+          description: successful
+  "/v1/location_points/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show location_point
+      tags:
+      - Location Points
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete location_point
+      tags:
+      - Location Points
+      responses:
+        '200':
+          description: successful
+  "/v1/password_resets":
+    get:
+      summary: list password_resets
+      tags:
+      - Password Resets
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create password_reset
+      tags:
+      - Password Resets
+      responses:
+        '200':
+          description: successful
+  "/v1/password_resets/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show password_reset
+      tags:
+      - Password Resets
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update password_reset
+      tags:
+      - Password Resets
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update password_reset
+      tags:
+      - Password Resets
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete password_reset
+      responses:
+        '200':
+          description: successful
+  "/v1/rideshares":
+    get:
+      summary: list rideshares
+      tags:
+      - Rideshares
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create rideshare
+      tags:
+      - Rideshares
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/rideshareIn"
+  "/v1/rideshares/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show rideshare
+      tags:
+      - Rideshares
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update rideshare
+      tags:
+      - Rideshares
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update rideshare
+      tags:
+      - Rideshares
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete rideshare
+      tags:
+      - Rideshares
+      responses:
+        '200':
+          description: successful
+  "/v1/search":
+    post:
+      summary: create search
+      tags:
+      - Search
+      responses:
+        '200':
+          description: successful
+  "/v1/users":
+    get:
+      summary: list users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+  "/v1/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update user
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: icfc.localhost:3010/api
+components:
+  schemas:
+    not_found:
+      type: object
+      properties:
+        message:
+          type: string
+    loginPayload:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          example: test@gmail.com
+        password:
+          type: string
+          format: password
+    signupPayload:
+      type: object
+      required:
+      - email
+      properties:
+        firstname:
+          type: string
+          example: ''
+        lastname:
+          type: string
+          example: ''
+        phonenumber:
+          type: string
+        username:
+          type: string
+          example: ''
+        email:
+          type: string
+          example: test@gmail.com
+        password:
+          type: password
+        password_confirmation:
+          type: password
+    articleIn:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        image:
+          type: string
+          format: binary
+        pinned:
+          type: boolean
+        user_id:
+          type: int
+    cabinAttachmentIn:
+      type: object
+      properties:
+        cabin_in:
+          type: int
+        image:
+          type: string
+          format: binary
+    cabinDateIn:
+      type: object
+      properties:
+        cabin_in:
+          type: int
+        startdate:
+          type: string
+          format: datetime
+        enddate:
+          type: string
+          format: datetime
+    cabinIn:
+      type: object
+      properties:
+        name:
+          type: string
+        bedrooms:
+          type: int
+        washerdryer:
+          type: boolean
+        dock:
+          type: boolean
+        user_id:
+          type: int
+        price_per_week:
+          type: int
+        price_per_day:
+          type: int
+        description:
+          type: string
+    chartIn:
+      type: object
+      properties: {}
+    commentIn:
+      type: object
+      properties:
+        content:
+          type: string
+        user_id:
+          type: int
+        article_id:
+          type: int
+    committeeIn:
+      type: object
+      properties:
+        url:
+          type: string
+        name:
+          type: string
+    documentIn:
+      type: object
+      properties:
+        document_title:
+          type: string
+        document_folder:
+          type: string
+        document:
+          type: document
+    eventIn:
+      type: object
+      properties:
+        location:
+          type: string
+        description:
+          type: string
+        start_time:
+          type: string
+          format: datetime
+        end_time:
+          type: string
+          format: datetime
+        user_id:
+          type: int
+    familyMemberIn:
+      type: object
+      properties:
+        name:
+          type: string
+        relationship:
+          type: string
+        family_tree_id:
+          type: int
+        parent_id:
+          type: int
+    familyTreeIn:
+      type: object
+      properties:
+        name:
+          type: string
+    galleryIn:
+      type: object
+      properties:
+        image:
+          type: string
+          format: binary
+        caption:
+          type: string
+        user_id:
+          type: int
+    locationPointIn:
+      type: object
+      properties:
+        location_name:
+          type: string
+        location_description:
+          type: string
+    passwordResetPayload:
+      type: object
+      properties: {}
+    rideshareIn:
+      type: object
+      properties:
+        user_id:
+          type: string
+        number_of_passengers:
+          type: string
+        additional_information:
+          type: string
+        arriving_at:
+          type: string
+        departing_at:
+          type: string
+        point_of_arrival_id:
+          type: string
+        point_of_departure_id:
+          type: string
+        seeking:
+          type: string
+    userIn:
+      type: object
+      properties: {}
+  securitySchemes:
+    AuthToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

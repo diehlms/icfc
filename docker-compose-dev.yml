@@ -1,0 +1,51 @@
+version: "3.8"
+services:
+  proxy:
+    image: nginx:1.23.3-alpine
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "4000:4000"
+    depends_on:
+      - frontend
+      - api
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: sh -c "npm i && npm run start" 
+    env_file:
+      - ".env"
+    volumes:
+      - frontend-node-modules-sync:/app/node_modules:nocopy
+      - ./frontend:/app
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    command: ["rails", "server", "--binding=0.0.0.0"]
+    env_file:
+      - ".env"
+    depends_on:
+      - postgres
+    ports:
+      - "3010:3000"
+    volumes:
+      - gems-sync:/usr/local/bundle:nocopy
+      - ./api:/app
+  postgres:
+    image: postgres:12.11-alpine
+    env_file:
+      - ".env"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
+  # gems-sync:
+  #   external: true
+  # frontend-node-modules-sync:
+  #   external: true
+
+networks:
+  icfc:

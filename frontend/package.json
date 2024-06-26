@@ -1,0 +1,12 @@
+{
+	"name": "frontendv2",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+        "start": "sleep 1000000000"
+	},
+	"devDependencies": {
+	},
+	"dependencies": {
+	}
+}

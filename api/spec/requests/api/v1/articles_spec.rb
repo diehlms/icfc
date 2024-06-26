@@ -1,0 +1,93 @@
+require 'swagger_helper'
+
+RSpec.describe 'api/v1/articles', type: :request do
+  path '/v1/articles' do
+    get('list articles') do
+      tags 'Articles'
+      produces 'application/json'
+      response(200, 'successful') do
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/v1/articles' do
+    post('create article') do
+      tags 'Articles'
+      parameter name: :articleIn, in: :body, schema: { "$ref" => "#/components/schemas/articleIn" }
+      response(200, 'successful') do
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/v1/articles/{id}' do
+    # You'll want to customize the parameter types...
+    parameter name: 'id', in: :path, type: :string, description: 'id'
+    get('show article') do
+      tags 'Articles'
+      produces 'application/json'
+      response(200, 'successful') do
+        let(:id) { '123' }
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+
+    delete('delete article') do
+      tags 'Articles'
+      produces 'application/json'
+      response(200, 'successful') do
+        let(:id) { '123' }
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+
+  path '/v1/articles/destroy/{id}' do
+    # You'll want to customize the parameter types...
+    parameter name: 'id', in: :path, type: :string, description: 'id'
+    delete('delete article') do
+      tags 'Articles'
+      produces 'application/json'
+      response(200, 'successful') do
+        let(:id) { '123' }
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+end

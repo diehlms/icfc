@@ -1,0 +1,23 @@
+current directory: /app/.bundle/gems/eventmachine-1.2.7/ext/fastfilereader
+/usr/local/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /app/.bundle/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-2cc9x0 sitelibdir\=./.gem.20240612-6-2cc9x0 clean
+make: Warning: File 'Makefile' has modification time 0.0047 s in the future
+make: warning:  Clock skew detected.  Your build may be incomplete.
+
+current directory: /app/.bundle/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-2cc9x0 sitelibdir\=./.gem.20240612-6-2cc9x0
+compiling mapper.cpp
+compiling rubymain.cpp
+linking shared-object fastfilereaderext.so
+
+current directory: /app/.bundle/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-2cc9x0 sitelibdir\=./.gem.20240612-6-2cc9x0 install
+make: Warning: File 'fastfilereaderext.so' has modification time 0.0047 s in the future
+/usr/bin/install -c -m 0755 fastfilereaderext.so ./.gem.20240612-6-2cc9x0
+make: warning:  Clock skew detected.  Your build may be incomplete.
+
+current directory: /app/.bundle/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-2cc9x0 sitelibdir\=./.gem.20240612-6-2cc9x0 clean

@@ -1,0 +1,29 @@
+current directory: /app/.bundle/gems/rbs-2.8.4/ext/rbs_extension
+/usr/local/bin/ruby extconf.rb
+checking for whether -std=gnu99 is accepted as CFLAGS... yes
+creating Makefile
+
+current directory: /app/.bundle/gems/rbs-2.8.4/ext/rbs_extension
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-71bzsu sitelibdir\=./.gem.20240612-6-71bzsu clean
+
+current directory: /app/.bundle/gems/rbs-2.8.4/ext/rbs_extension
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-71bzsu sitelibdir\=./.gem.20240612-6-71bzsu
+compiling constants.c
+compiling lexer.c
+compiling lexstate.c
+compiling location.c
+compiling main.c
+compiling parser.c
+compiling parserstate.c
+compiling ruby_objs.c
+compiling unescape.c
+linking shared-object rbs_extension.so
+
+current directory: /app/.bundle/gems/rbs-2.8.4/ext/rbs_extension
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-71bzsu sitelibdir\=./.gem.20240612-6-71bzsu install
+make: Warning: File 'rbs_extension.so' has modification time 0.0017 s in the future
+/usr/bin/install -c -m 0755 rbs_extension.so ./.gem.20240612-6-71bzsu
+make: warning:  Clock skew detected.  Your build may be incomplete.
+
+current directory: /app/.bundle/gems/rbs-2.8.4/ext/rbs_extension
+make DESTDIR\= sitearchdir\=./.gem.20240612-6-71bzsu sitelibdir\=./.gem.20240612-6-71bzsu clean

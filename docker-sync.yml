@@ -1,0 +1,6 @@
+version: "2"
+syncs:
+  gems-sync:
+    src: '~/Documents/Projects/icfc/api/.bundle'
+  frontend-node-modules-sync:
+    src: '~/Documents/Projects/icfc/frontend/node_modules'
