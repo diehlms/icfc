@@ -49,7 +49,7 @@
 			});
 			if (!intendedPath.includes('reset-password')) {
 				// Stupid
-				setTimeout(() => goto('/auth/login'), 0);
+				setTimeout(() => goto('auth/login'), 0);
 			}
 		} else {
 			updateAuthContext.updateAuthContext();
@@ -61,25 +61,24 @@
 	});
 
 	async function logout(): Promise<void> {
-		// localStorage.removeItem('authToken');
-		// get(clientStore)
-		// 	.restClient?.login.logoutApiV1LogoutPost()
-		// 	.then(() => {
-		// 		clientStore.update((prevValue) => ({
-		// 			...prevValue,
-		// 			restClient: new AppClient({
-		// 				BASE: PUBLIC_API_URL
-		// 			}),
-		// 			authCookie: null
-		// 		}));
-		// 		toastStore.update((prevValue) => ({
-		// 			...prevValue,
-		// 			isOpen: true,
-		// 			toastMessage: 'Logged Out Successfully',
-		// 			type: ToastTypes.success
-		// 		}));
-		// 		goto('/auth/login');
-		// 	});
+		localStorage.removeItem('authToken');
+		get(clientStore).restClient?.auth.logout()
+			.then(() => {
+				clientStore.update((prevValue) => ({
+					...prevValue,
+					restClient: new AppClient({
+						BASE: PUBLIC_API_URL
+					}),
+					authCookie: null
+				}));
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: 'Logged Out Successfully',
+					type: ToastTypes.success
+				}));
+				goto('/auth/login');
+			});
 		await resolveAuth();
 	}
 </script>
@@ -95,7 +94,7 @@
 		</div>
 		<div class="flex-1">
 			<Navbar on:emitLoggedOut={logout} />
-			<div class="main-ui-window mt-14 p-10">
+			<div class="main-ui-window mt-2 p-10">
 				<slot />
 			</div>
 		</div>

@@ -1,5 +1,7 @@
 <script lang="ts">
 	import {
+	Avatar,
+		Button,
 		Sidebar,
 		SidebarDropdownItem,
 		SidebarDropdownWrapper,
@@ -51,14 +53,12 @@
 <Sidebar asideClass="gradient" style="height:150vh; width: 250px;">
 	<SidebarWrapper divClass="sidebar-wrapper" class="p-2">
 		<SidebarGroup ulClass="sidebar-group">
-			<!-- <SidebarBrand imgClass="brand-img" aClass="brand-link" {site} /> -->
 			<div class="mb-3 flex items-center space-x-4 pl-4">
-				<!-- <Avatar>{initials}</Avatar> -->
-				<!-- <div class="space-y-1 font-medium dark:text-white">
-					<div class="text-white">{user?.full_name}</div>
-					<div class="role-sig">{user?.role}</div>
-				</div> -->
+				<Avatar>{initials}</Avatar>
 			</div>
+			<Button outline color='yellow'>
+				Pay Bill
+			</Button>
 			<SidebarDropdownWrapper label="Reservations">
 				<svelte:fragment slot="icon">
 					<Ticket

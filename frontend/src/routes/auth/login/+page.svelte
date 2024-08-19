@@ -33,10 +33,11 @@
 				password: password
 			})
 			.then((res: any) => {
-				localStorage.setItem('authToken', res.access_token);
+				console.log(res)
+				localStorage.setItem('authToken', res.token);
 				clientStore.update((prevValue) => ({
 					...prevValue,
-					authCookie: res.access_token,
+					authCookie: res.token,
 					authenticated: true
 				}));
 				toastStore.update((prevValue) => ({
@@ -51,10 +52,8 @@
 					.then((res: userIn) => {
 						userStore.update((prevValue) => ({
 							...prevValue
-							// full_name: res.full_name,
-							// role: res.role,
-							// is_active: res.is_active
 						}));
+						goto('/')
 					})
 					.catch((_) => {
 						clientStore.update((prevValue) => ({
@@ -64,7 +63,7 @@
 						}));
 						goto('/auth/login');
 					});
-				goto('/profile');
+				goto('/');
 			})
 			.catch((err) => {
 				toastStore.update((prevValue) => ({

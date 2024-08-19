@@ -24,24 +24,6 @@ export default {
 				}
 			});
 
-			// const httpLink = createHttpLink({
-			//     uri: `${apiUrl}/graphql`,
-			// });
-
-			// const authLink = apolloSetContext((_, { headers }) => {
-			//     return {
-			//         headers: {
-			//             ...headers,
-			//             'Authorization': `Bearer ${authToken}`
-			//         }
-			//     }
-			// });
-
-			// const apolloClientAuthenticated = new ApolloClient({
-			//     link: authLink.concat(httpLink),
-			//     cache: new InMemoryCache(),
-			// });
-
 			return {
 				...store,
 				authenticated: true,

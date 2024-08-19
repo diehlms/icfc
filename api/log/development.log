@@ -23824,3 +23824,1310 @@ Processing by Api::V1::ArticlesController#index as JSON
 Completed 200 OK in 119ms (Views: 65.4ms | ActiveRecord: 4.9ms | Allocations: 2156)
 
 
+DEPRECATION WARNING: Initialization autoloaded the constants ActionText::ContentHelper and ActionText::TagHelper.
+
+Being able to do this is deprecated. Autoloading during initialization is going
+to be an error condition in future versions of Rails.
+
+Reloading does not reboot the application, and therefore code executed during
+initialization does not run again. So, if you reload ActionText::ContentHelper, for example,
+the expected changes won't be reflected in that stale Module object.
+
+`config.autoloader` is set to `classic`. These autoloaded constants would have been unloaded if `config.autoloader` had been set to `:zeitwerk`.
+
+In order to autoload safely at boot time, please wrap your code in a reloader
+callback this way:
+
+    Rails.application.reloader.to_prepare do
+      # Autoload classes and modules needed at boot time here.
+    end
+
+That block runs when the application boots, and every time there is a reload.
+For historical reasons, it may run twice, so it has to be idempotent.
+
+Check the "Autoloading and Reloading Constants" guide to learn more about how
+Rails autoloads and reloads.
+ (called from <top (required)> at /app/config/environment.rb:7)
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 03:29:11 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mArticle Load (3.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 204ms (Views: 10.0ms | ActiveRecord: 19.9ms | Allocations: 18035)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 03:38:21 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mArticle Load (3.5ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 193ms (Views: 33.4ms | ActiveRecord: 34.8ms | Allocations: 5150)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 03:38:36 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mArticle Load (1.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 17ms (Views: 9.2ms | ActiveRecord: 1.4ms | Allocations: 2171)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 03:50:43 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mArticle Load (15.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 245ms (Views: 49.2ms | ActiveRecord: 53.2ms | Allocations: 5170)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:04:05 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mRideshare Load (18.6ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 368ms (Views: 38.8ms | ActiveRecord: 85.2ms | Allocations: 6292)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:05:54 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mRideshare Load (1.1ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 9ms (Views: 3.6ms | ActiveRecord: 1.1ms | Allocations: 1021)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:07:54 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mRideshare Load (11.7ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 52ms (Views: 25.1ms | ActiveRecord: 11.7ms | Allocations: 1020)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:10:08 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 57ms (ActiveRecord: 0.0ms | Allocations: 4971)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:10:29 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 12ms (ActiveRecord: 0.0ms | Allocations: 487)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:10:42 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 3ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:10:46 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 3ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:10:52 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 2ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:11:16 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 4ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:12:14 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 5ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:12:31 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 3ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:12:39 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 13ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 04:12:40 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mArticle Load (14.5ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 67ms (Views: 31.0ms | ActiveRecord: 14.5ms | Allocations: 2179)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 04:13:10 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mArticle Load (1.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 22ms (Views: 15.6ms | ActiveRecord: 1.3ms | Allocations: 2156)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 04:13:21 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mArticle Load (1.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 14ms (Views: 7.2ms | ActiveRecord: 1.2ms | Allocations: 2156)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:14:02 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 6ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:15:00 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 7ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:15:07 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 3ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:15:07 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:15:32 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 2ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:20:40 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 3ms (Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:20:40 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 0ms (Allocations: 484)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:20:48 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 8ms (Allocations: 484)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 04:20:51 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mArticle Load (3.0ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 165ms (Views: 17.9ms | ActiveRecord: 40.5ms | Allocations: 5129)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-07-09 04:21:17 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  Parameters: {"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (5.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "diehlstx@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 200 OK in 562ms (Views: 1.0ms | ActiveRecord: 32.8ms | Allocations: 16649)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-07-09 04:21:18 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 401 Unauthorized in 5ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 756)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:21:23 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 4ms (ActiveRecord: 0.0ms | Allocations: 485)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:22:07 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 5ms (ActiveRecord: 0.0ms | Allocations: 484)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-07-09 04:22:22 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  Parameters: {"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "diehlstx@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 200 OK in 241ms (Views: 0.5ms | ActiveRecord: 2.8ms | Allocations: 659)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-07-09 04:22:22 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 401 Unauthorized in 377ms (Views: 0.6ms | ActiveRecord: 0.9ms | Allocations: 722)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-07-09 04:23:02 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  Parameters: {"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "diehlstx@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 200 OK in 230ms (Views: 0.8ms | ActiveRecord: 1.4ms | Allocations: 658)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-07-09 04:23:03 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 401 Unauthorized in 32ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 722)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-07-09 04:23:38 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  Parameters: {"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "diehlstx@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 200 OK in 231ms (Views: 0.7ms | ActiveRecord: 2.3ms | Allocations: 661)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-07-09 04:23:38 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 401 Unauthorized in 12ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 722)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 04:23:51 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (1.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 77ms (Views: 15.7ms | ActiveRecord: 3.8ms | Allocations: 2593)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:23:53 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 5ms (ActiveRecord: 0.7ms | Allocations: 748)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:24:01 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 10ms (ActiveRecord: 1.3ms | Allocations: 745)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:24:29 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 11ms (ActiveRecord: 1.6ms | Allocations: 745)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:24:45 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 20ms (ActiveRecord: 1.5ms | Allocations: 745)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:25:02 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 62ms (ActiveRecord: 1.7ms | Allocations: 745)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:25:19 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 19ms (ActiveRecord: 1.2ms | Allocations: 745)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:25:22 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (5.0ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 32ms (Views: 8.9ms | ActiveRecord: 6.4ms | Allocations: 1297)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:25:24 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (2.7ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 24ms (Views: 8.0ms | ActiveRecord: 3.6ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:25:38 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (0.9ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 33ms (Views: 2.9ms | ActiveRecord: 2.1ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:25:42 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (0.7ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 11ms (Views: 1.8ms | ActiveRecord: 1.5ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:26:06 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (3.3ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 66ms (Views: 6.5ms | ActiveRecord: 5.7ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:26:19 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (0.7ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 11ms (Views: 2.0ms | ActiveRecord: 1.4ms | Allocations: 1274)
+
+
+Started GET "/api//v1/family_trees" for 192.168.65.1 at 2024-07-09 04:27:16 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::FamilyTreesController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mFamilyTree Load (11.6ms)[0m  [1m[34mSELECT "family_trees".* FROM "family_trees"[0m
+  ↳ app/controllers/api/v1/family_trees_controller.rb:10:in `index'
+Completed 200 OK in 143ms (Views: 58.1ms | ActiveRecord: 40.5ms | Allocations: 5075)
+
+
+Started GET "/api//v1/family_trees" for 192.168.65.1 at 2024-07-09 04:27:27 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::FamilyTreesController#index as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mFamilyTree Load (0.5ms)[0m  [1m[34mSELECT "family_trees".* FROM "family_trees"[0m
+  ↳ app/controllers/api/v1/family_trees_controller.rb:10:in `index'
+Completed 200 OK in 18ms (Views: 8.1ms | ActiveRecord: 1.3ms | Allocations: 1551)
+
+
+Started GET "/api//v1/family_trees" for 192.168.65.1 at 2024-07-09 04:27:32 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::FamilyTreesController#index as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mFamilyTree Load (0.5ms)[0m  [1m[34mSELECT "family_trees".* FROM "family_trees"[0m
+  ↳ app/controllers/api/v1/family_trees_controller.rb:10:in `index'
+Completed 200 OK in 13ms (Views: 3.5ms | ActiveRecord: 1.3ms | Allocations: 1548)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:27:38 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 14ms (ActiveRecord: 1.1ms | Allocations: 746)
+
+
+Started GET "/" for 172.30.0.5 at 2024-07-09 04:27:56 -0500
+Cannot render console from 172.30.0.5! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Rails::WelcomeController#index as HTML
+  Rendering .bundle/gems/railties-6.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered .bundle/gems/railties-6.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 87.6ms | Allocations: 479)
+Completed 200 OK in 209ms (Views: 131.9ms | ActiveRecord: 0.0ms | Allocations: 2407)
+
+
+Started GET "/api-docs" for 172.30.0.5 at 2024-07-09 04:27:59 -0500
+Cannot render console from 172.30.0.5! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api-docs/index.html" for 172.30.0.5 at 2024-07-09 04:27:59 -0500
+Cannot render console from 172.30.0.5! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api-docs/swagger-ui.css" for 172.30.0.5 at 2024-07-09 04:27:59 -0500
+Cannot render console from 172.30.0.5! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api-docs/swagger-ui-bundle.js" for 172.30.0.5 at 2024-07-09 04:27:59 -0500
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 172.30.0.5 at 2024-07-09 04:27:59 -0500
+Cannot render console from 172.30.0.5! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.30.0.5! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api-docs/v1/swagger.yaml" for 172.30.0.5 at 2024-07-09 04:28:00 -0500
+Cannot render console from 172.30.0.5! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api-docs/favicon-32x32.png" for 172.30.0.5 at 2024-07-09 04:28:00 -0500
+Cannot render console from 172.30.0.5! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api-docs/index.html" for 192.168.65.1 at 2024-07-09 04:28:22 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api-docs/swagger-ui-bundle.js" for 192.168.65.1 at 2024-07-09 04:28:22 -0500
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 192.168.65.1 at 2024-07-09 04:28:22 -0500
+Started GET "/api-docs/swagger-ui.css" for 192.168.65.1 at 2024-07-09 04:28:22 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api-docs/favicon-32x32.png" for 192.168.65.1 at 2024-07-09 04:28:22 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api-docs/v1/swagger.yaml" for 192.168.65.1 at 2024-07-09 04:28:22 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/api/v1/cabins" for 192.168.65.1 at 2024-07-09 04:28:27 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as */*
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 13ms (ActiveRecord: 0.0ms | Allocations: 2850)
+
+
+Started GET "/api/v1/charts" for 192.168.65.1 at 2024-07-09 04:28:41 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ChartsController#index as */*
+  [1m[36mChart Load (3.0ms)[0m  [1m[34mSELECT "charts".* FROM "charts"[0m
+  ↳ app/controllers/api/v1/charts_controller.rb:10:in `index'
+Completed 200 OK in 45ms (Views: 9.2ms | ActiveRecord: 3.0ms | Allocations: 3422)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:29:57 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 62ms (ActiveRecord: 2.4ms | Allocations: 1605)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:30:13 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (6.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 82ms (ActiveRecord: 6.3ms | Allocations: 747)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 04:30:19 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 14ms (ActiveRecord: 1.5ms | Allocations: 745)
+
+
+Started GET "/api//v1/charts" for 192.168.65.1 at 2024-07-09 04:30:21 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ChartsController#index as JSON
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mChart Load (1.9ms)[0m  [1m[34mSELECT "charts".* FROM "charts"[0m
+  ↳ app/controllers/api/v1/charts_controller.rb:10:in `index'
+Completed 200 OK in 13ms (Views: 4.9ms | ActiveRecord: 2.9ms | Allocations: 1235)
+
+
+Started GET "/api//v1/charts" for 192.168.65.1 at 2024-07-09 04:30:23 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ChartsController#index as JSON
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mChart Load (0.2ms)[0m  [1m[34mSELECT "charts".* FROM "charts"[0m
+  ↳ app/controllers/api/v1/charts_controller.rb:10:in `index'
+Completed 200 OK in 20ms (Views: 10.2ms | ActiveRecord: 1.1ms | Allocations: 1234)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:30:36 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (2.8ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 29ms (Views: 3.4ms | ActiveRecord: 4.9ms | Allocations: 1276)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:30:58 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (5.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (1.0ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 44ms (Views: 4.1ms | ActiveRecord: 6.4ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:30:58 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mRideshare Load (0.8ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 8ms (Views: 3.6ms | ActiveRecord: 0.8ms | Allocations: 1013)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-07-09 04:31:12 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  Parameters: {"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "diehlstx@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 200 OK in 228ms (Views: 0.8ms | ActiveRecord: 2.2ms | Allocations: 659)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-07-09 04:31:13 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 401 Unauthorized in 16ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 722)
+
+
+Started GET "/api//v1/family_trees" for 192.168.65.1 at 2024-07-09 04:32:12 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::FamilyTreesController#index as JSON
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mFamilyTree Load (0.9ms)[0m  [1m[34mSELECT "family_trees".* FROM "family_trees"[0m
+  ↳ app/controllers/api/v1/family_trees_controller.rb:10:in `index'
+Completed 200 OK in 25ms (Views: 8.6ms | ActiveRecord: 2.3ms | Allocations: 1550)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 04:50:36 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (2.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 237ms (Views: 23.2ms | ActiveRecord: 70.2ms | Allocations: 5465)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:50:46 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (4.3ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 21ms (Views: 2.9ms | ActiveRecord: 5.9ms | Allocations: 1295)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:51:40 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (2.0ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 48ms (Views: 5.0ms | ActiveRecord: 5.0ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:52:16 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (14.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (0.9ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 71ms (Views: 6.6ms | ActiveRecord: 15.2ms | Allocations: 1275)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:53:00 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (5.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (1.3ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 43ms (Views: 5.2ms | ActiveRecord: 6.6ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 04:55:22 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (5.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (1.8ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 66ms (Views: 6.7ms | ActiveRecord: 7.1ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 05:28:53 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (2.4ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 54ms (Views: 9.2ms | ActiveRecord: 5.2ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 05:33:55 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (3.1ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 60ms (Views: 10.8ms | ActiveRecord: 6.5ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 05:38:57 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (5.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (1.1ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 35ms (Views: 5.7ms | ActiveRecord: 6.4ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 05:42:11 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (0.9ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 40ms (Views: 8.1ms | ActiveRecord: 2.5ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 05:43:14 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (6.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (0.9ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 97ms (Views: 8.9ms | ActiveRecord: 7.8ms | Allocations: 1274)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 05:49:10 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (2.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 596ms (Views: 28.0ms | ActiveRecord: 37.1ms | Allocations: 5410)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 05:51:47 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (11.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (1.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 489ms (Views: 362.2ms | ActiveRecord: 13.1ms | Allocations: 2411)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 05:52:21 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 44ms (Views: 32.4ms | ActiveRecord: 2.3ms | Allocations: 2410)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 05:54:11 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (1.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 48ms (Views: 27.5ms | ActiveRecord: 3.3ms | Allocations: 2410)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 05:54:17 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (0.5ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 25ms (Views: 14.4ms | ActiveRecord: 1.9ms | Allocations: 2410)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 05:54:26 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (10.0ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 44ms (Views: 3.8ms | ActiveRecord: 11.3ms | Allocations: 1295)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 05:57:28 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (1.6ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 22ms (Views: 2.9ms | ActiveRecord: 2.9ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 05:57:43 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (5.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (1.1ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 39ms (Views: 16.2ms | ActiveRecord: 6.5ms | Allocations: 1274)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 05:58:05 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (0.9ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 28ms (Views: 4.1ms | ActiveRecord: 2.0ms | Allocations: 1274)
+
+
+Started GET "/api//v1/family_trees" for 192.168.65.1 at 2024-07-09 05:58:42 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::FamilyTreesController#index as JSON
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mFamilyTree Load (3.1ms)[0m  [1m[34mSELECT "family_trees".* FROM "family_trees"[0m
+  ↳ app/controllers/api/v1/family_trees_controller.rb:10:in `index'
+Completed 200 OK in 30ms (Views: 6.7ms | ActiveRecord: 5.2ms | Allocations: 1567)
+
+
+Started GET "/api//v1/family_trees" for 192.168.65.1 at 2024-07-09 06:01:06 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::FamilyTreesController#index as JSON
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mFamilyTree Load (0.9ms)[0m  [1m[34mSELECT "family_trees".* FROM "family_trees"[0m
+  ↳ app/controllers/api/v1/family_trees_controller.rb:10:in `index'
+Completed 200 OK in 56ms (Views: 5.2ms | ActiveRecord: 3.1ms | Allocations: 1548)
+
+
+Started GET "/api//v1/family_trees" for 192.168.65.1 at 2024-07-09 06:02:07 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::FamilyTreesController#index as JSON
+  [1m[36mUser Load (4.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mFamilyTree Load (4.0ms)[0m  [1m[34mSELECT "family_trees".* FROM "family_trees"[0m
+  ↳ app/controllers/api/v1/family_trees_controller.rb:10:in `index'
+Completed 200 OK in 98ms (Views: 56.9ms | ActiveRecord: 8.9ms | Allocations: 1548)
+
+
+Started GET "/api//v1/family_trees" for 192.168.65.1 at 2024-07-09 06:02:34 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::FamilyTreesController#index as JSON
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mFamilyTree Load (1.1ms)[0m  [1m[34mSELECT "family_trees".* FROM "family_trees"[0m
+  ↳ app/controllers/api/v1/family_trees_controller.rb:10:in `index'
+Completed 200 OK in 47ms (Views: 18.1ms | ActiveRecord: 3.5ms | Allocations: 1548)
+
+
+Started GET "/api//v1/family_trees" for 192.168.65.1 at 2024-07-09 06:03:23 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::FamilyTreesController#index as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mFamilyTree Load (0.8ms)[0m  [1m[34mSELECT "family_trees".* FROM "family_trees"[0m
+  ↳ app/controllers/api/v1/family_trees_controller.rb:10:in `index'
+Completed 200 OK in 28ms (Views: 13.1ms | ActiveRecord: 1.6ms | Allocations: 1548)
+
+
+Started GET "/api//v1/galleries" for 192.168.65.1 at 2024-07-09 06:03:25 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GalleriesController#index as JSON
+  [1m[36mUser Load (4.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+Filter chain halted as :require_user rendered or redirected
+Completed 401 Unauthorized in 141ms (Views: 1.0ms | ActiveRecord: 4.0ms | Allocations: 848)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:06:35 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (59.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (47.5ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 1063ms (Views: 243.3ms | ActiveRecord: 106.7ms | Allocations: 2411)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:06:44 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (9.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (10.1ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 540ms (Views: 70.1ms | ActiveRecord: 19.2ms | Allocations: 2410)
+
+
+Started GET "/api//v1/charts" for 192.168.65.1 at 2024-07-09 06:07:53 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ChartsController#index as JSON
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mChart Load (7.0ms)[0m  [1m[34mSELECT "charts".* FROM "charts"[0m
+  ↳ app/controllers/api/v1/charts_controller.rb:10:in `index'
+Completed 200 OK in 43ms (Views: 9.9ms | ActiveRecord: 8.4ms | Allocations: 1234)
+
+
+Started GET "/api//v1/charts" for 192.168.65.1 at 2024-07-09 06:08:04 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ChartsController#index as JSON
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mChart Load (0.6ms)[0m  [1m[34mSELECT "charts".* FROM "charts"[0m
+  ↳ app/controllers/api/v1/charts_controller.rb:10:in `index'
+Completed 200 OK in 63ms (Views: 13.2ms | ActiveRecord: 3.7ms | Allocations: 1234)
+
+
+Started GET "/api//v1/charts" for 192.168.65.1 at 2024-07-09 06:08:16 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ChartsController#index as JSON
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mChart Load (1.6ms)[0m  [1m[34mSELECT "charts".* FROM "charts"[0m
+  ↳ app/controllers/api/v1/charts_controller.rb:10:in `index'
+Completed 200 OK in 92ms (Views: 3.6ms | ActiveRecord: 3.5ms | Allocations: 1234)
+
+
+Started GET "/api//v1/events" for 192.168.65.1 at 2024-07-09 06:11:47 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::EventsController#index as JSON
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mEvent Load (35.7ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/api/v1/events_controller.rb:10:in `group_by'
+No template found for Api::V1::EventsController#index, rendering head :no_content
+Completed 204 No Content in 786ms (ActiveRecord: 98.4ms | Allocations: 4219)
+
+
+Started GET "/api//v1/events" for 192.168.65.1 at 2024-07-09 06:11:49 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::EventsController#index as JSON
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mEvent Load (0.7ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/api/v1/events_controller.rb:10:in `group_by'
+No template found for Api::V1::EventsController#index, rendering head :no_content
+Completed 204 No Content in 14ms (ActiveRecord: 1.6ms | Allocations: 1242)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-07-09 06:12:02 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (1.5ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-07-09')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 21ms (Views: 4.4ms | ActiveRecord: 2.2ms | Allocations: 1276)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-07-09 06:12:03 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 10ms (ActiveRecord: 0.5ms | Allocations: 746)
+
+
+Started GET "/api//v1/galleries" for 192.168.65.1 at 2024-07-09 06:12:09 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GalleriesController#index as JSON
+  [1m[36mUser Load (3.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+Filter chain halted as :require_user rendered or redirected
+Completed 401 Unauthorized in 41ms (Views: 2.3ms | ActiveRecord: 3.7ms | Allocations: 710)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:12:15 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (5.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 46ms (Views: 22.8ms | ActiveRecord: 6.3ms | Allocations: 2412)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:15:08 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (4.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (3.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 74ms (Views: 15.0ms | ActiveRecord: 7.5ms | Allocations: 2410)
+
+
+Started GET "/api//v1/charts" for 192.168.65.1 at 2024-07-09 06:15:29 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ChartsController#index as JSON
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mChart Load (1.9ms)[0m  [1m[34mSELECT "charts".* FROM "charts"[0m
+  ↳ app/controllers/api/v1/charts_controller.rb:10:in `index'
+Completed 200 OK in 37ms (Views: 6.9ms | ActiveRecord: 3.2ms | Allocations: 1236)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:20:09 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (13.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (7.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 149ms (Views: 57.2ms | ActiveRecord: 20.8ms | Allocations: 2410)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:22:39 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (7.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (4.7ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 183ms (Views: 40.6ms | ActiveRecord: 11.8ms | Allocations: 2410)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:23:34 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (4.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 57ms (Views: 13.6ms | ActiveRecord: 7.3ms | Allocations: 2410)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:29:53 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (2.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 570ms (Views: 99.4ms | ActiveRecord: 60.9ms | Allocations: 5459)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:34:30 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (11.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (1.9ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 178ms (Views: 64.5ms | ActiveRecord: 12.9ms | Allocations: 2410)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:36:16 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (6.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (2.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 79ms (Views: 25.4ms | ActiveRecord: 8.5ms | Allocations: 2410)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-07-09 06:37:43 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (1.1ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 57ms (Views: 29.9ms | ActiveRecord: 3.9ms | Allocations: 2410)
+
+
+DEPRECATION WARNING: Initialization autoloaded the constants ActionText::ContentHelper and ActionText::TagHelper.
+
+Being able to do this is deprecated. Autoloading during initialization is going
+to be an error condition in future versions of Rails.
+
+Reloading does not reboot the application, and therefore code executed during
+initialization does not run again. So, if you reload ActionText::ContentHelper, for example,
+the expected changes won't be reflected in that stale Module object.
+
+`config.autoloader` is set to `classic`. These autoloaded constants would have been unloaded if `config.autoloader` had been set to `:zeitwerk`.
+
+In order to autoload safely at boot time, please wrap your code in a reloader
+callback this way:
+
+    Rails.application.reloader.to_prepare do
+      # Autoload classes and modules needed at boot time here.
+    end
+
+That block runs when the application boots, and every time there is a reload.
+For historical reasons, it may run twice, so it has to be idempotent.
+
+Check the "Autoloading and Reloading Constants" guide to learn more about how
+Rails autoloads and reloads.
+ (called from <top (required)> at /app/config/environment.rb:7)
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-08-19 10:23:20 -0500
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-08-19 10:23:20 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (22.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ArgumentError (A copy of Api::V1 has been removed from the module tree but is still active!):
+  
+activesupport (6.1.3.2) lib/active_support/dependencies.rb:543:in `load_missing_constant'
+activesupport (6.1.3.2) lib/active_support/dependencies.rb:213:in `const_missing'
+activesupport (6.1.3.2) lib/active_support/inflector/methods.rb:288:in `const_get'
+activesupport (6.1.3.2) lib/active_support/inflector/methods.rb:288:in `block in constantize'
+activesupport (6.1.3.2) lib/active_support/inflector/methods.rb:284:in `each'
+activesupport (6.1.3.2) lib/active_support/inflector/methods.rb:284:in `inject'
+activesupport (6.1.3.2) lib/active_support/inflector/methods.rb:284:in `constantize'
+activesupport (6.1.3.2) lib/active_support/dependencies.rb:636:in `get'
+activesupport (6.1.3.2) lib/active_support/dependencies.rb:667:in `constantize'
+actionpack (6.1.3.2) lib/action_dispatch/http/request.rb:93:in `controller_class_for'
+actionpack (6.1.3.2) lib/action_dispatch/request/utils.rb:95:in `action_encoding_template'
+actionpack (6.1.3.2) lib/action_dispatch/request/utils.rb:83:in `encode'
+actionpack (6.1.3.2) lib/action_dispatch/request/utils.rb:45:in `set_binary_encoding'
+actionpack (6.1.3.2) lib/action_dispatch/http/parameters.rb:68:in `path_parameters='
+actionpack (6.1.3.2) lib/action_dispatch/journey/router.rb:48:in `block in serve'
+actionpack (6.1.3.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.1.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.1.3.2) lib/action_dispatch/routing/route_set.rb:842:in `call'
+rack (2.2.7) lib/rack/etag.rb:27:in `call'
+rack (2.2.7) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.7) lib/rack/head.rb:12:in `call'
+activerecord (6.1.3.2) lib/active_record/migration.rb:601:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.1.3.2) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+better_errors (2.10.0) lib/better_errors/middleware.rb:62:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.1.3.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.1.3.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (6.1.3.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (6.1.3.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (6.1.3.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/static.rb:24:in `call'
+rack (2.2.7) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:92:in `call'
+rack-cors (2.0.2) lib/rack/cors.rb:102:in `call'
+webpacker (5.4.4) lib/webpacker/dev_server_proxy.rb:25:in `perform_request'
+rack-proxy (0.7.6) lib/rack/proxy.rb:87:in `call'
+railties (6.1.3.2) lib/rails/engine.rb:539:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Processing by Api::V1::AuthenticationsController#login as JSON
+  Parameters: {"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (26.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "diehlstx@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 200 OK in 542ms (Views: 0.7ms | ActiveRecord: 115.9ms | Allocations: 21344)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-08-19 10:23:29 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 401 Unauthorized in 19ms (Views: 1.6ms | ActiveRecord: 2.3ms | Allocations: 782)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-08-19 10:23:39 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  Parameters: {"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"diehlstx@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "diehlstx@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 200 OK in 237ms (Views: 0.6ms | ActiveRecord: 1.0ms | Allocations: 674)
+
+
+Started POST "/api//v1/auth/login" for 192.168.65.1 at 2024-08-19 10:23:39 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::AuthenticationsController#login as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentications_controller.rb:5:in `login'
+Completed 401 Unauthorized in 7ms (Views: 0.4ms | ActiveRecord: 0.7ms | Allocations: 723)
+
+
+Started GET "/api//v1/galleries" for 192.168.65.1 at 2024-08-19 10:24:07 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GalleriesController#index as JSON
+  [1m[36mUser Load (5.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+Filter chain halted as :require_user rendered or redirected
+Completed 401 Unauthorized in 214ms (Views: 82.3ms | ActiveRecord: 5.4ms | Allocations: 1078)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-08-19 10:24:09 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (24.4ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 1030ms (Views: 108.3ms | ActiveRecord: 152.5ms | Allocations: 13835)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-08-19 10:24:19 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (4.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (3.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 127ms (Views: 29.6ms | ActiveRecord: 7.8ms | Allocations: 2417)
+
+
+Started GET "/api//v1/family_trees" for 192.168.65.1 at 2024-08-19 10:24:35 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::FamilyTreesController#index as JSON
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mFamilyTree Load (12.7ms)[0m  [1m[34mSELECT "family_trees".* FROM "family_trees"[0m
+  ↳ app/controllers/api/v1/family_trees_controller.rb:10:in `index'
+Completed 200 OK in 101ms (Views: 21.7ms | ActiveRecord: 38.6ms | Allocations: 5076)
+
+
+Started GET "/api//v1/users" for 192.168.65.1 at 2024-08-19 10:24:38 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::UsersController#index as JSON
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/v1/users_controller.rb:16:in `index'
+Completed 200 OK in 20ms (Views: 5.8ms | ActiveRecord: 2.5ms | Allocations: 1676)
+
+
+Started GET "/api//v1/cabins" for 192.168.65.1 at 2024-08-19 10:24:41 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::CabinsController#index as JSON
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+No template found for Api::V1::CabinsController#index, rendering head :no_content
+Completed 204 No Content in 54ms (ActiveRecord: 1.1ms | Allocations: 5260)
+
+
+Started GET "/api//v1/rideshares" for 192.168.65.1 at 2024-08-19 10:24:43 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::RidesharesController#index as JSON
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mRideshare Load (37.7ms)[0m  [1m[34mSELECT "rideshares".* FROM "rideshares" WHERE (arriving_at > '2024-08-19')[0m
+  ↳ app/controllers/api/v1/rideshares_controller.rb:10:in `index'
+Completed 200 OK in 199ms (Views: 14.2ms | ActiveRecord: 80.7ms | Allocations: 3494)
+
+
+Started GET "/api//v1/events" for 192.168.65.1 at 2024-08-19 10:24:51 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::EventsController#index as JSON
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mEvent Load (15.7ms)[0m  [1m[34mSELECT "events".* FROM "events"[0m
+  ↳ app/controllers/api/v1/events_controller.rb:10:in `group_by'
+No template found for Api::V1::EventsController#index, rendering head :no_content
+Completed 204 No Content in 132ms (ActiveRecord: 23.6ms | Allocations: 4141)
+
+
+Started GET "/api//v1/galleries" for 192.168.65.1 at 2024-08-19 10:25:03 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::GalleriesController#index as JSON
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+Filter chain halted as :require_user rendered or redirected
+Completed 401 Unauthorized in 35ms (Views: 2.7ms | ActiveRecord: 3.2ms | Allocations: 712)
+
+
+Started GET "/api//v1/articles" for 192.168.65.1 at 2024-08-19 10:25:25 -0500
+Cannot render console from 192.168.65.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Api::V1::ArticlesController#index as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:49:in `authorize_request'
+  [1m[36mArticle Load (1.6ms)[0m  [1m[34mSELECT "articles".* FROM "articles" ORDER BY "articles"."created_at" DESC[0m
+  ↳ app/controllers/api/v1/articles_controller.rb:10:in `index'
+Completed 200 OK in 27ms (Views: 14.5ms | ActiveRecord: 2.2ms | Allocations: 2412)
+
+

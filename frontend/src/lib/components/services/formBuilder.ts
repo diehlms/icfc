@@ -5,7 +5,10 @@ export enum FormTypes {
 	number = 'number',
 	checkbox = 'checkbox',
 	select = 'select',
-	password = 'password'
+	password = 'password',
+	richText = 'richText',
+	attachment = 'attachment',
+	dateTime = 'dateTime'
 }
 
 export class FormInput {
@@ -30,8 +33,53 @@ class FormBuilder {
 		return this;
 	}
 
-	description(): FormBuilder {
-		this.formInputs.push(new FormInput('description', FormTypes.text));
+	title(): FormBuilder {
+		this.formInputs.push(new FormInput('title', FormTypes.text))
+		return this;
+	}
+
+	location(): FormBuilder {
+		this.formInputs.push(new FormInput('location', FormTypes.text))
+		return this;
+	}
+
+	content(): FormBuilder {
+		this.formInputs.push(new FormInput('content', FormTypes.richText))
+		return this;
+	}
+
+	attachment(): FormBuilder {
+		this.formInputs.push(new FormInput('attachment', FormTypes.attachment))
+		return this;
+	}
+
+	fromLocation(): FormBuilder {
+		this.formInputs.push(new FormInput('fromLocation', FormTypes.select))
+		return this;
+	}
+
+	toLocation(): FormBuilder {
+		this.formInputs.push(new FormInput('toLocation', FormTypes.select))
+		return this;
+	}
+
+	offering(): FormBuilder {
+		this.formInputs.push(new FormInput('offering', FormTypes.checkbox))
+		return this;
+	}
+
+	numberOfPassengers(): FormBuilder {
+		this.formInputs.push(new FormInput('numberOfPassengers', FormTypes.number))
+		return this;
+	}
+
+	fromDate(): FormBuilder {
+		this.formInputs.push(new FormInput('fromDate', FormTypes.dateTime));
+		return this;
+	}
+
+	toDate(): FormBuilder {
+		this.formInputs.push(new FormInput('toDate', FormTypes.dateTime));
 		return this;
 	}
 
@@ -45,20 +93,6 @@ class FormBuilder {
 		return this;
 	}
 
-	isActive(valueOverride?: string): FormBuilder {
-		this.formInputs.push(
-			new FormInput(valueOverride ? valueOverride : 'isActive', FormTypes.checkbox)
-		);
-		return this;
-	}
-
-	dataAccess(valueOverride?: string): FormBuilder {
-		this.formInputs.push(
-			new FormInput(valueOverride ? valueOverride : 'dataAccess', FormTypes.checkbox)
-		);
-		return this;
-	}
-
 	enabled(): FormBuilder {
 		this.formInputs.push(new FormInput('enabled', FormTypes.checkbox));
 		return this;
@@ -66,32 +100,6 @@ class FormBuilder {
 
 	password(): FormBuilder {
 		this.formInputs.push(new FormInput('password', FormTypes.password));
-		return this;
-	}
-
-	role(): FormBuilder {
-		const selectOptions: SelectOptionType[] = [
-			{
-				value: 'SUPER_ADMIN',
-				name: 'Super Admin'
-			},
-			{
-				value: 'SERVICE_USER_WRITE',
-				name: 'Service User Write'
-			},
-			{
-				value: 'SERVICE_USER_READ',
-				name: 'Service User Read'
-			},
-			{
-				value: 'USER',
-				name: 'User'
-			}
-		];
-
-		this.formInputs.push(
-			new FormInput('role', FormTypes.select, undefined, true, undefined, undefined, selectOptions)
-		);
 		return this;
 	}
 

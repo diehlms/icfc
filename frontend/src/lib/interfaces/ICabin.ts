@@ -1,9 +1,9 @@
-import type { chartIn } from '$lib/client';
+import type { cabinIn } from '$lib/client';
 import { TableRow } from './TableRow';
 
 export default class extends TableRow {
-	constructor(public chartIn: chartIn) {
-		super('FamilyTree');
+	constructor(public cabinIn: cabinIn) {
+		super('Cabin');
 	}
 
 	name = 'Diehl';
