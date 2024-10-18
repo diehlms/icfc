@@ -3,7 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export type galleryIn = {
-	image?: Blob;
-	caption?: string;
-	user_id?: number;
+    image?: Blob;
+    caption?: string;
+    user_id?: number;
 };
+

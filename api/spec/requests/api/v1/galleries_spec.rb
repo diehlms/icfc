@@ -7,7 +7,6 @@ RSpec.describe 'api/v1/galleries', type: :request do
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -21,10 +20,9 @@ RSpec.describe 'api/v1/galleries', type: :request do
 
     post('create gallery') do
       tags 'Galleries'
-      consumes 'application/json'
       produces 'application/json'
+      parameter name: :galleryIn, in: :body, schema: { '$ref' => '#/components/schemas/galleryIn' }
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -42,42 +40,6 @@ RSpec.describe 'api/v1/galleries', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show gallery') do
-      tags 'Galleries'
-      consumes 'application/json'
-      produces 'application/json'
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
-    patch('update gallery') do
-      tags 'Galleries'
-      consumes 'application/json'
-      produces 'application/json'
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
-    put('update gallery') do
       tags 'Galleries'
       consumes 'application/json'
       produces 'application/json'

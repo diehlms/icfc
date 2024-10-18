@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :events, dependent: :destroy
   has_many :charts, dependent: :destroy
   has_many :rideshares, dependent: :destroy
+  has_many :family_trees, dependent: :destroy
+  has_many :family_members, dependent: :destroy
 
   before_save { self.email = email.downcase }
 

@@ -2,8 +2,10 @@
 
 class FamilyMember < ApplicationRecord
   belongs_to :family_tree
+  belongs_to :family_tree
   belongs_to :parent, class_name: 'FamilyMember', optional: true
-  has_many :children, class_name: 'FamilyMember', foreign_key: 'parent_id', dependent: :destroy
+
+  validates :parent_ids, length: { maximum: 2, message: 'A family member can have at most two parents' }
 
   enum relationship: {
     father: 0,

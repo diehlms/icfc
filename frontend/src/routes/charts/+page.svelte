@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { clientStore, toastStore, ToastTypes } from '$lib/stores';
+	import { clientStore, toastStore, ToastTypes, userStore } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import IChart from '$lib/interfaces/IChart';
@@ -10,7 +10,30 @@
 
 	let _: IChart[] = [];
 	let loading: boolean = false;
+	let formData = new FormData();
 	let createChartTreeForm = new FormBuilder().title().attachment().build()
+
+	const handleSubmit = (event) => {
+		formData.append('chart', event.detail.files.accepted[0]);
+		formData.append('caption', event.detail.caption)
+		formData.append('user_id', user.id)
+
+		client.imageUploadClient?.uploadImage('v1/charts/', formData).then(res => {
+			toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: 'Chart added!',
+					type: ToastTypes.success
+				}));
+		}).catch(err => {
+			toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: err,
+					type: ToastTypes.error
+			}));
+		})
+	}
 
 	onMount(() => {
 		loading = true;
@@ -20,6 +43,7 @@
 				data.map((chart: any) => {
 					_.push(new IChart(chart));
 				});
+				loading = false;
 			})
 			.catch((error) => {
 				loading = false;
@@ -30,16 +54,18 @@
 					type: ToastTypes.error
 				}));
 			});
-
-		loading = false;
 	});
 
+	
+
 	const client = get(clientStore);
+	const user = get(userStore);
 
 	$: _;
 </script>
 
 <AddEdit
+	on:triggerModalFormSubmit={handleSubmit}
 	form={createChartTreeForm}
 	openDrawerLabel="Add new chart"
 />
@@ -52,8 +78,9 @@
 		tableData={_}
 		tableName="Charts"
 		selectable={false}
-		columnNames={['name']}
-		searchableAttribute="Name"
+		columnNames={['caption', 'createdAt', 'updatedAt']}
+		searchableAttribute="caption"
 		showSearch={false}
+		followable={true}
 	/>
 {/if}

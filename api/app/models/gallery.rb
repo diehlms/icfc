@@ -3,9 +3,9 @@
 class Gallery < ApplicationRecord
   self.per_page = 30
 
-  belongs_to :user
+  validates :image, presence: true
 
-  validates :caption, length: { maximum: 30 }
+  belongs_to :user
   validates :user_id, presence: true
 
   mount_uploader :image, ImageUploader

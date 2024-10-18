@@ -55,7 +55,7 @@
 		opt.checked = !opt.checked;
 	}
 
-	function follow(row) {
+	function follow(row: any) {
 		if (followable) {
 			let unsubscribe = page.subscribe(($page) => {
 				goto(`${$page.url.pathname}/${row.id}`);
@@ -192,6 +192,8 @@
 <style>
 	.table-slim {
 		padding-bottom: 100px;
+		max-width: 70vw;
+		overflow-x: scroll;
 	}
 
 	.paginator {

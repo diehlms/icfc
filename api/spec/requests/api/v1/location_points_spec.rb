@@ -7,7 +7,6 @@ RSpec.describe 'api/v1/location_points', type: :request do
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -23,8 +22,8 @@ RSpec.describe 'api/v1/location_points', type: :request do
       tags 'Location Points'
       consumes 'application/json'
       produces 'application/json'
+      parameter name: :locationPointIn, in: :body, schema: { '$refs' => '#/components/schemas/locationPointIn' }
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -40,25 +39,6 @@ RSpec.describe 'api/v1/location_points', type: :request do
   path '/v1/location_points/{id}' do
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
-
-    get('show location_point') do
-      tags 'Location Points'
-      consumes 'application/json'
-      produces 'application/json'
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
     delete('delete location_point') do
       tags 'Location Points'
       consumes 'application/json'

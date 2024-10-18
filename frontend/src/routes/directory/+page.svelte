@@ -14,10 +14,8 @@
 		client.restClient?.users
 			.getV1Users()
 			.then((data) => {
+				users = data.map((user: any) => new IUser(user));
 				loading = false;
-				data.map((user: any) => {
-					users.push(new IUser(user));
-				});
 			})
 			.catch((error) => {
 				loading = false;
@@ -43,7 +41,7 @@
 		tableData={users}
 		tableName="Directory"
 		selectable={false}
-		columnNames={['name']}
+		columnNames={['name', 'username', 'email', 'phoneNumber']}
 		searchableAttribute="Name"
 		showSearch={false}
 	/>

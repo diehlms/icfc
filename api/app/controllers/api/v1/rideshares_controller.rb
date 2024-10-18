@@ -6,12 +6,12 @@ module Api
       before_action :authorize_request
 
       def index
-        rideshare = Rideshare.all.where('arriving_at > ?', Date.today)
-        render json: rideshare
+        rideshare = Rideshare.includes(:point_of_departure, :point_of_arrival).all.where('arriving_at > ?', Date.today)
+        render json: rideshare, include: %i[point_of_departure point_of_arrival]
       end
 
       def create
-        @rideshare = Rideshare.create(rideshare_params)
+        @rideshare = Rideshare.create!(rideshare_params)
         if @rideshare.save
           render json: Rideshare.all
         else
@@ -21,9 +21,28 @@ module Api
         end
       end
 
+      def show
+        rideshare = Rideshare.includes(:point_of_departure, :point_of_arrival).find(params[:id])
+        render json: rideshare, include: %i[point_of_departure point_of_arrival]
+      end
+
+      def update_rideshare
+        if rideshare.update(rideshare_params)
+          render json: { message: 'rideshare updated!', rideshare: @rideshare }, status: :ok
+        else
+          render json: { errors: @rideshare.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
       def destroy
-        @rideshare = current_user.rideshares.find(params[:id])
-        render json: Rideshare.all
+        set_rideshare
+        if @rideshare.destroy
+          render json: {}
+        else
+          render json: {
+            errors: @rideshare.errors.full_messages
+          }, status: :bad_request
+        end
       end
 
       private

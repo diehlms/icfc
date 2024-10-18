@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type cabinAttachmentIn = {
-	cabin_in?: number;
-	image?: Blob;
+    cabin_in?: number;
+    image?: Blob;
 };
+

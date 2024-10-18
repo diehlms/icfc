@@ -1,12 +1,9 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/rideshares', type: :request do
-
   path '/v1/rideshares' do
-
     get('list rideshares') do
       tags 'Rideshares'
-      consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
         after do |example|
@@ -24,7 +21,7 @@ RSpec.describe 'api/v1/rideshares', type: :request do
       tags 'Rideshares'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :rideshareIn, in: :body, schema: { "$ref" => "#/components/schemas/rideshareIn" }
+      parameter name: :rideshareIn, in: :body, schema: { '$ref' => '#/components/schemas/rideshareIn' }
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -43,24 +40,6 @@ RSpec.describe 'api/v1/rideshares', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
     get('show rideshare') do
       tags 'Rideshares'
-      consumes 'application/json'
-      produces 'application/json'
-      response(200, 'successful') do
-        let(:id) { '123' }
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
-    patch('update rideshare') do
-      tags 'Rideshares'
-      consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
         let(:id) { '123' }
@@ -77,6 +56,7 @@ RSpec.describe 'api/v1/rideshares', type: :request do
 
     put('update rideshare') do
       tags 'Rideshares'
+      parameter name: :rideshareIn, in: :body, schema: { '$ref' => '#/components/schemas/rideshareIn' }
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do

@@ -1,17 +1,19 @@
 <script lang="ts">
 	import FormBuilder, { FormInput } from '$lib/components/services/formBuilder';
 	import { toTitleCase } from '$lib/components/services/textFormatting';
-	import { FloatingLabelInput, Checkbox, Button, Select, Label, Drawer } from 'flowbite-svelte';
+	import Wysiwyg from './WYSIWYG.svelte';
+	import { FloatingLabelInput, Checkbox, Button, Select, Label, Drawer, SpeedDial, SpeedDialButton } from 'flowbite-svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { sineIn } from 'svelte/easing';
 	import Dropzone from "svelte-file-dropzone";
-	import Editor from '@tinymce/tinymce-svelte';
+	import { Plus } from 'svelte-heros-v2';
 
 	export let form: FormInput[] = new FormBuilder().build();
-    export let openDrawerLabel: string = "Add new"
+  export let openDrawerLabel: string = "Add new"
+	export let displayAsButton: boolean = false;
 
-    let hidden1 = true;
-    let transitionParams = {
+	let hidden1 = true;
+	let transitionParams = {
 		x: -320,
 		duration: 200,
 		easing: sineIn
@@ -26,6 +28,7 @@
 		const { acceptedFiles, fileRejections } = e.detail;
 		files.accepted = [...files.accepted, ...acceptedFiles];
 		files.rejected = [...files.rejected, ...fileRejections];
+		payload.files = files;
 	}
 
 	const dispatch = createEventDispatcher();
@@ -34,18 +37,33 @@
 		dispatch('triggerModalFormSubmit', payload);
 	}
 
+	function handleWysiwygInput(content: string, name: string) {
+    payload[name] = content;
+  }
+
 	function handleInput(event: any) {
 		const { name, value } = event.target;
 		payload = { ...payload, [name]: value };
 	}
+
+	// Populate the payload with initial values (if it's an edit form)
+	$: if (form && form.length) {
+		form.forEach(input => {
+			if (input.value !== undefined) {
+				payload[input.name] = input.value;  // Prepopulate the payload with the initial form data
+			}
+		});
+	}
+
 </script>
 
 <Drawer transitionType="fly" {transitionParams} bind:hidden={hidden1} id="sidebar1">
-	<form class="flex flex-col space-y-2" on:submit|preventDefault={onSubmit}>
+	<form class="flex flex-col space-y-1" on:submit|preventDefault={onSubmit}>
 		{#each form as input}
 			<div class="w-full">
-				{#if input.type == 'text' || input.type == 'password'}
+				{#if input.type == 'text' || input.type == 'password' || input.type == 'number' || input.type == 'datetime-local' }
 					<div>
+						<Label for={input.name} class="block">{toTitleCase(input.name)}</Label>
 						<FloatingLabelInput
 							placeholder={input.name}
 							label={toTitleCase(input.name)}
@@ -60,11 +78,9 @@
 					</div>
 				{/if}
 			</div>
-			<div class="flex">
+			<div>
 				{#if input.type == 'richText'}
-					<Editor
-						apiKey='6ilbob7y500eesacvilah194gk2uyx7snt00b5275xeamsat'
-					/>
+					<Wysiwyg on:input={(e) => handleWysiwygInput(e.detail, input.name)} bind:content={input.value} />
 				{/if}
 			</div>
 			<div class="flex">
@@ -89,11 +105,18 @@
 				{/if}
 			</div>
 		{/each}
-		<Button outline={true} type="submit" on:click={onSubmit}>Submit</Button>
+		<Button outline={true} type="submit">Submit</Button>
 	</form>
 </Drawer>
 
-
-<div class="text-center">
-	<Button on:click={() => (hidden1 = false)}>{openDrawerLabel}</Button>
-</div>
+{#if displayAsButton}
+	<Button on:click={() => (hidden1 = false)} outline>
+		{openDrawerLabel}
+	</Button>
+{:else}
+	<SpeedDial defaultClass="fixed end-6 bottom-12">
+		<SpeedDialButton on:click={() => (hidden1 = false)} name={openDrawerLabel}>
+			<Plus class="w-6 h-6" />
+		</SpeedDialButton>
+	</SpeedDial>
+{/if}

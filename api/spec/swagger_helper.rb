@@ -110,7 +110,7 @@ RSpec.configure do |config|
             type: 'object',
             properties: {
               cabin_in: {
-                type: :number,
+                type: :number
               },
               image: {
                 type: :string,
@@ -122,15 +122,15 @@ RSpec.configure do |config|
             type: 'object',
             properties: {
               cabin_in: {
-                type: :number,
+                type: :number
               },
               startdate: {
                 type: :string,
-                format: :datetime,
+                format: :datetime
               },
               enddate: {
                 type: :string,
-                format: :datetime,
+                format: :datetime
               }
             }
           },
@@ -165,8 +165,7 @@ RSpec.configure do |config|
           },
           chartIn: {
             type: 'object',
-            properties: {
-            }
+            properties: {}
           },
           commentIn: {
             type: 'object',
@@ -230,26 +229,41 @@ RSpec.configure do |config|
             }
           },
           familyMemberIn: {
-            type: 'object',
-            properties: {
-              name: {
-                type: :string
-              }, 
-              relationship: {
-                type: :string
-              }, 
-              family_tree_id: {
-                type: :number
-              }, 
-              parent_id: {
-                type: :number
-              }
+            type: :array,
+            items: {
+              type: 'object',
+              properties: {
+                name: {
+                  type: :string
+                },
+                relationship: {
+                  type: :string
+                },
+                family_tree_id: {
+                  type: :number
+                },
+                parent_id: {
+                  type: :number
+                }
+              },
+              required: %w[name, family_tree_id]
             }
           },
           familyTreeIn: {
             type: 'object',
             properties: {
               name: {
+                type: :string
+              }
+            }
+          },
+          locationPointIn: {
+            type: 'object',
+            properties: {
+              location_name: {
+                type: :string
+              },
+              location_description: {
                 type: :string
               }
             }
@@ -269,34 +283,22 @@ RSpec.configure do |config|
               }
             }
           },
-          locationPointIn: {
-            type: 'object',
-            properties: {
-              location_name: {
-                type: :string
-              },
-              location_description: {
-                type: :string
-              }
-            }
-          },
           passwordResetPayload: {
             type: 'object',
-            properties: {
-            }
+            properties: {}
           },
           rideshareIn: {
             type: 'object',
             properties: {
               user_id: {
-                type: :string
+                type: :number
               },
               number_of_passengers: {
-                type: :string
+                type: :number
               },
               additional_information: {
                 type: :string
-              }, 
+              },
               arriving_at: {
                 type: :string
               },
@@ -310,13 +312,31 @@ RSpec.configure do |config|
                 type: :string
               },
               seeking: {
-                type: :string
+                type: :boolean
               }
-            } 
+            }
           },
           userIn: {
             type: 'object',
+            properties: {}
+          },
+          relationshipArray: {
+            type: :array,
+            items: {
+              type: 'object',
+              properties: {
+                child: { type: :string },
+                parent: { type: :string }
+              },
+              required: %w[child parent]
+            }
+          },
+          searchIn: {
+            type: 'object',
             properties: {
+              search: {
+                type: :string
+              }
             }
           }
         },
@@ -328,7 +348,6 @@ RSpec.configure do |config|
       }
     }
   }
-  
 
   # Specify the format of the output Swagger file when running 'rswag:specs:swaggerize'.
   # The openapi_specs configuration option has the filename including format in

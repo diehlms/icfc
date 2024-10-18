@@ -2,16 +2,16 @@ import type { userIn } from '$lib/client';
 import { TableRow } from './TableRow';
 
 export default class extends TableRow {
-	constructor(public userIn: userIn) {
-		super('User');
-	}
+	name: string;
+	username: string;
+	email: string;
+	phoneNumber: string;
 
-	name = 'Diehl';
-	// name = this.userIn;
-	// user_id = this.userIn.id;
-	// role = this.userIn.role;
-	// email = this.userIn.email;
-	// isActive = this.userIn.is_active;
-	// hasDataAccess = this.userIn.data_access;
-	// apiOnly = this.userIn.api_only;
+	constructor(public user: userIn) {
+		super('User');
+		this.name = `${this.user.firstname} ${this.user.lastname}`;
+		this.username = this.user.username;
+		this.email = this.user.email;
+		this.phoneNumber = this.user.phone_number;
+	}
 }

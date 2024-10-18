@@ -1,43 +1,36 @@
 # frozen_string_literal: true
 
 module Api
-    module V1
-        class CabindatesController < ApplicationController
-            before_action :authorize_request
-        
-            def new
-                @cabindate = Cabindate.new(cabin_id: params[:cabin_id])
-                @cabin = Cabin.find(params[:cabin_id])
-            end
-        
-            def index
-                @cabindate = Cabindate.all
-            end
-        
-            def show
-                @cabindates = @cabin.cabindates
-            end
-        
-            def destroy
-                set_cabindate
-                # redirect_back(fallback_location: root_path)
-            end
-        
-            def create
-                @cabindate = Cabindate.new(cabindate_params)
-                @cabinid = params[:id]
-                # redirect_back(fallback_location: root_path)
-            end
-        
-            private
-        
-            def set_cabindate
-                @cabindate = Cabindate.find(params[:id])
-            end
-        
-            def cabindate_params
-                params.require(:cabindate).permit(:startdate, :enddate, :cabin_id)
-            end
+  module V1
+    class CabinDatesController < ApplicationController
+      before_action :authorize_request
+
+      def index
+        @cabin_dates = Cabindate.find_by(id: params[:cabin_id])
+        render json: @cabin_dates
+      end
+
+      def create
+        @cabin_date = Cabindate.create!(cabin_date_params)
+        if @cabin_date
+          render json: {}
+        else
+          render json: @cabin_date.errors
         end
+      end
+
+      def destroy
+        @cabin_date.destroy
+        respond_to do |format|
+          format.json { head :no_content }
+        end
+      end
+
+      private
+
+      def cabin_date_params
+        params.require(:cabindate).permit(:startdate, :enddate, :cabin_id)
+      end
     end
+  end
 end

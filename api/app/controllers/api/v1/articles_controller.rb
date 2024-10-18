@@ -6,8 +6,8 @@ module Api
       before_action :authorize_request
 
       def index
-        articles = Article.all.order(created_at: :desc)
-        render json: articles
+        @articles = Article.includes(:comments).order(created_at: :desc)
+        render json: @articles.to_json(include: :comments)
       end
 
       def create
@@ -19,11 +19,27 @@ module Api
         end
       end
 
+      def upload_image
+        if article.update(image_params)
+          render json: { message: 'Image uploaded successfully', article: @article }, status: :ok
+        else
+          render json: { errors: @article.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
       def show
         if article
-          render json: article
+          render json: article.to_json(include: :comments)
         else
           render json: article.errors
+        end
+      end
+
+      def update
+        if article.update(article_params)
+          render json: { message: 'Article updated!', article: @article }, status: :ok
+        else
+          render json: { errors: @article.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
@@ -35,11 +51,15 @@ module Api
       private
 
       def article_params
-        params.permit(:title, :content, :image, :pinned, :user_id)
+        params.require(:article).permit(:title, :content, :image, :pinned, :user_id)
+      end
+
+      def image_params
+        params.permit(:image)
       end
 
       def article
-        @article ||= Article.find(params[:id])
+        @article ||= Article.includes(:comments).find(params[:id])
       end
     end
   end

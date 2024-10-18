@@ -22,7 +22,7 @@ RSpec.describe 'api/v1/cabins', type: :request do
       tags 'Cabins'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :cabinIn, in: :body, schema: { "$ref" => "#/components/schemas/cabinIn" }
+      parameter name: :cabinIn, in: :body, schema: { '$ref' => '#/components/schemas/cabinIn' }
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -56,26 +56,9 @@ RSpec.describe 'api/v1/cabins', type: :request do
       end
     end
 
-    patch('update cabin') do
-      tags 'Cabins'
-      consumes 'application/json'
-      produces 'application/json'
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
     put('update cabin') do
       tags 'Cabins'
+      parameter name: :cabinIn, in: :body, schema: { '$ref' => '#/components/schemas/cabinIn' }
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do

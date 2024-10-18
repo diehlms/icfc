@@ -6,7 +6,7 @@ require 'nokogiri'
 module Api
   module V1
     class EntryController < ApplicationController
-      bbefore_action :authorize_request
+      before_action :authorize_request
 
       def initial_payload
         render json: {

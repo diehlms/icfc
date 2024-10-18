@@ -1,9 +1,13 @@
-import { type AppClient, type User } from '$lib/client';
+import { type AppClient } from '$lib/client';
 import { writable } from 'svelte/store';
 
 export enum ToastTypes {
 	success = 'SUCCESS',
 	error = 'ERROR'
+}
+
+export interface IUserStore {
+	id: number | null
 }
 
 export interface IToastStore {
@@ -17,6 +21,7 @@ export interface IClientStore {
 	restClient: AppClient | null;
 	apiUrl: string;
 	authenticated: boolean;
+	imageUploadClient: any;
 }
 
 export const toastStore = writable<IToastStore>({
@@ -29,17 +34,10 @@ export const clientStore = writable<IClientStore>({
 	apiUrl: '',
 	authCookie: null,
 	restClient: null,
-	authenticated: false
+	authenticated: false,
+	imageUploadClient: null
 });
 
-export const userStore = writable<User>({
-	email: '',
-	is_active: false,
-	full_name: '',
-	role: undefined,
-	id: undefined,
-	is_superuser: false,
-	client_id: undefined,
-	api_only: false,
-	data_access: false
+export const userStore = writable<IUserStore>({
+	id: null
 });

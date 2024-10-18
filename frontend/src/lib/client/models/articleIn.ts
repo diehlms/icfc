@@ -3,9 +3,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export type articleIn = {
-	title?: string;
-	content?: string;
-	image?: Blob;
-	pinned?: boolean;
-	user_id?: number;
+    title?: string;
+    content?: string;
+    image?: Blob;
+    pinned?: boolean;
+    user_id?: number;
 };
+

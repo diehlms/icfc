@@ -8,7 +8,7 @@ export enum FormTypes {
 	password = 'password',
 	richText = 'richText',
 	attachment = 'attachment',
-	dateTime = 'dateTime'
+	datetime = 'datetime-local'
 }
 
 export class FormInput {
@@ -53,13 +53,13 @@ class FormBuilder {
 		return this;
 	}
 
-	fromLocation(): FormBuilder {
-		this.formInputs.push(new FormInput('fromLocation', FormTypes.select))
+	fromLocation(options: any): FormBuilder {
+		this.formInputs.push(new FormInput('fromLocation', FormTypes.select, undefined, undefined, undefined, undefined, options))
 		return this;
 	}
 
-	toLocation(): FormBuilder {
-		this.formInputs.push(new FormInput('toLocation', FormTypes.select))
+	toLocation(options: any): FormBuilder {
+		this.formInputs.push(new FormInput('toLocation', FormTypes.select, undefined, undefined, undefined, undefined, options))
 		return this;
 	}
 
@@ -74,12 +74,12 @@ class FormBuilder {
 	}
 
 	fromDate(): FormBuilder {
-		this.formInputs.push(new FormInput('fromDate', FormTypes.dateTime));
+		this.formInputs.push(new FormInput('fromDate', FormTypes.datetime));
 		return this;
 	}
 
 	toDate(): FormBuilder {
-		this.formInputs.push(new FormInput('toDate', FormTypes.dateTime));
+		this.formInputs.push(new FormInput('toDate', FormTypes.datetime));
 		return this;
 	}
 
@@ -100,6 +100,36 @@ class FormBuilder {
 
 	password(): FormBuilder {
 		this.formInputs.push(new FormInput('password', FormTypes.password));
+		return this;
+	}
+
+	bedrooms(): FormBuilder {
+		this.formInputs.push(new FormInput('bedrooms', FormTypes.number))
+		return this;
+	}
+	
+	washerdryer(): FormBuilder {
+		this.formInputs.push(new FormInput('washerdryer', FormTypes.checkbox))
+		return this;
+	}
+
+	dock(): FormBuilder {
+		this.formInputs.push(new FormInput('dock', FormTypes.checkbox))
+		return this;
+	}
+
+	price_per_week(): FormBuilder {
+		this.formInputs.push(new FormInput('price_per_week', FormTypes.number))
+		return this;
+	}
+
+	price_per_day(): FormBuilder {
+		this.formInputs.push(new FormInput('price_per_day', FormTypes.number))
+		return this;
+	}
+
+	description(): FormBuilder {
+		this.formInputs.push(new FormInput('description', FormTypes.text))
 		return this;
 	}
 

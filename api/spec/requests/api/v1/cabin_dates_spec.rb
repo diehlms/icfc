@@ -2,20 +2,6 @@ require 'swagger_helper'
 
 RSpec.describe 'api/v1/cabin_dates', type: :request do
   path '/v1/cabin_dates' do
-    get('list cabin_dates') do
-      tags 'Cabin Dates'
-      response(200, 'successful') do
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
     post('create cabin_date') do
       tags 'Cabin Dates'
       consumes 'application/json'

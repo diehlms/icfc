@@ -40,21 +40,19 @@ paths:
       responses:
         '200':
           description: successful
-    delete:
-      summary: delete article
+    put:
+      summary: update article
       tags:
       - Articles
+      parameters: []
       responses:
         '200':
           description: successful
-  "/v1/articles/destroy/{id}":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/articleIn"
     delete:
       summary: delete article
       tags:
@@ -101,26 +99,13 @@ paths:
             schema:
               "$ref": "#/components/schemas/signupPayload"
   "/v1/cabin_attachments":
-    get:
-      summary: list cabin_attachments
-      tags:
-      - Cabin Attachments
-      responses:
-        '200':
-          description: successful
     post:
       summary: create cabin_attachment
       tags:
       - Cabin Attachments
-      parameters: []
       responses:
         '200':
           description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/cabinAttachmentIn"
   "/v1/cabin_attachments/{id}":
     parameters:
     - name: id
@@ -129,13 +114,6 @@ paths:
       required: true
       schema:
         type: string
-    get:
-      summary: show cabin_attachment
-      tags:
-      - Cabin Attachments
-      responses:
-        '200':
-          description: successful
     delete:
       summary: delete cabin_attachment
       tags:
@@ -144,13 +122,6 @@ paths:
         '200':
           description: successful
   "/v1/cabin_dates":
-    get:
-      summary: list cabin_dates
-      tags:
-      - Cabin Dates
-      responses:
-        '200':
-          description: successful
     post:
       summary: create cabin_date
       tags:
@@ -208,20 +179,19 @@ paths:
       responses:
         '200':
           description: successful
-    patch:
-      summary: update cabin
-      tags:
-      - Cabins
-      responses:
-        '200':
-          description: successful
     put:
       summary: update cabin
       tags:
       - Cabins
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/cabinIn"
     delete:
       summary: delete cabin
       tags:
@@ -259,20 +229,6 @@ paths:
       responses:
         '200':
           description: successful
-    patch:
-      summary: update chart
-      tags:
-      - Charts
-      responses:
-        '200':
-          description: successful
-    put:
-      summary: update chart
-      tags:
-      - Charts
-      responses:
-        '200':
-          description: successful
     delete:
       summary: delete chart
       tags:
@@ -281,13 +237,6 @@ paths:
         '200':
           description: successful
   "/v1/comments":
-    get:
-      summary: list comments
-      tags:
-      - Comments
-      responses:
-        '200':
-          description: successful
     post:
       summary: create comment
       tags:
@@ -339,27 +288,6 @@ paths:
       required: true
       schema:
         type: string
-    get:
-      summary: show committee
-      tags:
-      - Committees
-      responses:
-        '200':
-          description: successful
-    patch:
-      summary: update committee
-      tags:
-      - Committees
-      responses:
-        '200':
-          description: successful
-    put:
-      summary: update committee
-      tags:
-      - Committees
-      responses:
-        '200':
-          description: successful
     delete:
       summary: delete committee
       tags:
@@ -397,20 +325,6 @@ paths:
       responses:
         '200':
           description: successful
-    patch:
-      summary: update document
-      tags:
-      - Documents
-      responses:
-        '200':
-          description: successful
-    put:
-      summary: update document
-      tags:
-      - Documents
-      responses:
-        '200':
-          description: successful
     delete:
       summary: delete document
       tags:
@@ -418,52 +332,33 @@ paths:
       responses:
         '200':
           description: successful
-  "/v1/entry":
+  "/v1/entry/initial_payload":
     get:
-      summary: list entries
+      summary: get initial payload
       tags:
       - Entry
       responses:
         '200':
           description: successful
-    post:
-      summary: create entry
-      tags:
-      - Entry
-      responses:
-        '200':
-          description: successful
-  "/v1/entry/{id}":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
+  "/v1/entry/campers":
     get:
-      summary: show entry
+      summary: campers
       tags:
       - Entry
       responses:
         '200':
           description: successful
-    patch:
-      summary: update entry
+  "/v1/entry/recent_articles":
+    get:
+      summary: recent articles
       tags:
       - Entry
       responses:
         '200':
           description: successful
-    put:
-      summary: update entry
-      tags:
-      - Entry
-      responses:
-        '200':
-          description: successful
-    delete:
-      summary: delete entry
+  "/v1/entry/this_weeks_events":
+    get:
+      summary: this weeks events
       tags:
       - Entry
       responses:
@@ -505,20 +400,19 @@ paths:
       responses:
         '200':
           description: successful
-    patch:
-      summary: update event
-      tags:
-      - Events
-      responses:
-        '200':
-          description: successful
     put:
       summary: update event
       tags:
       - Events
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/eventIn"
     delete:
       summary: delete event
       tags:
@@ -527,13 +421,6 @@ paths:
         '200':
           description: successful
   "/v1/family_members":
-    get:
-      summary: list family_members
-      tags:
-      - Family Members
-      responses:
-        '200':
-          description: successful
     post:
       summary: create family_member
       tags:
@@ -547,21 +434,20 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/familyMemberIn"
-  "/v1/family_members/{id}":
-    patch:
-      summary: update family_member
-      tags:
-      - Family Members
-      responses:
-        '200':
-          description: successful
     put:
       summary: update family_member
       tags:
       - Family Members
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/relationshipArray"
+  "/v1/family_members/{id}":
     delete:
       summary: delete family_member
       tags:
@@ -605,20 +491,6 @@ paths:
       responses:
         '200':
           description: successful
-    patch:
-      summary: update family_tree
-      tags:
-      - Family Trees
-      responses:
-        '200':
-          description: successful
-    put:
-      summary: update family_tree
-      tags:
-      - Family Trees
-      responses:
-        '200':
-          description: successful
     delete:
       summary: delete family_tree
       tags:
@@ -638,6 +510,7 @@ paths:
       summary: create gallery
       tags:
       - Galleries
+      parameters: []
       responses:
         '200':
           description: successful
@@ -651,20 +524,6 @@ paths:
         type: string
     get:
       summary: show gallery
-      tags:
-      - Galleries
-      responses:
-        '200':
-          description: successful
-    patch:
-      summary: update gallery
-      tags:
-      - Galleries
-      responses:
-        '200':
-          description: successful
-    put:
-      summary: update gallery
       tags:
       - Galleries
       responses:
@@ -689,9 +548,15 @@ paths:
       summary: create location_point
       tags:
       - Location Points
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$refs": "#/components/schemas/locationPointIn"
   "/v1/location_points/{id}":
     parameters:
     - name: id
@@ -700,13 +565,6 @@ paths:
       required: true
       schema:
         type: string
-    get:
-      summary: show location_point
-      tags:
-      - Location Points
-      responses:
-        '200':
-          description: successful
     delete:
       summary: delete location_point
       tags:
@@ -799,20 +657,19 @@ paths:
       responses:
         '200':
           description: successful
-    patch:
-      summary: update rideshare
-      tags:
-      - Rideshares
-      responses:
-        '200':
-          description: successful
     put:
       summary: update rideshare
       tags:
       - Rideshares
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/rideshareIn"
     delete:
       summary: delete rideshare
       tags:
@@ -825,9 +682,15 @@ paths:
       summary: create search
       tags:
       - Search
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/searchIn"
   "/v1/users":
     get:
       summary: list users
@@ -936,12 +799,12 @@ components:
         pinned:
           type: boolean
         user_id:
-          type: int
+          type: number
     cabinAttachmentIn:
       type: object
       properties:
         cabin_in:
-          type: int
+          type: number
         image:
           type: string
           format: binary
@@ -949,7 +812,7 @@ components:
       type: object
       properties:
         cabin_in:
-          type: int
+          type: number
         startdate:
           type: string
           format: datetime
@@ -962,17 +825,17 @@ components:
         name:
           type: string
         bedrooms:
-          type: int
+          type: number
         washerdryer:
           type: boolean
         dock:
           type: boolean
         user_id:
-          type: int
+          type: number
         price_per_week:
-          type: int
+          type: number
         price_per_day:
-          type: int
+          type: number
         description:
           type: string
     chartIn:
@@ -984,9 +847,9 @@ components:
         content:
           type: string
         user_id:
-          type: int
+          type: number
         article_id:
-          type: int
+          type: number
     committeeIn:
       type: object
       properties:
@@ -1017,22 +880,34 @@ components:
           type: string
           format: datetime
         user_id:
-          type: int
+          type: number
     familyMemberIn:
-      type: object
-      properties:
-        name:
-          type: string
-        relationship:
-          type: string
-        family_tree_id:
-          type: int
-        parent_id:
-          type: int
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          relationship:
+            type: string
+          family_tree_id:
+            type: number
+          parent_id:
+            type: number
+        required:
+        - name,
+        - family_tree_id
     familyTreeIn:
       type: object
       properties:
         name:
+          type: string
+    locationPointIn:
+      type: object
+      properties:
+        location_name:
+          type: string
+        location_description:
           type: string
     galleryIn:
       type: object
@@ -1043,14 +918,7 @@ components:
         caption:
           type: string
         user_id:
-          type: int
-    locationPointIn:
-      type: object
-      properties:
-        location_name:
-          type: string
-        location_description:
-          type: string
+          type: number
     passwordResetPayload:
       type: object
       properties: {}
@@ -1058,9 +926,9 @@ components:
       type: object
       properties:
         user_id:
-          type: string
+          type: number
         number_of_passengers:
-          type: string
+          type: number
         additional_information:
           type: string
         arriving_at:
@@ -1072,10 +940,27 @@ components:
         point_of_departure_id:
           type: string
         seeking:
-          type: string
+          type: boolean
     userIn:
       type: object
       properties: {}
+    relationshipArray:
+      type: array
+      items:
+        type: object
+        properties:
+          child:
+            type: string
+          parent:
+            type: string
+        required:
+        - child
+        - parent
+    searchIn:
+      type: object
+      properties:
+        search:
+          type: string
   securitySchemes:
     AuthToken:
       type: http

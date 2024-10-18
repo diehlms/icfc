@@ -2,16 +2,22 @@ import type { cabinIn } from '$lib/client';
 import { TableRow } from './TableRow';
 
 export default class extends TableRow {
-	constructor(public cabinIn: cabinIn) {
-		super('Cabin');
-	}
+	id: number
+	name: string
+	bedrooms: number
+	dock: boolean
+	washerDryer: boolean
+	pricePerDay: number
+	pricePerWeek: number
 
-	name = 'Diehl';
-	// name = this.userIn;
-	// user_id = this.userIn.id;
-	// role = this.userIn.role;
-	// email = this.userIn.email;
-	// isActive = this.userIn.is_active;
-	// hasDataAccess = this.userIn.data_access;
-	// apiOnly = this.userIn.api_only;
+	constructor(public cabin: cabinIn) {
+		super('Cabin');
+		this.id = this.cabin.id
+		this.name = this.cabin.name
+		this.bedrooms = this.cabin.bedrooms
+		this.washerDryer = this.cabin.washerdryer
+		this.dock = this.cabin.dock
+		this.pricePerDay = `$${this.cabin.price_per_day}`
+		this.pricePerWeek = `$${this.cabin.price_per_week}`
+	}
 }

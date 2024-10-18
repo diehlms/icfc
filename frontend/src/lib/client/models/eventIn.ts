@@ -3,9 +3,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export type eventIn = {
-	location?: string;
-	description?: string;
-	start_time?: string;
-	end_time?: string;
-	user_id?: number;
+    location?: string;
+    description?: string;
+    start_time?: string;
+    end_time?: string;
+    user_id?: number;
 };
+

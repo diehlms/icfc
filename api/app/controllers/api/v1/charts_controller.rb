@@ -15,9 +15,18 @@ module Api
         render json: Chart.all
       end
 
+      def show
+        chart = Chart.find(params[:id])
+        render json: chart
+      end
+
       def destroy
         set_chart
-        render json: Chart.all
+        if @chart.destroy
+          render json: {}
+        else
+          render json: @chart.errors
+        end
       end
 
       private

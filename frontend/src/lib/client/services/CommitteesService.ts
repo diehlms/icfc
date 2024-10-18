@@ -5,87 +5,44 @@
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CommitteesService {
-	constructor(public readonly httpRequest: BaseHttpRequest) {}
-	/**
-	 * list committees
-	 * @returns any successful
-	 * @throws ApiError
-	 */
-	public getV1Committees(): CancelablePromise<any> {
-		return this.httpRequest.request({
-			method: 'GET',
-			url: '/v1/committees'
-		});
-	}
-	/**
-	 * create committee
-	 * @returns any successful
-	 * @throws ApiError
-	 */
-	public postV1Committees(): CancelablePromise<any> {
-		return this.httpRequest.request({
-			method: 'POST',
-			url: '/v1/committees'
-		});
-	}
-	/**
-	 * show committee
-	 * @param id id
-	 * @returns any successful
-	 * @throws ApiError
-	 */
-	public getV1Committees1(id: string): CancelablePromise<any> {
-		return this.httpRequest.request({
-			method: 'GET',
-			url: '/v1/committees/{id}',
-			path: {
-				id: id
-			}
-		});
-	}
-	/**
-	 * update committee
-	 * @param id id
-	 * @returns any successful
-	 * @throws ApiError
-	 */
-	public patchV1Committees(id: string): CancelablePromise<any> {
-		return this.httpRequest.request({
-			method: 'PATCH',
-			url: '/v1/committees/{id}',
-			path: {
-				id: id
-			}
-		});
-	}
-	/**
-	 * update committee
-	 * @param id id
-	 * @returns any successful
-	 * @throws ApiError
-	 */
-	public putV1Committees(id: string): CancelablePromise<any> {
-		return this.httpRequest.request({
-			method: 'PUT',
-			url: '/v1/committees/{id}',
-			path: {
-				id: id
-			}
-		});
-	}
-	/**
-	 * delete committee
-	 * @param id id
-	 * @returns any successful
-	 * @throws ApiError
-	 */
-	public deleteV1Committees(id: string): CancelablePromise<any> {
-		return this.httpRequest.request({
-			method: 'DELETE',
-			url: '/v1/committees/{id}',
-			path: {
-				id: id
-			}
-		});
-	}
+    constructor(public readonly httpRequest: BaseHttpRequest) {}
+    /**
+     * list committees
+     * @returns any successful
+     * @throws ApiError
+     */
+    public getV1Committees(): CancelablePromise<any> {
+        return this.httpRequest.request({
+            method: 'GET',
+            url: '/v1/committees',
+        });
+    }
+    /**
+     * create committee
+     * @returns any successful
+     * @throws ApiError
+     */
+    public postV1Committees(): CancelablePromise<any> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/v1/committees',
+        });
+    }
+    /**
+     * delete committee
+     * @param id id
+     * @returns any successful
+     * @throws ApiError
+     */
+    public deleteV1Committees(
+        id: string,
+    ): CancelablePromise<any> {
+        return this.httpRequest.request({
+            method: 'DELETE',
+            url: '/v1/committees/{id}',
+            path: {
+                'id': id,
+            },
+        });
+    }
 }

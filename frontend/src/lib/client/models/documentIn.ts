@@ -4,7 +4,8 @@
 /* eslint-disable */
 import type { document } from './document';
 export type documentIn = {
-	document_title?: string;
-	document_folder?: string;
-	document?: document;
+    document_title?: string;
+    document_folder?: string;
+    document?: document;
 };
+

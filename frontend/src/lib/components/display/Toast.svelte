@@ -5,7 +5,7 @@
 	import { get } from 'svelte/store';
 	import { CheckCircle, XCircle } from 'svelte-heros-v2';
 
-	let message: string | null = get(toastStore).toastMessage;
+	export let message: string | null = get(toastStore).toastMessage;
 	let isOpen = get(toastStore).isOpen;
 	let toastType = get(toastStore).type;
 

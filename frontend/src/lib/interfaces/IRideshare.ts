@@ -2,16 +2,24 @@ import type { rideshareIn } from '$lib/client';
 import { TableRow } from './TableRow';
 
 export default class extends TableRow {
-	constructor(public rideshareIn: rideshareIn) {
-		super('Rideshare');
-	}
+	id: number
+	seeking: boolean
+	arrivingAt: string
+	departingAt: string
+	numberOfPassengers: number
+	pointOfDeparture: string
+	pointOfArrival: string
+	userId: string
 
-	name = 'Diehl';
-	// name = this.userIn;
-	// user_id = this.userIn.id;
-	// role = this.userIn.role;
-	// email = this.userIn.email;
-	// isActive = this.userIn.is_active;
-	// hasDataAccess = this.userIn.data_access;
-	// apiOnly = this.userIn.api_only;
+	constructor(public rideshare: rideshareIn) {
+		super('Rideshare');
+		this.id = this.rideshare.id
+		this.seeking = this.rideshare.seeking
+		this.arrivingAt = this.rideshare.arriving_at
+		this.departingAt = this.rideshare.departing_at
+		this.numberOfPassengers = this.rideshare.number_of_passengers
+		this.pointOfArrival = this.rideshare.point_of_arrival.location_name
+		this.pointOfDeparture = this.rideshare.point_of_departure.location_name
+		this.userId = this.rideshare.user_id
+	}
 }

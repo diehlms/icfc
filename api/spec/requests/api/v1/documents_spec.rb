@@ -54,39 +54,7 @@ RSpec.describe 'api/v1/documents', type: :request do
         run_test!
       end
     end
-
-    patch('update document') do
-      tags 'Documents'
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
-    put('update document') do
-      tags 'Documents'
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
+    
     delete('delete document') do
       tags 'Documents'
       response(200, 'successful') do

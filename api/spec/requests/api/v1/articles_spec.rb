@@ -21,7 +21,9 @@ RSpec.describe 'api/v1/articles', type: :request do
   path '/v1/articles' do
     post('create article') do
       tags 'Articles'
-      parameter name: :articleIn, in: :body, schema: { "$ref" => "#/components/schemas/articleIn" }
+      consumes 'application/json'
+      produces 'application/json'
+      parameter name: :articleIn, in: :body, schema: { '$ref' => '#/components/schemas/articleIn' }
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -54,8 +56,10 @@ RSpec.describe 'api/v1/articles', type: :request do
       end
     end
 
-    delete('delete article') do
+    put('update article') do
       tags 'Articles'
+      parameter name: :articleIn, in: :body, schema: { '$ref' => '#/components/schemas/articleIn' }
+      consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
         let(:id) { '123' }
@@ -69,11 +73,7 @@ RSpec.describe 'api/v1/articles', type: :request do
         run_test!
       end
     end
-  end
 
-  path '/v1/articles/destroy/{id}' do
-    # You'll want to customize the parameter types...
-    parameter name: 'id', in: :path, type: :string, description: 'id'
     delete('delete article') do
       tags 'Articles'
       produces 'application/json'

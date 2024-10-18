@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { ToastTypes, clientStore, toastStore, userStore } from '$lib/stores';
+	import { ToastTypes, clientStore, toastStore } from '$lib/stores';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { Card, Input, Button } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
-	import type { AppClient, userIn } from '$lib/client';
+	import type { AppClient } from '$lib/client';
 	import updateAuthContext from '$lib/components/services/auth';
-	// import Logo from '$lib/assets/logo.png';
 
 	onMount(async () => {
-		if (!!localStorage.getItem('authToken') && $clientStore.authenticated) {
+		if (!!localStorage.getItem('authToken')) {
 			goto('/');
 		}
 	});
@@ -21,7 +20,6 @@
 		if (value.restClient !== null) {
 			restClient = value.restClient;
 		} else {
-			// Rest Client not initialized, will need to programatically refresh page
 			invalidateAll();
 		}
 	});
@@ -47,22 +45,6 @@
 					type: ToastTypes.success
 				}));
 				updateAuthContext.updateAuthContext();
-				restClient.auth
-					.postV1AuthLogin()
-					.then((res: userIn) => {
-						userStore.update((prevValue) => ({
-							...prevValue
-						}));
-						goto('/')
-					})
-					.catch((_) => {
-						clientStore.update((prevValue) => ({
-							...prevValue,
-							authCookie: null,
-							authenticated: false
-						}));
-						goto('/auth/login');
-					});
 				goto('/');
 			})
 			.catch((err) => {
@@ -72,6 +54,7 @@
 					isOpen: true,
 					type: ToastTypes.error
 				}));
+				goto('/auth/login');
 			});
 	}
 </script>

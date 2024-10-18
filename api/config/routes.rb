@@ -9,7 +9,19 @@ Rails.application.routes.draw do
       post '/auth/login', to: 'authentications#login'
       post '/auth/signup', to: 'authentications#signup'
 
-      resources :articles
+      get '/entry/initial_payload', to: 'entry#initial_payload'
+      get '/entry/campers', to: 'entry#campers'
+      get '/entry/recent_articles', to: 'entry#recent_articles'
+      get '/entry/this_weeks_events', to: 'entry#this_weeks_events'
+
+      put '/family_members', to: 'family_members#update'
+      post '/search', to: 'search#search'
+
+      resources :articles do
+        member do
+          patch :upload_image
+        end
+      end
       resources :authentications
       resources :cabin_attachments
       resources :cabin_dates
@@ -18,7 +30,6 @@ Rails.application.routes.draw do
       resources :comments
       resources :committees
       resources :documents
-      resources :entry
       resources :events
       resources :family_members
       resources :family_trees

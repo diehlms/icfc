@@ -26,7 +26,9 @@ export type { locationPointIn } from './models/locationPointIn';
 export type { loginPayload } from './models/loginPayload';
 export type { not_found } from './models/not_found';
 export type { passwordResetPayload } from './models/passwordResetPayload';
+export type { relationshipArray } from './models/relationshipArray';
 export type { rideshareIn } from './models/rideshareIn';
+export type { searchIn } from './models/searchIn';
 export type { signupPayload } from './models/signupPayload';
 export type { userIn } from './models/userIn';
 

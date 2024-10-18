@@ -1,35 +1,23 @@
 <script lang="ts">
-	import { Drawer, CloseButton, Timeline, TimelineItem, Button, Table } from 'flowbite-svelte';
-	import { clientStore, toastStore, ToastTypes } from '$lib/stores';
+	import { clientStore, toastStore, ToastTypes, userStore } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
-	import type { articleIn, cabinIn, rideshareIn } from '$lib/client';
-	import { ArrowRight } from 'svelte-heros-v2';
-	import { sineIn } from 'svelte/easing';
+	import Table from '$lib/components/display/Table.svelte';
 	import Loader from '$lib/components/display/Loader.svelte';
 	import ICabin from '$lib/interfaces/ICabin';
+	import AddEdit from '$lib/components/display/AddEdit.svelte';
+	import FormBuilder from '$lib/components/services/formBuilder';
 
-	let hidden1 = true;
-	let transitionParams = {
-		x: -320,
-		duration: 200,
-		easing: sineIn
-	};
+	let createCabinForm = new FormBuilder().name().bedrooms().washerdryer().dock().price_per_week().price_per_day().description().build();
+	let cabins: ICabin[] = []
+	let loading: boolean = true;
 
-	let _: ICabin[] = []
-	let loading: boolean = false;
-
-	const client = get(clientStore);
-
-	onMount(async () => {
-		loading = true;
-	
+	onMount(() => {
 		client.restClient?.cabins
 			.getV1Cabins()
 			.then((data) => {
-				data.map((cabin: any) => {
-					_.push(new ICabin(cabin));
-				});
+				cabins = data.map((cabin: any) => new ICabin(cabin));
+				loading = false;
 			})
 			.catch((error) => {
 				loading = false;
@@ -40,30 +28,38 @@
 					type: ToastTypes.error
 				}));
 			});
-		
-		loading = false;
 	});
 
-	$: _;
+	const client = get(clientStore);
+
+	$: cabins;
 </script>
 
-<div class="text-center">
-	<Button on:click={() => (hidden1 = false)}>Show drawer</Button>
-</div>
-
-<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden1} id="sidebar1">
-</Drawer>
+<AddEdit
+	form={createCabinForm}
+	openDrawerLabel="Add Cabin"
+/>
 
 {#if loading}
 	<Loader />
-{:else}
+{:else if cabins.length > 0}
 	<Table
 		tableActions={[]}
-		tableData={_}
+		tableData={cabins}
 		tableName="Cabins"
 		selectable={false}
-		columnNames={['name']}
+		columnNames={[
+			'name',
+			'bedrooms',
+			'dock',
+			'pricePerDay',
+			'pricePerWeek',
+			'washerDryer',
+		]}
 		searchableAttribute="Name"
 		showSearch={false}
+		followable={true}
 	/>
+{:else}
+	<p>No cabins available.</p>  // Handle case where no data is returned
 {/if}

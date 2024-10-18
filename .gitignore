@@ -48,3 +48,6 @@ yarn-debug.log*
 .env
 /.cache
 /.bin
+
+terraform.tfvars
+.terraform/
