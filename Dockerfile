@@ -13,10 +13,10 @@ RUN apk add --no-cache \
     postgresql-dev \
     git
 
-COPY Gemfile Gemfile.lock ./
+COPY api/Gemfile api/Gemfile.lock ./
 RUN bundle install --jobs 4 --retry 3
 
-COPY . .
+COPY api/. .
 COPY --from=frontend /app/dist/ public/
 
 RUN bundle exec rails assets:precompile
