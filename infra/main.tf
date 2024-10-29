@@ -1,26 +1,114 @@
 terraform {
   required_providers {
     hcloud = {
-      source = "hetznercloud/hcloud"
-      version = "~> 1.45"
+      source  = "hetznercloud/hcloud"
+      version = "~> 1.45.0"
     }
   }
 }
 
 variable "hcloud_token" {
-  sensitive = true
+  description = "Hetzner Cloud API Token"
+  sensitive   = true
+}
+
+variable "home_ip" {
+  description = "My home network IP address (CIDR notation)"
+  type        = string
+}
+
+variable "username" {
+  description = "The username for the new user"
+  type        = string
+  default     = "devuser"
 }
 
 provider "hcloud" {
   token = var.hcloud_token
 }
 
-resource "hcloud_server" "node1" {
-  name        = "node1"
-  image       = "debian-11"
-  server_type = "cx22"
+resource "hcloud_network" "private_network" {
+  name     = "private-network"
+  ip_range = "10.0.0.0/16"
+}
+
+resource "hcloud_network_subnet" "subnet" {
+  type         = "cloud"
+  network_id   = hcloud_network.private_network.id
+  network_zone = "eu-central"
+  ip_range     = "10.0.1.0/24"
+}
+
+resource "hcloud_firewall" "web_firewall" {
+  name = "web-firewall"
+
+  rule {
+    direction  = "in"
+    protocol   = "tcp"
+    port       = "80"
+    source_ips = ["0.0.0.0/0", "::/0"]
+  }
+
+  rule {
+    direction  = "in"
+    protocol   = "tcp"
+    port       = "443"
+    source_ips = ["0.0.0.0/0", "::/0"]
+  }
+
+  rule {
+    direction  = "in"
+    protocol   = "tcp"
+    port       = "22"
+    source_ips = ["${var.home_ip}/32"]
+  }
+}
+
+resource "hcloud_server" "web_server" {
+  name        = "web-server"
+  server_type = "cx11"
+  image       = "ubuntu-22.04"
+  location    = "nbg1"
+
+  network {
+    network_id = hcloud_network.private_network.id
+  }
+
+  firewall_ids = [hcloud_firewall.web_firewall.id]
+
   public_net {
     ipv4_enabled = true
     ipv6_enabled = true
   }
+
+  ssh_keys = [data.hcloud_ssh_key.my_key.id]
+
+  connection {
+    type        = "ssh"
+    user        = "root"
+    private_key = file("~/.ssh/id_rsa")  # Adjust path to your private key
+    host        = self.ipv4_address
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "useradd -m -s /bin/bash ${var.username}",
+      "mkdir -p /home/${var.username}/.ssh",
+      "cp /root/.ssh/authorized_keys /home/${var.username}/.ssh/",
+      "chown -R ${var.username}:${var.username} /home/${var.username}/.ssh",
+      "chmod 700 /home/${var.username}/.ssh",
+      "chmod 600 /home/${var.username}/.ssh/authorized_keys",
+      "usermod -aG sudo ${var.username}",
+      "echo '${var.username} ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/${var.username}",
+      "chmod 440 /etc/sudoers.d/${var.username}"
+    ]
+  }
+}
+
+data "hcloud_ssh_key" "my_key" {
+  name = "diehl_default"
+}
+
+output "server_ip" {
+  value = hcloud_server.web_server.ipv4_address
 }
