@@ -38,7 +38,7 @@ RSpec.describe 'api/v1/location_points', type: :request do
 
   path '/v1/location_points/{id}' do
     # You'll want to customize the parameter types...
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'id', in: :path, type: :integer, description: 'id'
     delete('delete location_point') do
       tags 'Location Points'
       consumes 'application/json'

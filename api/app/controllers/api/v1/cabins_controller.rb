@@ -4,10 +4,12 @@ module Api
   module V1
     class CabinsController < ApplicationController
       before_action :authorize_request
+      before_action :cabin, only: %i[show update destroy]
+      before_action :check_authorization, only: %i[update destroy]
 
       def index
         @cabins = Cabin.all
-        render json: @cabins
+        render json: @cabins, each_serializer: CabinSerializer
       end
 
       def create
@@ -22,16 +24,11 @@ module Api
       def show
         return unless cabin
 
-        render json: cabin.to_json(
-          include: {
-            cabin_attachments: {},
-            cabindates: {}
-          }
-        )
+        render json: cabin, serializer: CabinSerializer
       end
 
       def update
-        if cabin.update(cabin_params)
+        if cabin.update!(cabin_params)
           render json: { message: 'Cabin updated!', cabin: @cabin }, status: :ok
         else
           render json: { errors: @cabin.errors.full_messages }, status: :unprocessable_entity
@@ -56,7 +53,7 @@ module Api
       end
 
       def cabin
-        @cabin ||= Cabin.includes(:cabin_attachments, :cabindates).find_by_id(params[:id])
+        @cabin ||= Cabin.find_by_id(params[:id])
       end
     end
   end

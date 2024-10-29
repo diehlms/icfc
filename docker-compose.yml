@@ -37,6 +37,8 @@ services:
       - ./api:/app
   postgres:
     image: postgres:12.11-alpine
+    ports:
+      - "8881:5432"
     env_file:
       - ".env"
     volumes:

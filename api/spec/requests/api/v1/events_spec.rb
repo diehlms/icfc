@@ -35,7 +35,7 @@ RSpec.describe 'api/v1/events', type: :request do
   end
 
   path '/v1/events/{id}' do
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'id', in: :path, type: :integer, description: 'id'
 
     get('show event') do
       tags 'Events'

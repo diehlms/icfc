@@ -4,6 +4,7 @@ module Api
   module V1
     class CommentsController < ApplicationController
       before_action :authorize_request
+      before_action :check_authorization, only: %i[destroy]
 
       def create
         @comment = Comment.create!(comment_params)

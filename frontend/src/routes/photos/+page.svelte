@@ -3,80 +3,84 @@
 	import { get } from 'svelte/store';
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import FormBuilder from '$lib/components/services/formBuilder';
-	import { Gallery, Button, Breadcrumb, BreadcrumbItem } from 'flowbite-svelte';
+	import { Gallery, Button } from 'flowbite-svelte';
 	import updateAuthContext from '$lib/components/services/auth';
-	import BreadCrumb from '$lib/components/display/BreadCrumb.svelte';
 	import { onMount } from 'svelte';
+	import { ArrowsPointingOut, Trash, XCircle } from 'svelte-heros-v2';
 
 	let createImageForm = new FormBuilder().name('caption').attachment().build();
 	let loading: boolean = false;
-	let images = [];
+	let images: any = [];
 	let formData = new FormData();
-	let selectedImage = null; // State to track selected image for full-page view
+	let selectedImage: any = null; // State to track selected image for full-page view
 	let currentPage = 1; // Track the current page of images
-	let totalPages = 1;  // Total pages returned by API
+	let totalPages = 1; // Total pages returned by API
 	let isFetchingMore = false; // Track if more images are being fetched
 
 	// Function to handle submitting new image
-	const handleSubmit = (event) => {
+	const handleSubmit = (event: any) => {
 		formData.append('gallery[image]', event.detail.files.accepted[0]);
 		formData.append('gallery[caption]', event.detail.caption);
-		formData.append('gallery[user_id]', '1');
+		formData.append('gallery[user_id]', user.id);
 
-		client.imageUploadClient?.uploadImage('v1/galleries/', formData).then(res => {
-			toastStore.update((prevValue) => ({
+		client.imageUploadClient
+			?.uploadImage('v1/galleries/', formData)
+			.then(() => {
+				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
 					toastMessage: 'Images added!',
 					type: ToastTypes.success
 				}));
-		}).catch(err => {
-			toastStore.update((prevValue) => ({
+			})
+			.catch((err: any) => {
+				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
 					toastMessage: err,
 					type: ToastTypes.error
-			}));
-		});
+				}));
+			});
 	};
 
-	// Fetch images for a specific page
-	const fetchImages = (page) => {
+	const fetchImages = (page: number) => {
 		loading = true;
-		client.restClient?.galleries.getV1Galleries({ page }).then(data => {
-				const newImages = data.map(_ => ({
+		client.restClient?.galleries
+			.getV1Galleries(page)
+			.then((data) => {
+				const newImages = data.map((_: any) => ({
 					id: _.id,
 					user_id: _.user_id,
 					alt: _.caption,
 					src: `http://icfc.localhost:3010${_.image.url}`
 				}));
 
-				images = [...images, ...newImages]; // Append new images to existing ones
+				images = [...images, ...newImages];
 				loading = false;
-				totalPages = data.total_pages; // Assuming your API returns the total pages count
-		}).catch(error => {
-			loading = false;
-			toastStore.update(prevValue => ({
-				...prevValue,
-				isOpen: true,
-				toastMessage: error,
-				type: ToastTypes.error
-			}))
-		})
-	};
-
-	// Function to handle the delete photo action
-	const deletePhoto = (id) => {
-		client.restClient?.galleries
-			.deleteV1Galleries(id)
-			.then(_ => {
+				totalPages = data.total_pages;
+			})
+			.catch((error) => {
+				loading = false;
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: "Photo deleted!",
+					toastMessage: error,
+					type: ToastTypes.error
+				}));
+			});
+	};
+
+	const deletePhoto = (id) => {
+		client.restClient?.galleries
+			.deleteV1Galleries(id)
+			.then((_) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: 'Photo deleted!',
 					type: ToastTypes.success
 				}));
-				images = images.filter(img => img.id !== id); // Remove the deleted photo from the images list
+				images = images.filter((img) => img.id !== id);
 			})
 			.catch((error) => {
 				toastStore.update((prevValue) => ({
@@ -91,37 +95,18 @@
 	const user = get(userStore);
 	const client = get(clientStore);
 
-	const openFullPageImage = (image) => {
-		selectedImage = image; // Set the clicked image as selected
+	const openFullPageImage = (image: any) => {
+		selectedImage = image;
 	};
 
 	const closeFullPageImage = () => {
-		selectedImage = null; // Clear selected image to close the full-page view
+		selectedImage = null;
 	};
 
-	// Scroll event listener to detect when user reaches the bottom
-	const handleScroll = () => {
-		if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isFetchingMore && currentPage < totalPages) {
-			isFetchingMore = true;
-			currentPage++;
-			fetchImages(currentPage).finally(() => {
-				isFetchingMore = false;
-			});
-		}
-	};
-
-	// Attach the scroll event listener and fetch initial images
 	onMount(() => {
-		fetchImages(currentPage); // Initial fetch
-		window.addEventListener('scroll', handleScroll); // Listen for scroll events
-
-		return () => {
-			window.removeEventListener('scroll', handleScroll); // Clean up scroll listener
-		};
+		fetchImages(currentPage);
 	});
 </script>
-
-<BreadCrumb localPathName="photos" />
 
 <AddEdit
 	on:triggerModalFormSubmit={handleSubmit}
@@ -130,30 +115,58 @@
 />
 
 {#if images && images.length > 0}
-	<Gallery class="gap-4 grid-cols-3" items={images} let:item>
-		<div class="ring-4 ring-red-600 dark:ring-red-400 p-1 cursor-pointer">
-			<img on:click={() => openFullPageImage(item)} src={item.src} alt={item.alt} class="h-auto max-w-full" />
-			<span>{item.alt}</span>
-			{#if updateAuthContext.userActionPermitted(item.user_id, user.id)}
-				<Button on:click={() => deletePhoto(item.id)}>Delete Photo</Button>
-			{/if}
+	<Gallery class="grid-cols-3 gap-4" items={images} let:item>
+		<div class="group relative cursor-pointer overflow-hidden rounded-lg">
+			<img
+				src={item.src}
+				alt={item.alt}
+				class="h-auto w-full transform object-cover transition-all duration-300 group-hover:scale-105 group-hover:brightness-50"
+			/>
+			<div
+				class="absolute inset-0 flex items-center justify-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+			>
+				<Button
+					color="dark"
+					size="sm"
+					class="!flex items-center gap-2 bg-black/70 px-4 py-2 text-white backdrop-blur-sm transition-transform hover:bg-black/80"
+					on:click={() => openFullPageImage(item)}
+				>
+					<ArrowsPointingOut />
+					Open
+				</Button>
+
+				{#if updateAuthContext.userActionPermitted(item.user_id, user)}
+					<Button
+						color="red"
+						size="sm"
+						class="!flex items-center gap-2 bg-red-500/70 px-4 py-2 text-white backdrop-blur-sm transition-transform hover:bg-red-600/80"
+						on:click={() => deletePhoto(item.id)}
+					>
+						<Trash />
+						Delete
+					</Button>
+				{/if}
+			</div>
+			<div
+				class="absolute bottom-0 left-0 right-0 bg-black/50 p-2 text-sm text-white backdrop-blur-sm"
+			>
+				{item.alt}
+			</div>
 		</div>
 	</Gallery>
 {/if}
 
 {#if selectedImage}
-	<!-- Full-page view when an image is selected -->
 	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
 		<div class="relative">
-			<img src={selectedImage.src} alt={selectedImage.alt} class="max-w-full max-h-screen" />
-			<Button class="absolute top-4 right-4" on:click={closeFullPageImage}>Close</Button>
+			<img src={selectedImage.src} alt={selectedImage.alt} class="max-h-screen max-w-full" />
+			<Button outline class="absolute right-4 top-4" on:click={closeFullPageImage}><XCircle /></Button>
 		</div>
 	</div>
 {/if}
 
 {#if isFetchingMore}
-	<!-- Loading spinner when fetching more images -->
-	<div class="flex justify-center items-center py-4">
+	<div class="flex items-center justify-center py-4">
 		<p>Loading more images...</p>
 	</div>
 {/if}

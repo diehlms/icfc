@@ -1,4 +1,5 @@
 import type { SelectOptionType } from 'flowbite-svelte/dist/types';
+import { toSnakeCase } from './textFormatting';
 
 export enum FormTypes {
 	text = 'text',
@@ -33,53 +34,82 @@ class FormBuilder {
 		return this;
 	}
 
+	events(): FormBuilder {
+		this.formInputs.push(new FormInput('events', FormTypes.text));
+		return this;
+	}
+
 	title(): FormBuilder {
-		this.formInputs.push(new FormInput('title', FormTypes.text))
+		this.formInputs.push(new FormInput('title', FormTypes.text));
 		return this;
 	}
 
 	location(): FormBuilder {
-		this.formInputs.push(new FormInput('location', FormTypes.text))
+		this.formInputs.push(new FormInput('location', FormTypes.text));
 		return this;
 	}
 
-	content(): FormBuilder {
-		this.formInputs.push(new FormInput('content', FormTypes.richText))
+	content(valueOverride?: string): FormBuilder {
+		this.formInputs.push(new FormInput(valueOverride ? valueOverride : 'content', FormTypes.richText));
 		return this;
 	}
 
 	attachment(): FormBuilder {
-		this.formInputs.push(new FormInput('attachment', FormTypes.attachment))
+		this.formInputs.push(new FormInput('attachment', FormTypes.attachment));
 		return this;
 	}
 
-	fromLocation(options: any): FormBuilder {
-		this.formInputs.push(new FormInput('fromLocation', FormTypes.select, undefined, undefined, undefined, undefined, options))
+	pointOfDeparture(options: any): FormBuilder {
+		this.formInputs.push(
+			new FormInput(
+				'point_of_departure',
+				FormTypes.select,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				options
+			)
+		);
 		return this;
 	}
 
-	toLocation(options: any): FormBuilder {
-		this.formInputs.push(new FormInput('toLocation', FormTypes.select, undefined, undefined, undefined, undefined, options))
+	pointOfArrival(options: any): FormBuilder {
+		this.formInputs.push(
+			new FormInput(
+				'point_of_arrival',
+				FormTypes.select,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				options
+			)
+		);
 		return this;
 	}
 
 	offering(): FormBuilder {
-		this.formInputs.push(new FormInput('offering', FormTypes.checkbox))
+		this.formInputs.push(new FormInput('offering', FormTypes.checkbox));
 		return this;
 	}
 
 	numberOfPassengers(): FormBuilder {
-		this.formInputs.push(new FormInput('numberOfPassengers', FormTypes.number))
+		this.formInputs.push(new FormInput('numberOfPassengers', FormTypes.number));
 		return this;
 	}
 
-	fromDate(): FormBuilder {
-		this.formInputs.push(new FormInput('fromDate', FormTypes.datetime));
+	fromDate(valueOverride?: string): FormBuilder {
+		this.formInputs.push(
+			new FormInput(valueOverride ? valueOverride : 'fromDate', FormTypes.datetime)
+		);
 		return this;
 	}
 
-	toDate(): FormBuilder {
-		this.formInputs.push(new FormInput('toDate', FormTypes.datetime));
+	toDate(valueOverride?: string): FormBuilder {
+		this.formInputs.push(
+			new FormInput(valueOverride ? valueOverride : 'toDate', FormTypes.datetime)
+		);
 		return this;
 	}
 
@@ -104,43 +134,60 @@ class FormBuilder {
 	}
 
 	bedrooms(): FormBuilder {
-		this.formInputs.push(new FormInput('bedrooms', FormTypes.number))
+		this.formInputs.push(new FormInput('bedrooms', FormTypes.number));
 		return this;
 	}
-	
+
 	washerdryer(): FormBuilder {
-		this.formInputs.push(new FormInput('washerdryer', FormTypes.checkbox))
+		this.formInputs.push(new FormInput('washerdryer', FormTypes.checkbox));
 		return this;
 	}
 
 	dock(): FormBuilder {
-		this.formInputs.push(new FormInput('dock', FormTypes.checkbox))
+		this.formInputs.push(new FormInput('dock', FormTypes.checkbox));
 		return this;
 	}
 
 	price_per_week(): FormBuilder {
-		this.formInputs.push(new FormInput('price_per_week', FormTypes.number))
+		this.formInputs.push(new FormInput('price_per_week', FormTypes.number));
 		return this;
 	}
 
 	price_per_day(): FormBuilder {
-		this.formInputs.push(new FormInput('price_per_day', FormTypes.number))
+		this.formInputs.push(new FormInput('price_per_day', FormTypes.number));
 		return this;
 	}
 
 	description(): FormBuilder {
-		this.formInputs.push(new FormInput('description', FormTypes.text))
+		this.formInputs.push(new FormInput('description', FormTypes.text));
 		return this;
 	}
 
 	build(data?: any): FormInput[] {
 		if (data === undefined) {
-			// blank form
 			return this.formInputs;
 		} else {
 			this.formInputs.forEach((input) => {
-				if (data[input.name] !== undefined) {
-					input.value = data[input.name];
+				const snakeCaseKey = toSnakeCase(input.name);
+				if (data[snakeCaseKey] !== undefined) {
+					if (input.type === FormTypes.datetime) {
+						const dateStr = data[snakeCaseKey];
+						if (dateStr.length === 10) {
+							// "YYYY-MM-DD" format
+							// Append default time "T00:00"
+							input.value = `${dateStr}T00:00`;
+						} else {
+							// If it already has time component, just format it
+							const dateTime = new Date(dateStr);
+							dateTime.setMinutes(dateTime.getMinutes() - dateTime.getTimezoneOffset());
+							input.value = dateTime.toISOString().slice(0, 16);
+						}
+					} else if (input.type === FormTypes.select) {
+						const selectedOption = input.selectOptions?.filter(option => option.name === data[snakeCaseKey].location_name)
+						input.value = selectedOption[0].value
+					} else {
+						input.value = data[snakeCaseKey];
+					}
 				}
 			});
 			return this.formInputs;

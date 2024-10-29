@@ -11,40 +11,25 @@ gem 'rails', '~> 6.1.3.2'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'mini_racer', platforms: :ruby
 
 # imported gems for this project
 
+gem 'active_model_serializers'
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
-gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'carrierwave'
 gem 'exception_handler', '~> 0.8.0.0'
-gem 'font-awesome-rails'
-gem 'foreman'
 gem 'friendly_id', '~> 5.2.4'
-gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
-gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
-gem 'leaflet-rails'
+gem 'jwt'
 gem 'open-weather'
 gem 'psych', '< 4'
-gem 'jwt'
 gem 'rack-cors'
 gem 'rails-controller-testing'
-gem 'rubocop'
-gem 'sendgrid-ruby'
-gem 'simple_calendar', '~> 2.0'
-gem 'simple_form', '~> 4.1'
-gem 'trix-rails', require: 'trix'
-gem 'webpacker'
 gem 'rswag-api'
 gem 'rswag-ui'
+gem 'rubocop'
+gem 'sassc-rails'
+gem 'sendgrid-ruby'
 gem 'will_paginate'
-gem 'will_paginate-bootstrap'
 
 # storage
 
@@ -52,8 +37,6 @@ gem 'aws-sdk-s3', require: false
 gem 'carrierwave-aws'
 gem 'fog-aws', group: :production
 
-# # Use CoffeeScript for .coffee assets and views
-# gem 'coffee-rails', '~> 4.2'
 # # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

@@ -11,38 +11,40 @@
 	let _: IChart[] = [];
 	let loading: boolean = false;
 	let formData = new FormData();
-	let createChartTreeForm = new FormBuilder().title().attachment().build()
+	let createChartTreeForm = new FormBuilder().title().attachment().build();
 
 	const handleSubmit = (event) => {
 		formData.append('chart', event.detail.files.accepted[0]);
-		formData.append('caption', event.detail.caption)
-		formData.append('user_id', user.id)
+		formData.append('caption', event.detail.caption);
+		formData.append('user_id', user.id);
 
-		client.imageUploadClient?.uploadImage('v1/charts/', formData).then(res => {
-			toastStore.update((prevValue) => ({
+		client.imageUploadClient
+			?.uploadImage('v1/charts/', formData)
+			.then((res) => {
+				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
 					toastMessage: 'Chart added!',
 					type: ToastTypes.success
 				}));
-		}).catch(err => {
-			toastStore.update((prevValue) => ({
+			})
+			.catch((err) => {
+				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
 					toastMessage: err,
 					type: ToastTypes.error
-			}));
-		})
-	}
+				}));
+			});
+	};
 
 	onMount(() => {
 		loading = true;
 		client.restClient?.charts
 			.getV1Charts()
 			.then((data) => {
-				data.map((chart: any) => {
-					_.push(new IChart(chart));
-				});
+				_ = data.map((chart: any) => new IChart(chart));
+				loading = false;
 				loading = false;
 			})
 			.catch((error) => {
@@ -55,8 +57,6 @@
 				}));
 			});
 	});
-
-	
 
 	const client = get(clientStore);
 	const user = get(userStore);

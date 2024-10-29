@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type locationPointIn = {
-    location_name?: string;
-    location_description?: string;
+	location_name?: string;
+	location_description?: string;
 };
-

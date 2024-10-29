@@ -7,7 +7,9 @@ module Api
           token = JsonWebToken.encode(
             first_name: @user.firstname,
             last_name: @user.lastname,
-            user_id: @user.id
+            user_id: @user.id,
+            email: @user.email,
+            admin: @user.admin
           )
           render json: { token: }, status: :ok
         else

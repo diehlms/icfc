@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type committeeIn = {
-    url?: string;
-    name?: string;
+	url?: string;
+	name?: string;
 };
-

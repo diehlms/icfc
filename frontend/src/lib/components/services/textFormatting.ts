@@ -47,11 +47,18 @@ export function toCamelCase(text: string): string {
 	return text.replace(/[^a-zA-Z0-9]+(.)/g, (_, character) => character.toUpperCase());
 }
 
+export function toSnakeCase(text: string): string {
+	return text
+		.replace(/[^\w\s]/g, ' ')
+		.replace(/([A-Z])/g, ' $1')
+		.toLowerCase()
+		.trim()
+		.replace(/\s+/g, '_');
+}
+
 export function toTitleCase(input: string): string {
 	const trimmedInput = input.trim();
-
 	const words = trimmedInput.split(/[\s_]|(?=[A-Z])/);
-
 	const formattedWords = words.map((word) => {
 		return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 	});

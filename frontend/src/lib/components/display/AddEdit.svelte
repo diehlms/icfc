@@ -2,66 +2,60 @@
 	import FormBuilder, { FormInput } from '$lib/components/services/formBuilder';
 	import { toTitleCase } from '$lib/components/services/textFormatting';
 	import Wysiwyg from './WYSIWYG.svelte';
-	import { FloatingLabelInput, Checkbox, Button, Select, Label, Drawer, SpeedDial, SpeedDialButton } from 'flowbite-svelte';
+	import {
+		FloatingLabelInput,
+		Checkbox,
+		Button,
+		Select,
+		Label,
+		SpeedDial,
+		SpeedDialButton,
+		Modal
+	} from 'flowbite-svelte';
+	import { PencilSquare, RocketLaunch } from 'svelte-heros-v2';
 	import { createEventDispatcher } from 'svelte';
-	import { sineIn } from 'svelte/easing';
-	import Dropzone from "svelte-file-dropzone";
 	import { Plus } from 'svelte-heros-v2';
+	import AttachmentUploader from './AttachmentUploader.svelte';
 
 	export let form: FormInput[] = new FormBuilder().build();
-  export let openDrawerLabel: string = "Add new"
+	export let openDrawerLabel: string = 'Add new';
 	export let displayAsButton: boolean = false;
 
-	let hidden1 = true;
-	let transitionParams = {
-		x: -320,
-		duration: 200,
-		easing: sineIn
-	};
+	let defaultModal = false;
 	let payload: any = {};
-	let files = {
-		accepted: [],
-		rejected: []
-	};
-
-	function handleFilesSelect(e: any) {
-		const { acceptedFiles, fileRejections } = e.detail;
-		files.accepted = [...files.accepted, ...acceptedFiles];
-		files.rejected = [...files.rejected, ...fileRejections];
-		payload.files = files;
-	}
 
 	const dispatch = createEventDispatcher();
 
-	function onSubmit() {
+	function onSubmit(event?: any) {
+		if (event?.detail?.files) {
+			payload.files = event.detail.files;
+		}
 		dispatch('triggerModalFormSubmit', payload);
 	}
 
 	function handleWysiwygInput(content: string, name: string) {
-    payload[name] = content;
-  }
+		payload[name] = content;
+	}
 
 	function handleInput(event: any) {
 		const { name, value } = event.target;
 		payload = { ...payload, [name]: value };
 	}
 
-	// Populate the payload with initial values (if it's an edit form)
 	$: if (form && form.length) {
-		form.forEach(input => {
+		form.forEach((input) => {
 			if (input.value !== undefined) {
-				payload[input.name] = input.value;  // Prepopulate the payload with the initial form data
+				payload[input.name] = input.value;
 			}
 		});
 	}
-
 </script>
 
-<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden1} id="sidebar1">
+<Modal bind:open={defaultModal} autoclose>
 	<form class="flex flex-col space-y-1" on:submit|preventDefault={onSubmit}>
 		{#each form as input}
 			<div class="w-full">
-				{#if input.type == 'text' || input.type == 'password' || input.type == 'number' || input.type == 'datetime-local' }
+				{#if input.type == 'text' || input.type == 'password' || input.type == 'number' || input.type == 'datetime-local'}
 					<div>
 						<Label for={input.name} class="block">{toTitleCase(input.name)}</Label>
 						<FloatingLabelInput
@@ -80,7 +74,10 @@
 			</div>
 			<div>
 				{#if input.type == 'richText'}
-					<Wysiwyg on:input={(e) => handleWysiwygInput(e.detail, input.name)} bind:content={input.value} />
+					<Wysiwyg
+						on:input={(e) => handleWysiwygInput(e.detail, input.name)}
+						bind:content={input.value}
+					/>
 				{/if}
 			</div>
 			<div class="flex">
@@ -94,29 +91,23 @@
 					<Select class="mt-2" items={input.selectOptions} bind:value={payload[input.name]} />
 				{/if}
 			</div>
-			<div class="flex">
-				{#if input.type == 'attachment'}
-					<Dropzone on:drop={handleFilesSelect} />
-					<ol>
-						{#each files.accepted as item}
-							<li>{item.name}</li>
-						{/each}
-					</ol>
-				{/if}
-			</div>
+			{#if input.type == 'attachment'}
+				<AttachmentUploader on:triggerAttachmentUpload={onSubmit} />
+			{/if}
 		{/each}
-		<Button outline={true} type="submit">Submit</Button>
+		<Button color="green" type="submit"><RocketLaunch /> Submit</Button>
 	</form>
-</Drawer>
+</Modal>
 
 {#if displayAsButton}
-	<Button on:click={() => (hidden1 = false)} outline>
+	<Button color="yellow" size="xs" on:click={() => (defaultModal = true)} outline>
+		<PencilSquare />
 		{openDrawerLabel}
 	</Button>
 {:else}
 	<SpeedDial defaultClass="fixed end-6 bottom-12">
-		<SpeedDialButton on:click={() => (hidden1 = false)} name={openDrawerLabel}>
-			<Plus class="w-6 h-6" />
+		<SpeedDialButton on:click={() => (defaultModal = true)} name={openDrawerLabel}>
+			<Plus class="h-6 w-6" />
 		</SpeedDialButton>
 	</SpeedDial>
 {/if}

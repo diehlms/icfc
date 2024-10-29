@@ -38,6 +38,7 @@ RSpec.describe 'api/v1/family_members', type: :request do
   end
 
   path '/v1/family_members/{id}' do
+    parameter name: 'id', in: :path, type: :integer, description: 'id'
     delete('delete family_member') do
       tags 'Family Members'
       consumes 'application/json'

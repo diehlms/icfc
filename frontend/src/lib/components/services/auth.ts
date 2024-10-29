@@ -1,5 +1,5 @@
 import { AppClient } from '../../../lib/client/AppClient';
-import { clientStore, userStore, type IClientStore, type IUserStore} from '$lib/stores';
+import { clientStore, userStore, type IClientStore, type IUserStore } from '$lib/stores';
 import { get } from 'svelte/store';
 import { ImageUploadClient } from './imageUploadClient';
 
@@ -11,8 +11,8 @@ export default {
 		const tokenPayload = JSON.parse(atob(arrayToken[1]));
 		return Math.floor(new Date().getTime() / 1000) >= tokenPayload?.sub;
 	},
-	userActionPermitted(entity_user_id: number, user_id: number): boolean {
-		return entity_user_id === user_id
+	userActionPermitted(entity_user_id: number, user: any): boolean {
+		return user.admin || entity_user_id === user.id;
 	},
 	updateAuthContext() {
 		const apiUrl = PUBLIC_API_URL;
@@ -32,9 +32,13 @@ export default {
 		userStore.update((store: IUserStore) => {
 			return {
 				...store,
-				id: tokenPayload['user_id']
-			}
-		})
+				id: tokenPayload['user_id'],
+				admin: tokenPayload['admin'],
+				firstName: tokenPayload['first_name'],
+				lastName: tokenPayload['last_name'],
+				email: tokenPayload['email']
+			};
+		});
 
 		clientStore.update((store: IClientStore) => {
 			const restClientAuthenticated = new AppClient({
@@ -44,9 +48,7 @@ export default {
 				}
 			});
 
-			const imageUploadClient = new ImageUploadClient(
-				PUBLIC_API_URL, authToken as string
-			)
+			const imageUploadClient = new ImageUploadClient(PUBLIC_API_URL, authToken as string);
 
 			return {
 				...store,

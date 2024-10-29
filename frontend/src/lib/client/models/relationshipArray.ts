@@ -3,6 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type relationshipArray = Array<{
-    child: string;
-    parent: string;
+	child: string;
+	parent: string;
 }>;

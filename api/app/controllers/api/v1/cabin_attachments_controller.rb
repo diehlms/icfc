@@ -3,8 +3,9 @@
 module Api
   module V1
     class CabinAttachmentsController < ApplicationController
-      before_action :set_cabin_attachment, only: %i[destroy]
       before_action :authorize_request
+      before_action :cabin_attachment, only: %i[destroy]
+      before_action :check_authorization, only: %i[destroy]
 
       def index
         @cabin_attachments = CabinAttachment.find_by(cabin_id: params[:cabin_id])
@@ -29,7 +30,7 @@ module Api
 
       private
 
-      def set_cabin_attachment
+      def cabin_attachment
         @cabin_attachment = CabinAttachment.find(params[:id])
       end
 

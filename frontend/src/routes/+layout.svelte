@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.postcss';
-	import { AppClient} from '$lib/client';
+	import { AppClient } from '$lib/client';
 	import { onMount } from 'svelte';
 	import { clientStore, toastStore, ToastTypes } from '$lib/stores';
 	import { goto, invalidateAll } from '$app/navigation';
@@ -13,7 +13,7 @@
 	import '../global.scss';
 	import Footer from '$lib/components/display/Footer.svelte';
 	import Toast from '$lib/components/display/Toast.svelte';
-
+	import BreadCrumb from '$lib/components/display/BreadCrumb.svelte';
 
 	const PUBLIC_API_URL = 'http://localhost:3010/api/';
 
@@ -64,24 +64,21 @@
 
 	async function logout(): Promise<void> {
 		localStorage.removeItem('authToken');
-		get(clientStore).restClient?.auth.logout()
-			.then(() => {
-				clientStore.update((prevValue) => ({
-					...prevValue,
-					restClient: new AppClient({
-						BASE: PUBLIC_API_URL
-					}),
-					imageUploadClient: new ImageUploadClient('',''),
-					authCookie: null
-				}));
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Logged Out Successfully',
-					type: ToastTypes.success
-				}));
-				goto('/auth/login');
-			});
+		clientStore.update((prevValue) => ({
+			...prevValue,
+			restClient: new AppClient({
+				BASE: PUBLIC_API_URL
+			}),
+			imageUploadClient: new ImageUploadClient('', ''),
+			authCookie: null
+		}));
+		toastStore.update((prevValue) => ({
+			...prevValue,
+			isOpen: true,
+			toastMessage: 'Logged Out Successfully',
+			type: ToastTypes.success
+		}));
+		goto('/auth/login');
 		await resolveAuth();
 	}
 </script>
@@ -91,13 +88,16 @@
 {/if}
 
 {#if authenticated}
-	<main class="flex h-screen">
-		<div>
-			<Sidebar />
-		</div>
-		<div class="flex-1">
-			<Navbar on:emitLoggedOut={logout} />
-			<div class="main-ui-window mt-2 p-10">
+	<main class="flex h-screen flex-col">
+		<Navbar on:emitLoggedOut={logout} />
+		<div class="flex flex-1">
+			<!-- Flexbox for sidebar and content -->
+			<Sidebar class="w-1/5" />
+			<!-- Give the sidebar a fixed width -->
+			<div class="main-ui-window mt-2 flex-1 p-10">
+				<div class="mb-4">
+					<BreadCrumb />
+				</div>
 				<slot />
 			</div>
 		</div>
@@ -107,3 +107,31 @@
 {/if}
 
 <Footer />
+
+<style>
+	.main-ui-window {
+		flex-grow: 1;
+		margin-top: 1rem;
+		padding: 2.5rem;
+	}
+
+	.flex {
+		display: flex;
+	}
+
+	.flex-1 {
+		flex: 1;
+	}
+
+	.h-screen {
+		height: 100vh;
+	}
+
+	.mt-2 {
+		margin-top: 0.5rem;
+	}
+
+	.p-10 {
+		padding: 2.5rem;
+	}
+</style>

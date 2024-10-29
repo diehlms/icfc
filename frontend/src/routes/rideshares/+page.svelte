@@ -20,10 +20,16 @@
 				return {
 					value: _.id,
 					name: _.location_name
-				}
-			})
-			createRideshareForm = new FormBuilder().fromLocation(selectOptions).toLocation(selectOptions).offering().content().numberOfPassengers().build()
-		})
+				};
+			});
+			createRideshareForm = new FormBuilder()
+				.pointOfDeparture(selectOptions)
+				.pointOfArrival(selectOptions)
+				.offering()
+				.content()
+				.numberOfPassengers()
+				.build();
+		});
 
 		client.restClient?.rideshares
 			.getV1Rideshares()
@@ -45,31 +51,34 @@
 	const handleSubmit = (event: any) => {
 		const rideshareReq: rideshareIn = {
 			user_id: user.id,
-			point_of_departure_id: event.detail.fromLocation,
-			point_of_arrival_id: event.detail.toLocation,
+			point_of_departure_id: event.detail.pointOfDeparture,
+			point_of_arrival_id: event.detail.pointOfArrival,
 			number_of_passengers: parseInt(event.detail.numberOfPassengers),
 			seeking: true,
-			arriving_at: "2024-12-21",
-			departing_at: "2024-12-31",
-			additional_information: "foo"
-		}
+			arriving_at: '2024-12-21',
+			departing_at: '2024-12-31',
+			additional_information: 'foo'
+		};
 
-		client.restClient?.rideshares.postV1Rideshares(rideshareReq).then(res => {
-			toastStore.update((prevValue) => ({
+		client.restClient?.rideshares
+			.postV1Rideshares(rideshareReq)
+			.then((res) => {
+				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
 					toastMessage: 'Rideshare added!',
 					type: ToastTypes.success
 				}));
-		}).catch(err => {
-			toastStore.update((prevValue) => ({
+			})
+			.catch((err) => {
+				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
 					toastMessage: err,
 					type: ToastTypes.error
-			}));
-		})
-	}
+				}));
+			});
+	};
 
 	const client = get(clientStore);
 	const user = get(userStore);
@@ -97,8 +106,7 @@
 			'departingAt',
 			'numberOfPassengers',
 			'pointOfDeparture',
-			'pointOfArrival',
-			'userId',
+			'pointOfArrival'
 		]}
 		followable={true}
 		searchableAttribute="Name"

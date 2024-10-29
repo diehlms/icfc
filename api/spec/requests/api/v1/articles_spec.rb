@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/articles', type: :request do
   path '/v1/articles' do
     get('list articles') do
       tags 'Articles'
+      parameter name: :page, in: :query, type: :integer, description: 'Page number for pagination'
       produces 'application/json'
       response(200, 'successful') do
         after do |example|
@@ -16,9 +17,7 @@ RSpec.describe 'api/v1/articles', type: :request do
         run_test!
       end
     end
-  end
 
-  path '/v1/articles' do
     post('create article') do
       tags 'Articles'
       consumes 'application/json'
@@ -39,7 +38,7 @@ RSpec.describe 'api/v1/articles', type: :request do
 
   path '/v1/articles/{id}' do
     # You'll want to customize the parameter types...
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'id', in: :path, type: :integer, description: 'id'
     get('show article') do
       tags 'Articles'
       produces 'application/json'

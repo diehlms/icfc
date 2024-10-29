@@ -5,7 +5,6 @@ RSpec.describe 'api/v1/users', type: :request do
     get('list users') do
       tags 'Users'
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -34,7 +33,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
   path '/v1/users/{id}' do
     # You'll want to customize the parameter types...
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'id', in: :path, type: :integer, description: 'id'
 
     get('show user') do
       tags 'Users'

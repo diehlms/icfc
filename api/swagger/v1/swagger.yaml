@@ -9,6 +9,12 @@ paths:
       summary: list articles
       tags:
       - Articles
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
       responses:
         '200':
           description: successful
@@ -32,7 +38,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: show article
       tags:
@@ -113,7 +119,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     delete:
       summary: delete cabin_attachment
       tags:
@@ -171,7 +177,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: show cabin
       tags:
@@ -221,7 +227,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: show chart
       tags:
@@ -257,7 +263,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     delete:
       summary: delete comment
       tags:
@@ -287,7 +293,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     delete:
       summary: delete committee
       tags:
@@ -317,7 +323,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: show document
       tags:
@@ -392,7 +398,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: show event
       tags:
@@ -448,6 +454,13 @@ paths:
             schema:
               "$ref": "#/components/schemas/relationshipArray"
   "/v1/family_members/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: integer
     delete:
       summary: delete family_member
       tags:
@@ -483,7 +496,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: show family_tree
       tags:
@@ -521,7 +534,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: show gallery
       tags:
@@ -564,7 +577,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     delete:
       summary: delete location_point
       tags:
@@ -573,54 +586,52 @@ paths:
         '200':
           description: successful
   "/v1/password_resets":
-    get:
-      summary: list password_resets
-      tags:
-      - Password Resets
-      responses:
-        '200':
-          description: successful
     post:
       summary: create password_reset
       tags:
       - Password Resets
+      parameters:
+      - name: email
+        in: query
+        schema:
+          type: string
       responses:
         '200':
           description: successful
-  "/v1/password_resets/{id}":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
+  "/v1/password_resets/init_reset_password":
     get:
       summary: show password_reset
       tags:
       - Password Resets
+      parameters:
+      - name: password_reset_token
+        in: query
+        description: password_reset_token
+        schema:
+          type: string
       responses:
         '200':
           description: successful
+  "/v1/password_resets/{password_reset_token}":
     patch:
-      summary: update password_reset
+      summary: update password
       tags:
       - Password Resets
+      parameters:
+      - name: password_reset_token
+        in: query
+        description: password_reset_token
+        schema:
+          type: string
       responses:
         '200':
           description: successful
-    put:
-      summary: update password_reset
-      tags:
-      - Password Resets
-      responses:
-        '200':
-          description: successful
-    delete:
-      summary: delete password_reset
-      responses:
-        '200':
-          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: updated password
   "/v1/rideshares":
     get:
       summary: list rideshares
@@ -713,7 +724,7 @@ paths:
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: show user
       tags:

@@ -31,7 +31,7 @@
 				password: password
 			})
 			.then((res: any) => {
-				console.log(res)
+				console.log(res);
 				localStorage.setItem('authToken', res.token);
 				clientStore.update((prevValue) => ({
 					...prevValue,

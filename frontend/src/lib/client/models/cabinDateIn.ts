@@ -3,8 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type cabinDateIn = {
-    cabin_in?: number;
-    startdate?: string;
-    enddate?: string;
+	cabin_in?: number;
+	startdate?: string;
+	enddate?: string;
 };
-

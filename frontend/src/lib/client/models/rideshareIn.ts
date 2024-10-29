@@ -3,13 +3,12 @@
 /* tslint:disable */
 /* eslint-disable */
 export type rideshareIn = {
-    user_id?: number;
-    number_of_passengers?: number;
-    additional_information?: string;
-    arriving_at?: string;
-    departing_at?: string;
-    point_of_arrival_id?: string;
-    point_of_departure_id?: string;
-    seeking?: boolean;
+	user_id?: number;
+	number_of_passengers?: number;
+	additional_information?: string;
+	arriving_at?: string;
+	departing_at?: string;
+	point_of_arrival_id?: string;
+	point_of_departure_id?: string;
+	seeking?: boolean;
 };
-

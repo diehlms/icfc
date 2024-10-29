@@ -4,10 +4,12 @@ module Api
   module V1
     class ChartsController < ApplicationController
       before_action :authorize_request
+      before_action :chart, only: %i[show destroy]
+      before_action :check_authorization, only: %i[destroy destroy]
 
       def index
         chart = Chart.all
-        render json: chart
+        render json: chart, each_serializer: ChartSerializer
       end
 
       def create
@@ -17,11 +19,11 @@ module Api
 
       def show
         chart = Chart.find(params[:id])
-        render json: chart
+        render json: chart, serializer: ChartSerializer
       end
 
       def destroy
-        set_chart
+        chart
         if @chart.destroy
           render json: {}
         else
@@ -32,10 +34,10 @@ module Api
       private
 
       def charts_params
-        params.permit(:chart, :caption, :user_id)
+        params.require(:chart).permit(:chart, :caption, :user_id)
       end
 
-      def set_chart
+      def chart
         @chart = Chart.find(params[:id])
       end
     end

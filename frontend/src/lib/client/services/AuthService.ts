@@ -7,39 +7,35 @@ import type { signupPayload } from '../models/signupPayload';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class AuthService {
-    constructor(public readonly httpRequest: BaseHttpRequest) {}
-    /**
-     * login authentication
-     * login, get new session
-     * @param requestBody
-     * @returns loginPayload successful
-     * @throws ApiError
-     */
-    public postV1AuthLogin(
-        requestBody?: loginPayload,
-    ): CancelablePromise<loginPayload> {
-        return this.httpRequest.request({
-            method: 'POST',
-            url: '/v1/auth/login',
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
-    /**
-     * signup authentication
-     * sign up
-     * @param requestBody
-     * @returns signupPayload successful
-     * @throws ApiError
-     */
-    public postV1AuthSignup(
-        requestBody?: signupPayload,
-    ): CancelablePromise<signupPayload> {
-        return this.httpRequest.request({
-            method: 'POST',
-            url: '/v1/auth/signup',
-            body: requestBody,
-            mediaType: 'application/json',
-        });
-    }
+	constructor(public readonly httpRequest: BaseHttpRequest) {}
+	/**
+	 * login authentication
+	 * login, get new session
+	 * @param requestBody
+	 * @returns loginPayload successful
+	 * @throws ApiError
+	 */
+	public postV1AuthLogin(requestBody?: loginPayload): CancelablePromise<loginPayload> {
+		return this.httpRequest.request({
+			method: 'POST',
+			url: '/v1/auth/login',
+			body: requestBody,
+			mediaType: 'application/json'
+		});
+	}
+	/**
+	 * signup authentication
+	 * sign up
+	 * @param requestBody
+	 * @returns signupPayload successful
+	 * @throws ApiError
+	 */
+	public postV1AuthSignup(requestBody?: signupPayload): CancelablePromise<signupPayload> {
+		return this.httpRequest.request({
+			method: 'POST',
+			url: '/v1/auth/signup',
+			body: requestBody,
+			mediaType: 'application/json'
+		});
+	}
 }

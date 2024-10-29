@@ -4,6 +4,8 @@ module Api
   module V1
     class CommitteesController < ApplicationController
       before_action :authorize_request
+      before_action :committee, only: %i[destroy]
+      before_action :check_authorization, only: %i[destroy]
 
       def index
         committee = Committee.all
@@ -12,12 +14,13 @@ module Api
 
       def create
         @committee = Committee.create!(committees_params)
-        render json: Committee.all
+        render json: @committee
       end
 
       def destroy
-        set_committee
-        render json: Committee.all
+        return unless committee&.destroy
+
+        render json: {}
       end
 
       private
@@ -26,7 +29,7 @@ module Api
         params.permit(:url, :name, :committee)
       end
 
-      def set_committee
+      def committee
         @committee = Committee.find(params[:id])
       end
     end

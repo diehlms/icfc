@@ -37,7 +37,7 @@ RSpec.describe 'api/v1/family_trees', type: :request do
   end
 
   path '/v1/family_trees/{id}' do
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'id', in: :path, type: :integer, description: 'id'
 
     get('show family_tree') do
       tags 'Family Trees'

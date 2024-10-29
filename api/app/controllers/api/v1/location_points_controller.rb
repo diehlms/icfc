@@ -4,15 +4,12 @@ module Api
   module V1
     class LocationPointsController < ApplicationController
       before_action :authorize_request
+      before_action :location_point, only: %i[destroy]
+      before_action :check_authorization, only: %i[destroy]
 
       def index
         location_point = LocationPoint.all
         render json: location_point
-      end
-
-      def single
-        set_location_point
-        render json: @location
       end
 
       def create
@@ -23,12 +20,11 @@ module Api
       def destroy
         return unless current_user.admin?
 
-        set_location_point
-        if @location.destroy
-          render json: LocationPoint.all
+        if location_point.destroy
+          render json: {}
         else
           render json: {
-            errors: @location.errors.full_messages
+            errors: location_point.errors.full_messages
           }, status: :bad_request
         end
       end
@@ -39,7 +35,7 @@ module Api
         params.permit(:location_name, :location_description)
       end
 
-      def set_location_point
+      def location_point
         @location = LocationPoint.find(params[:id])
       end
     end

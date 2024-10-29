@@ -4,6 +4,8 @@ module Api
   module V1
     class FamilyMembersController < ApplicationController
       before_action :authorize_request
+      before_action :family_member, only: %i[destroy]
+      before_action :check_authorization, only: %i[destroy]
 
       def create
         family_members_data = params.permit!.to_h
@@ -60,8 +62,14 @@ module Api
         render json: { error: e.message }, status: :unprocessable_entity
       end
 
-      def delete
-        nil
+      def destroy
+        @family_member = FamilyMember.find(params[:id])
+
+        if @family_member.destroy
+          render json: { message: 'Family member deleted succesfully' }, status: :ok
+        else
+          render json: @family_member.errors
+        end
       end
 
       private

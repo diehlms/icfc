@@ -11,13 +11,13 @@
 
 	let familyTrees: IFamilyTree[] = [];
 	let loading: boolean = true;
-	let createFamilyTreeForm = new FormBuilder().name().build()
+	let createFamilyTreeForm = new FormBuilder().name().build();
 
 	const fetchData = () => {
 		client.restClient?.familyTrees
 			.getV1FamilyTrees()
 			.then((data) => {
-				familyTrees = data.map((familyTree: any) => new IFamilyTree(familyTree))
+				familyTrees = data.map((familyTree: any) => new IFamilyTree(familyTree));
 				loading = false;
 			})
 			.catch((error) => {
@@ -29,39 +29,42 @@
 					type: ToastTypes.error
 				}));
 			});
-		
+
 		loading = false;
-	}
+	};
 
 	onMount(() => {
-		fetchData()
+		fetchData();
 	});
 
 	const handleSubmit = (event: any) => {
 		const familyTreeReq: familyTreeIn = {
 			user_id: user.id,
 			name: event.detail.name
-		}
+		};
 
-		console.log(familyTreeReq)
+		console.log(familyTreeReq);
 
-		client.restClient?.familyTrees.postV1FamilyTrees({family_tree: familyTreeReq}).then(res => {
-			toastStore.update((prevValue) => ({
+		client.restClient?.familyTrees
+			.postV1FamilyTrees({ family_tree: familyTreeReq })
+			.then((res) => {
+				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
 					toastMessage: 'Family tree!',
 					type: ToastTypes.success
 				}));
-				fetchData()
-		}).catch(err => {
-			toastStore.update((prevValue) => ({
+				fetchData();
+			})
+			.catch((err) => {
+				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
 					toastMessage: err,
 					type: ToastTypes.error
-			}));
-		})
-	}
+				}));
+			});
+	};
 
 	const client = get(clientStore);
 	const user = get(userStore);

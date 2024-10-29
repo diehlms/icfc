@@ -5,7 +5,6 @@ RSpec.describe 'api/v1/charts', type: :request do
     get('list charts') do
       tags 'Charts'
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -20,7 +19,6 @@ RSpec.describe 'api/v1/charts', type: :request do
     post('create chart') do
       tags 'Charts'
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -34,7 +32,7 @@ RSpec.describe 'api/v1/charts', type: :request do
   end
 
   path '/v1/charts/{id}' do
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'id', in: :path, type: :integer, description: 'id'
 
     get('show chart') do
       tags 'Charts'

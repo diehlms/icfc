@@ -21,7 +21,7 @@ RSpec.describe 'api/v1/comments', type: :request do
   end
 
   path '/v1/comments/{id}' do
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'id', in: :path, type: :integer, description: 'id'
 
     delete('delete comment') do
       tags 'Comments'

@@ -7,9 +7,18 @@
 	import ICabin from '$lib/interfaces/ICabin';
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import FormBuilder from '$lib/components/services/formBuilder';
+	import type { cabinIn } from '$lib/client';
 
-	let createCabinForm = new FormBuilder().name().bedrooms().washerdryer().dock().price_per_week().price_per_day().description().build();
-	let cabins: ICabin[] = []
+	let createCabinForm = new FormBuilder()
+		.name()
+		.bedrooms()
+		.washerdryer()
+		.dock()
+		.price_per_week()
+		.price_per_day()
+		.description()
+		.build();
+	let cabins: ICabin[] = [];
 	let loading: boolean = true;
 
 	onMount(() => {
@@ -30,12 +39,46 @@
 			});
 	});
 
+	const handleSubmit = (event: any) => {
+		const cabinReq: cabinIn = {
+			user_id: user.id,
+			name: event.detail.name,
+			bedrooms: event.detail.bedrooms,
+			washerdryer: event.detail.washerdryer,
+			dock: event.detail.dock,
+			price_per_week: event.detail.price_per_week,
+			price_per_day: event.detail.price_per_day,
+			description: event.detail.description
+		};
+
+		client.restClient?.cabins
+			.postV1Cabins({ cabin: cabinReq })
+			.then((res) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: 'Cabin added!',
+					type: ToastTypes.success
+				}));
+			})
+			.catch((err) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: err,
+					type: ToastTypes.error
+				}));
+			});
+	};
+
 	const client = get(clientStore);
+	const user = get(userStore);
 
 	$: cabins;
 </script>
 
 <AddEdit
+	on:triggerModalFormSubmit={handleSubmit}
 	form={createCabinForm}
 	openDrawerLabel="Add Cabin"
 />
@@ -48,18 +91,12 @@
 		tableData={cabins}
 		tableName="Cabins"
 		selectable={false}
-		columnNames={[
-			'name',
-			'bedrooms',
-			'dock',
-			'pricePerDay',
-			'pricePerWeek',
-			'washerDryer',
-		]}
+		columnNames={['name', 'bedrooms', 'dock', 'pricePerDay', 'pricePerWeek', 'washerDryer']}
 		searchableAttribute="Name"
 		showSearch={false}
 		followable={true}
 	/>
 {:else}
-	<p>No cabins available.</p>  // Handle case where no data is returned
+	<p>No cabins available.</p>
+	// Handle case where no data is returned
 {/if}

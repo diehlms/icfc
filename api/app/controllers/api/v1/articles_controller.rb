@@ -4,23 +4,25 @@ module Api
   module V1
     class ArticlesController < ApplicationController
       before_action :authorize_request
+      before_action :article, only: %i[upload_image show update destroy]
+      before_action :check_authorization, only: %i[upload_image update destroy]
 
       def index
-        @articles = Article.includes(:comments).order(created_at: :desc)
-        render json: @articles.to_json(include: :comments)
+        @articles = Article.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
+        render json: @articles, each_serializer: ArticleSerializer
       end
 
       def create
-        article = Article.create!(article_params)
-        if article
-          render json: article
+        @article = Article.create!(article_params)
+        if @article
+          render json: @article
         else
-          render json: article.errors
+          render json: @article.errors
         end
       end
 
       def upload_image
-        if article.update(image_params)
+        if article.update!(image_params)
           render json: { message: 'Image uploaded successfully', article: @article }, status: :ok
         else
           render json: { errors: @article.errors.full_messages }, status: :unprocessable_entity
@@ -29,9 +31,9 @@ module Api
 
       def show
         if article
-          render json: article.to_json(include: :comments)
+          render json: article, serializer: ArticleSerializer
         else
-          render json: article.errors
+          render json: { errors: @article.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
@@ -44,8 +46,11 @@ module Api
       end
 
       def destroy
-        article&.destroy
-        render json: { message: 'Post deleted!' }
+        if article.destroy
+          render json: { message: 'Post deleted!' }
+        else
+          render json: { errors: @article.errors.full_messages }, status: :unprocessable_entity
+        end
       end
 
       private
@@ -55,11 +60,11 @@ module Api
       end
 
       def image_params
-        params.permit(:image)
+        params.require(:article).permit(:id, :image, :user_id)
       end
 
       def article
-        @article ||= Article.includes(:comments).find(params[:id])
+        @article ||= Article.find(params[:id])
       end
     end
   end

@@ -3,6 +3,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export type familyTreeIn = {
-    name?: string;
+	name?: string;
 };
-

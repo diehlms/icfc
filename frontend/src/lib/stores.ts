@@ -7,7 +7,11 @@ export enum ToastTypes {
 }
 
 export interface IUserStore {
-	id: number | null
+	id: number | null;
+	email: string | null;
+	admin: boolean | null;
+	firstName: string | null;
+	lastName: string | null;
 }
 
 export interface IToastStore {
@@ -39,5 +43,9 @@ export const clientStore = writable<IClientStore>({
 });
 
 export const userStore = writable<IUserStore>({
-	id: null
+	id: null,
+	email: null,
+	admin: false,
+	firstName: null,
+	lastName: null
 });

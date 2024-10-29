@@ -3,6 +3,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export type searchIn = {
-    search?: string;
+	search?: string;
 };
-

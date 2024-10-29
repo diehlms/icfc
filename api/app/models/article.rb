@@ -2,7 +2,7 @@
 
 class Article < ApplicationRecord
   extend FriendlyId
-  self.per_page = 10
+  self.per_page = 3
 
   has_many :comments, dependent: :destroy
   belongs_to :user

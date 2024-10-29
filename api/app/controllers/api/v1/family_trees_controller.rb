@@ -4,10 +4,11 @@ module Api
   module V1
     class FamilyTreesController < ApplicationController
       before_action :authorize_request
+      before_action :check_authorization, only: %i[destroy]
 
       def index
         @family_trees = FamilyTree.all
-        render json: @family_trees
+        render json: @family_trees, each_serializer: FamilyTreeSerializer
       end
 
       def show
