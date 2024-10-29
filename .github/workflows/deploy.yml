@@ -37,8 +37,8 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
-          scp -i ~/.ssh/deploy_key docker-compose-production.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose.yml
+          scp -i ~/.ssh/deploy_key docker-compose-production.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-production.yml
           scp -i ~/.ssh/deploy_key Dockerfile $DEPLOY_USER@$DEPLOY_HOST:~/app/Dockerfile
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \
-            docker compose up --pull -d --build'
+            docker compose -f docker-compose-production.yml up --pull -d --build'
