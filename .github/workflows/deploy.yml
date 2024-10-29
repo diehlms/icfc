@@ -41,5 +41,4 @@ jobs:
           scp -i ~/.ssh/deploy_key Dockerfile $DEPLOY_USER@$DEPLOY_HOST:~/app/Dockerfile
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \
-            docker compose pull && \
             docker compose up -f docker-compose-production.yml -d --build'
