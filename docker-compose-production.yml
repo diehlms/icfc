@@ -3,12 +3,13 @@ services:
     image: nginx:alpine
     ports:
       - "80:80"
-      - "443:443"
+      # - "443:443"
     volumes:
-      - ./proxy/nginx.prod.conf:/etc/nginx/conf.d/nginx.prod.conf
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+      - ./proxy/nginx.default.conf:/etc/nginx/nginx.conf:ro
+      # - ./proxy/nginx.prod.conf:/etc/nginx/conf.d/nginx.prod.conf
+      # - ./certbot/conf:/etc/letsencrypt
+      # - ./certbot/www:/var/www/certbot
+    # command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     depends_on:
       - web
     networks:
@@ -24,11 +25,17 @@ services:
   #     - app_network
 
   web:
-    image: ghcr.io/diehlms/icfc-www:latest
+    image: ghcr.io/diehlms/icfc-www:${IMAGE_TAG}
+    entrypoint: ["/bin/bash", "/rails/entrypoint.sh"]
     environment:
       - RAILS_ENV=production
       - RAILS_SERVE_STATIC_FILES=true
+    ports:
+      - 3000:3000
+    env_file:
+      - ".env"
     volumes:
+      - ./entrypoint.sh:/rails/entrypoint.sh
       - ./storage:/rails/storage
     networks:
       - app_network
@@ -50,3 +57,4 @@ volumes:
 
 networks:
   app_network:
+    driver: bridge

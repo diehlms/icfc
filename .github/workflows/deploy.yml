@@ -36,5 +36,26 @@ jobs:
 
   deploy:
     runs-on: [self-hosted, linux, X64]
+    needs: [publish]
     steps:
       - uses: actions/checkout@v2
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+      - name: Deploy to server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
+            cd ~/app && \
+            echo 'IMAGE_TAG=${{ github.sha }}' >> .build-env && \
+            source .build-env && \
+            docker compose -f docker-compose-production.yml up -d'
