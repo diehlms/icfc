@@ -25,8 +25,8 @@ COPY --from=frontend /app/build/ public/
 
 RUN adduser --disabled-password --gecos "" ${appuser}
 
-RUN chown -R ${appuser}:${appuser} /app
-RUN chmod 755 /app
+RUN chown -R ${appuser}:${appuser} /rails
+RUN chmod 755 /rails
 
 USER ${appuser}
 
