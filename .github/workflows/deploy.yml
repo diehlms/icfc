@@ -56,6 +56,6 @@ jobs:
         run: |
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \
-            export IMAGE=ghcr.io/diehlms/icfc-www:${{ github.sha }}
+            export IMAGE=ghcr.io/diehlms/icfc-www:${{ github.sha }} && \
             yq eval ".services.web.image = \"$IMAGE\"" -i docker-compose-production.yml && \
             docker compose -f docker-compose-production.yml up -d'
