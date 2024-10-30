@@ -37,7 +37,8 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
-          tar -czf app.tar.gz .
+          touch archive.tar.gz
+          tar --exclude=archive.tar.gz -zcvf archive.tar.gz .
 
           scp -i ~/.ssh/deploy_key app.tar.gz $DEPLOY_USER@$DEPLOY_HOST:~/app/
 
