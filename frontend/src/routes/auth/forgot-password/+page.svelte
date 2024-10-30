@@ -5,8 +5,6 @@
 	import { Card, Input, Button } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 
-	// import Logo from '$lib/assets/logo.png';
-
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken')) {
 			goto('/dashboard');

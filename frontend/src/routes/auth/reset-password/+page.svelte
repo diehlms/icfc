@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { ToastTypes, clientStore, toastStore } from '$lib/stores';
+	import { clientStore } from '$lib/stores';
 	import { Card, Input, Button, Label } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { AppClient } from '$lib/client';
-	import Logo from '$lib/assets/logo.png';
 
 	onMount(async () => {
 		const url = $page.url;
@@ -86,7 +85,6 @@
 <div class="landing-img">
 	{#if useResetForm === true}
 		<Card class="login-card mx-auto my-8 w-96">
-			<img class="login-logo" src={Logo} height="150vh" width="150vw" alt="Orbio Corporate Logo" />
 			<form on:submit|preventDefault={resetPassword}>
 				<div class="mb-6">
 					<Label for="password" class="mb-2">Password</Label>

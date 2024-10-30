@@ -1,27 +1,30 @@
+# Step 1: Frontend Build
 FROM node:18-alpine AS frontend
 WORKDIR /app
 COPY frontend/package*.json ./
 RUN npm install
-COPY frontend/ .
+COPY frontend/. .
 RUN npm run build
 
-FROM ruby:3.2-alpine AS rails-builder
+# Step 2: Rails Build
+FROM ruby:3.2.2-bullseye AS rails-builder
 WORKDIR /rails
 
-RUN apk add --no-cache \
-    build-base \
-    postgresql-dev \
+RUN apt-get update && apt-get install -y \
+    nodejs \
     git
 
+# Copy Gemfile and Gemfile.lock from api/ to avoid rebuilds if only app code changes
 COPY api/Gemfile api/Gemfile.lock ./
 RUN bundle install --jobs 4 --retry 3
 
+# Copy Rails app from api/ directory
 COPY api/. .
-COPY --from=frontend /app/dist/ public/
+COPY --from=frontend /app/build/ public/
 
-RUN bundle exec rails assets:precompile
+# RUN bundle exec rails assets:precompile
 
-RUN adduser -D rails
+RUN adduser --disabled-password --gecos "" rails
 USER rails
 
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

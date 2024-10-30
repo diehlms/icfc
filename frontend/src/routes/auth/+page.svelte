@@ -5,7 +5,6 @@
 	import { Card, Input, Button, Label, Checkbox, A } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 	import type { userIn } from '$lib/client';
-	import Logo from '$lib/assets/logo.png';
 
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken') && $clientStore.authenticated) {
@@ -50,7 +49,6 @@
 <div class="landing-img">
 	<div class="login-card">
 		<Card class="mx-auto mt-8">
-			<img class="login-logo" src={Logo} alt="Orbio Corporate Logo" />
 			<p class="mx-auto mb-2">Register for Orbio Earth</p>
 			<form class="signup-form">
 				<div class="mb-6 grid gap-6 md:grid-cols-2">
