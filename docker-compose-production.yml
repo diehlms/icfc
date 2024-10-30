@@ -24,9 +24,7 @@ services:
   #     - app_network
 
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/diehlms/icfc-www:latest
     environment:
       - RAILS_ENV=production
       - RAILS_SERVE_STATIC_FILES=true

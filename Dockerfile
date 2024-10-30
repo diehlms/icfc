@@ -8,6 +8,8 @@ RUN npm run build
 
 # Step 2: Rails Build
 FROM ruby:3.2.2-bullseye AS rails-builder
+
+ENV appuser=rails
 WORKDIR /rails
 
 RUN apt-get update && apt-get install -y \
@@ -21,7 +23,11 @@ RUN bundle install --jobs 4 --retry 3
 COPY api/. .
 COPY --from=frontend /app/build/ public/
 
-RUN adduser --disabled-password --gecos "" rails
-USER rails
+RUN adduser --disabled-password --gecos "" ${appuser}
+
+RUN chown -R ${appuser}:${appuser} /app
+RUN chmod 755 /app
+
+USER ${appuser}
 
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
