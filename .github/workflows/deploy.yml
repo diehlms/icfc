@@ -40,10 +40,10 @@ jobs:
           touch archive.tar.gz
           tar --exclude=archive.tar.gz -zcvf archive.tar.gz .
 
-          scp -i ~/.ssh/deploy_key app.tar.gz $DEPLOY_USER@$DEPLOY_HOST:~/app/
+          scp -i ~/.ssh/deploy_key archive.tar.gz $DEPLOY_USER@$DEPLOY_HOST:~/app/
 
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \
-            tar -xzf app.tar.gz && \
-            rm app.tar.gz && \
+            tar -xzf archive.tar.gz && \
+            rm archive.tar.gz && \
             docker compose -f docker-compose-production.yml up -d --build'
