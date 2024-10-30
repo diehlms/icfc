@@ -14,15 +14,12 @@ RUN apt-get update && apt-get install -y \
     nodejs \
     git
 
-# Copy Gemfile and Gemfile.lock from api/ to avoid rebuilds if only app code changes
 COPY api/Gemfile api/Gemfile.lock ./
 RUN bundle install --jobs 4 --retry 3
 
 # Copy Rails app from api/ directory
 COPY api/. .
 COPY --from=frontend /app/build/ public/
-
-# RUN bundle exec rails assets:precompile
 
 RUN adduser --disabled-password --gecos "" rails
 USER rails
