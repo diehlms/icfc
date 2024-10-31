@@ -2,7 +2,7 @@ services:
   proxy:
     image: nginx:1.23.3-alpine
     volumes:
-      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./proxy/nginx.dev.conf:/etc/nginx/nginx.conf:ro
     ports:
       - "4000:4000"
     depends_on:
@@ -35,7 +35,7 @@ services:
       - gems:/usr/local/bundle
       - ./api:/app
   postgres:
-    image: postgres:16-bullseye
+    image: postgres:12-alpine
     ports:
       - "8881:5432"
     env_file:

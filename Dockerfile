@@ -1,5 +1,12 @@
 # Step 1: Frontend Build
 FROM node:18-alpine AS frontend
+
+ARG PUBLIC_API_URL
+ARG PUBLIC_VERSION
+
+ENV PUBLIC_API_URL=http://128.140.1.67/api \
+    PUBLIC_VERSION=0.0.1
+
 WORKDIR /app
 COPY frontend/package*.json ./
 RUN npm install
