@@ -1,8 +1,0 @@
-<%= form_for @gallery do |f| %>
-    <%= render 'layouts/error_messages', object: @gallery %>
-    <%= f.label :caption  %>
-    <%= f.text_field :caption, placeholder: "30 Character Limit" %>
-    <%= f.label :picture %>
-    <%= f.file_field :image %>
-    <%= f.submit %>
-<% end %>
