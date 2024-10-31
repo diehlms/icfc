@@ -40,6 +40,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - uses: Homebrew/actions/setup-homebrew@master
+
       - name: Configure SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
