@@ -14,8 +14,7 @@
 	import Footer from '$lib/components/display/Footer.svelte';
 	import Toast from '$lib/components/display/Toast.svelte';
 	import BreadCrumb from '$lib/components/display/BreadCrumb.svelte';
-
-	const PUBLIC_API_URL = 'http://localhost:3010/api/';
+	import { PUBLIC_API_URL } from '$env/static/public';
 
 	let message: string | null = null;
 	let restClient: AppClient;

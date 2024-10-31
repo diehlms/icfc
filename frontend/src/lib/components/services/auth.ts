@@ -4,8 +4,6 @@ import { get } from 'svelte/store';
 import { ImageUploadClient } from './imageUploadClient';
 import { PUBLIC_API_URL } from '$env/static/public';
 
-// const PUBLIC_API_URL = 'http://localhost:3010/api/';
-
 export default {
 	isTokenExpired(token: string) {
 		const arrayToken = token.split('.');
