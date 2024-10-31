@@ -51,14 +51,17 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
+      - name: Update Docker Compose File with Image
+        run: |
+          export IMAGE="ghcr.io/diehlms/icfc-www:${{ github.sha }}"
+          yq eval ".services.web.image = \"$IMAGE\"" -i docker-compose-production.yml
+
       - name: Deploy to server
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
-          brew install yq
+          scp -i ~/.ssh/deploy_key docker-compose-production.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-production.yml
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \
-            export IMAGE=ghcr.io/diehlms/icfc-www:${{ github.sha }} && \
-            yq eval ".services.web.image = \"$IMAGE\"" -i docker-compose-production.yml && \
             docker compose -f docker-compose-production.yml up -d'
