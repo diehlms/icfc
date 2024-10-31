@@ -51,3 +51,5 @@ yarn-debug.log*
 
 terraform.tfvars
 .terraform/
+
+**/log
