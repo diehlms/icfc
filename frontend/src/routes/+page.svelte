@@ -58,24 +58,7 @@
 	{:else if error}
 		<div class="alert alert-error">{error}</div>
 	{:else if events && campers && articles}
-		<!-- Site Title -->
 		<h1 class="mb-4 text-center text-4xl font-bold">Iron City Fishing Club</h1>
-
-		<!-- Row of Buttons -->
-		<div class="mb-8 flex justify-center">
-			<button
-				class="mr-2 rounded bg-blue-500 px-4 py-2 text-sm text-white hover:bg-blue-600 focus:outline-none focus:ring"
-				>Action 1</button
-			>
-			<button
-				class="mr-2 rounded bg-green-500 px-4 py-2 text-sm text-white hover:bg-green-600 focus:outline-none focus:ring"
-				>Action 2</button
-			>
-			<button
-				class="rounded bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring"
-				>Action 3</button
-			>
-		</div>
 
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 			<!-- Breakfast Card -->

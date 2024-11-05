@@ -46,9 +46,7 @@
 							</li>
 						{/each}
 					</ul>
-					{#if searchResults.articles.length > 5}
-						<!-- <Separator class="my-2" /> -->
-					{/if}
+					{#if searchResults.articles.length > 5}{/if}
 				</div>
 			{/if}
 
@@ -59,17 +57,15 @@
 						{#each limitResults(searchResults.events) as event}
 							<li class="rounded p-2 hover:bg-gray-50 dark:hover:bg-gray-700">
 								<a href="/events/{event.id}" class="block">
-									<div class="font-medium">{event.title}</div>
+									<div class="font-medium">{event.events}</div>
 									<div class="text-sm text-gray-500 dark:text-gray-400">
-										{event.date}
+										{event.location}: {event.start_time} - {event.end_time}
 									</div>
 								</a>
 							</li>
 						{/each}
 					</ul>
-					{#if searchResults.events.length > 5}
-						<!-- <Separator class="my-2" /> -->
-					{/if}
+					{#if searchResults.events.length > 5}{/if}
 				</div>
 			{/if}
 
@@ -86,9 +82,7 @@
 							</li>
 						{/each}
 					</ul>
-					{#if searchResults.users.length > 5}
-						<!-- <Separator class="my-2" /> -->
-					{/if}
+					{#if searchResults.users.length > 5}{/if}
 				</div>
 			{/if}
 
@@ -107,16 +101,13 @@
 							</li>
 						{/each}
 					</ul>
-					{#if searchResults.cabins.length > 5}
-						<!-- <Separator class="my-2" /> -->
-					{/if}
+					{#if searchResults.cabins.length > 5}{/if}
 				</div>
 			{/if}
 
 			<a href="/search" class="block">
 				<Button variant="outline" class="mt-2 flex w-full items-center justify-center gap-2">
 					View All Results
-					<!-- <ArrowRight class="h-4 w-4" /> -->
 				</Button>
 			</a>
 		</div>

@@ -5,7 +5,7 @@
 	import { clientStore, toastStore, ToastTypes, userStore } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
-	import type { eventIn } from '$lib/client';
+	import type { eventIn, eventOut } from '$lib/client';
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import FormBuilder from '$lib/components/services/formBuilder';
 	import { goto } from '$app/navigation';
@@ -36,7 +36,7 @@
 
 	const handleSubmit = (event: any) => {
 		const eventReq: eventIn = {
-			user_id: user.id,
+			user_id: user.id as number,
 			events: event.detail.event,
 			description: event.detail.description,
 			location: event.detail.location,
@@ -68,7 +68,7 @@
 		loading = true;
 		client.restClient?.events
 			.getV1Events()
-			.then((data) => {
+			.then((data: eventOut[]) => {
 				options.events = data.map((event: any) => {
 					const calendarEvent: CalendarEvent = {
 						id: event.id,

@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type cabinDateIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type cabinDateIn = createUpdateBaseModel & {
 	cabin_in?: number;
 	startdate?: string;
 	enddate?: string;

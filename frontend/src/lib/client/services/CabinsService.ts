@@ -3,16 +3,19 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { cabinIn } from '../models/cabinIn';
+import type { cabinOut } from '../models/cabinOut';
+import type { cabinUpdate } from '../models/cabinUpdate';
+import type { createUpdateBaseModel } from '../models/createUpdateBaseModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CabinsService {
 	constructor(public readonly httpRequest: BaseHttpRequest) {}
 	/**
 	 * list cabins
-	 * @returns any successful
+	 * @returns cabinOut successful
 	 * @throws ApiError
 	 */
-	public getV1Cabins(): CancelablePromise<any> {
+	public getV1Cabins(): CancelablePromise<Array<cabinOut>> {
 		return this.httpRequest.request({
 			method: 'GET',
 			url: '/v1/cabins'
@@ -21,10 +24,10 @@ export class CabinsService {
 	/**
 	 * create cabin
 	 * @param requestBody
-	 * @returns any successful
+	 * @returns cabinOut successful
 	 * @throws ApiError
 	 */
-	public postV1Cabins(requestBody?: cabinIn): CancelablePromise<any> {
+	public postV1Cabins(requestBody?: cabinIn): CancelablePromise<cabinOut> {
 		return this.httpRequest.request({
 			method: 'POST',
 			url: '/v1/cabins',
@@ -35,10 +38,10 @@ export class CabinsService {
 	/**
 	 * show cabin
 	 * @param id id
-	 * @returns any successful
+	 * @returns cabinOut successful
 	 * @throws ApiError
 	 */
-	public getV1Cabins1(id: number): CancelablePromise<any> {
+	public getV1Cabins1(id: number): CancelablePromise<cabinOut> {
 		return this.httpRequest.request({
 			method: 'GET',
 			url: '/v1/cabins/{id}',
@@ -51,10 +54,10 @@ export class CabinsService {
 	 * update cabin
 	 * @param id id
 	 * @param requestBody
-	 * @returns any successful
+	 * @returns cabinOut successful
 	 * @throws ApiError
 	 */
-	public putV1Cabins(id: number, requestBody?: cabinIn): CancelablePromise<any> {
+	public putV1Cabins(id: number, requestBody?: cabinUpdate): CancelablePromise<cabinOut> {
 		return this.httpRequest.request({
 			method: 'PUT',
 			url: '/v1/cabins/{id}',
@@ -68,16 +71,19 @@ export class CabinsService {
 	/**
 	 * delete cabin
 	 * @param id id
+	 * @param requestBody
 	 * @returns any successful
 	 * @throws ApiError
 	 */
-	public deleteV1Cabins(id: number): CancelablePromise<any> {
+	public deleteV1Cabins(id: number, requestBody?: createUpdateBaseModel): CancelablePromise<any> {
 		return this.httpRequest.request({
 			method: 'DELETE',
 			url: '/v1/cabins/{id}',
 			path: {
 				id: id
-			}
+			},
+			body: requestBody,
+			mediaType: 'application/json'
 		});
 	}
 }

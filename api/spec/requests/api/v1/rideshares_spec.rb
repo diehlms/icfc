@@ -6,6 +6,8 @@ RSpec.describe 'api/v1/rideshares', type: :request do
       tags 'Rideshares'
       produces 'application/json'
       response(200, 'successful') do
+        schema type: :array, items: { '$ref' => '#/components/schemas/rideshareOut' }
+
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -23,6 +25,8 @@ RSpec.describe 'api/v1/rideshares', type: :request do
       produces 'application/json'
       parameter name: :rideshareIn, in: :body, schema: { '$ref' => '#/components/schemas/rideshareIn' }
       response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/rideshareOut'
+
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -36,12 +40,13 @@ RSpec.describe 'api/v1/rideshares', type: :request do
   end
 
   path '/v1/rideshares/{id}' do
-    # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
     get('show rideshare') do
       tags 'Rideshares'
       produces 'application/json'
       response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/rideshareOut'
+
         let(:id) { '123' }
         after do |example|
           example.metadata[:response][:content] = {
@@ -60,6 +65,8 @@ RSpec.describe 'api/v1/rideshares', type: :request do
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/rideshareOut'
+
         let(:id) { '123' }
         after do |example|
           example.metadata[:response][:content] = {
@@ -74,8 +81,9 @@ RSpec.describe 'api/v1/rideshares', type: :request do
 
     delete('delete rideshare') do
       tags 'Rideshares'
-      consumes 'application/json'
+      parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
+      consumes 'application/json'
       response(200, 'successful') do
         let(:id) { '123' }
         after do |example|

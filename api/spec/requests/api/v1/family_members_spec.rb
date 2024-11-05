@@ -41,8 +41,9 @@ RSpec.describe 'api/v1/family_members', type: :request do
     parameter name: 'id', in: :path, type: :integer, description: 'id'
     delete('delete family_member') do
       tags 'Family Members'
-      consumes 'application/json'
+      parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
+      consumes 'application/json'
       response(200, 'successful') do
         let(:id) { '123' }
 

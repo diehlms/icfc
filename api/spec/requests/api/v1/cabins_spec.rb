@@ -7,6 +7,8 @@ RSpec.describe 'api/v1/cabins', type: :request do
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
+        schema type: :array, items: { '$ref' => '#/components/schemas/cabinOut' }
+
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -24,6 +26,8 @@ RSpec.describe 'api/v1/cabins', type: :request do
       produces 'application/json'
       parameter name: :cabinIn, in: :body, schema: { '$ref' => '#/components/schemas/cabinIn' }
       response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/cabinOut'
+
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -43,6 +47,8 @@ RSpec.describe 'api/v1/cabins', type: :request do
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/cabinOut'
+
         let(:id) { '123' }
 
         after do |example|
@@ -58,10 +64,12 @@ RSpec.describe 'api/v1/cabins', type: :request do
 
     put('update cabin') do
       tags 'Cabins'
-      parameter name: :cabinIn, in: :body, schema: { '$ref' => '#/components/schemas/cabinIn' }
+      parameter name: :cabinUpdate, in: :body, schema: { '$ref' => '#/components/schemas/cabinUpdate' }
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/cabinOut'
+
         let(:id) { '123' }
 
         after do |example|
@@ -77,8 +85,9 @@ RSpec.describe 'api/v1/cabins', type: :request do
 
     delete('delete cabin') do
       tags 'Cabins'
-      consumes 'application/json'
+      parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
+      consumes 'application/json'
       response(200, 'successful') do
         let(:id) { '123' }
 

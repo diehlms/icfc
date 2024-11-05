@@ -4,19 +4,20 @@ module Api
   module V1
     class DocumentsController < ApplicationController
       before_action :authorize_request
+      before_action :document, only: %i[destroy]
+      before_action :check_authorization, only: %i[create destroy]
 
       def index
-        @documents = Document.all.where(document_folder: params[:document_folder])
+        @documents = Document.all
         render json: @documents
       end
 
       def create
-        return unless current_user.admin?
-
         @document = Document.create(documents_params)
         if @document.save
-          render json: Document.all
+          render json: {}
         else
+          puts @document.errors.full_messages
           render json: {
             errors: @document.errors.full_messages
           }, status: :bad_request
@@ -24,9 +25,7 @@ module Api
       end
 
       def destroy
-        return unless current_user.admin?
-
-        set_document
+        document
         render json: Document.all
       end
 
@@ -36,7 +35,7 @@ module Api
         params.permit(:document, :document_title, :document_folder)
       end
 
-      def set_document
+      def document
         @document = Document.find(params[:id])
       end
     end

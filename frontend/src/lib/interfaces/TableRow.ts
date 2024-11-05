@@ -1,5 +1,5 @@
 export class TableRow {
-	constructor(public id: string) {}
+	constructor(public id: number | undefined | string) {}
 	[key: string]: any;
 	checked = false;
 }

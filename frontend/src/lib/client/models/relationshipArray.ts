@@ -2,7 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type relationshipArray = Array<{
-	child: string;
-	parent: string;
-}>;
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type relationshipArray = Array<
+	createUpdateBaseModel & {
+		child: string;
+		parent: string;
+	}
+>;

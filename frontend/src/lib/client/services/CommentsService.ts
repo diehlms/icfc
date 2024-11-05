@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { commentIn } from '../models/commentIn';
+import type { createUpdateBaseModel } from '../models/createUpdateBaseModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class CommentsService {
@@ -24,16 +25,19 @@ export class CommentsService {
 	/**
 	 * delete comment
 	 * @param id id
+	 * @param requestBody
 	 * @returns any successful
 	 * @throws ApiError
 	 */
-	public deleteV1Comments(id: number): CancelablePromise<any> {
+	public deleteV1Comments(id: number, requestBody?: createUpdateBaseModel): CancelablePromise<any> {
 		return this.httpRequest.request({
 			method: 'DELETE',
 			url: '/v1/comments/{id}',
 			path: {
 				id: id
-			}
+			},
+			body: requestBody,
+			mediaType: 'application/json'
 		});
 	}
 }

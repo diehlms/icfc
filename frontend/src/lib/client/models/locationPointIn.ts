@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type locationPointIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type locationPointIn = createUpdateBaseModel & {
 	location_name?: string;
 	location_description?: string;
 };

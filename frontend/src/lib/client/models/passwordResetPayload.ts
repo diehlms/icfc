@@ -2,4 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type passwordResetPayload = {};
+export type passwordResetPayload = {
+	password?: string;
+	password_confirmation?: string;
+};

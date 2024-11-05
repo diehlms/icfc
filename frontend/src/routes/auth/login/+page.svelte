@@ -31,7 +31,6 @@
 				password: password
 			})
 			.then((res: any) => {
-				console.log(res);
 				localStorage.setItem('authToken', res.token);
 				clientStore.update((prevValue) => ({
 					...prevValue,
@@ -47,7 +46,7 @@
 				updateAuthContext.updateAuthContext();
 				goto('/');
 			})
-			.catch((err) => {
+			.catch(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					toastMessage: 'Failed to log in',
@@ -62,7 +61,6 @@
 <div class="landing-img">
 	<div class="login-card">
 		<Card class="mx-auto my-12 w-96">
-			<!-- <img class="login-logo" src={Logo} alt="Orbio Corporate Logo" /> -->
 			<form on:submit|preventDefault={handleLogin}>
 				<Input class="m-2" type="text" bind:value={username} placeholder="Username" />
 				<Input class="m-2" type="password" bind:value={password} placeholder="Password" />
@@ -76,20 +74,7 @@
 	</div>
 </div>
 
-<style>
-	.landing-img {
-		background-image: url('../../../lib/assets/background.webp');
-		background-size: cover;
-		height: 100vh;
-		overflow-y: hidden;
-	}
-
-	.landing-img {
-		/* .login-card {
-			max-height: 70vh;
-		} */
-	}
-
+<style lang="scss">
 	.login-logo {
 		max-height: 15vh;
 		max-width: 15vw;

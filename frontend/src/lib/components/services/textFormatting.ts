@@ -68,14 +68,13 @@ export function toTitleCase(input: string): string {
 	return formattedString;
 }
 
-// export function resolveCoordinatesFromLineString(input: string): Coordinate[] {
-// 	const coordinates = input
-// 		.replace('LINESTRING(', '')
-// 		.replace(')', '')
-// 		.split(',')
-// 		.map((coord) => {
-// 			const [lon, lat] = coord.trim().split(' ');
-// 			return fromLonLat([parseFloat(lon), parseFloat(lat)]);
-// 		});
-// 	return coordinates;
-// }
+export function formatDate(dateString: string) {
+	return new Date(dateString).toLocaleString('en-US', {
+		weekday: 'long',
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+		hour: 'numeric',
+		minute: 'numeric'
+	});
+}

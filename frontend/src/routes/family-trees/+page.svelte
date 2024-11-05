@@ -8,6 +8,8 @@
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import FormBuilder from '$lib/components/services/formBuilder';
 	import { type familyTreeIn } from '$lib/client/models/familyTreeIn';
+	import type { familyTreeOut } from '$lib/client';
+	import { createEntity } from '$lib/components/services/crud';
 
 	let familyTrees: IFamilyTree[] = [];
 	let loading: boolean = true;
@@ -16,8 +18,8 @@
 	const fetchData = () => {
 		client.restClient?.familyTrees
 			.getV1FamilyTrees()
-			.then((data) => {
-				familyTrees = data.map((familyTree: any) => new IFamilyTree(familyTree));
+			.then((data: familyTreeOut[]) => {
+				familyTrees = data.map((familyTree: familyTreeOut) => new IFamilyTree(familyTree));
 				loading = false;
 			})
 			.catch((error) => {
@@ -29,8 +31,6 @@
 					type: ToastTypes.error
 				}));
 			});
-
-		loading = false;
 	};
 
 	onMount(() => {
@@ -38,32 +38,18 @@
 	});
 
 	const handleSubmit = (event: any) => {
+		loading = true;
 		const familyTreeReq: familyTreeIn = {
 			user_id: user.id,
 			name: event.detail.name
 		};
-
-		console.log(familyTreeReq);
-
-		client.restClient?.familyTrees
-			.postV1FamilyTrees({ family_tree: familyTreeReq })
-			.then((res) => {
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Family tree!',
-					type: ToastTypes.success
-				}));
-				fetchData();
-			})
-			.catch((err) => {
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: err,
-					type: ToastTypes.error
-				}));
-			});
+		createEntity(
+			familyTreeReq,
+			'Family tree',
+			client.restClient?.familyTrees.postV1FamilyTrees.bind(client.restClient.familyTrees)
+		);
+		fetchData();
+		loading = false;
 	};
 
 	const client = get(clientStore);

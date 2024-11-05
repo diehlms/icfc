@@ -23,6 +23,9 @@ RSpec.describe 'api/v1/cabin_attachments', type: :request do
     parameter name: 'id', in: :path, type: :integer, description: 'id'
 
     delete('delete cabin_attachment') do
+      parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+      consumes 'application/json'
+      produces 'application/json'
       tags 'Cabin Attachments'
       response(200, 'successful') do
         let(:id) { '123' }

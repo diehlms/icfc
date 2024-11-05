@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { createUpdateBaseModel } from '../models/createUpdateBaseModel';
 import type { familyMemberIn } from '../models/familyMemberIn';
 import type { relationshipArray } from '../models/relationshipArray';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -39,16 +40,22 @@ export class FamilyMembersService {
 	/**
 	 * delete family_member
 	 * @param id id
+	 * @param requestBody
 	 * @returns any successful
 	 * @throws ApiError
 	 */
-	public deleteV1FamilyMembers(id: number): CancelablePromise<any> {
+	public deleteV1FamilyMembers(
+		id: number,
+		requestBody?: createUpdateBaseModel
+	): CancelablePromise<any> {
 		return this.httpRequest.request({
 			method: 'DELETE',
 			url: '/v1/family_members/{id}',
 			path: {
 				id: id
-			}
+			},
+			body: requestBody,
+			mediaType: 'application/json'
 		});
 	}
 }

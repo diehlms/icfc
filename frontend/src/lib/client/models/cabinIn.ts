@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type cabinIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type cabinIn = createUpdateBaseModel & {
 	name?: string;
 	bedrooms?: number;
 	washerdryer?: boolean;

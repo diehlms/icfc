@@ -1,4 +1,54 @@
+<script lang="ts">
+	import { clientStore, toastStore, ToastTypes, userStore } from '$lib/stores';
+	import { Listgroup } from 'flowbite-svelte';
+	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
+
+	let committees: any[] = [];
+	let loading: boolean = false;
+	let isFetchingMore = false;
+
+	const fetchCommittees = () => {
+		loading = true;
+		client.restClient?.committees
+			.getV1Committees()
+			.then((data) => {
+				committees = data;
+				loading = false;
+			})
+			.catch((error) => {
+				loading = false;
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: error,
+					type: ToastTypes.error
+				}));
+			})
+			.finally(() => {
+				isFetchingMore = false;
+			});
+	};
+
+	onMount(() => {
+		fetchCommittees();
+	});
+
+	const client = get(clientStore);
+	const user = get(userStore);
+
+	$: committees;
+</script>
+
 <div>
+	{#if committees.length > 0}
+		<h1 class="my-4 text-3xl font-bold">Committees:</h1>
+		<Listgroup items={committees} let:item class="mb-4">
+			<span>
+				<a href={item.url}>{item.name}</a>
+			</span>
+		</Listgroup>
+	{/if}
 	<h1 class="my-4 text-3xl font-bold">Committee Primer FAQ</h1>
 
 	<div class="text-container mt-4">

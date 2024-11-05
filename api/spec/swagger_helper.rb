@@ -85,18 +85,95 @@ RSpec.configure do |config|
               }
             }
           },
-          articleIn: {
+          # Define a base model schema to reduce repetition in other models
+          baseModel: {
             type: 'object',
+            properties: {
+              id: {
+                type: :number
+              },
+              created_at: {
+                type: :string,
+                format: :datetime
+              },
+              updated_at: {
+                type: :string,
+                format: :datetime
+              }
+            }
+          },
+          createUpdateBaseModel: {
+            properties: {
+              user_id: {
+                type: :number
+              }
+            }
+          },
+          attachmentBaseModel: {
+            properties: {
+              url: {
+                type: :string
+              },
+              thumb: {
+                type: :object
+              },
+              large: {
+                type: :object
+              }
+            }
+          },
+          author: {
+            type: 'object',
+            properties: {
+              id: {
+                type: :number
+              },
+              email: {
+                type: :string,
+                format: :email
+              },
+              username: {
+                type: :string
+              },
+              created_at: {
+                type: :string,
+                format: :datetime
+              },
+              updated_at: {
+                type: :string,
+                format: :datetime
+              },
+              admin: {
+                type: :boolean
+              },
+              phone_number: {
+                type: :string
+              },
+              firstname: {
+                type: :string
+              },
+              lastname: {
+                type: :string
+              },
+              verified: {
+                type: :boolean
+              },
+              slug: {
+                type: :string
+              },
+              recently_joined?: {
+                type: :boolean
+              }
+            }
+          },
+          articleIn: {
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               title: {
                 type: :string
               },
               content: {
                 type: :string
-              },
-              image: {
-                type: :string,
-                format: :binary
               },
               pinned: {
                 type: :boolean
@@ -106,8 +183,39 @@ RSpec.configure do |config|
               }
             }
           },
-          cabinAttachmentIn: {
+          articleUpdate: {
+            allOf: [
+              { '$ref' => '#/components/schemas/baseModel' },
+              { '$ref' => '#/components/schemas/articleIn' },
+              { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+            ]
+          },
+          articleOut: {
             type: 'object',
+            allOf: [
+              { '$ref' => '#/components/schemas/baseModel' },
+              { '$ref' => '#/components/schemas/articleIn' }
+            ],
+            properties: {
+              id: {
+                type: :number
+              },
+              image: {
+                '$ref' => '#/components/schemas/attachmentBaseModel'
+              },
+              user: {
+                '$ref' => '#/components/schemas/author'
+              },
+              comments: {
+                type: :array,
+                items: {
+                  '$ref' => '#/components/schemas/commentOut'
+                }
+              }
+            }
+          },
+          cabinAttachmentIn: {
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               cabin_in: {
                 type: :number
@@ -118,10 +226,16 @@ RSpec.configure do |config|
               }
             }
           },
+          cabinAttachmentOut: {
+            allOf: [
+              { '$ref' => '#/components/schemas/cabinAttachmentIn' },
+              { '$ref' => '#/components/schemas/baseModel' }
+            ]
+          },
           cabinDateIn: {
-            type: 'object',
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
-              cabin_in: {
+              cabin_id: {
                 type: :number
               },
               startdate: {
@@ -134,8 +248,14 @@ RSpec.configure do |config|
               }
             }
           },
+          cabinDateOut: {
+            allOf: [
+              { '$ref' => '#/components/schemas/baseModel' },
+              { '$ref' => '#/components/schemas/cabinDateIn' }
+            ]
+          },
           cabinIn: {
-            type: 'object',
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               name: {
                 type: :string
@@ -163,12 +283,66 @@ RSpec.configure do |config|
               }
             }
           },
-          chartIn: {
+          cabinOut: {
             type: 'object',
-            properties: {}
+            allOf: [
+              { '$ref' => '#/components/schemas/baseModel' },
+              { '$ref' => '#/components/schemas/cabinIn' }
+            ],
+            properties: {
+              id: {
+                type: :number
+              },
+              cabindates: {
+                type: :array,
+                items: {
+                  '$ref' => '#/components/schemas/cabinDateOut'
+                }
+              },
+              cabin_attachments: {
+                type: :array,
+                items: {
+                  '$ref' => '#/components/schemas/cabinAttachmentOut'
+                }
+              },
+              user: {
+                '$ref' => '#/components/schemas/author'
+              }
+            }
+          },
+          cabinUpdate: {
+            allOf: [
+              { '$ref' => '#/components/schemas/cabinOut' },
+              { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+            ]
+          },
+          chartIn: {
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
+            properties: {
+              caption: {
+                type: :string
+              }
+            }
+          },
+          chartOut: {
+            allOf: [
+              { '$ref' => '#/components/schemas/chartIn' },
+              { '$ref' => '#/components/schemas/baseModel' }
+            ],
+            properties: {
+              chart: {
+                '$ref' => '#/components/schemas/attachmentBaseModel'
+              },
+              id: {
+                type: :number
+              },
+              user: {
+                '$ref' => '#/components/schemas/author'
+              }
+            }
           },
           commentIn: {
-            type: 'object',
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               content: {
                 type: :string
@@ -181,8 +355,19 @@ RSpec.configure do |config|
               }
             }
           },
+          commentOut: {
+            allOf: [
+              { '$ref' => '#/components/schemas/baseModel' },
+              { '$ref' => '#/components/schemas/commentIn' }
+            ],
+            properties: {
+              id: {
+                type: :number
+              }
+            }
+          },
           committeeIn: {
-            type: 'object',
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               url: {
                 type: :string
@@ -192,8 +377,14 @@ RSpec.configure do |config|
               }
             }
           },
+          committeeOut: {
+            allOf: [
+              { '$ref' => '#/components/schemas/baseModel' },
+              { '$ref' => '#/components/schemas/committeeIn' }
+            ]
+          },
           documentIn: {
-            type: 'object',
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               document_title: {
                 type: :string
@@ -202,12 +393,18 @@ RSpec.configure do |config|
                 type: :string
               },
               document: {
-                type: :document
+                '$ref' => '#/components/schemas/attachmentBaseModel'
               }
             }
           },
+          documentOut: {
+            allOf: [
+              { '$ref' => '#/components/schemas/baseModel' },
+              { '$ref' => '#/components/schemas/documentIn' }
+            ]
+          },
           eventIn: {
-            type: 'object',
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               location: {
                 type: :string
@@ -228,10 +425,30 @@ RSpec.configure do |config|
               }
             }
           },
+          eventOut: {
+            allOf: [
+              { '$ref' => '#/components/schemas/baseModel' },
+              { '$ref' => '#/components/schemas/eventIn' }
+            ],
+            properties: {
+              id: {
+                type: :number
+              },
+              user: {
+                '$ref' => '#/components/schemas/author'
+              }
+            }
+          },
+          eventUpdate: {
+            allOf: [
+              { '$ref' => '#/components/schemas/eventIn' },
+              { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+            ]
+          },
           familyMemberIn: {
             type: :array,
             items: {
-              type: 'object',
+              allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
               properties: {
                 name: {
                   type: :string
@@ -245,20 +462,30 @@ RSpec.configure do |config|
                 parent_id: {
                   type: :number
                 }
-              },
-              required: %w[name, family_tree_id]
+              }
             }
           },
           familyTreeIn: {
-            type: 'object',
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               name: {
                 type: :string
               }
             }
           },
+          familyTreeOut: {
+            allOf: [
+              { '$ref' => '#/components/schemas/baseModel' },
+              { '$ref' => '#/components/schemas/familyTreeIn' }
+            ],
+            properties: {
+              user: {
+                '$ref' => '#/components/schemas/author'
+              }
+            }
+          },
           locationPointIn: {
-            type: 'object',
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               location_name: {
                 type: :string
@@ -268,8 +495,12 @@ RSpec.configure do |config|
               }
             }
           },
+          locationPointOut: {
+            allOf: [{ '$ref' => '#/components/schemas/locationPointIn' },
+                    { '$ref' => '#/components/schemas/baseModel' }]
+          },
           galleryIn: {
-            type: 'object',
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               image: {
                 type: :string,
@@ -283,12 +514,33 @@ RSpec.configure do |config|
               }
             }
           },
+          galleryOut: {
+            allOf: [{ '$ref' => '#/components/schemas/galleryIn' },
+                    { '$ref' => '#/components/schemas/baseModel' }],
+            properties: {
+              image: {
+                '$ref' => '#/components/schemas/attachmentBaseModel'
+              },
+              user: {
+                '$ref' => '#/components/schemas/author'
+              }
+            }
+          },
           passwordResetPayload: {
-            type: 'object',
-            properties: {}
+            type: :object,
+            properties: {
+              password: {
+                type: :string,
+                format: :password
+              },
+              password_confirmation: {
+                type: :string,
+                format: :password
+              }
+            }
           },
           rideshareIn: {
-            type: 'object',
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
               user_id: {
                 type: :number
@@ -316,14 +568,32 @@ RSpec.configure do |config|
               }
             }
           },
+          rideshareOut: {
+            allOf: [{ '$ref' => '#/components/schemas/rideshareIn' },
+                    { '$ref' => '#/components/schemas/baseModel' }],
+            properties: {
+              id: {
+                type: :number
+              },
+              user: {
+                '$ref' => '#/components/schemas/author'
+              }
+            }
+          },
+          rideshareUpdate: {
+            allOf: [
+              { '$ref' => '#/components/schemas/rideshareIn' },
+              { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+            ]
+          },
           userIn: {
-            type: 'object',
+            type: :object,
             properties: {}
           },
           relationshipArray: {
             type: :array,
             items: {
-              type: 'object',
+              allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
               properties: {
                 child: { type: :string },
                 parent: { type: :string }

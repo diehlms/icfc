@@ -37,12 +37,13 @@ RSpec.describe 'api/v1/location_points', type: :request do
   end
 
   path '/v1/location_points/{id}' do
-    # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :integer, description: 'id'
+
     delete('delete location_point') do
       tags 'Location Points'
-      consumes 'application/json'
+      parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
+      consumes 'application/json'
       response(200, 'successful') do
         let(:id) { '123' }
 

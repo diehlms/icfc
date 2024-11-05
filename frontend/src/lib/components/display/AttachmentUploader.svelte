@@ -2,11 +2,13 @@
 	import { Dropzone, Button } from 'flowbite-svelte';
 	import { createEventDispatcher } from 'svelte';
 
+	export let showUploadButton: boolean = true;
+
 	let files = {
 		accepted: [] as File[], // Store actual File objects here
 		rejected: []
 	};
-	let value: string[] = []; // File names (for display purposes)
+	let value: string[] = [];
 
 	const dispatch = createEventDispatcher();
 
@@ -22,14 +24,13 @@
 		event.preventDefault();
 		files.accepted = [];
 
-		// Use DataTransferItemList interface to access the files
 		if (event.dataTransfer && event.dataTransfer.items) {
 			for (let i = 0; i < event.dataTransfer.items.length; i++) {
 				if (event.dataTransfer.items[i].kind === 'file') {
 					const file = event.dataTransfer.items[i].getAsFile();
 					if (file) {
-						files.accepted.push(file); // Push the actual file objects
-						value.push(file.name); // Push file names for display
+						files.accepted.push(file);
+						value.push(file.name);
 					}
 				}
 			}
@@ -96,4 +97,6 @@
 		{/if}
 	</Dropzone>
 </div>
-<Button outline color="green" on:click={onSubmit}>Upload</Button>
+{#if showUploadButton}
+	<Button outline size="xs" color="green" on:click={onSubmit}>Attach</Button>
+{/if}

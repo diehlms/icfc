@@ -2,16 +2,18 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { createUpdateBaseModel } from '../models/createUpdateBaseModel';
+import type { familyTreeOut } from '../models/familyTreeOut';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class FamilyTreesService {
 	constructor(public readonly httpRequest: BaseHttpRequest) {}
 	/**
 	 * list family_trees
-	 * @returns any successful
+	 * @returns familyTreeOut successful
 	 * @throws ApiError
 	 */
-	public getV1FamilyTrees(): CancelablePromise<any> {
+	public getV1FamilyTrees(): CancelablePromise<Array<familyTreeOut>> {
 		return this.httpRequest.request({
 			method: 'GET',
 			url: '/v1/family_trees'
@@ -49,16 +51,22 @@ export class FamilyTreesService {
 	/**
 	 * delete family_tree
 	 * @param id id
+	 * @param requestBody
 	 * @returns any successful
 	 * @throws ApiError
 	 */
-	public deleteV1FamilyTrees(id: number): CancelablePromise<any> {
+	public deleteV1FamilyTrees(
+		id: number,
+		requestBody?: createUpdateBaseModel
+	): CancelablePromise<any> {
 		return this.httpRequest.request({
 			method: 'DELETE',
 			url: '/v1/family_trees/{id}',
 			path: {
 				id: id
-			}
+			},
+			body: requestBody,
+			mediaType: 'application/json'
 		});
 	}
 }

@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type commentIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type commentIn = createUpdateBaseModel & {
 	content?: string;
 	user_id?: number;
 	article_id?: number;

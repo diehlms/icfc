@@ -7,17 +7,20 @@
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import FormBuilder, { FormInput } from '$lib/components/services/formBuilder';
 	import { Trash } from 'svelte-heros-v2';
+	import { formatDate } from '$lib/components/services/textFormatting';
+	import type { locationPointOut, rideshareOut, rideshareUpdate } from '$lib/client';
+	import { deleteEntity, editEntity } from '$lib/components/services/crud';
 
 	let loading: boolean = true;
-	let rideshare: any;
+	let rideshare: rideshareOut;
 	let editRideshareForm: FormInput[];
 
 	export let data: any;
 
-	onMount(() => {
+	const fetchData = () => {
 		client.restClient?.rideshares
 			.getV1Rideshares1(data.id)
-			.then((data) => {
+			.then((data: rideshareOut) => {
 				rideshare = data;
 			})
 			.catch((error) => {
@@ -29,8 +32,8 @@
 				}));
 			})
 			.finally(() => {
-				client.restClient?.locationPoints.getV1LocationPoints().then((data: any) => {
-					const selectOptions = data.map((_: any) => {
+				client.restClient?.locationPoints.getV1LocationPoints().then((data: locationPointOut[]) => {
+					const selectOptions = data.map((_: locationPointOut) => {
 						return {
 							value: _.id,
 							name: _.location_name
@@ -49,73 +52,43 @@
 			});
 
 		loading = false;
+	};
+
+	onMount(() => {
+		fetchData();
 	});
 
 	const deleteRideshare = (id: number) => {
-		client.restClient?.rideshares
-			.deleteV1Rideshares(id)
-			.then((_) => {
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Rideshare deleted!',
-					type: ToastTypes.success
-				}));
-			})
-			.catch((error) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: error,
-					type: ToastTypes.error
-				}));
-			});
+		loading = true;
+		deleteEntity(
+			id,
+			{ user_id: user.id as number },
+			'Rideshare',
+			client.restClient?.rideshares.deleteV1Rideshares.bind(client.restClient?.rideshares)
+		);
+		loading = false;
 	};
 
 	const editRideshare = (event: any) => {
 		loading = true;
-
-		let rideshareUpdatePayload: rideshareIn = {
-			title: event.detail.title,
-			content: event.detail.content
+		const rideshareUpdatePayload: rideshareUpdate = {
+			number_of_passengers: event.detail.numberOfPassengers,
+			additional_information: event.detail.additional_information,
+			departing_at: event.detail.departing_at,
+			arriving_at: event.detail.arriving_at
 		};
-
-		client.restClient?.rideshares
-			.putV1Rideshares(rideshare.id, { rideshare: rideshareUpdatePayload })
-			.then((_) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Rideshare updated',
-					type: ToastTypes.success
-				}));
-			})
-			.catch((error) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: error,
-					type: ToastTypes.error
-				}));
-			});
+		editEntity(
+			rideshare.id as number,
+			{ rideshare: rideshareUpdatePayload, user_id: user.id as number },
+			'Rideshare',
+			client.restClient?.rideshares.putV1Rideshares.bind(client.restClient?.rideshares)
+		);
+		fetchData();
+		loading = false;
 	};
 
 	const client = get(clientStore);
 	const user = get(userStore);
-
-	function formatDate(dateString: string) {
-		return new Date(dateString).toLocaleString('en-US', {
-			weekday: 'long',
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric',
-			hour: 'numeric',
-			minute: 'numeric'
-		});
-	}
 
 	$: rideshare;
 </script>
@@ -174,13 +147,19 @@
 				{#if rideshare.additional_information}
 					<div class="mb-4">
 						<p class="font-semibold">Additional Information:</p>
-						<p>{rideshare.additional_information}</p>
+						<p>{@html rideshare.additional_information}</p>
 					</div>
 				{/if}
 
 				<div class="flex justify-end">
 					{#if updateAuthContext.userActionPermitted(parseInt(rideshare.user_id), user)}
-						<Button class="mr-3" color="red" outline size="sm" on:click={() => deleteRideshare(rideshare.id)}><Trash /></Button>
+						<Button
+							class="mr-3"
+							color="red"
+							outline
+							size="sm"
+							on:click={() => deleteRideshare(rideshare.id)}><Trash /></Button
+						>
 						<AddEdit
 							on:triggerModalFormSubmit={editRideshare}
 							form={editRideshareForm}

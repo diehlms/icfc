@@ -31,11 +31,8 @@
 		};
 		await clients.restClient?.users
 			.postV1Users()
-			.then((res: any) => {
-				console.log(res);
-			})
+			.then((res: any) => {})
 			.catch((err) => {
-				console.log(err);
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					toastMessage: 'Could not register your account.',

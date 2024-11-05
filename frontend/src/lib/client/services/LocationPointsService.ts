@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { createUpdateBaseModel } from '../models/createUpdateBaseModel';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class LocationPointsService {
@@ -34,16 +35,22 @@ export class LocationPointsService {
 	/**
 	 * delete location_point
 	 * @param id id
+	 * @param requestBody
 	 * @returns any successful
 	 * @throws ApiError
 	 */
-	public deleteV1LocationPoints(id: number): CancelablePromise<any> {
+	public deleteV1LocationPoints(
+		id: number,
+		requestBody?: createUpdateBaseModel
+	): CancelablePromise<any> {
 		return this.httpRequest.request({
 			method: 'DELETE',
 			url: '/v1/location_points/{id}',
 			path: {
 				id: id
-			}
+			},
+			body: requestBody,
+			mediaType: 'application/json'
 		});
 	}
 }

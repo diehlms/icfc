@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type rideshareIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type rideshareIn = createUpdateBaseModel & {
 	user_id?: number;
 	number_of_passengers?: number;
 	additional_information?: string;

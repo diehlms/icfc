@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type eventIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type eventIn = createUpdateBaseModel & {
 	location?: string;
 	description?: string;
 	start_time?: string;

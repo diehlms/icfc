@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type committeeIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type committeeIn = createUpdateBaseModel & {
 	url?: string;
 	name?: string;
 };

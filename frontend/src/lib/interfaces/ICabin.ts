@@ -1,18 +1,17 @@
-import type { cabinIn } from '$lib/client';
+import type { cabinOut } from '$lib/client';
 import { TableRow } from './TableRow';
 
 export default class extends TableRow {
-	id: number;
-	name: string;
-	bedrooms: number;
-	dock: boolean;
-	washerDryer: boolean;
-	pricePerDay: number;
-	pricePerWeek: number;
+	name: string | undefined;
+	bedrooms: number | undefined;
+	dock: boolean | undefined;
+	washerDryer: boolean | undefined;
+	pricePerDay: string | undefined;
+	pricePerWeek: string | undefined;
 
-	constructor(public cabin: cabinIn) {
+	constructor(public cabin: cabinOut) {
 		super('Cabin');
-		this.id = this.cabin.id;
+		this.id = this.cabin.id?.toString() as string;
 		this.name = this.cabin.name;
 		this.bedrooms = this.cabin.bedrooms;
 		this.washerDryer = this.cabin.washerdryer;

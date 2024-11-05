@@ -4,13 +4,16 @@
 	import { clientStore, toastStore, ToastTypes, userStore } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
-	import { type articleIn, type commentIn } from '$lib/client';
+	import { type articleUpdate, type commentIn } from '$lib/client';
 	import updateAuthContext from '$lib/components/services/auth';
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import FormBuilder, { FormInput } from '$lib/components/services/formBuilder';
 	import Timestamps from '$lib/components/display/Timestamps.svelte';
 	import AttachmentUploader from '$lib/components/display/AttachmentUploader.svelte';
 	import { Trash, RocketLaunch } from 'svelte-heros-v2';
+	import { hotSwapProductionUris } from '$lib/components/services/imageUtils';
+	import { createEntity, deleteEntity, editEntity } from '$lib/components/services/crud';
+	import InteractiveImage from '$lib/components/display/InteractiveImage.svelte';
 
 	let article: any;
 	let loading: boolean = true;
@@ -20,7 +23,7 @@
 
 	export let data: any;
 
-	onMount(() => {
+	const fetchData = () => {
 		client.restClient?.articles
 			.getV1Articles1(data.id)
 			.then((data) => {
@@ -36,9 +39,15 @@
 				}));
 			});
 		loading = false;
+	};
+
+	onMount(() => {
+		fetchData();
 	});
 
 	const handleArticleImageUpload = (event: any) => {
+		loading = true;
+
 		if (event.detail.files.accepted.length > 1) {
 			toastStore.update((prevValue) => ({
 				...prevValue,
@@ -49,10 +58,11 @@
 		}
 
 		formData.append('article[image]', event.detail.files.accepted[0]);
+		formData.append('user_id', user.id);
 
 		client.imageUploadClient
-			?.uploadImage(`v1/articles/${article.id}/upload_image`, formData, 'PATCH')
-			.then((res) => {
+			?.uploadImage(`/v1/articles/${article.id}/upload_image`, formData, 'PATCH')
+			.then(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
@@ -60,7 +70,7 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err) => {
+			.catch((err: any) => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
@@ -68,113 +78,63 @@
 					type: ToastTypes.error
 				}));
 			});
+
+		fetchData();
 	};
 
-	const onSubmit = () => {
-		const Comment: commentIn = {
+	const createComment = () => {
+		loading = true;
+		const payload: commentIn = {
 			content: comment,
 			article_id: data.id,
-			user_id: user.id
+			user_id: user.id as number
 		};
-
-		client.restClient?.comments
-			.postV1Comments(Comment)
-			.then((data) => {
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Comment Added',
-					type: ToastTypes.success
-				}));
-				article.comments.push(data);
-			})
-			.catch((error) => {
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: error,
-					type: ToastTypes.error
-				}));
-			});
+		createEntity(
+			payload,
+			'Comment',
+			client.restClient?.comments.postV1Comments.bind(client.restClient.comments)
+		);
+		fetchData();
 		loading = false;
 	};
 
-	const deleteComment = (id) => {
+	const deleteComment = (id: number) => {
 		loading = true;
-		client.restClient?.comments
-			.deleteV1Comments(id)
-			.then((_) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Comment deleted',
-					type: ToastTypes.success
-				}));
-			})
-			.catch((error) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: error,
-					type: ToastTypes.error
-				}));
-			});
+		deleteEntity(
+			id,
+			{ user_id: user.id as number },
+			'Comment',
+			client.restClient?.comments.deleteV1Comments.bind(client.restClient.comments)
+		);
+		fetchData();
+		loading = false;
 	};
 
-	const deleteArticle = (id) => {
+	const deleteArticle = (id: number) => {
 		loading = true;
-		client.restClient?.articles
-			.deleteV1Articles(id)
-			.then((_) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Article deleted',
-					type: ToastTypes.success
-				}));
-			})
-			.catch((error) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: error,
-					type: ToastTypes.error
-				}));
-			});
+		deleteEntity(
+			id,
+			{ user_id: user.id as number },
+			'Article',
+			client.restClient?.articles.deleteV1Articles.bind(client.restClient.articles)
+		);
+		loading = false;
 	};
 
 	const editArticle = (event: any) => {
 		loading = true;
-
-		let articleUpdatePayload: articleIn = {
+		let articleUpdatePayload: articleUpdate = {
 			title: event.detail.title,
 			content: event.detail.content
 		};
-
-		client.restClient?.articles
-			.putV1Articles(article.id, { article: articleUpdatePayload })
-			.then((_) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Article updated',
-					type: ToastTypes.success
-				}));
-			})
-			.catch((error) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: error,
-					type: ToastTypes.error
-				}));
-			});
+		editEntity(
+			article.id,
+			{ article: articleUpdatePayload, user_id: user.id as number },
+			'Article',
+			client.restClient?.articles.putV1Articles.bind(client.restClient.articles)
+		);
+		fetchData();
+		loading = false;
 	};
 
 	const handleInput = (event: any) => {
@@ -216,10 +176,13 @@
 		{#if !!article.image.url}
 			<div class="w-1/3 p-4">
 				<Gallery class="gap-4">
-					<img
-						src="http://icfc.localhost:3010{article.image.url}"
-						alt={''}
-						class="h-auto max-w-full rounded-lg"
+					<InteractiveImage
+						on:handleDelete={() => {}}
+						item={{
+							src: hotSwapProductionUris(article.image.url),
+							alt: `Image for ${article.title}`
+						}}
+						isOwner={() => updateAuthContext.userActionPermitted(article.id, user.id)}
 					/>
 				</Gallery>
 			</div>
@@ -231,10 +194,12 @@
 	{/if}
 
 	<div class="mt-4">
-		<form on:submit={onSubmit}>
+		<form>
 			<Textarea on:change={handleInput} class="mb-4" placeholder="Write a comment...">
 				<div slot="footer" class="flex items-center justify-between">
-					<Button color="green" outline on:click={onSubmit} type="submit"><RocketLaunch /></Button>
+					<Button color="green" outline on:click={createComment} type="submit"
+						><RocketLaunch /></Button
+					>
 				</div>
 			</Textarea>
 		</form>
@@ -250,7 +215,9 @@
 			<pre class="mb-4 whitespace-pre-wrap text-base text-gray-700 dark:text-gray-300">
 {@html item.content}</pre>
 			{#if updateAuthContext.userActionPermitted(item.user_id, user)}
-				<Button outline size="xs" color="red" on:click={() => deleteComment(item.id)}><Trash /></Button>
+				<Button outline size="xs" color="red" on:click={() => deleteComment(item.id)}
+					><Trash /></Button
+				>
 			{/if}
 		</Listgroup>
 	{/if}

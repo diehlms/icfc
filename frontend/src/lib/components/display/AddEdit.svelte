@@ -33,6 +33,13 @@
 		dispatch('triggerModalFormSubmit', payload);
 	}
 
+	function addAttachmentToPayload(event?: any) {
+		event.preventDefault();
+		if (event?.detail?.files) {
+			payload.files = event.detail.files;
+		}
+	}
+
 	function handleWysiwygInput(content: string, name: string) {
 		payload[name] = content;
 	}
@@ -51,7 +58,7 @@
 	}
 </script>
 
-<Modal bind:open={defaultModal} autoclose>
+<Modal bind:open={defaultModal}>
 	<form class="flex flex-col space-y-1" on:submit|preventDefault={onSubmit}>
 		{#each form as input}
 			<div class="w-full">
@@ -92,10 +99,13 @@
 				{/if}
 			</div>
 			{#if input.type == 'attachment'}
-				<AttachmentUploader on:triggerAttachmentUpload={onSubmit} />
+				<AttachmentUploader
+					on:triggerAttachmentUpload={addAttachmentToPayload}
+					showUploadButton={true}
+				/>
 			{/if}
 		{/each}
-		<Button color="green" type="submit"><RocketLaunch /> Submit</Button>
+		<Button color="green" type="submit" on:click={onSubmit}><RocketLaunch /> Submit</Button>
 	</form>
 </Modal>
 

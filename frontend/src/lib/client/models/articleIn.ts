@@ -2,10 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type articleIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type articleIn = createUpdateBaseModel & {
 	title?: string;
 	content?: string;
-	image?: Blob;
 	pinned?: boolean;
 	user_id?: number;
 };

@@ -7,20 +7,21 @@
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import FormBuilder from '$lib/components/services/formBuilder';
 	import Table from '$lib/components/display/Table.svelte';
+	import type { chartOut } from '$lib/client';
 
 	let _: IChart[] = [];
 	let loading: boolean = false;
 	let formData = new FormData();
 	let createChartTreeForm = new FormBuilder().title().attachment().build();
 
-	const handleSubmit = (event) => {
+	const handleSubmit = (event: any) => {
 		formData.append('chart', event.detail.files.accepted[0]);
 		formData.append('caption', event.detail.caption);
 		formData.append('user_id', user.id);
 
 		client.imageUploadClient
 			?.uploadImage('v1/charts/', formData)
-			.then((res) => {
+			.then(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
@@ -42,7 +43,7 @@
 		loading = true;
 		client.restClient?.charts
 			.getV1Charts()
-			.then((data) => {
+			.then((data: chartOut[]) => {
 				_ = data.map((chart: any) => new IChart(chart));
 				loading = false;
 				loading = false;

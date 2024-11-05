@@ -1,37 +1,22 @@
 <script lang="ts">
-	import { Timeline, TimelineItem, Button } from 'flowbite-svelte';
 	import { clientStore, toastStore, ToastTypes, userStore } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
-	import type { articleIn } from '$lib/client';
-	import { ArrowRight, Pencil, Trash } from 'svelte-heros-v2';
+	import type { articleIn, articleOut } from '$lib/client';
+	import { ArrowRight } from 'svelte-heros-v2';
 	import FormBuilder from '$lib/components/services/formBuilder';
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import Loader from '$lib/components/display/Loader.svelte';
-	import updateAuthContext from '$lib/components/services/auth';
+	import { hotSwapProductionUris } from '$lib/components/services/imageUtils';
+	import { formatDate } from '$lib/components/services/textFormatting';
 
-	let articles: articleIn[] = [];
+	let articles: articleOut[] = [];
 	let loading: boolean = false;
 	let createArticleForm = new FormBuilder().title().content().build();
 	let currentPage = 1;
 	let fetchedAll: boolean = false;
 	let isFetchingMore = false;
 	let maxPageLength = 3;
-
-	// Add these helper functions
-	const formatDate = (dateString: string) => {
-		return new Date(dateString).toLocaleDateString('en-US', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-			hour: '2-digit',
-			minute: '2-digit'
-		});
-	};
-
-	// const isUserAuthorized = (articleUserId: string) => {
-	// 	return user.isAdmin || articleUserId === user.id;
-	// };
 
 	const fetchArticles = (page: number) => {
 		loading = true;
@@ -85,7 +70,7 @@
 
 	const handleSubmit = (event: any) => {
 		const articleReq: articleIn = {
-			user_id: user.id,
+			user_id: user.id as number,
 			content: event.detail.content,
 			title: event.detail.title,
 			pinned: false
@@ -93,7 +78,7 @@
 
 		client.restClient?.articles
 			.postV1Articles({ article: articleReq })
-			.then((res) => {
+			.then(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
@@ -129,7 +114,6 @@
 			<div
 				class="relative w-full rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
 			>
-				<!-- Author Info & Date -->
 				<div class="mb-4 flex items-start justify-between">
 					<div>
 						<h3 class="text-xl font-bold text-gray-900 dark:text-white">
@@ -155,31 +139,16 @@
 							{@html article.content?.slice(0, 248)}<span class="text-gray-400">...</span>
 						</pre>
 
-						<!-- <div class="mt-4 flex items-center gap-4">
-							{#if updateAuthContext.userActionPermitted(article.user_id, user)}
-								<div class="flex gap-2">
-									<Button color="light" size="sm" class="inline-flex items-center">
-										<Pencil class="mr-2 h-4 w-4" />
-										Edit
-									</Button>
-									<Button color="red" size="sm" class="inline-flex items-center">
-										<Trash class="mr-2 h-4 w-4" />
-										Delete
-									</Button>
-								</div>
-							{/if}
-						</div> -->
-
 						<div class="mt-3 text-sm text-gray-500 dark:text-gray-400">
-							{article.comments.length}
-							{article.comments.length === 1 ? 'comment' : 'comments'}
+							{article.comments?.length}
+							{article.comments?.length === 1 ? 'comment' : 'comments'}
 						</div>
 					</div>
 				</div>
 				{#if article.image && article.image.url}
 					<div class="flex-shrink-0">
 						<img
-							src={`http://icfc.localhost:3010${article.image.url}`}
+							src={hotSwapProductionUris(article.image.url)}
 							alt="Attachment"
 							class="block overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
 						/>

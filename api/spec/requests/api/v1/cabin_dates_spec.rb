@@ -6,7 +6,7 @@ RSpec.describe 'api/v1/cabin_dates', type: :request do
       tags 'Cabin Dates'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :articleIn, in: :body, schema: { "$ref" => "#/components/schemas/cabinDateIn" }
+      parameter name: :cabinDateIn, in: :body, schema: { '$ref' => '#/components/schemas/cabinDateIn' }
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -21,8 +21,13 @@ RSpec.describe 'api/v1/cabin_dates', type: :request do
   end
 
   path '/v1/cabin_dates/{id}' do
+    parameter name: 'id', in: :path, type: :integer, description: 'id'
+
     delete('delete cabin_date') do
       tags 'Cabin Dates'
+      parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+      produces 'application/json'
+      consumes 'application/json'
       response(200, 'successful') do
         let(:id) { '123' }
         after do |example|

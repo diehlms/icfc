@@ -11,8 +11,7 @@ module Api
       def initial_payload
         render json: {
           inseason_reservation_link: ENV.fetch('INSEASON_RESERVATION_LINK', nil),
-          outseason_reservation_link: ENV.fetch('OUTSEASON_RESERVATION_LINK', nil),
-          logged_in: !current_user.nil?
+          outseason_reservation_link: ENV.fetch('OUTSEASON_RESERVATION_LINK', nil)
         }
       end
 
@@ -59,9 +58,6 @@ module Api
       def this_weeks_events
         nearest_sunday = Time.now.sunday.to_s
         last_sunday = Time.now.last_week.sunday.to_s
-
-        puts nearest_sunday
-        puts last_sunday
 
         @events = Event.where(
           :start_time.to_s => last_sunday..nearest_sunday

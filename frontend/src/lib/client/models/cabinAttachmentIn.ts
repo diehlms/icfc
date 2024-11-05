@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type cabinAttachmentIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type cabinAttachmentIn = createUpdateBaseModel & {
 	cabin_in?: number;
 	image?: Blob;
 };

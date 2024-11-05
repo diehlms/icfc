@@ -7,70 +7,54 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class PasswordResetsService {
 	constructor(public readonly httpRequest: BaseHttpRequest) {}
 	/**
-	 * list password_resets
-	 * @returns any successful
-	 * @throws ApiError
-	 */
-	public getV1PasswordResets(): CancelablePromise<any> {
-		return this.httpRequest.request({
-			method: 'GET',
-			url: '/v1/password_resets'
-		});
-	}
-	/**
 	 * create password_reset
+	 * @param email
 	 * @returns any successful
 	 * @throws ApiError
 	 */
-	public postV1PasswordResets(): CancelablePromise<any> {
+	public postV1PasswordResets(email?: string): CancelablePromise<any> {
 		return this.httpRequest.request({
 			method: 'POST',
-			url: '/v1/password_resets'
+			url: '/v1/password_resets',
+			query: {
+				email: email
+			}
 		});
 	}
 	/**
 	 * show password_reset
-	 * @param id id
+	 * @param passwordResetToken password_reset_token
 	 * @returns any successful
 	 * @throws ApiError
 	 */
-	public getV1PasswordResets1(id: number): CancelablePromise<any> {
+	public getV1PasswordResetsInitResetPassword(passwordResetToken?: string): CancelablePromise<any> {
 		return this.httpRequest.request({
 			method: 'GET',
-			url: '/v1/password_resets/{id}',
-			path: {
-				id: id
+			url: '/v1/password_resets/init_reset_password',
+			query: {
+				password_reset_token: passwordResetToken
 			}
 		});
 	}
 	/**
-	 * update password_reset
-	 * @param id id
+	 * update password
+	 * @param passwordResetToken password_reset_token
+	 * @param requestBody updated password
 	 * @returns any successful
 	 * @throws ApiError
 	 */
-	public patchV1PasswordResets(id: number): CancelablePromise<any> {
+	public patchV1PasswordResets(
+		passwordResetToken?: string,
+		requestBody?: string
+	): CancelablePromise<any> {
 		return this.httpRequest.request({
 			method: 'PATCH',
-			url: '/v1/password_resets/{id}',
-			path: {
-				id: id
-			}
-		});
-	}
-	/**
-	 * update password_reset
-	 * @param id id
-	 * @returns any successful
-	 * @throws ApiError
-	 */
-	public putV1PasswordResets(id: number): CancelablePromise<any> {
-		return this.httpRequest.request({
-			method: 'PUT',
-			url: '/v1/password_resets/{id}',
-			path: {
-				id: id
-			}
+			url: '/v1/password_resets/{password_reset_token}',
+			query: {
+				password_reset_token: passwordResetToken
+			},
+			body: requestBody,
+			mediaType: 'application/json'
 		});
 	}
 }

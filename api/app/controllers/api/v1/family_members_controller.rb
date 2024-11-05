@@ -11,7 +11,6 @@ module Api
         family_members_data = params.permit!.to_h
 
         family_members_data['_json'].each do |family_member_data|
-          # Find by unique identifier (assuming `name` is unique)
           family_member = FamilyMember.find_or_initialize_by(name: family_member_data[:name])
 
           family_member.assign_attributes(
@@ -19,7 +18,6 @@ module Api
             family_tree_id: family_member_data[:family_tree_id]
           )
 
-          # Save the record only if it is new or has changes
           next unless family_member.changed? && !family_member.save
 
           render json: { error: "Failed to save family member #{family_member.name}" },
@@ -35,7 +33,6 @@ module Api
       def update
         relationships = params.permit!.to_h
 
-        # Loop through each relationship (each hash in the array)
         relationships['_json'].each do |relationship|
           child_id = relationship['child']
           parent_id = relationship['parent']

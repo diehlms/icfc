@@ -6,11 +6,13 @@
 	import * as tj from '@mapbox/togeojson';
 	import Timestamps from '$lib/components/display/Timestamps.svelte';
 	import { Card } from 'flowbite-svelte';
+	import type { chartOut } from '$lib/client';
+	import { deleteEntity } from '$lib/components/services/crud';
+	import { hotSwapProductionUris } from '$lib/components/services/imageUtils';
 
-	let map;
+	let map: any;
 	let loading: boolean = true;
-	let chart: any;
-	let gpxFile: any;
+	let chart: chartOut | undefined;
 
 	export let data: any;
 
@@ -20,8 +22,7 @@
 	onMount(() => {
 		client.restClient?.charts
 			.getV1Charts1(data.id)
-			.then((data) => {
-				console.log(data);
+			.then((data: chartOut) => {
 				chart = data;
 			})
 			.catch((error) => {
@@ -35,26 +36,14 @@
 		loading = false;
 	});
 
-	const deleteChart = (id) => {
-		client.restClient?.charts
-			.deleteV1Charts(id)
-			.then((_) => {
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Chart deleted!',
-					type: ToastTypes.success
-				}));
-			})
-			.catch((error) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: error,
-					type: ToastTypes.error
-				}));
-			});
+	const deleteChart = (id: number) => {
+		loading = true;
+		deleteEntity(
+			chart?.id,
+			{ user_id: user.id as number },
+			client.restClient?.charts.deleteV1Charts.bind(client.restClient?.charts)
+		);
+		loading = false;
 	};
 
 	const renderBaseMap = async () => {
@@ -71,8 +60,8 @@
 		map.setView([51.505, -0.09], 13);
 	};
 
-	const fetchGpxFile = async (chartGpxUrl: string): string => {
-		const response = await fetch(`http://icfc.localhost:3010/${chartGpxUrl}`);
+	const fetchGpxFile = async (chartGpxUrl: string): Promise<string> => {
+		const response = await fetch(hotSwapProductionUris(chartGpxUrl));
 		const gpxText = await response.text();
 		return gpxText;
 	};
@@ -96,7 +85,7 @@
 			.getV1Charts1(data.id)
 			.then(async (data) => {
 				chart = data;
-				let gpxText = await fetchGpxFile(data.chart.url);
+				let gpxText = await fetchGpxFile(data.chart?.url);
 				renderGpx(gpxText); // Render the GPX data and center the map
 			})
 			.catch((error) => {

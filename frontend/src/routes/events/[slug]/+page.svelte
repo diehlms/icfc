@@ -9,6 +9,8 @@
 	import FormBuilder, { FormInput } from '$lib/components/services/formBuilder';
 	import Timestamps from '$lib/components/display/Timestamps.svelte';
 	import { Trash } from 'svelte-heros-v2';
+	import type { eventUpdate } from '$lib/client';
+	import { deleteEntity, editEntity } from '$lib/components/services/crud';
 
 	let event: any;
 	let loading: boolean = true;
@@ -16,7 +18,7 @@
 
 	export let data: any;
 
-	onMount(() => {
+	const fetchData = () => {
 		client.restClient?.events
 			.getV1Events1(data.id)
 			.then((data) => {
@@ -37,59 +39,35 @@
 				}));
 			});
 		loading = false;
+	};
+	onMount(() => {
+		fetchData();
 	});
 
 	const deleteEvent = (id: number) => {
 		loading = true;
-		client.restClient?.events
-			.deleteV1Events(id)
-			.then((_) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Event deleted',
-					type: ToastTypes.success
-				}));
-			})
-			.catch((error) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: error,
-					type: ToastTypes.error
-				}));
-			});
+		deleteEntity(
+			id,
+			{ user_id: user.id as number },
+			'Event',
+			client.restClient?.events.deleteV1Events.bind(client.restClient?.events)
+		);
+		loading = false;
 	};
 
 	const editEvent = (payload: any) => {
 		loading = true;
-
-		let eventUpdatePayload: eventIn = {
+		let eventUpdatePayload: eventUpdate = {
 			description: payload.detail.description
 		};
-
-		client.restClient?.events
-			.putV1Events(event.id, { event: eventUpdatePayload })
-			.then((_) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Event updated',
-					type: ToastTypes.success
-				}));
-			})
-			.catch((error) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: error,
-					type: ToastTypes.error
-				}));
-			});
+		editEntity(
+			event.id as number,
+			{ event: eventUpdatePayload, user_id: user.id as number },
+			'Event',
+			client.restClient?.events.putV1Events.bind(client.restClient.events)
+		);
+		fetchData();
+		loading = false;
 	};
 
 	const user = get(userStore);
@@ -129,7 +107,7 @@
 					</div>
 				</div>
 				<div class="mt-4 flex space-x-3 md:mt-6">
-					{#if updateAuthContext.userActionPermitted(event.user_id, user)}
+					{#if updateAuthContext.userActionPermitted(event.user.id, user)}
 						<Button color="red" outline on:click={() => deleteEvent(event.id)}><Trash /></Button>
 						<AddEdit
 							on:triggerModalFormSubmit={editEvent}
@@ -146,6 +124,3 @@
 		</Card>
 	</div>
 {/if}
-
-<style>
-</style>

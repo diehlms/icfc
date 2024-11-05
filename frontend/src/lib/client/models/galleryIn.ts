@@ -2,7 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type galleryIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type galleryIn = createUpdateBaseModel & {
 	image?: Blob;
 	caption?: string;
 	user_id?: number;

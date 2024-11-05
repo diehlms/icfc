@@ -4,7 +4,11 @@ RSpec.describe 'api/v1/documents', type: :request do
   path '/v1/documents' do
     get('list documents') do
       tags 'Documents'
+      consumes 'application/json'
+      produces 'application/json'
       response(200, 'successful') do
+        schema type: :array, items: { '$ref' => '#/components/schemas/documentOut' }
+
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -18,6 +22,8 @@ RSpec.describe 'api/v1/documents', type: :request do
 
     post('create document') do
       tags 'Documents'
+      consumes 'application/json'
+      produces 'application/json'
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -32,27 +38,13 @@ RSpec.describe 'api/v1/documents', type: :request do
   end
 
   path '/v1/documents/{id}' do
-    # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :integer, description: 'id'
-
-    get('show document') do
-      tags 'Documents'
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
 
     delete('delete document') do
       tags 'Documents'
+      parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+      produces 'application/json'
+      consumes 'application/json'
       response(200, 'successful') do
         let(:id) { '123' }
 

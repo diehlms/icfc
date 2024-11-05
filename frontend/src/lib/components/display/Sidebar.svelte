@@ -17,7 +17,8 @@
 		EllipsisHorizontalCircle,
 		Ticket,
 		Map,
-		Clipboard
+		Clipboard,
+		Users
 	} from 'svelte-heros-v2';
 	import { userStore } from '$lib/stores';
 	import type { userIn } from '$lib/client';
@@ -37,7 +38,7 @@
 </script>
 
 <Sidebar>
-	<SidebarWrapper>
+	<SidebarWrapper class="bg-transparent">
 		<SidebarGroup>
 			<SidebarDropdownWrapper label="Reservations">
 				<svelte:fragment slot="icon">
@@ -102,7 +103,7 @@
 			</SidebarItem>
 			<SidebarItem href="/directory" label="Users">
 				<svelte:fragment slot="icon">
-					<UserGroup />
+					<Users />
 				</svelte:fragment>
 			</SidebarItem>
 			<SidebarItem href="/family-trees" label="Family Trees">

@@ -2,4 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type chartIn = {};
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type chartIn = createUpdateBaseModel & {
+	caption?: string;
+};

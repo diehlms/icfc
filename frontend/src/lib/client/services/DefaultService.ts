@@ -7,21 +7,6 @@ import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class DefaultService {
 	constructor(public readonly httpRequest: BaseHttpRequest) {}
 	/**
-	 * delete password_reset
-	 * @param id id
-	 * @returns any successful
-	 * @throws ApiError
-	 */
-	public deleteV1PasswordResets(id: number): CancelablePromise<any> {
-		return this.httpRequest.request({
-			method: 'DELETE',
-			url: '/v1/password_resets/{id}',
-			path: {
-				id: id
-			}
-		});
-	}
-	/**
 	 * update user
 	 * @param id id
 	 * @returns any successful

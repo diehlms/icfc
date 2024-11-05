@@ -180,7 +180,7 @@
 
 		client.restClient?.familyMembers
 			.putV1FamilyMembers(relationships)
-			.then((res) => {})
+			.then(() => {})
 			.catch((error) => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
@@ -191,14 +191,14 @@
 			});
 	};
 
-	const deleteFamilyTree = (id) => {
+	const deleteFamilyTree = (id: number) => {
 		client.restClient?.familyTrees
-			.deleteV1FamilyTrees(id)
+			.deleteV1FamilyTrees(id, { user_id: user.id as number })
 			.then((_) => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: 'Photo deleted!',
+					toastMessage: 'Family member deleted!',
 					type: ToastTypes.success
 				}));
 			})

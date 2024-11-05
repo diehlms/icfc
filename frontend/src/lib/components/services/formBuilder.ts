@@ -34,6 +34,11 @@ class FormBuilder {
 		return this;
 	}
 
+	folder(valueOverride?: string): FormBuilder {
+		this.formInputs.push(new FormInput(valueOverride ? valueOverride : 'folder', FormTypes.text));
+		return this;
+	}
+
 	events(): FormBuilder {
 		this.formInputs.push(new FormInput('events', FormTypes.text));
 		return this;
@@ -50,7 +55,9 @@ class FormBuilder {
 	}
 
 	content(valueOverride?: string): FormBuilder {
-		this.formInputs.push(new FormInput(valueOverride ? valueOverride : 'content', FormTypes.richText));
+		this.formInputs.push(
+			new FormInput(valueOverride ? valueOverride : 'content', FormTypes.richText)
+		);
 		return this;
 	}
 
@@ -183,8 +190,10 @@ class FormBuilder {
 							input.value = dateTime.toISOString().slice(0, 16);
 						}
 					} else if (input.type === FormTypes.select) {
-						const selectedOption = input.selectOptions?.filter(option => option.name === data[snakeCaseKey].location_name)
-						input.value = selectedOption[0].value
+						const selectedOption = input.selectOptions?.filter(
+							(option) => option.name === data[snakeCaseKey].location_name
+						);
+						input.value = selectedOption[0].value;
 					} else {
 						input.value = data[snakeCaseKey];
 					}

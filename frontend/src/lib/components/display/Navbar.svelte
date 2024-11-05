@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { Navbar, NavUl, NavBrand, NavHamburger, Button, Avatar, Input } from 'flowbite-svelte';
 	import { MagnifyingGlass } from 'svelte-heros-v2';
-	import { clientStore, toastStore, ToastTypes } from '$lib/stores';
+	import { clientStore, toastStore, ToastTypes, userStore } from '$lib/stores';
 	import { get } from 'svelte/store';
 	import SearchResultsDropdown from './SearchResultsDropdown.svelte';
 
@@ -10,6 +10,7 @@
 	let searchQuery = '';
 	let searchResults: any[] = [];
 	let loading = false;
+
 	const dispatch = createEventDispatcher();
 
 	function emitLogOut() {
@@ -22,7 +23,6 @@
 				search: query
 			})
 			.then((data) => {
-				console.log(data);
 				searchResults = data;
 			})
 			.catch((error) => {
@@ -37,10 +37,11 @@
 	}
 
 	const client = get(clientStore);
+	const user = get(userStore);
 
 	const handleClose = () => {
 		searchResults = [];
-	}
+	};
 
 	function handleSearchInput(event: Event) {
 		searchQuery = (event.target as HTMLInputElement).value;
@@ -48,6 +49,7 @@
 	}
 
 	$: searchResults;
+	$: initials;
 </script>
 
 <Navbar
@@ -85,7 +87,11 @@
 			<Button class="btn-override px-2 py-1" outline on:click={emitLogOut}>Log Out</Button>
 		</NavUl>
 		<div class="flex items-center">
-			<Avatar>{initials}</Avatar>
+			{#if user.firstName && user.lastName}
+				<Avatar>{user.firstName[0].toUpperCase()}{user.lastName[0].toUpperCase()}</Avatar>
+			{:else}
+				<Avatar>UK</Avatar>
+			{/if}
 		</div>
 	</div>
 </Navbar>

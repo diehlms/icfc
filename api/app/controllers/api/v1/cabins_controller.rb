@@ -49,7 +49,7 @@ module Api
 
       def cabin_params
         params.require(:cabin).permit(:name, :bedrooms, :washerdryer, :dock, :user_id, :price_per_week,
-                                      :price_per_day, :description, cabin_attachments_attributes: %i[id cabin_id image])
+                                      :price_per_day, :description)
       end
 
       def cabin

@@ -25,6 +25,9 @@ RSpec.describe 'api/v1/comments', type: :request do
 
     delete('delete comment') do
       tags 'Comments'
+      parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+      produces 'application/json'
+      consumes 'application/json'
       response(200, 'successful') do
         let(:id) { '123' }
 

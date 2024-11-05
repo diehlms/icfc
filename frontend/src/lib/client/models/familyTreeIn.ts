@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type familyTreeIn = {
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type familyTreeIn = createUpdateBaseModel & {
 	name?: string;
 };

@@ -5,6 +5,7 @@
 	import Table from '$lib/components/display/Table.svelte';
 	import Loader from '$lib/components/display/Loader.svelte';
 	import IUser from '$lib/interfaces/IUser';
+	import type { author } from '$lib/client';
 
 	let users: IUser[] = [];
 	let loading: boolean = false;
@@ -13,7 +14,7 @@
 		loading = true;
 		client.restClient?.users
 			.getV1Users()
-			.then((data) => {
+			.then((data: author[]) => {
 				users = data.map((user: any) => new IUser(user));
 				loading = false;
 			})
@@ -41,7 +42,7 @@
 		tableData={users}
 		tableName="Directory"
 		selectable={false}
-		columnNames={['name', 'username', 'email', 'phoneNumber']}
+		columnNames={['admin', 'recentlyJoined', 'name', 'username', 'email', 'phoneNumber']}
 		searchableAttribute="Name"
 		showSearch={false}
 	/>

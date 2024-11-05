@@ -2,9 +2,10 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { document } from './document';
-export type documentIn = {
+import type { attachmentBaseModel } from './attachmentBaseModel';
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type documentIn = createUpdateBaseModel & {
 	document_title?: string;
 	document_folder?: string;
-	document?: document;
+	document?: attachmentBaseModel;
 };

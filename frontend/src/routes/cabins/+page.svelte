@@ -7,7 +7,7 @@
 	import ICabin from '$lib/interfaces/ICabin';
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import FormBuilder from '$lib/components/services/formBuilder';
-	import type { cabinIn } from '$lib/client';
+	import type { cabinIn, cabinOut } from '$lib/client';
 
 	let createCabinForm = new FormBuilder()
 		.name()
@@ -24,7 +24,7 @@
 	onMount(() => {
 		client.restClient?.cabins
 			.getV1Cabins()
-			.then((data) => {
+			.then((data: cabinOut[]) => {
 				cabins = data.map((cabin: any) => new ICabin(cabin));
 				loading = false;
 			})
@@ -41,7 +41,7 @@
 
 	const handleSubmit = (event: any) => {
 		const cabinReq: cabinIn = {
-			user_id: user.id,
+			user_id: user.id as number,
 			name: event.detail.name,
 			bedrooms: event.detail.bedrooms,
 			washerdryer: event.detail.washerdryer,

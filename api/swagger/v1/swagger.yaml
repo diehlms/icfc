@@ -18,6 +18,12 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/articleOut"
     post:
       summary: create article
       tags:
@@ -26,6 +32,10 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/articleOut"
       requestBody:
         content:
           application/json:
@@ -46,8 +56,29 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/articleOut"
     put:
       summary: update article
+      tags:
+      - Articles
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/articleOut"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/articleUpdate"
+    delete:
+      summary: delete article
       tags:
       - Articles
       parameters: []
@@ -58,14 +89,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/articleIn"
-    delete:
-      summary: delete article
-      tags:
-      - Articles
-      responses:
-        '200':
-          description: successful
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/auth/login":
     post:
       summary: login authentication
@@ -122,11 +146,17 @@ paths:
         type: integer
     delete:
       summary: delete cabin_attachment
+      parameters: []
       tags:
       - Cabin Attachments
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/cabin_dates":
     post:
       summary: create cabin_date
@@ -142,13 +172,26 @@ paths:
             schema:
               "$ref": "#/components/schemas/cabinDateIn"
   "/v1/cabin_dates/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: integer
     delete:
       summary: delete cabin_date
       tags:
       - Cabin Dates
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/cabins":
     get:
       summary: list cabins
@@ -157,6 +200,12 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/cabinOut"
     post:
       summary: create cabin
       tags:
@@ -165,6 +214,10 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/cabinOut"
       requestBody:
         content:
           application/json:
@@ -185,8 +238,29 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/cabinOut"
     put:
       summary: update cabin
+      tags:
+      - Cabins
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/cabinOut"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/cabinUpdate"
+    delete:
+      summary: delete cabin
       tags:
       - Cabins
       parameters: []
@@ -197,14 +271,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/cabinIn"
-    delete:
-      summary: delete cabin
-      tags:
-      - Cabins
-      responses:
-        '200':
-          description: successful
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/charts":
     get:
       summary: list charts
@@ -213,6 +280,12 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/chartOut"
     post:
       summary: create chart
       tags:
@@ -220,6 +293,10 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/chartOut"
   "/v1/charts/{id}":
     parameters:
     - name: id
@@ -235,13 +312,23 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/chartOut"
     delete:
       summary: delete chart
       tags:
       - Charts
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/comments":
     post:
       summary: create comment
@@ -268,9 +355,15 @@ paths:
       summary: delete comment
       tags:
       - Comments
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/committees":
     get:
       summary: list committees
@@ -279,28 +372,12 @@ paths:
       responses:
         '200':
           description: successful
-    post:
-      summary: create committee
-      tags:
-      - Committees
-      responses:
-        '200':
-          description: successful
-  "/v1/committees/{id}":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: integer
-    delete:
-      summary: delete committee
-      tags:
-      - Committees
-      responses:
-        '200':
-          description: successful
+          content:
+            application/json:
+              schema:
+                type: committeeOut
+                items:
+                  "$ref": "#/components/schemas/committeeOut"
   "/v1/documents":
     get:
       summary: list documents
@@ -309,6 +386,12 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/documentOut"
     post:
       summary: create document
       tags:
@@ -324,20 +407,19 @@ paths:
       required: true
       schema:
         type: integer
-    get:
-      summary: show document
-      tags:
-      - Documents
-      responses:
-        '200':
-          description: successful
     delete:
       summary: delete document
       tags:
       - Documents
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/entry/initial_payload":
     get:
       summary: get initial payload
@@ -378,6 +460,12 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/eventOut"
     post:
       summary: create event
       tags:
@@ -386,6 +474,10 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/eventOut"
       requestBody:
         content:
           application/json:
@@ -406,8 +498,29 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/eventOut"
     put:
       summary: update event
+      tags:
+      - Events
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/eventOut"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/eventIn"
+    delete:
+      summary: delete event
       tags:
       - Events
       parameters: []
@@ -418,14 +531,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/eventIn"
-    delete:
-      summary: delete event
-      tags:
-      - Events
-      responses:
-        '200':
-          description: successful
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/family_members":
     post:
       summary: create family_member
@@ -465,9 +571,15 @@ paths:
       summary: delete family_member
       tags:
       - Family Members
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/family_trees":
     get:
       summary: list family_trees
@@ -476,6 +588,12 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/familyTreeOut"
     post:
       summary: create family_tree
       tags:
@@ -508,9 +626,15 @@ paths:
       summary: delete family_tree
       tags:
       - Family Trees
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/galleries":
     get:
       summary: list galleries
@@ -519,6 +643,12 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/galleryOut"
     post:
       summary: create gallery
       tags:
@@ -535,20 +665,19 @@ paths:
       required: true
       schema:
         type: integer
-    get:
-      summary: show gallery
-      tags:
-      - Galleries
-      responses:
-        '200':
-          description: successful
     delete:
       summary: delete gallery
       tags:
       - Galleries
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/location_points":
     get:
       summary: list location_points
@@ -582,9 +711,15 @@ paths:
       summary: delete location_point
       tags:
       - Location Points
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/password_resets":
     post:
       summary: create password_reset
@@ -640,6 +775,12 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/rideshareOut"
     post:
       summary: create rideshare
       tags:
@@ -648,6 +789,10 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/rideshareOut"
       requestBody:
         content:
           application/json:
@@ -668,8 +813,29 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/rideshareOut"
     put:
       summary: update rideshare
+      tags:
+      - Rideshares
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/rideshareOut"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/rideshareIn"
+    delete:
+      summary: delete rideshare
       tags:
       - Rideshares
       parameters: []
@@ -680,14 +846,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/rideshareIn"
-    delete:
-      summary: delete rideshare
-      tags:
-      - Rideshares
-      responses:
-        '200':
-          description: successful
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/search":
     post:
       summary: create search
@@ -797,32 +956,110 @@ components:
           type: password
         password_confirmation:
           type: password
-    articleIn:
+    baseModel:
       type: object
+      properties:
+        id:
+          type: number
+        created_at:
+          type: string
+          format: datetime
+        updated_at:
+          type: string
+          format: datetime
+    createUpdateBaseModel:
+      properties:
+        user_id:
+          type: number
+    attachmentBaseModel:
+      properties:
+        url:
+          type: string
+        thumb:
+          type: object
+        large:
+          type: object
+    author:
+      type: object
+      properties:
+        id:
+          type: number
+        email:
+          type: string
+          format: email
+        username:
+          type: string
+        created_at:
+          type: string
+          format: datetime
+        updated_at:
+          type: string
+          format: datetime
+        admin:
+          type: boolean
+        phone_number:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        verified:
+          type: boolean
+        slug:
+          type: string
+        recently_joined?:
+          type: boolean
+    articleIn:
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         title:
           type: string
         content:
           type: string
-        image:
-          type: string
-          format: binary
         pinned:
           type: boolean
         user_id:
           type: number
-    cabinAttachmentIn:
+    articleUpdate:
+      allOf:
+      - "$ref": "#/components/schemas/baseModel"
+      - "$ref": "#/components/schemas/articleIn"
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
+    articleOut:
       type: object
+      allOf:
+      - "$ref": "#/components/schemas/baseModel"
+      - "$ref": "#/components/schemas/articleIn"
+      properties:
+        id:
+          type: number
+        image:
+          "$ref": "#/components/schemas/attachmentBaseModel"
+        user:
+          "$ref": "#/components/schemas/author"
+        comments:
+          type: array
+          items:
+            "$ref": "#/components/schemas/commentOut"
+    cabinAttachmentIn:
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         cabin_in:
           type: number
         image:
           type: string
           format: binary
+    cabinAttachmentOut:
+      allOf:
+      - "$ref": "#/components/schemas/cabinAttachmentIn"
+      - "$ref": "#/components/schemas/baseModel"
     cabinDateIn:
-      type: object
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
-        cabin_in:
+        cabin_id:
           type: number
         startdate:
           type: string
@@ -830,8 +1067,13 @@ components:
         enddate:
           type: string
           format: datetime
+    cabinDateOut:
+      allOf:
+      - "$ref": "#/components/schemas/baseModel"
+      - "$ref": "#/components/schemas/cabinDateIn"
     cabinIn:
-      type: object
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         name:
           type: string
@@ -849,11 +1091,48 @@ components:
           type: number
         description:
           type: string
+    cabinOut:
+      type: object
+      allOf:
+      - "$ref": "#/components/schemas/baseModel"
+      - "$ref": "#/components/schemas/cabinIn"
+      properties:
+        id:
+          type: number
+        cabindates:
+          type: array
+          items:
+            "$ref": "#/components/schemas/cabinDateOut"
+        cabin_attachments:
+          type: array
+          items:
+            "$ref": "#/components/schemas/cabinAttachmentOut"
+        user:
+          "$ref": "#/components/schemas/author"
+    cabinUpdate:
+      allOf:
+      - "$ref": "#/components/schemas/cabinOut"
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
     chartIn:
-      type: object
-      properties: {}
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
+      properties:
+        caption:
+          type: string
+    chartOut:
+      allOf:
+      - "$ref": "#/components/schemas/chartIn"
+      - "$ref": "#/components/schemas/baseModel"
+      properties:
+        chart:
+          "$ref": "#/components/schemas/attachmentBaseModel"
+        id:
+          type: number
+        user:
+          "$ref": "#/components/schemas/author"
     commentIn:
-      type: object
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         content:
           type: string
@@ -861,24 +1140,42 @@ components:
           type: number
         article_id:
           type: number
+    commentOut:
+      allOf:
+      - "$ref": "#/components/schemas/baseModel"
+      - "$ref": "#/components/schemas/commentIn"
+      properties:
+        id:
+          type: number
     committeeIn:
-      type: object
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         url:
           type: string
         name:
           type: string
+    committeeOut:
+      allOf:
+      - "$ref": "#/components/schemas/baseModel"
+      - "$ref": "#/components/schemas/committeeIn"
     documentIn:
-      type: object
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         document_title:
           type: string
         document_folder:
           type: string
         document:
-          type: document
+          "$ref": "#/components/schemas/attachmentBaseModel"
+    documentOut:
+      allOf:
+      - "$ref": "#/components/schemas/baseModel"
+      - "$ref": "#/components/schemas/documentIn"
     eventIn:
-      type: object
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         location:
           type: string
@@ -892,10 +1189,24 @@ components:
           format: datetime
         user_id:
           type: number
+    eventOut:
+      allOf:
+      - "$ref": "#/components/schemas/baseModel"
+      - "$ref": "#/components/schemas/eventIn"
+      properties:
+        id:
+          type: number
+        user:
+          "$ref": "#/components/schemas/author"
+    eventUpdate:
+      allOf:
+      - "$ref": "#/components/schemas/eventIn"
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
     familyMemberIn:
       type: array
       items:
-        type: object
+        allOf:
+        - "$ref": "#/components/schemas/createUpdateBaseModel"
         properties:
           name:
             type: string
@@ -905,23 +1216,34 @@ components:
             type: number
           parent_id:
             type: number
-        required:
-        - name,
-        - family_tree_id
     familyTreeIn:
-      type: object
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         name:
           type: string
+    familyTreeOut:
+      allOf:
+      - "$ref": "#/components/schemas/baseModel"
+      - "$ref": "#/components/schemas/familyTreeIn"
+      properties:
+        user:
+          "$ref": "#/components/schemas/author"
     locationPointIn:
-      type: object
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         location_name:
           type: string
         location_description:
           type: string
+    locationPointOut:
+      allOf:
+      - "$ref": "#/components/schemas/locationPointIn"
+      - "$ref": "#/components/schemas/baseModel"
     galleryIn:
-      type: object
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         image:
           type: string
@@ -930,11 +1252,27 @@ components:
           type: string
         user_id:
           type: number
+    galleryOut:
+      allOf:
+      - "$ref": "#/components/schemas/galleryIn"
+      - "$ref": "#/components/schemas/baseModel"
+      properties:
+        image:
+          "$ref": "#/components/schemas/attachmentBaseModel"
+        user:
+          "$ref": "#/components/schemas/author"
     passwordResetPayload:
       type: object
-      properties: {}
+      properties:
+        password:
+          type: string
+          format: password
+        password_confirmation:
+          type: string
+          format: password
     rideshareIn:
-      type: object
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
       properties:
         user_id:
           type: number
@@ -952,13 +1290,27 @@ components:
           type: string
         seeking:
           type: boolean
+    rideshareOut:
+      allOf:
+      - "$ref": "#/components/schemas/rideshareIn"
+      - "$ref": "#/components/schemas/baseModel"
+      properties:
+        id:
+          type: number
+        user:
+          "$ref": "#/components/schemas/author"
+    rideshareUpdate:
+      allOf:
+      - "$ref": "#/components/schemas/rideshareIn"
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
     userIn:
       type: object
       properties: {}
     relationshipArray:
       type: array
       items:
-        type: object
+        allOf:
+        - "$ref": "#/components/schemas/createUpdateBaseModel"
         properties:
           child:
             type: string
