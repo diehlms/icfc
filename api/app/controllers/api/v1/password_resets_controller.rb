@@ -6,7 +6,8 @@ module Api
       def new; end
 
       def create
-        user = User.find_by_email(params[:email].downcase)
+        puts params[:email][:email]
+        user = User.find_by_email(params[:email][:email].downcase)
         user&.send_password_reset
         render json: {
           message: 'If the email provided is associated with an account, please check the inbox for password reset instructions'

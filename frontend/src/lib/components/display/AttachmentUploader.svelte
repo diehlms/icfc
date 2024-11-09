@@ -37,6 +37,13 @@
 		}
 		files = { ...files };
 		value = [...value];
+
+		if (!showUploadButton) {
+			dispatch('triggerAttachmentUpload', {
+				files: files,
+				value: value
+			});
+		}
 	};
 
 	// Handle file selection via input
@@ -49,6 +56,13 @@
 		}
 		files = { ...files };
 		value = [...value];
+
+		if (!showUploadButton) {
+			dispatch('triggerAttachmentUpload', {
+				files: files,
+				value: value
+			});
+		}
 	};
 
 	// Function to show the selected file names

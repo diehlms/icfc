@@ -12,15 +12,15 @@
 	let _: IChart[] = [];
 	let loading: boolean = false;
 	let formData = new FormData();
-	let createChartTreeForm = new FormBuilder().title().attachment().build();
+	let createChartForm = new FormBuilder().name('caption').attachment().build();
 
 	const handleSubmit = (event: any) => {
-		formData.append('chart', event.detail.files.accepted[0]);
-		formData.append('caption', event.detail.caption);
-		formData.append('user_id', user.id);
+		formData.append('chart[chart]', event.detail.files.accepted[0]);
+		formData.append('chart[caption]', event.detail.caption);
+		formData.append('chart[user_id]', user.id?.toString() as string);
 
 		client.imageUploadClient
-			?.uploadImage('v1/charts/', formData)
+			?.uploadImage('/v1/charts/', formData)
 			.then(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
@@ -29,7 +29,7 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err) => {
+			.catch((err: any) => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
@@ -44,11 +44,11 @@
 		client.restClient?.charts
 			.getV1Charts()
 			.then((data: chartOut[]) => {
-				_ = data.map((chart: any) => new IChart(chart));
+				_ = data.map((chart: chartOut) => new IChart(chart));
 				loading = false;
 				loading = false;
 			})
-			.catch((error) => {
+			.catch((error: any) => {
 				loading = false;
 				toastStore.update((prevValue) => ({
 					...prevValue,
@@ -66,8 +66,8 @@
 </script>
 
 <AddEdit
-	on:triggerModalFormSubmit={handleSubmit}
-	form={createChartTreeForm}
+	on:triggerModalFormSubmit={(event) => handleSubmit(event)}
+	form={createChartForm}
 	openDrawerLabel="Add new chart"
 />
 

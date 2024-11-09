@@ -23,6 +23,7 @@
 	import InteractiveImage from '$lib/components/display/InteractiveImage.svelte';
 	import { hotSwapProductionUris } from '$lib/components/services/imageUtils';
 	import { createEntity, deleteEntity, editEntity } from '$lib/components/services/crud';
+	import { goto } from '$app/navigation';
 
 	export let data: any;
 
@@ -44,7 +45,8 @@
 						if (!!attachment.image.url) {
 							images.push({
 								src: hotSwapProductionUris(attachment.image.url),
-								alt: ''
+								alt: '',
+								id: attachment.id
 							});
 						}
 					});
@@ -68,8 +70,9 @@
 					toastMessage: error,
 					type: ToastTypes.error
 				}));
+			}).finally(() => {
+				loading = false;
 			});
-		loading = false;
 	};
 
 	onMount(() => {
@@ -93,8 +96,7 @@
 			},
 			'Cabin date',
 			client.restClient?.cabinDates.postV1CabinDates.bind(client.restClient?.cabinDates)
-		);
-		fetchData();
+		).finally(() => fetchData());
 		loading = false;
 	};
 
@@ -107,6 +109,7 @@
 			client.restClient?.cabins.deleteV1Cabins.bind(client.restClient?.cabins)
 		);
 		loading = false;
+		goto('/cabins')
 	};
 
 	const deleteCabinDate = (id: number) => {
@@ -116,21 +119,17 @@
 			{ user_id: user.id as number },
 			'Cabin date',
 			client.restClient?.cabinDates.deleteV1CabinDates.bind(client.restClient?.cabinDates)
-		);
-		fetchData();
-		loading = false;
+		).finally(() => fetchData());
 	};
 
 	const deleteCabinAttachment = (id: number) => {
 		loading = true;
-		// deleteEntity(
-		// 	id,
-		// 	{ user_id: user.id as number },
-		// 	'Cabin date',
-		// 	client.restClient?.cabinDates.deleteV1CabinDates.bind(client.restClient?.cabinDates)
-		// )
-		fetchData();
-		loading = false;
+		deleteEntity(
+			id,
+			{ user_id: user.id as number },
+			'Image',
+			client.restClient?.cabinAttachments.deleteV1CabinAttachments.bind(client.restClient?.cabinAttachments)
+		).finally(() => fetchData())
 	};
 
 	const editCabin = (event: any) => {
@@ -149,12 +148,12 @@
 			{ cabin: cabinUpdatePayload, user_id: user.id as number },
 			'Cabin',
 			client.restClient?.cabins.putV1Cabins.bind(client.restClient.cabins)
-		);
-		fetchData();
-		loading = false;
+		).finally(() => fetchData());
 	};
 
 	const postCabinAttachments = (payload: any) => {
+		loading = true;
+
 		if (payload?.detail?.files.accepted.length > 1) {
 			toastStore.update((prevValue) => ({
 				...prevValue,
@@ -185,9 +184,7 @@
 					toastMessage: err,
 					type: ToastTypes.error
 				}));
-			});
-
-		fetchData();
+			}).finally(() => fetchData());
 	};
 
 	$: cabin;

@@ -54,6 +54,21 @@ RSpec.configure do |config|
               }
             }
           },
+          passwordResetPayload: {
+            type: 'object',
+            properties: {
+              password_reset_token: {
+                type: :string,
+                format: :password
+              }, password: {
+                type: :string,
+                format: :password
+              }, password_confirmation: {
+                type: :string,
+                format: :password
+              }
+            }
+          },
           signupPayload: {
             type: 'object',
             required: [:email],
@@ -445,26 +460,6 @@ RSpec.configure do |config|
               { '$ref' => '#/components/schemas/createUpdateBaseModel' }
             ]
           },
-          familyMemberIn: {
-            type: :array,
-            items: {
-              allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
-              properties: {
-                name: {
-                  type: :string
-                },
-                relationship: {
-                  type: :string
-                },
-                family_tree_id: {
-                  type: :number
-                },
-                parent_id: {
-                  type: :number
-                }
-              }
-            }
-          },
           familyTreeIn: {
             allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
@@ -481,8 +476,42 @@ RSpec.configure do |config|
             properties: {
               user: {
                 '$ref' => '#/components/schemas/author'
+              },
+              family_members: {
+                type: :array,
+                items: {
+                  '$ref' => '#/components/schemas/familyMemberOut'
+                }
               }
             }
+          },
+          familyMemberIn: {
+            allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
+            properties: {
+              family_tree_id: {
+                type: :number
+              },
+              name: {
+                type: :string
+              },
+              relationship: {
+                type: :string
+              },
+              parent_ids: {
+                type: :array,
+                items: {
+                  type: :number
+                }
+              },
+              date_of_birth: {
+                type: :string,
+                format: :datetime
+              }
+            }
+          },
+          familyMemberOut: {
+            allOf: [{ '$ref' => '#/components/schemas/familyMemberIn' },
+                    { '$ref' => '#/components/schemas/baseModel' }]
           },
           locationPointIn: {
             allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
@@ -523,19 +552,6 @@ RSpec.configure do |config|
               },
               user: {
                 '$ref' => '#/components/schemas/author'
-              }
-            }
-          },
-          passwordResetPayload: {
-            type: :object,
-            properties: {
-              password: {
-                type: :string,
-                format: :password
-              },
-              password_confirmation: {
-                type: :string,
-                format: :password
               }
             }
           },

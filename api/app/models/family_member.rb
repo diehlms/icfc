@@ -5,6 +5,8 @@ class FamilyMember < ApplicationRecord
   belongs_to :family_tree
   belongs_to :parent, class_name: 'FamilyMember', optional: true
 
+  validates :user_id, presence: true
+
   validates :parent_ids, length: { maximum: 2, message: 'A family member can have at most two parents' }
 
   enum relationship: {

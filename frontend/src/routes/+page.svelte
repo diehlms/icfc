@@ -108,19 +108,32 @@
 					{/if}
 				</ul>
 			</div>
-
-			<!-- Larger Image Cards -->
 			<div
-				class="col-span-1 row-span-2 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-2"
+				class="img1 col-span-1 row-span-2 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-2"
 			>
-				<img src="/path/to/image1.jpg" alt="Featured Image 1" class="h-full w-full object-cover" />
 			</div>
-
 			<div
-				class="col-span-1 row-span-2 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-2"
+				class="img2 col-span-1 row-span-3 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-3"
 			>
-				<img src="/path/to/image2.jpg" alt="Featured Image 2" class="h-full w-full object-cover" />
 			</div>
 		</div>
 	{/if}
 </div>
+
+<style lang="scss">
+	.img1 {
+		background-image: url('../assets/images/flags.jpg');
+		background-size: cover;
+		background-position: bottom;
+		height: 30vh;
+		overflow-y: hidden;
+	}
+
+	.img2 {
+		background-image: url('../assets/images/boardwalk.jpg');
+		background-size: cover;
+		background-position: bottom;
+		height: 60vh;
+		overflow-y: hidden;
+	}
+</style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { clientStore } from '$lib/stores';
+	import { clientStore, toastStore, ToastTypes } from '$lib/stores';
 	import { Card, Input, Button, Label } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
@@ -32,51 +32,49 @@
 	});
 
 	async function sendRecoveryEmail() {
-		// await restClient.login
-		// 	.recoverPasswordApiV1PasswordRecoveryEmailPost(email)
-		// 	.then((res: any) => {
-		// 		toastStore.update((prevValue) => ({
-		// 			...prevValue,
-		// 			isOpen: true,
-		// 			toastMessage: 'Recovery email sent',
-		// 			type: ToastTypes.success
-		// 		}));
-		// 	})
-		// 	.catch((err) => {
-		// 		toastStore.update((prevValue) => ({
-		// 			...prevValue,
-		// 			isOpen: true,
-		// 			toastMessage: 'Unable to send recovery email. Please contact administration.',
-		// 			type: ToastTypes.error
-		// 		}));
-		// 	});
+		await restClient.passwordResets.postV1PasswordResets(email)
+			.then((res: any) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: 'Recovery email sent',
+					type: ToastTypes.success
+				}));
+			})
+			.catch((err) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: 'Unable to send recovery email. Please contact administration.',
+					type: ToastTypes.error
+				}));
+			});
 	}
 
 	async function resetPassword() {
-		// await restClient.login
-		// 	.resetPasswordApiV1ResetPasswordPost({
-		// 		new_password: password,
-		// 		token: token
-		// 	})
-		// 	.then((res: any) => {
-		// 		console.log('hi');
-		// 		toastStore.update((prevValue) => ({
-		// 			...prevValue,
-		// 			isOpen: true,
-		// 			toastMessage: 'Password Updated!',
-		// 			type: ToastTypes.success
-		// 		}));
-		// 		goto('/auth/login');
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log('hi');
-		// 		toastStore.update((prevValue) => ({
-		// 			...prevValue,
-		// 			isOpen: true,
-		// 			toastMessage: `Unable to reset password: Error: ${err}`,
-		// 			type: ToastTypes.error
-		// 		}));
-		// 	});
+		await restClient.passwordResets.patchV1PasswordResets(
+			{
+				password_reset_token: token,
+				password: password,
+				password_confirmation: passwordConfirm
+			})
+			.then((res: any) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: 'Password Updated!',
+					type: ToastTypes.success
+				}));
+				goto('/auth/login');
+			})
+			.catch((err) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: `Unable to reset password: Error: ${err}`,
+					type: ToastTypes.error
+				}));
+			});
 	}
 
 	$: useResetForm;
@@ -91,7 +89,6 @@
 					<Input
 						type="password"
 						id="password"
-						placeholder="•••••••••"
 						required
 						bind:value={password}
 					/>
@@ -101,7 +98,6 @@
 					<Input
 						type="password"
 						id="confirmPassword"
-						placeholder="•••••••••"
 						required
 						bind:value={passwordConfirm}
 					/>
@@ -111,7 +107,6 @@
 		</Card>
 	{:else}
 		<Card class="login-card mx-auto my-8 w-96">
-			<img class="login-logo" src={Logo} height="150vh" width="150vw" alt="Orbio Corporate Logo" />
 			<form on:submit|preventDefault={sendRecoveryEmail}>
 				<Input class="m-2" type="text" bind:value={email} placeholder="Email" />
 				<Button type="submit" outline={true} class="m-2 w-full">Send Recovery Email</Button>
@@ -123,8 +118,9 @@
 
 <style>
 	.landing-img {
-		background-image: url('../../../lib/assets/background_alt.webp');
+		background-image: url('../../../assets/images/lodge.jpg');
 		background-size: cover;
+		background-position: bottom;
 		height: 100vh;
 		overflow-y: hidden;
 	}

@@ -166,7 +166,7 @@ class FormBuilder {
 	}
 
 	description(): FormBuilder {
-		this.formInputs.push(new FormInput('description', FormTypes.text));
+		this.formInputs.push(new FormInput('description', FormTypes.richText));
 		return this;
 	}
 

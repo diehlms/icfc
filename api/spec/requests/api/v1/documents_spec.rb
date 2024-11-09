@@ -38,7 +38,7 @@ RSpec.describe 'api/v1/documents', type: :request do
   end
 
   path '/v1/documents/{id}' do
-    parameter name: 'id', in: :path, type: :integer, description: 'id'
+    parameter name: 'id', in: :path, type: :string, description: 'id'
 
     delete('delete document') do
       tags 'Documents'

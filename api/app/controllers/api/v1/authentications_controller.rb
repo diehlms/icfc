@@ -19,15 +19,27 @@ module Api
 
       def signup
         @user = User.new(user_params)
-        respond_to do |format|
-          if @user.save
-            UserMailer.registration_confirmation(@user).deliver
-            UserMailer.new_member_notification(@user).deliver
-            format.json { render json: @user }
+        if @user.save
+          UserMailer.registration_confirmation(@user).deliver
+          UserMailer.new_member_notification(@user).deliver
+
+          render json: {}, status: :ok
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
+      end
+
+      def confirm_email
+        @user = User.find_by_confirm_token(params[:token])
+
+        if @user
+          if @user.email_activate
+            render json: {}, status: :ok
           else
-            format.html { render :new }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
+            render json: { error: 'Email activation failed' }, status: :unprocessable_entity
           end
+        else
+          render json: { error: 'User not found' }, status: :not_found
         end
       end
 

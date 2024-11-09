@@ -14,6 +14,7 @@ module Api
           family_member = FamilyMember.find_or_initialize_by(name: family_member_data[:name])
 
           family_member.assign_attributes(
+            user_id: family_member_data[:user_id],
             relationship: family_member_data[:relationship],
             family_tree_id: family_member_data[:family_tree_id]
           )
@@ -60,8 +61,6 @@ module Api
       end
 
       def destroy
-        @family_member = FamilyMember.find(params[:id])
-
         if @family_member.destroy
           render json: { message: 'Family member deleted succesfully' }, status: :ok
         else
@@ -70,6 +69,10 @@ module Api
       end
 
       private
+
+      def family_member
+        @family_member = FamilyMember.find(params[:id])
+      end
 
       def family_member_params
         params.permit(:family_members, :name, :relationship, :family_tree_id, :parent_ids, :relationships)

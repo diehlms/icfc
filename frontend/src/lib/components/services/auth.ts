@@ -11,7 +11,7 @@ export default {
 		return Math.floor(new Date().getTime() / 1000) >= tokenPayload?.sub;
 	},
 	userActionPermitted(entity_user_id: number, user: any): boolean {
-		return user.admin || entity_user_id === user.id;
+		return user && (user.admin || entity_user_id === user.id);
 	},
 	updateAuthContext() {
 		const apiUrl = PUBLIC_API_URL;

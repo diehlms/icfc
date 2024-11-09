@@ -4,6 +4,7 @@
 	import { goto } from '$app/navigation';
 	import { Card, Input, Button } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken')) {
@@ -26,11 +27,11 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((_) => {
+			.catch((error) => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: 'Unable to send recovery email. Please contact administration.',
+					toastMessage: `${processApiErrorsToString(error.body)}`,
 					type: ToastTypes.error
 				}));
 			});
@@ -51,7 +52,9 @@
 
 <style lang="scss">
 	.landing-img {
+		background-image: url('../../../assets/images/lodge.jpg');
 		background-size: cover;
+		background-position: bottom;
 		height: 100vh;
 		overflow-y: hidden;
 	}

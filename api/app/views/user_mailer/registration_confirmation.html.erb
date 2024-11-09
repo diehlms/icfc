@@ -2,6 +2,7 @@ Hi <%= @user.username %>,
 <br>
 Thanks for registering! To confirm your registration click the URL below.
 <br>
-<%= confirm_email_user_url(@user.confirm_token) %>
+
+https://icfc.net/auth/confirm-email/<%= @user.confirm_token %>
 
 If the link above does not work, please copy and paste the link into your browser.

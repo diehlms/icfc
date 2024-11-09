@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/auth/login', to: 'authentications#login'
       post '/auth/signup', to: 'authentications#signup'
+      post '/auth/confirm_email/:token', to: 'authentications#confirm_email'
 
       get '/entry/initial_payload', to: 'entry#initial_payload'
       get '/entry/campers', to: 'entry#campers'

@@ -77,9 +77,7 @@
 					toastMessage: err,
 					type: ToastTypes.error
 				}));
-			});
-
-		fetchData();
+			}).finally(() => fetchData());
 	};
 
 	const createComment = () => {
@@ -93,8 +91,7 @@
 			payload,
 			'Comment',
 			client.restClient?.comments.postV1Comments.bind(client.restClient.comments)
-		);
-		fetchData();
+		).finally(() => fetchData());
 		loading = false;
 	};
 
@@ -105,8 +102,7 @@
 			{ user_id: user.id as number },
 			'Comment',
 			client.restClient?.comments.deleteV1Comments.bind(client.restClient.comments)
-		);
-		fetchData();
+		).finally(() => fetchData());
 		loading = false;
 	};
 
@@ -117,7 +113,7 @@
 			{ user_id: user.id as number },
 			'Article',
 			client.restClient?.articles.deleteV1Articles.bind(client.restClient.articles)
-		);
+		).finally(() => goto('/articles'));
 		loading = false;
 	};
 
@@ -132,8 +128,7 @@
 			{ article: articleUpdatePayload, user_id: user.id as number },
 			'Article',
 			client.restClient?.articles.putV1Articles.bind(client.restClient.articles)
-		);
-		fetchData();
+		).finally(() => fetchData());
 		loading = false;
 	};
 
@@ -182,7 +177,7 @@
 							src: hotSwapProductionUris(article.image.url),
 							alt: `Image for ${article.title}`
 						}}
-						isOwner={() => updateAuthContext.userActionPermitted(article.id, user.id)}
+						isOwner={() => updateAuthContext.userActionPermitted(article.id, user)}
 					/>
 				</Gallery>
 			</div>

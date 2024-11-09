@@ -4,4 +4,5 @@
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
 import type { rideshareIn } from './rideshareIn';
-export type rideshareUpdate = rideshareIn & createUpdateBaseModel;
+export type rideshareUpdate = (rideshareIn & createUpdateBaseModel);
+

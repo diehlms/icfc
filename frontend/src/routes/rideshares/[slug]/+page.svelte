@@ -72,6 +72,9 @@
 	const editRideshare = (event: any) => {
 		loading = true;
 		const rideshareUpdatePayload: rideshareUpdate = {
+			seeking: event.detail.seeking,
+			point_of_arrival_id: event.detail.point_of_arrival,
+			point_of_departure_id: event.detail.point_of_departure,
 			number_of_passengers: event.detail.numberOfPassengers,
 			additional_information: event.detail.additional_information,
 			departing_at: event.detail.departing_at,

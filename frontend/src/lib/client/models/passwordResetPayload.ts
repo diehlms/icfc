@@ -3,6 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export type passwordResetPayload = {
-	password?: string;
-	password_confirmation?: string;
+    password_reset_token?: string;
+    password?: string;
+    password_confirmation?: string;
 };
+

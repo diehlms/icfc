@@ -26,7 +26,9 @@ module Api
 
       def destroy
         document
-        render json: Document.all
+        return unless document&.destroy
+
+        render json: {}
       end
 
       private
@@ -36,6 +38,7 @@ module Api
       end
 
       def document
+        puts params[:id]
         @document = Document.find(params[:id])
       end
     end

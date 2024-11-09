@@ -3,11 +3,11 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type familyMemberIn = Array<
-	createUpdateBaseModel & {
-		name?: string;
-		relationship?: string;
-		family_tree_id?: number;
-		parent_id?: number;
-	}
->;
+export type familyMemberIn = (createUpdateBaseModel & {
+    family_tree_id?: number;
+    name?: string;
+    relationship?: string;
+    parent_ids?: Array<number>;
+    date_of_birth?: string;
+});
+

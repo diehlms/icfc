@@ -36,6 +36,7 @@ export type { eventIn } from './models/eventIn';
 export type { eventOut } from './models/eventOut';
 export type { eventUpdate } from './models/eventUpdate';
 export type { familyMemberIn } from './models/familyMemberIn';
+export type { familyMemberOut } from './models/familyMemberOut';
 export type { familyTreeIn } from './models/familyTreeIn';
 export type { familyTreeOut } from './models/familyTreeOut';
 export type { galleryIn } from './models/galleryIn';

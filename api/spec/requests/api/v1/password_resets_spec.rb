@@ -18,12 +18,11 @@ RSpec.describe 'api/v1/password_resets', type: :request do
         run_test!
       end
     end
-  end
 
-  path '/v1/password_resets/init_reset_password' do
-    get('show password_reset') do
+    patch('update password') do
       tags 'Password Resets'
-      parameter name: :password_reset_token, in: :query, type: :string, description: 'password_reset_token'
+      parameter name: :passwordResetPayload, in: :body,
+                schema: { '$refs' => '#/components/schemas/passwordResetPayload' }
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -41,11 +40,10 @@ RSpec.describe 'api/v1/password_resets', type: :request do
     end
   end
 
-  path '/v1/password_resets/{password_reset_token}' do
-    patch('update password') do
+  path '/v1/password_resets/init_reset_password' do
+    get('show password_reset') do
       tags 'Password Resets'
       parameter name: :password_reset_token, in: :query, type: :string, description: 'password_reset_token'
-      parameter name: :new_password, in: :body, type: :string, description: 'updated password'
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do

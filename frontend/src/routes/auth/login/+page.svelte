@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import type { AppClient } from '$lib/client';
 	import updateAuthContext from '$lib/components/services/auth';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken')) {
@@ -46,10 +47,10 @@
 				updateAuthContext.updateAuthContext();
 				goto('/');
 			})
-			.catch(() => {
+			.catch((error: any) => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
-					toastMessage: 'Failed to log in',
+					toastMessage: `Failed to log in: ${processApiErrorsToString(error.body)}`,
 					isOpen: true,
 					type: ToastTypes.error
 				}));
@@ -61,6 +62,7 @@
 <div class="landing-img">
 	<div class="login-card">
 		<Card class="mx-auto my-12 w-96">
+			<h1>Iron City Fishing Club</h1>
 			<form on:submit|preventDefault={handleLogin}>
 				<Input class="m-2" type="text" bind:value={username} placeholder="Username" />
 				<Input class="m-2" type="password" bind:value={password} placeholder="Password" />
@@ -75,6 +77,14 @@
 </div>
 
 <style lang="scss">
+	.landing-img {
+		background-image: url('../../../assets/images/lodge.jpg');
+		background-size: cover;
+		background-position: bottom;
+		height: 100vh;
+		overflow-y: hidden;
+	}
+
 	.login-logo {
 		max-height: 15vh;
 		max-width: 15vw;

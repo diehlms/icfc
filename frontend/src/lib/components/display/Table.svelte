@@ -103,3 +103,9 @@
 		</TableBody>
 	</Table>
 </div>
+
+<style>
+	.table-cell-hover:hover {
+		cursor: pointer;
+	}
+</style>

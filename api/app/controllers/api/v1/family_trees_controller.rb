@@ -12,8 +12,11 @@ module Api
       end
 
       def show
-        @family_tree = FamilyTree.includes(:family_members).find(params[:id])
-        render json: @family_tree.to_json(include: :family_members)
+        if family_tree
+          render json: family_tree, serializer: FamilyTreeSerializer
+        else
+          render json: { errors: @article.errors.full_messages }, status: :not_found
+        end
       end
 
       def create
@@ -35,6 +38,10 @@ module Api
       end
 
       private
+
+      def family_tree
+        @family_tree ||= FamilyTree.find(params[:id])
+      end
 
       def family_tree_params
         params.require(:family_tree).permit(:name, :user_id)

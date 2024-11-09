@@ -4,7 +4,6 @@
 	import { onMount } from 'svelte';
 	import { clientStore, toastStore, ToastTypes } from '$lib/stores';
 	import { goto, invalidateAll } from '$app/navigation';
-	import { get } from 'svelte/store';
 	import updateAuthContext from '$lib/components/services/auth';
 	import { ImageUploadClient } from '$lib/components/services/imageUploadClient';
 	import Sidebar from '$lib/components/display/Sidebar.svelte';
@@ -15,7 +14,7 @@
 	import Toast from '$lib/components/display/Toast.svelte';
 	import BreadCrumb from '$lib/components/display/BreadCrumb.svelte';
 	import { PUBLIC_API_URL } from '$env/static/public';
-
+	
 	let message: string | null = null;
 	let restClient: AppClient;
 
@@ -36,7 +35,6 @@
 
 	async function resolveAuth(): Promise<void> {
 		const intendedPath = window.location.pathname;
-
 		if (localStorage.getItem('authToken') === null) {
 			const restClient = new AppClient({
 				BASE: PUBLIC_API_URL
@@ -48,8 +46,7 @@
 				authenticated: false,
 				imageUploadClient: null
 			});
-			if (!intendedPath.includes('reset-password')) {
-				// Stupid
+			if (!intendedPath.includes('reset-password') && !intendedPath.includes('confirm-email')) {
 				setTimeout(() => goto('/auth/login'), 0);
 			}
 		} else {
@@ -90,10 +87,8 @@
 	<main class="flex h-screen flex-col">
 		<Navbar on:emitLoggedOut={logout} />
 		<div class="flex flex-1">
-			<!-- Flexbox for sidebar and content -->
-			<Sidebar class="w-1/5" />
-			<!-- Give the sidebar a fixed width -->
-			<div class="main-ui-window mt-2 flex-1 p-10">
+			<Sidebar />
+			<div class="main-ui-window flex-1">
 				<div class="mb-4">
 					<BreadCrumb />
 				</div>
@@ -111,7 +106,8 @@
 	.main-ui-window {
 		flex-grow: 1;
 		margin-top: 1rem;
-		padding: 2.5rem;
+		padding-left: 7rem;
+		padding-right: 5rem;
 	}
 
 	.flex {

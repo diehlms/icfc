@@ -4,8 +4,8 @@ export const createEntity = (
 	payload: object,
 	entityName: string,
 	callback: (payload: object) => Promise<void>
-): void => {
-	callback(payload)
+): Promise<void> => {
+	return callback(payload)
 		.then(() => {
 			toastStore.update((prevValue) => ({
 				...prevValue,
@@ -25,12 +25,12 @@ export const createEntity = (
 };
 
 export const deleteEntity = (
-	id: number,
+	id: number | string,
 	payload: object,
 	entityName: string,
-	callback: (id: number, payload: object) => Promise<void>
-): void => {
-	callback(id, payload)
+	callback: (id: number | string, payload: object) => Promise<void>
+): Promise<void> => {
+	return callback(id, payload)
 		.then(() => {
 			toastStore.update((prevValue) => ({
 				...prevValue,
@@ -54,7 +54,7 @@ export const editEntity = (
 	payload: object,
 	entityName: string,
 	callback: (id: number, payload: object) => Promise<void>
-): void => {
+): Promise<void> => {
 	callback(id, payload)
 		.then(() => {
 			toastStore.update((prevValue) => ({

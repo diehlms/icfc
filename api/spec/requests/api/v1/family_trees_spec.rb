@@ -46,6 +46,8 @@ RSpec.describe 'api/v1/family_trees', type: :request do
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
+        schema '$ref' => '#/components/schemas/familyTreeOut'
+
         let(:id) { '123' }
 
         after do |example|

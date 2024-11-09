@@ -28,6 +28,8 @@
 				.offering()
 				.content()
 				.numberOfPassengers()
+				.fromDate('arriving_at')
+				.toDate('departing_at')
 				.build();
 		});
 

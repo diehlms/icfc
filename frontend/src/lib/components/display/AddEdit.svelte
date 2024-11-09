@@ -49,6 +49,14 @@
 		payload = { ...payload, [name]: value };
 	}
 
+	function handleCheck(event: any) {
+		const { name, value } = event.target;
+		
+		let updatedValue = value === 'on' ? true : false
+		console.log(name, updatedValue)
+		payload = { ...payload, [name]: updatedValue };
+	}
+
 	$: if (form && form.length) {
 		form.forEach((input) => {
 			if (input.value !== undefined) {
@@ -81,6 +89,7 @@
 			</div>
 			<div>
 				{#if input.type == 'richText'}
+					<Label for={input.name} class="block">{toTitleCase(input.name)}</Label>
 					<Wysiwyg
 						on:input={(e) => handleWysiwygInput(e.detail, input.name)}
 						bind:content={input.value}
@@ -89,23 +98,23 @@
 			</div>
 			<div class="flex">
 				{#if input.type == 'checkbox'}
-					<Checkbox checked={input.value}>{toTitleCase(input.name)}</Checkbox>
+					<Checkbox bind:value={input.value} name={input.name} on:change={handleCheck} checked={input.value}>{toTitleCase(input.name)}</Checkbox>
 				{/if}
 			</div>
 			<div class="flex">
 				{#if input.type == 'select'}
 					<Label for="role" />
-					<Select class="mt-2" items={input.selectOptions} bind:value={payload[input.name]} />
+					<Select class="mt-2" items={input.selectOptions} name={input.name} on:change={handleInput} bind:value={input.value} />
 				{/if}
 			</div>
 			{#if input.type == 'attachment'}
 				<AttachmentUploader
 					on:triggerAttachmentUpload={addAttachmentToPayload}
-					showUploadButton={true}
+					showUploadButton={false}
 				/>
 			{/if}
 		{/each}
-		<Button color="green" type="submit" on:click={onSubmit}><RocketLaunch /> Submit</Button>
+		<Button color="green" type="submit"><RocketLaunch /> Submit</Button>
 	</form>
 </Modal>
 

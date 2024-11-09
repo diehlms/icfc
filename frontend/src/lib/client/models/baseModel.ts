@@ -3,7 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export type baseModel = {
-	id?: number;
-	created_at?: string;
-	updated_at?: string;
+    id?: number;
+    created_at?: string;
+    updated_at?: string;
 };
+

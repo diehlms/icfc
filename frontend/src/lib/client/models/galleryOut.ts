@@ -6,8 +6,8 @@ import type { attachmentBaseModel } from './attachmentBaseModel';
 import type { author } from './author';
 import type { baseModel } from './baseModel';
 import type { galleryIn } from './galleryIn';
-export type galleryOut = galleryIn &
-	baseModel & {
-		image?: attachmentBaseModel;
-		user?: author;
-	};
+export type galleryOut = (galleryIn & baseModel & {
+    image?: attachmentBaseModel;
+    user?: author;
+});
+

@@ -6,43 +6,33 @@
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import { toTitleCase } from '$lib/components/services/textFormatting';
+	import type { documentOut } from '$lib/client';
+	import { deleteEntity } from '../services/crud';
+	import { hotSwapProductionUris } from '../services/imageUtils';
+
+	export let foldersToShow: string[] = [];
 
 	let createDocumentForm = new FormBuilder().name('title').name('folder').attachment().build();
-
-	let documents: any = [];
+	let documents: documentOut[] = [];
 	let documentGroups = {};
 	let loading = true;
 	let documentFormData = new FormData();
-	export let foldersToShow: string[] = [];
 
-	const deleteDocument = (id: any) => {
+	const deleteDocument = (id: string) => {
 		loading = true;
-		client.restClient?.documents
-			.deleteV1Documents(id)
-			.then((_) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Cabin date deleted',
-					type: ToastTypes.success
-				}));
-			})
-			.catch((error) => {
-				loading = false;
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: error,
-					type: ToastTypes.error
-				}));
-			});
+		deleteEntity(
+			id,
+			{ user_id: user.id as number },
+			'Document',
+			client.restClient?.documents.deleteV1Documents.bind(client.restClient.documents)
+		)
+		loading = false;
 	};
 
-	const postDocument = (payload: any) => {
-		documentFormData.append('document', payload?.detail?.files.accepted[0]);
-		documentFormData.append('document_folder', payload.detail.folder);
-		documentFormData.append('document_title', payload.detail.name);
+	const postDocument = (event: any) => {
+		documentFormData.append('document', event?.detail?.files.accepted[0]);
+		documentFormData.append('document_folder', event.detail.folder);
+		documentFormData.append('document_title', event.detail.title);
 		documentFormData.append('user_id', user.id);
 
 		client.imageUploadClient
@@ -65,26 +55,25 @@
 			});
 	};
 
-	const downloadDocument = async (url, title) => {
+	const downloadDocument = async (url: string, title: string) => {
     try {
-      const response = await fetch(url);
+      const response = await fetch(hotSwapProductionUris(url));
       if (!response.ok) {
+				console.error(response)
         throw new Error('Failed to download document');
       }
-
       const blob = await response.blob();
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
       link.download = title;
       link.click();
-
       toastStore.update((prevValue) => ({
         ...prevValue,
         isOpen: true,
         toastMessage: 'Document downloaded!',
         type: ToastTypes.success,
       }));
-    } catch (error) {
+    } catch (error: any) {
       toastStore.update((prevValue) => ({
         ...prevValue,
         isOpen: true,
@@ -140,7 +129,7 @@
 						<div class="float-right">
 							<Badge color="blue">
 								<span on:click={() => downloadDocument(item.document.url, item.document_title)}>Download</span></Badge>
-								<Badge color="red"><span on:click={() => deleteDocument(item.document.url, item.document_title)}>Delete</span>
+								<Badge color="red"><span on:click={() => deleteDocument(item.id)}>Delete</span>
 								</Badge>
 						</div>
 					</span>

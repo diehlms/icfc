@@ -5,10 +5,12 @@
 	import { get } from 'svelte/store';
 	import * as tj from '@mapbox/togeojson';
 	import Timestamps from '$lib/components/display/Timestamps.svelte';
-	import { Card } from 'flowbite-svelte';
+	import { Button, Card } from 'flowbite-svelte';
 	import type { chartOut } from '$lib/client';
 	import { deleteEntity } from '$lib/components/services/crud';
 	import { hotSwapProductionUris } from '$lib/components/services/imageUtils';
+	import updateAuthContext from '$lib/components/services/auth';
+	import { Trash } from 'svelte-heros-v2';
 
 	let map: any;
 	let loading: boolean = true;
@@ -36,11 +38,12 @@
 		loading = false;
 	});
 
-	const deleteChart = (id: number) => {
+	const deleteChart = () => {
 		loading = true;
 		deleteEntity(
 			chart?.id,
 			{ user_id: user.id as number },
+			'Chart',
 			client.restClient?.charts.deleteV1Charts.bind(client.restClient?.charts)
 		);
 		loading = false;
@@ -113,6 +116,9 @@
 	<div class="flex flex-col gap-4 lg:flex-row">
 		<div class="w-full lg:w-3/4">
 			<Card>
+				{#if updateAuthContext.userActionPermitted(chart?.user_id, user)}
+					<Button color="red" size="xs" on:click={deleteChart}><Trash /></Button>
+				{/if}
 				<Timestamps model={chart} />
 			</Card>
 		</div>
@@ -125,13 +131,6 @@
 </div>
 
 <style>
-	html,
-	body {
-		padding: 0;
-		margin: 0;
-	}
-	html,
-	body,
 	#map {
 		height: 70vh;
 		width: 30vw;

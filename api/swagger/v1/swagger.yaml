@@ -128,6 +128,22 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/signupPayload"
+  "/v1/auth/confirm_email/{token}":
+    parameters:
+    - name: token
+      in: path
+      description: confirm token
+      required: true
+      schema:
+        type: string
+    post:
+      summary: confirm email
+      tags:
+      - Auth
+      description: confirm email
+      responses:
+        '200':
+          description: successful
   "/v1/cabin_attachments":
     post:
       summary: create cabin_attachment
@@ -406,7 +422,7 @@ paths:
       description: id
       required: true
       schema:
-        type: integer
+        type: string
     delete:
       summary: delete document
       tags:
@@ -622,6 +638,10 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/familyTreeOut"
     delete:
       summary: delete family_tree
       tags:
@@ -733,6 +753,19 @@ paths:
       responses:
         '200':
           description: successful
+    patch:
+      summary: update password
+      tags:
+      - Password Resets
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$refs": "#/components/schemas/passwordResetPayload"
   "/v1/password_resets/init_reset_password":
     get:
       summary: show password_reset
@@ -747,26 +780,6 @@ paths:
       responses:
         '200':
           description: successful
-  "/v1/password_resets/{password_reset_token}":
-    patch:
-      summary: update password
-      tags:
-      - Password Resets
-      parameters:
-      - name: password_reset_token
-        in: query
-        description: password_reset_token
-        schema:
-          type: string
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-        description: updated password
   "/v1/rideshares":
     get:
       summary: list rideshares
@@ -931,6 +944,18 @@ components:
           type: string
           example: test@gmail.com
         password:
+          type: string
+          format: password
+    passwordResetPayload:
+      type: object
+      properties:
+        password_reset_token:
+          type: string
+          format: password
+        password:
+          type: string
+          format: password
+        password_confirmation:
           type: string
           format: password
     signupPayload:
@@ -1202,20 +1227,6 @@ components:
       allOf:
       - "$ref": "#/components/schemas/eventIn"
       - "$ref": "#/components/schemas/createUpdateBaseModel"
-    familyMemberIn:
-      type: array
-      items:
-        allOf:
-        - "$ref": "#/components/schemas/createUpdateBaseModel"
-        properties:
-          name:
-            type: string
-          relationship:
-            type: string
-          family_tree_id:
-            type: number
-          parent_id:
-            type: number
     familyTreeIn:
       allOf:
       - "$ref": "#/components/schemas/createUpdateBaseModel"
@@ -1229,6 +1240,31 @@ components:
       properties:
         user:
           "$ref": "#/components/schemas/author"
+        family_members:
+          type: array
+          items:
+            "$ref": "#/components/schemas/familyMemberOut"
+    familyMemberIn:
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
+      properties:
+        family_tree_id:
+          type: number
+        name:
+          type: string
+        relationship:
+          type: string
+        parent_ids:
+          type: array
+          items:
+            type: number
+        date_of_birth:
+          type: string
+          format: datetime
+    familyMemberOut:
+      allOf:
+      - "$ref": "#/components/schemas/familyMemberIn"
+      - "$ref": "#/components/schemas/baseModel"
     locationPointIn:
       allOf:
       - "$ref": "#/components/schemas/createUpdateBaseModel"
@@ -1261,15 +1297,6 @@ components:
           "$ref": "#/components/schemas/attachmentBaseModel"
         user:
           "$ref": "#/components/schemas/author"
-    passwordResetPayload:
-      type: object
-      properties:
-        password:
-          type: string
-          format: password
-        password_confirmation:
-          type: string
-          format: password
     rideshareIn:
       allOf:
       - "$ref": "#/components/schemas/createUpdateBaseModel"
