@@ -1,7 +1,5 @@
 <script lang="ts">
-	// import { PUBLIC_VERSION } from '$env/static/public';
-
-	const PUBLIC_VERSION = '0.0.0';
+	import { PUBLIC_VERSION } from '$env/static/public';
 	export let year = new Date().getFullYear();
 </script>
 

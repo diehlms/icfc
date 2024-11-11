@@ -28,7 +28,7 @@
 			.getV1Articles1(data.id)
 			.then((data) => {
 				article = data;
-				editArticleForm = new FormBuilder().title().content().build(article);
+				editArticleForm = new FormBuilder().text('title').richText('content').build(article);
 			})
 			.catch((error) => {
 				toastStore.update((prevValue) => ({

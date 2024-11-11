@@ -13,7 +13,7 @@
 
 	let familyTrees: IFamilyTree[] = [];
 	let loading: boolean = true;
-	let createFamilyTreeForm = new FormBuilder().name().build();
+	let createFamilyTreeForm = new FormBuilder().text('name').build();
 
 	const fetchData = () => {
 		client.restClient?.familyTrees

@@ -29,47 +29,47 @@ class FormBuilder {
 
 	constructor() {}
 
-	name(valueOverride?: string): FormBuilder {
-		this.formInputs.push(new FormInput(valueOverride ? valueOverride : 'name', FormTypes.text));
+	text(name: string): FormBuilder {
+		this.formInputs.push(new FormInput(name, FormTypes.text));
 		return this;
 	}
 
-	folder(valueOverride?: string): FormBuilder {
-		this.formInputs.push(new FormInput(valueOverride ? valueOverride : 'folder', FormTypes.text));
-		return this;
-	}
-
-	events(): FormBuilder {
-		this.formInputs.push(new FormInput('events', FormTypes.text));
-		return this;
-	}
-
-	title(): FormBuilder {
-		this.formInputs.push(new FormInput('title', FormTypes.text));
-		return this;
-	}
-
-	location(): FormBuilder {
-		this.formInputs.push(new FormInput('location', FormTypes.text));
-		return this;
-	}
-
-	content(valueOverride?: string): FormBuilder {
+	richText(name: string): FormBuilder {
 		this.formInputs.push(
-			new FormInput(valueOverride ? valueOverride : 'content', FormTypes.richText)
+			new FormInput(name, FormTypes.richText)
 		);
 		return this;
 	}
 
-	attachment(): FormBuilder {
-		this.formInputs.push(new FormInput('attachment', FormTypes.attachment));
+	attachment(name: string): FormBuilder {
+		this.formInputs.push(new FormInput(name, FormTypes.attachment));
 		return this;
 	}
 
-	pointOfDeparture(options: any): FormBuilder {
+	checkbox(name: string): FormBuilder {
+		this.formInputs.push(new FormInput(name, FormTypes.checkbox));
+		return this;
+	}
+
+	dateTime(name: string): FormBuilder {
+		this.formInputs.push(new FormInput(name, FormTypes.datetime));
+		return this;
+	}
+
+	password(name: string): FormBuilder {
+		this.formInputs.push(new FormInput(name, FormTypes.password));
+		return this;
+	}
+
+	number(name: string): FormBuilder {
+		this.formInputs.push(new FormInput(name, FormTypes.number));
+		return this;
+	}
+
+	select(options: any, name: string): FormBuilder {
 		this.formInputs.push(
 			new FormInput(
-				'point_of_departure',
+				name,
 				FormTypes.select,
 				undefined,
 				undefined,
@@ -81,94 +81,141 @@ class FormBuilder {
 		return this;
 	}
 
-	pointOfArrival(options: any): FormBuilder {
-		this.formInputs.push(
-			new FormInput(
-				'point_of_arrival',
-				FormTypes.select,
-				undefined,
-				undefined,
-				undefined,
-				undefined,
-				options
-			)
-		);
-		return this;
-	}
+	// folder(valueOverride?: string): FormBuilder {
+	// 	this.formInputs.push(new FormInput(valueOverride ? valueOverride : 'folder', FormTypes.text));
+	// 	return this;
+	// }
 
-	offering(): FormBuilder {
-		this.formInputs.push(new FormInput('offering', FormTypes.checkbox));
-		return this;
-	}
+	// events(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('events', FormTypes.text));
+	// 	return this;
+	// }
 
-	numberOfPassengers(): FormBuilder {
-		this.formInputs.push(new FormInput('numberOfPassengers', FormTypes.number));
-		return this;
-	}
+	// title(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('title', FormTypes.text));
+	// 	return this;
+	// }
 
-	fromDate(valueOverride?: string): FormBuilder {
-		this.formInputs.push(
-			new FormInput(valueOverride ? valueOverride : 'fromDate', FormTypes.datetime)
-		);
-		return this;
-	}
+	// location(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('location', FormTypes.text));
+	// 	return this;
+	// }
 
-	toDate(valueOverride?: string): FormBuilder {
-		this.formInputs.push(
-			new FormInput(valueOverride ? valueOverride : 'toDate', FormTypes.datetime)
-		);
-		return this;
-	}
+	// content(valueOverride?: string): FormBuilder {
+	// 	this.formInputs.push(
+	// 		new FormInput(valueOverride ? valueOverride : 'content', FormTypes.richText)
+	// 	);
+	// 	return this;
+	// }
 
-	email(): FormBuilder {
-		this.formInputs.push(new FormInput('email', FormTypes.text));
-		return this;
-	}
+	// attachment(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('attachment', FormTypes.attachment));
+	// 	return this;
+	// }
 
-	phoneNumber(): FormBuilder {
-		this.formInputs.push(new FormInput('phoneNumber', FormTypes.number | FormTypes.text));
-		return this;
-	}
+	// pointOfDeparture(options: any): FormBuilder {
+	// 	this.formInputs.push(
+	// 		new FormInput(
+	// 			'point_of_departure',
+	// 			FormTypes.select,
+	// 			undefined,
+	// 			undefined,
+	// 			undefined,
+	// 			undefined,
+	// 			options
+	// 		)
+	// 	);
+	// 	return this;
+	// }
 
-	enabled(): FormBuilder {
-		this.formInputs.push(new FormInput('enabled', FormTypes.checkbox));
-		return this;
-	}
+	// pointOfArrival(options: any): FormBuilder {
+	// 	this.formInputs.push(
+	// 		new FormInput(
+	// 			'point_of_arrival',
+	// 			FormTypes.select,
+	// 			undefined,
+	// 			undefined,
+	// 			undefined,
+	// 			undefined,
+	// 			options
+	// 		)
+	// 	);
+	// 	return this;
+	// }
 
-	password(): FormBuilder {
-		this.formInputs.push(new FormInput('password', FormTypes.password));
-		return this;
-	}
+	// seeking(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('seeking', FormTypes.checkbox));
+	// 	return this;
+	// }
 
-	bedrooms(): FormBuilder {
-		this.formInputs.push(new FormInput('bedrooms', FormTypes.number));
-		return this;
-	}
+	// numberOfPassengers(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('numberOfPassengers', FormTypes.number));
+	// 	return this;
+	// }
 
-	washerdryer(): FormBuilder {
-		this.formInputs.push(new FormInput('washerdryer', FormTypes.checkbox));
-		return this;
-	}
+	// fromDate(valueOverride?: string): FormBuilder {
+	// 	this.formInputs.push(
+	// 		new FormInput(valueOverride ? valueOverride : 'fromDate', FormTypes.datetime)
+	// 	);
+	// 	return this;
+	// }
 
-	dock(): FormBuilder {
-		this.formInputs.push(new FormInput('dock', FormTypes.checkbox));
-		return this;
-	}
+	// toDate(valueOverride?: string): FormBuilder {
+	// 	this.formInputs.push(
+	// 		new FormInput(valueOverride ? valueOverride : 'toDate', FormTypes.datetime)
+	// 	);
+	// 	return this;
+	// }
 
-	price_per_week(): FormBuilder {
-		this.formInputs.push(new FormInput('price_per_week', FormTypes.number));
-		return this;
-	}
+	// email(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('email', FormTypes.text));
+	// 	return this;
+	// }
 
-	price_per_day(): FormBuilder {
-		this.formInputs.push(new FormInput('price_per_day', FormTypes.number));
-		return this;
-	}
+	// phoneNumber(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('phoneNumber', FormTypes.number | FormTypes.text));
+	// 	return this;
+	// }
 
-	description(): FormBuilder {
-		this.formInputs.push(new FormInput('description', FormTypes.richText));
-		return this;
-	}
+	// enabled(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('enabled', FormTypes.checkbox));
+	// 	return this;
+	// }
+
+	// password(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('password', FormTypes.password));
+	// 	return this;
+	// }
+
+	// bedrooms(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('bedrooms', FormTypes.number));
+	// 	return this;
+	// }
+
+	// washerdryer(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('washerdryer', FormTypes.checkbox));
+	// 	return this;
+	// }
+
+	// dock(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('dock', FormTypes.checkbox));
+	// 	return this;
+	// }
+
+	// price_per_week(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('price_per_week', FormTypes.number));
+	// 	return this;
+	// }
+
+	// price_per_day(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('price_per_day', FormTypes.number));
+	// 	return this;
+	// }
+
+	// description(): FormBuilder {
+	// 	this.formInputs.push(new FormInput('description', FormTypes.richText));
+	// 	return this;
+	// }
 
 	build(data?: any): FormInput[] {
 		if (data === undefined) {

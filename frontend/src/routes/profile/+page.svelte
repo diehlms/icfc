@@ -9,10 +9,8 @@
 	let profile: any;
 
 	onMount(() => {
-		const userId = user.id;
-
 		client.restClient?.users
-			.getV1Users1(userId?.toString())
+			.getV1Users1(user.id)
 			.then((res) => {
 				profile = res;
 			})
@@ -48,18 +46,6 @@
 				{#if profile.admin}
 					<Badge color="red" class="mt-2">Admin</Badge>
 				{/if}
-				<!-- <div class="mt-4 flex space-x-3 md:mt-6">
-					<a
-						href="#"
-						class="inline-flex items-center rounded-lg bg-blue-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-						>Edit Profile</a
-					>
-					<a
-						href="#"
-						class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:hover:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-						>Message</a
-					>
-				</div> -->
 			</div>
 			<hr class="my-4 border-gray-200 dark:border-gray-700" />
 			<div class="space-y-3">

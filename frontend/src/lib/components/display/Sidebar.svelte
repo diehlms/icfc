@@ -21,13 +21,15 @@
 		Map,
 		Clipboard,
 		Users,
-		Bars3CenterLeft
+		Bars3CenterLeft,
+		Cog
 	} from 'svelte-heros-v2';
 	import { userStore } from '$lib/stores';
 	import { sineIn } from 'svelte/easing';
 	import { onMount } from 'svelte';
 
-	let sidebarOpen = false;  // Manage sidebar open state
+	let sidebarOpen = false;
+	let showAdminLinks = false;
   let transitionParams = {
     x: -320,
     duration: 200,
@@ -65,12 +67,11 @@
 
   userStore.subscribe((value) => {
     user = value;
-    getInitials();
+    if (!!user.admin) {
+			console.log("hwo")
+			showAdminLinks = true
+		}
   });
-
-  function getInitials(): void {
-    // Calculate initials from user data (ensure this function is implemented)
-  }
 
   $: initials;
   $: user;
@@ -168,6 +169,14 @@
 						<UserGroup />
 					</svelte:fragment>
 				</SidebarItem>
+				<SidebarDropdownWrapper label="Admin">
+					<svelte:fragment slot="icon">
+						<Cog
+							class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+						/>
+					</svelte:fragment>
+					<SidebarDropdownItem href="/admin/settings" label="Settings" />
+				</SidebarDropdownWrapper>
 			</SidebarGroup>
 		</SidebarWrapper>
 	</Sidebar>

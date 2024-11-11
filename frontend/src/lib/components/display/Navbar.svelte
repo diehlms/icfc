@@ -4,6 +4,7 @@
 	import { clientStore, toastStore, ToastTypes, userStore } from '$lib/stores';
 	import { get } from 'svelte/store';
 	import SearchResultsDropdown from './SearchResultsDropdown.svelte';
+	import { PUBLIC_BASE_URL } from '$env/static/public';
 
 	let searchQuery = '';
 	let searchResults: any[] = [];
@@ -49,44 +50,49 @@
 	$: searchResults;
 </script>
 
-<Navbar let:hidden>
-	<NavBrand href="/">
-		<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">ICFC</span>
-	</NavBrand>
-	<NavHamburger />
-	<NavUl {hidden}>
-		<NavLi>
-			<Button outline on:click={emitLogOut}>Pay Bill</Button>
-		</NavLi>
-		<NavLi>
-			<Button outline on:click={emitLogOut}>Log Out</Button>
-		</NavLi>
-		<NavLi>
-			{#if user.firstName && user.lastName}
-				<Avatar>{user.firstName[0].toUpperCase()}{user.lastName[0].toUpperCase()}</Avatar>
-			{:else}
-				<Avatar>UK</Avatar>
-			{/if}
-		</NavLi>
-		<NavLi>
-			<div>
-				<Input
-					id="search-navbar"
-					placeholder="Search..."
-					on:input={handleSearchInput}
-				/>
-				{#if searchResults}
-					<div class="transform-translate-x-1/2 absolute left-1/2">
-						<SearchResultsDropdown {searchResults} onClose={() => handleClose()} />
-					</div>
+<div class="z-50">
+	<Navbar let:hidden>
+		<NavBrand href="/">
+			<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">ICFC</span>
+		</NavBrand>
+		<NavHamburger />
+		<NavUl {hidden}>
+			<NavLi>
+				<Button outline><a target="_blank" href={`${PUBLIC_BASE_URL}/yearbook_curr.pdf`}>Yearbook</a></Button>
+			</NavLi>
+			<NavLi>
+				<Button outline><a target="_blank" href="https://www.paypal.com/ncp/payment/95N2K7CA3CPF4"></a>Pay Bill</Button>
+			</NavLi>
+			<NavLi>
+				<Button outline on:click={emitLogOut}>Log Out</Button>
+			</NavLi>
+			<NavLi>
+				{#if user.firstName && user.lastName}
+					<Avatar>{user.firstName[0].toUpperCase()}{user.lastName[0].toUpperCase()}</Avatar>
+				{:else}
+					<Avatar>UK</Avatar>
 				{/if}
-			</div>
-		</NavLi>
-	</NavUl>
-</Navbar>
-<div class="stripe-container">
-  <div class="stripe stripe-red"></div>
-  <div class="stripe stripe-blue"></div>
+			</NavLi>
+			<NavLi>
+				<div>
+					<Input
+						id="search-navbar"
+						placeholder="Search..."
+						on:input={handleSearchInput}
+					/>
+					{#if searchResults}
+						<div class="transform-translate-x-1/2 absolute left-1/2">
+							<SearchResultsDropdown {searchResults} onClose={() => handleClose()} />
+						</div>
+					{/if}
+				</div>
+			</NavLi>
+		</NavUl>
+	</Navbar>
+	<div class="stripe-container">
+		<div class="stripe stripe-red"></div>
+		<div class="stripe stripe-blue"></div>
+	</div>
 </div>
 
 <style lang="scss">

@@ -50,11 +50,8 @@
 	}
 
 	function handleCheck(event: any) {
-		const { name, value } = event.target;
-		
-		let updatedValue = value === 'on' ? true : false
-		console.log(name, updatedValue)
-		payload = { ...payload, [name]: updatedValue };
+		const { name, checked } = event.target;
+		payload = { ...payload, [name]: checked };
 	}
 
 	$: if (form && form.length) {
@@ -98,7 +95,7 @@
 			</div>
 			<div class="flex">
 				{#if input.type == 'checkbox'}
-					<Checkbox bind:value={input.value} name={input.name} on:change={handleCheck} checked={input.value}>{toTitleCase(input.name)}</Checkbox>
+					<Checkbox bind:value={input.value} name={input.name} on:change={handleCheck} bind:checked={input.value}>{toTitleCase(input.name)}</Checkbox>
 				{/if}
 			</div>
 			<div class="flex">

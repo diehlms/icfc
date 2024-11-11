@@ -12,7 +12,7 @@
 
 	let articles: articleOut[] = [];
 	let loading: boolean = false;
-	let createArticleForm = new FormBuilder().title().content().build();
+	let createArticleForm = new FormBuilder().text('title').richText('content').build();
 	let currentPage = 1;
 	let fetchedAll: boolean = false;
 	let isFetchingMore = false;

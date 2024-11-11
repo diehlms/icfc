@@ -288,6 +288,58 @@ paths:
           application/json:
             schema:
               "$ref": "#/components/schemas/createUpdateBaseModel"
+  "/v1/camp_messages":
+    get:
+      summary: list camp_messages
+      tags:
+      - Camp Messages
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/campMessageOut"
+    post:
+      summary: create camp message
+      tags:
+      - Camp Messages
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/campMessageOut"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/campMessageIn"
+  "/v1/camp_messages/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: integer
+    delete:
+      summary: delete camp message
+      tags:
+      - Camp Messages
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/createUpdateBaseModel"
   "/v1/charts":
     get:
       summary: list charts
@@ -439,30 +491,6 @@ paths:
   "/v1/entry/initial_payload":
     get:
       summary: get initial payload
-      tags:
-      - Entry
-      responses:
-        '200':
-          description: successful
-  "/v1/entry/campers":
-    get:
-      summary: campers
-      tags:
-      - Entry
-      responses:
-        '200':
-          description: successful
-  "/v1/entry/recent_articles":
-    get:
-      summary: recent articles
-      tags:
-      - Entry
-      responses:
-        '200':
-          description: successful
-  "/v1/entry/this_weeks_events":
-    get:
-      summary: this weeks events
       tags:
       - Entry
       responses:
@@ -1137,6 +1165,16 @@ components:
     cabinUpdate:
       allOf:
       - "$ref": "#/components/schemas/cabinOut"
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
+    campMessageIn:
+      allOf:
+      - "$ref": "#/components/schemas/createUpdateBaseModel"
+      properties:
+        message:
+          type: string
+    campMessageOut:
+      allOf:
+      - "$ref": "#/components/schemas/campMessageIn"
       - "$ref": "#/components/schemas/createUpdateBaseModel"
     chartIn:
       allOf:

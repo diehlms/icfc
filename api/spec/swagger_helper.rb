@@ -331,6 +331,22 @@ RSpec.configure do |config|
               { '$ref' => '#/components/schemas/createUpdateBaseModel' }
             ]
           },
+          campMessageIn: {
+            allOf: [
+              { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+            ],
+            properties: {
+              message: {
+                type: :string
+              }
+            }
+          },
+          campMessageOut: {
+            allOf: [
+              { '$ref' => '#/components/schemas/campMessageIn' },
+              { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+            ]
+          },
           chartIn: {
             allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {

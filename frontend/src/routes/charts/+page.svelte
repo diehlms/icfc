@@ -12,7 +12,7 @@
 	let _: IChart[] = [];
 	let loading: boolean = false;
 	let formData = new FormData();
-	let createChartForm = new FormBuilder().name('caption').attachment().build();
+	let createChartForm = new FormBuilder().text('caption').attachment('chart').build();
 
 	const handleSubmit = (event: any) => {
 		formData.append('chart[chart]', event.detail.files.accepted[0]);

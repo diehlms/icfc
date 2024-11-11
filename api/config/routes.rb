@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       end
       resources :authentications
       resources :cabin_attachments
+      resources :camp_messages
       resources :cabin_dates
       resources :cabins
       resources :charts

@@ -5,7 +5,6 @@
 	import { get } from 'svelte/store';
 
 	let campers: any[] = [];
-	let initial: any[] = [];
 	let articles: any[] = [];
 	let events: any[] = [];
 	let error: any;
@@ -14,13 +13,19 @@
 	const client = get(clientStore);
 
 	onMount(async () => {
+
 		try {
-			[initial, articles, campers, events] = await Promise.all([
-				client.restClient?.entry.getV1EntryInitialPayload(),
-				client.restClient?.entry.getV1EntryRecentArticles(),
-				client.restClient?.entry.getV1EntryCampers(),
-				client.restClient?.entry.getV1EntryThisWeeksEvents()
-			]);
+			client.restClient?.entry.getV1EntryInitialPayload().then((res: any) => {
+				articles = res.articles;
+				const currentDate = new Date();
+				const filteredCampers = res.campers.filter((camper: any) => {
+				const arrivalDate = new Date(camper.arrival);
+						const departureDate = new Date(camper.departure);
+						return arrivalDate <= currentDate && departureDate >= currentDate;
+				});
+				campers = filteredCampers;
+				events = res.events;
+			});
 		} catch (err) {
 			error = err.message || 'An error occurred while fetching data.';
 		} finally {
@@ -62,13 +67,13 @@
 
 		<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
 			<!-- Breakfast Card -->
-			<div class="flex flex-col justify-between rounded-lg bg-white p-6 shadow-md">
+			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
 				<h2 class="mb-4 text-xl font-semibold">Today's Breakfast</h2>
 				<p class="text-gray-600">{getBreakfast()}</p>
 			</div>
 
 			<!-- Events Card -->
-			<div class="flex flex-col justify-between rounded-lg bg-white p-6 shadow-md">
+			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
 				<h2 class="mb-4 text-xl font-semibold">This Week's Events</h2>
 				<ul class="list-inside list-disc">
 					{#if events.length > 0}
@@ -87,7 +92,9 @@
 				<ul class="list-inside list-disc">
 					{#if articles.length > 0}
 						{#each articles as article}
-							<li>{article.title}</li>
+							<li>
+								<a href={`/articles/${article.id}`}>{article.title}</a>
+							</li>
 						{/each}
 					{:else}
 						<span>No articles this week!</span>
@@ -98,7 +105,7 @@
 			<!-- Campers Card -->
 			<div class="flex flex-col justify-between rounded-lg bg-white p-6 shadow-md">
 				<h2 class="mb-4 text-xl font-semibold">Campers</h2>
-				<ul class="list-inside list-disc">
+				<ul class="list-inside list-disc overflow-y-scroll max-h-32">
 					{#if campers.length > 0}
 						{#each campers as camper}
 							<li>{camper.title}</li>
@@ -108,13 +115,9 @@
 					{/if}
 				</ul>
 			</div>
-			<div
-				class="img1 col-span-1 row-span-2 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-2"
-			>
+			<div class="img1 col-span-1 row-span-2 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-2">
 			</div>
-			<div
-				class="img2 col-span-1 row-span-3 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-3"
-			>
+			<div class="img2 col-span-1 row-span-3 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-3">
 			</div>
 		</div>
 	{/if}

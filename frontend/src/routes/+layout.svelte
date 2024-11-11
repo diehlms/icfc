@@ -14,6 +14,7 @@
 	import Toast from '$lib/components/display/Toast.svelte';
 	import BreadCrumb from '$lib/components/display/BreadCrumb.svelte';
 	import { PUBLIC_API_URL } from '$env/static/public';
+	import CampMessageBanner from '$lib/components/display/CampMessageBanner.svelte';
 	
 	let message: string | null = null;
 	let restClient: AppClient;
@@ -90,6 +91,7 @@
 			<Sidebar />
 			<div class="main-ui-window flex-1">
 				<div class="mb-4">
+					<CampMessageBanner />
 					<BreadCrumb />
 				</div>
 				<slot />

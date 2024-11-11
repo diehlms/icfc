@@ -4,6 +4,8 @@ module Api
   module V1
     class UsersController < ApplicationController
       before_action :authorize_request
+      before_action :user, only: %i[show update destroy]
+      before_action :check_authorization, only: %i[update destroy]
 
       def index
         @user = User.all

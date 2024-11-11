@@ -10,6 +10,7 @@ import { AuthService } from './services/AuthService';
 import { CabinAttachmentsService } from './services/CabinAttachmentsService';
 import { CabinDatesService } from './services/CabinDatesService';
 import { CabinsService } from './services/CabinsService';
+import { CampMessagesService } from './services/CampMessagesService';
 import { ChartsService } from './services/ChartsService';
 import { CommentsService } from './services/CommentsService';
 import { CommitteesService } from './services/CommitteesService';
@@ -32,6 +33,7 @@ export class AppClient {
     public readonly cabinAttachments: CabinAttachmentsService;
     public readonly cabinDates: CabinDatesService;
     public readonly cabins: CabinsService;
+    public readonly campMessages: CampMessagesService;
     public readonly charts: ChartsService;
     public readonly comments: CommentsService;
     public readonly committees: CommitteesService;
@@ -65,6 +67,7 @@ export class AppClient {
         this.cabinAttachments = new CabinAttachmentsService(this.request);
         this.cabinDates = new CabinDatesService(this.request);
         this.cabins = new CabinsService(this.request);
+        this.campMessages = new CampMessagesService(this.request);
         this.charts = new ChartsService(this.request);
         this.comments = new CommentsService(this.request);
         this.committees = new CommitteesService(this.request);

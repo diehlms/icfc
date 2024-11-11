@@ -54,13 +54,13 @@
 				cabinDates = data.cabindates;
 				cabin = data;
 				editCabinForm = new FormBuilder()
-					.name()
-					.bedrooms()
-					.washerdryer()
-					.dock()
-					.price_per_week()
-					.price_per_day()
-					.description()
+					.text('name')
+					.number('bedrooms')
+					.checkbox('washerdryer')
+					.checkbox('dock')
+					.number('price_per_week')
+					.number('price_per_week')
+					.richText('description')
 					.build(cabin);
 			})
 			.catch((error) => {

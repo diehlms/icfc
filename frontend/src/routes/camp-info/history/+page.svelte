@@ -2,20 +2,18 @@
 	<h1 class="my-4 text-3xl font-bold">History</h1>
 
 	<div>
-		<p>History</p>
-		<!-- <Message>
-            <Message.p>The Story of the Club</Message.p>
-            <p>From the Golden Jubilee Handbook (1931)</p>
-            <small>(The historical sketches following have been prepared with the assistance and collaboration of Rev. Dr. Charles L. Smith and Rev. Dr. Joseph W. Miles, the story of the Club prior to 1900 being contributed by Dr. Smith)</small>
-        </Message> -->
+		<div>
+			<p>The Story of the Club</p>
+			<p>From the Golden Jubilee Handbook (1931)</p>
+			<small>(The historical sketches following have been prepared with the assistance and collaboration of Rev. Dr. Charles L. Smith and Rev. Dr. Joseph W. Miles, the story of the Club prior to 1900 being contributed by Dr. Smith)</small>
+		</div>
 		<p>
-			<em
-				>This is the story of the events of fifty years ago, concerning which there are so very few
+			<em>This is the story of the events of fifty years ago, concerning which there are so very few
 				now living who can say with this writer: “Of them I was a part.”</em
 			>
 		</p>
 		<div>
-			<p>Our Historical Setting</p>
+			<h4>Our Historical Setting</h4>
 			<p>
 				Tradition informs us that two great Indian nations known as the Mengwe and the Lenni-Lenape
 				came from the north and west of the Mississippi River where they met the Alligewi who were

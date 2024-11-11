@@ -24,10 +24,11 @@
 			.then((data) => {
 				event = data;
 				editEventForm = new FormBuilder()
-					.events()
-					.description()
-					.fromDate('start_time')
-					.toDate('end_time')
+					.text('event_title')
+					.text('location')
+					.richText('description')
+					.dateTime('start_time')
+					.dateTime('end_time')
 					.build(event);
 			})
 			.catch((error) => {
@@ -58,6 +59,10 @@
 	const editEvent = (payload: any) => {
 		loading = true;
 		let eventUpdatePayload: eventUpdate = {
+			start_time: payload.detail.start_time,
+			end_time: payload.detail.end_time,
+			location: payload.detail.location,
+			events: payload.detail.event_title,
 			description: payload.detail.description
 		};
 		editEntity(
@@ -80,7 +85,7 @@
 	<Loader />
 {:else if event}
 	<div class="flex items-center justify-center">
-		<Card class="w-full max-w-md">
+		<Card class="max-w-none mx-auto my-12 w-3/4 p-5">
 			<div class="flex flex-col items-center">
 				<h1 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
 					{event.events}
@@ -106,7 +111,7 @@
 						<p>{@html event.description}</p>
 					</div>
 				</div>
-				<div class="mt-4 flex space-x-3 md:mt-6">
+				<div class="mb-4 grid grid-cols-2 gap-4 md:grid-cols-4">
 					{#if updateAuthContext.userActionPermitted(event.user.id, user)}
 						<Button color="red" outline on:click={() => deleteEvent(event.id)}><Trash /></Button>
 						<AddEdit

@@ -23,13 +23,13 @@
 				};
 			});
 			createRideshareForm = new FormBuilder()
-				.pointOfDeparture(selectOptions)
-				.pointOfArrival(selectOptions)
-				.offering()
-				.content()
-				.numberOfPassengers()
-				.fromDate('arriving_at')
-				.toDate('departing_at')
+				.select(selectOptions, 'point_of_departure')
+				.select(selectOptions, 'point_of_arrival')
+				.checkbox('seeking')
+				.richText('description')
+				.number('number_of_passengers')
+				.dateTime('arriving_at')
+				.dateTime('departing_at')
 				.build();
 		});
 

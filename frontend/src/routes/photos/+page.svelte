@@ -11,7 +11,7 @@
 	import { type galleryOut, type baseModel } from '$lib/client';
 	import { deleteEntity } from '$lib/components/services/crud';
 
-	let createImageForm = new FormBuilder().name('caption').attachment().build();
+	let createImageForm = new FormBuilder().text('caption').attachment('image').build();
 	let loading: boolean = false;
 	let images: any = [];
 	let formData = new FormData();
