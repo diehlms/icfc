@@ -59,6 +59,8 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
+          scp -i ~/.ssh/deploy_key proxy/nginx.prod.conf $DEPLOY_USER@$DEPLOY_HOST:~/app/proxy/nginx.prod.conf
+          scp -i ~/.ssh/deploy_key -r configs $DEPLOY_USER@$DEPLOY_HOST:~/app
           scp -i ~/.ssh/deploy_key docker-compose-production.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-production.yml
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \

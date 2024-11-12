@@ -1,0 +1,11 @@
+route:
+  receiver: 'email'
+
+receivers:
+  - name: 'email'
+    email_configs:
+      - to: your-email@example.com
+        from: alertmanager@example.com
+        smarthost: '{{ env "SMTP_SMARTHOST" }}'
+        auth_username: '{{ env "SMTP_USERNAME" }}'
+        auth_password: '{{ env "SMTP_PASSWORD" }}'
