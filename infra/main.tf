@@ -62,6 +62,22 @@ resource "hcloud_firewall" "web_firewall" {
     port       = "22"
     source_ips = ["${var.home_ip}/32"]
   }
+
+  # grafana
+  rule {
+    direction  = "in"
+    protocol   = "tcp"
+    port       = "3001"
+    source_ips = ["${var.home_ip}/32"]
+  }
+
+  # prometheus
+  rule {
+    direction  = "in"
+    protocol   = "tcp"
+    port       = "9093"
+    source_ips = ["${var.home_ip}/32"]
+  }
 }
 
 resource "hcloud_server" "web_server" {
