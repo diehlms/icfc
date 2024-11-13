@@ -2,7 +2,7 @@
 FROM node:18-alpine AS frontend
 WORKDIR /app
 
-COPY .env.production .env
+COPY frontend/.env.production .env
 COPY frontend/package*.json ./
 RUN npm install
 COPY frontend/. .
