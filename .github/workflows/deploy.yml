@@ -24,8 +24,8 @@ jobs:
         
         run: |
           touch frontend/.env;
-          echo "PUBLIC_API_URL=http://128.140.1.67/api" >> frontend/.env;
-          echo "PUBLIC_BASE_URL=http://128.140.1.67" >> frontend/.env;
+          echo "PUBLIC_API_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz/api" >> frontend/.env;
+          echo "PUBLIC_BASE_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz" >> frontend/.env;
           echo "PUBLIC_API_VERSION=foobar" >> frontend/.env;
           echo "PUBLIC_ENVIRONMENT=production" >> frontend/.env;
           echo "PUBLIC_UPLOADS_S3_BUCKET=ironcityfishingclub" >> frontend/.env;

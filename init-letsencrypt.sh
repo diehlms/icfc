@@ -1,5 +1,5 @@
-domains=(icfc-staging.diehlsillers.xyz)
-email="" # Adding a valid address is strongly recommended
+domains=(caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz)
+email="diehlstx@gmail.com" # Adding a valid address is strongly recommended
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 data_path="./certbot"
@@ -23,17 +23,17 @@ fi
 echo "### Creating dummy certificate for $domains ..."
 path="/etc/letsencrypt/live/$domains"
 mkdir -p "$data_path/conf/live/$domains"
-sudo docker compose run --rm --entrypoint "\
+sudo docker compose -f docker-compose-ssl-init.yml run --rm --entrypoint "\
   openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1\
     -keyout '$path/privkey.pem' \
     -out '$path/fullchain.pem' \
     -subj '/CN=localhost'" certbot
 
 echo "### Starting nginx ..."
-sudo docker compose up --force-recreate -d nginx
+sudo docker compose -f docker-compose-ssl-init.yml up --force-recreate -d nginx
 
 echo "### Deleting dummy certificate ..."
-sudo docker compose run --rm --entrypoint "\
+sudo docker compose -f docker-compose-ssl-init.yml run --rm --entrypoint "\
   rm -Rf /etc/letsencrypt/live/$domains && \
   rm -Rf /etc/letsencrypt/archive/$domains && \
   rm -Rf /etc/letsencrypt/renewal/$domains.conf" certbot
@@ -53,7 +53,7 @@ esac
 # Enable staging mode if needed
 if [ $staging != "0" ]; then staging_arg="--staging"; fi
 
-sudo docker compose run --rm --entrypoint "\
+sudo docker compose -f docker-compose-ssl-init.yml run --rm --entrypoint "\
   certbot certonly --webroot -w /var/www/certbot \
     $staging_arg \
     $email_arg \
@@ -63,4 +63,4 @@ sudo docker compose run --rm --entrypoint "\
     --force-renewal" certbot
 
 echo "### Reloading nginx ..."
-sudo docker compose exec nginx nginx -s reload
+sudo docker compose -f docker-compose-ssl-init.yml exec nginx -s reload
