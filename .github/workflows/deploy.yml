@@ -26,7 +26,7 @@ jobs:
           touch frontend/.env.production;
           echo "PUBLIC_API_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz/api" >> frontend/.env.production;
           echo "PUBLIC_BASE_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz" >> frontend/.env.production;
-          echo "PUBLIC_API_VERSION=${{ github.sha }}" >> frontend/.env.production;
+          echo "PUBLIC_VERSION=${{ github.sha }}" >> frontend/.env.production;
           echo "PUBLIC_ENVIRONMENT=production" >> frontend/.env.production;
           echo "PUBLIC_UPLOADS_S3_BUCKET=ironcityfishingclub" >> frontend/.env.production;
           docker build . --tag ghcr.io/diehlms/icfc-www:${{ github.sha }}
