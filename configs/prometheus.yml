@@ -4,4 +4,4 @@ scrape_configs:
       - targets: ['web:3000'] 
   - job_name: 'nginx'
     static_configs:
-      - targets: ['nginx:9113']
+      - targets: ['nginx:80']
