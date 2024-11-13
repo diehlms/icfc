@@ -78,6 +78,13 @@ resource "hcloud_firewall" "web_firewall" {
     port       = "9093"
     source_ips = ["${var.home_ip}/32"]
   }
+
+  rule {
+    direction  = "out"
+    protocol   = "tcp"
+    port       = "any"
+    destination_ips = ["0.0.0.0/0", "::/0"]
+  }
 }
 
 resource "hcloud_server" "web_server" {
