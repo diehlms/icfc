@@ -75,7 +75,7 @@ resource "hcloud_firewall" "web_firewall" {
   rule {
     direction  = "in"
     protocol   = "tcp"
-    port       = "9093"
+    port       = "9090"
     source_ips = ["${var.home_ip}/32"]
   }
 
