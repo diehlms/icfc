@@ -12,7 +12,7 @@
 
 	export let foldersToShow: string[] = [];
 
-	let createDocumentForm = new FormBuilder().name('title').name('folder').attachment().build();
+	let createDocumentForm = new FormBuilder().text('title').text('folder').attachment('document').build();
 	let documents: documentOut[] = [];
 	let documentGroups = {};
 	let loading = true;

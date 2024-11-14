@@ -8,7 +8,7 @@ Rails.application.configure do
   config.force_ssl = true
 
   # config.hosts << /icfc\.net\Z/
-  config.hosts << "caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz"
+  config.hosts << 'caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz'
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -47,6 +47,8 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
+
+  config.action_mailer.delivery_method = :mailtrap
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil

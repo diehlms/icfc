@@ -5,12 +5,21 @@ class ApplicationController < ActionController::Base
 
   def authorize_request
     header = request.headers['Authorization']
-    header = header.split(' ').last if header
 
-    decoded = JsonWebToken.decode(header)
-    @current_user = User.find(decoded[:user_id]) if decoded
-  rescue ActiveRecord::RecordNotFound, JWT::DecodeError
-    render json: { errors: 'Unauthorized' }, status: :unauthorized
+    if header.present?
+      token = header.split(' ').last
+
+      begin
+        @decoded = JsonWebToken.decode(token)
+        @current_user = User.find(@decoded[:user_id])
+      rescue ActiveRecord::RecordNotFound => e
+        render json: { errors: "User not found: #{e.message}" }, status: :unauthorized
+      rescue JWT::DecodeError => e
+        render json: { errors: "Token decode error: #{e.message}" }, status: :unauthorized
+      end
+    else
+      render json: { errors: 'Missing token' }, status: :unauthorized
+    end
   end
 
   def check_authorization
