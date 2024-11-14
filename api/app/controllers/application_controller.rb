@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   # protect_from_forgery
+  around_action :label_metrics
 
   def authorize_request
     header = request.headers['Authorization']
@@ -53,4 +54,16 @@ class ApplicationController < ActionController::Base
     payload[:user_id] = @current_user&.id || 'guest' # Add user context if available
     payload[:request_id] = request.uuid # Add request ID for traceability
   end
+
+  private
+
+  def label_metrics
+    Thread.current['metrics_labels'] = { controller: params[:controller], action: params[:action] }
+    yield # call the action
+  ensure
+    # reset to nil so nothing else can access it
+    Thread.current['metrics_labels'] = nil
+  end
 end
+
+ActiveRecordPrometheusSubscriber

@@ -207,7 +207,6 @@ GEM
       net-imap
       net-pop
       net-smtp
-    mailtrap (2.1.0)
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
@@ -241,6 +240,8 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.3)
+    prometheus_exporter (2.1.1)
+      webrick
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -344,7 +345,6 @@ GEM
     ruby-progressbar (1.13.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
-    ruby_http_client (3.5.5)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -353,8 +353,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sendgrid-ruby (6.6.2)
-      ruby_http_client (~> 3.4)
     shellany (0.0.1)
     solargraph (0.49.0)
       backport (~> 1.2)
@@ -395,6 +393,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    webrick (1.9.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -425,10 +424,10 @@ DEPENDENCIES
   jwt
   listen (>= 3.0.5, < 3.2)
   lograge (~> 0.14.0)
-  mailtrap
   mini_magick (~> 4.8)
   open-weather
   pg
+  prometheus_exporter (~> 2.1)
   psych (< 4)
   puma (~> 3.11)
   rack-cors
@@ -441,7 +440,6 @@ DEPENDENCIES
   rswag-ui
   rubocop
   sassc-rails
-  sendgrid-ruby
   solargraph
   spring
   spring-watcher-listen (~> 2.0.0)

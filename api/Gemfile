@@ -27,12 +27,10 @@ gem 'rswag-api'
 gem 'rswag-ui'
 gem 'rubocop'
 gem 'sassc-rails'
-gem 'sendgrid-ruby'
 gem 'will_paginate'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # Use ActiveStorage variant
-gem 'mailtrap'
 gem 'mini_magick', '~> 4.8'
 
 group :development, :test do
@@ -64,3 +62,5 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'lograge', '~> 0.14.0'
+
+gem "prometheus_exporter", "~> 2.1"
