@@ -65,5 +65,3 @@ class ApplicationController < ActionController::Base
     Thread.current['metrics_labels'] = nil
   end
 end
-
-ActiveRecordPrometheusSubscriber

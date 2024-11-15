@@ -6,6 +6,6 @@ receivers:
     email_configs:
       - to: your-email@example.com
         from: alertmanager@example.com
-        smarthost: '{{ env "SMTP_SMARTHOST" }}'
+        smarthost: '{{ env "SMTP_HOST" }}'
         auth_username: '{{ env "SMTP_USERNAME" }}'
         auth_password: '{{ env "SMTP_PASSWORD" }}'

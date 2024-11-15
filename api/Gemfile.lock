@@ -128,10 +128,6 @@ GEM
       http_parser.rb (~> 0)
     erubi (1.12.0)
     eventmachine (1.2.7)
-    exception_handler (0.8.0.2)
-      bundler
-      rails (>= 4.2.0)
-      responders
     excon (0.100.0)
     ffi (1.15.5)
     fog-aws (3.19.0)
@@ -240,8 +236,8 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.3)
-    prometheus_exporter (2.1.1)
-      webrick
+    prometheus-client (4.2.3)
+      base64
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -295,9 +291,6 @@ GEM
     regexp_parser (2.8.0)
     request_store (1.7.0)
       rack (>= 1.4)
-    responders (3.1.0)
-      actionpack (>= 5.2)
-      railties (>= 5.2)
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
@@ -393,7 +386,6 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webrick (1.9.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -415,7 +407,6 @@ DEPENDENCIES
   capybara (>= 2.15)
   carrierwave
   carrierwave-aws
-  exception_handler (~> 0.8.0.0)
   fog-aws
   friendly_id (~> 5.2.4)
   guard
@@ -427,7 +418,7 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   open-weather
   pg
-  prometheus_exporter (~> 2.1)
+  prometheus-client
   psych (< 4)
   puma (~> 3.11)
   rack-cors

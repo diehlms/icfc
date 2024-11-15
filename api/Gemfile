@@ -10,7 +10,6 @@ gem 'aws-sdk-s3', require: false
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 gem 'carrierwave'
 gem 'carrierwave-aws'
-gem 'exception_handler', '~> 0.8.0.0'
 gem 'fog-aws', group: :production
 gem 'friendly_id', '~> 5.2.4'
 gem 'jbuilder', '~> 2.5'
@@ -28,10 +27,11 @@ gem 'rswag-ui'
 gem 'rubocop'
 gem 'sassc-rails'
 gem 'will_paginate'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 # Use ActiveStorage variant
 gem 'mini_magick', '~> 4.8'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'lograge', '~> 0.14.0'
+gem 'prometheus-client'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -57,10 +57,3 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
-gem 'lograge', '~> 0.14.0'
-
-gem "prometheus_exporter", "~> 2.1"
