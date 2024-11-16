@@ -19,10 +19,10 @@ RSpec.describe 'api/v1/password_resets', type: :request do
       end
     end
 
-    patch('update password') do
+    put('update password') do
       tags 'Password Resets'
       parameter name: :passwordResetPayload, in: :body,
-                schema: { '$refs' => '#/components/schemas/passwordResetPayload' }
+                schema: { '$ref' => '#/components/schemas/passwordResetPayload' }
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do

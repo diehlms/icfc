@@ -14,10 +14,12 @@ Rails.application.routes.draw do
       get '/entry/campers', to: 'entry#campers'
       get '/entry/recent_articles', to: 'entry#recent_articles'
       get '/entry/this_weeks_events', to: 'entry#this_weeks_events'
-      get '/password_resets/init_reset_password', to: 'password_resets#init_reset_password'
-
       put '/family_members', to: 'family_members#update'
       post '/search', to: 'search#search'
+
+      get '/password_resets/init_reset_password', to: 'password_resets#init_reset_password'
+      post '/password_resets', to: 'password_resets#create'
+      put '/password_resets', to: 'password_resets#update'
 
       resources :articles do
         member do
@@ -38,7 +40,6 @@ Rails.application.routes.draw do
       resources :family_trees
       resources :galleries
       resources :location_points
-      resources :password_resets
       resources :rideshares
       resources :search
       resources :sessions

@@ -650,7 +650,7 @@ paths:
         content:
           application/json:
             schema:
-              "$refs": "#/components/schemas/familyTreeIn"
+              "$ref": "#/components/schemas/familyTreeIn"
   "/v1/family_trees/{id}":
     parameters:
     - name: id
@@ -746,7 +746,7 @@ paths:
         content:
           application/json:
             schema:
-              "$refs": "#/components/schemas/locationPointIn"
+              "$ref": "#/components/schemas/locationPointIn"
   "/v1/location_points/{id}":
     parameters:
     - name: id
@@ -781,7 +781,7 @@ paths:
       responses:
         '200':
           description: successful
-    patch:
+    put:
       summary: update password
       tags:
       - Password Resets
@@ -793,7 +793,7 @@ paths:
         content:
           application/json:
             schema:
-              "$refs": "#/components/schemas/passwordResetPayload"
+              "$ref": "#/components/schemas/passwordResetPayload"
   "/v1/password_resets/init_reset_password":
     get:
       summary: show password_reset

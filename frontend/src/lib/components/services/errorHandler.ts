@@ -36,8 +36,3 @@ export function processApiErrorsToString(errorBody: ErrorObject | ApiErrorRespon
     return `${formattedErrors[0].field} ${formattedErrors[0].messages}`;
   }
 }
-
-// console.log(processApiErrorsToString([{
-//   email: ['has already been taken'],
-//   username: ['is too short (minimum is 6 characters)']
-// }]))

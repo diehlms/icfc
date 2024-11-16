@@ -49,6 +49,8 @@
 			});
 			if (!intendedPath.includes('reset-password') && !intendedPath.includes('confirm-email')) {
 				setTimeout(() => goto('/auth/login'), 0);
+			} else {
+				goto(intendedPath)
 			}
 		} else {
 			updateAuthContext.updateAuthContext();

@@ -22,7 +22,7 @@ RSpec.describe 'api/v1/location_points', type: :request do
       tags 'Location Points'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :locationPointIn, in: :body, schema: { '$refs' => '#/components/schemas/locationPointIn' }
+      parameter name: :locationPointIn, in: :body, schema: { '$ref' => '#/components/schemas/locationPointIn' }
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {

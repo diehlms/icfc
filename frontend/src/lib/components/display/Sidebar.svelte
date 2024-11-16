@@ -68,7 +68,6 @@
   userStore.subscribe((value) => {
     user = value;
     if (!!user.admin) {
-			console.log("hwo")
 			showAdminLinks = true
 		}
   });

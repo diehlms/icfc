@@ -33,7 +33,7 @@ export class PasswordResetsService {
         requestBody?: any,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
-            method: 'PATCH',
+            method: 'PUT',
             url: '/v1/password_resets',
             body: requestBody,
             mediaType: 'application/json',

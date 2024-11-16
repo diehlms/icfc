@@ -24,7 +24,7 @@ RSpec.describe 'api/v1/family_trees', type: :request do
       tags 'Family Trees'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :familyTreeIn, in: :body, schema: { '$refs' => '#/components/schemas/familyTreeIn' }
+      parameter name: :familyTreeIn, in: :body, schema: { '$ref' => '#/components/schemas/familyTreeIn' }
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
