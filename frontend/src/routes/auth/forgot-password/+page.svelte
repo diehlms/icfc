@@ -8,7 +8,7 @@
 
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken')) {
-			goto('/dashboard');
+			goto('/');
 		}
 	});
 
