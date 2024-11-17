@@ -28,10 +28,11 @@ gem 'rubocop'
 gem 'sassc-rails'
 gem 'will_paginate'
 # Use ActiveStorage variant
-gem 'mini_magick', '~> 4.8'
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'lograge', '~> 0.14.0'
+gem 'mini_magick', '~> 4.8'
 gem 'prometheus-client'
+gem 'prometheus_exporter'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

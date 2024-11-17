@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:alpine
+    image: ghcr.io/diehlms/icfc-www:latest
     ports:
       - "80:80"
       - "443:443"
@@ -21,7 +21,7 @@ services:
     networks:
       - app_network
   web:
-    image: ghcr.io/diehlms/icfc-www:f1aafe395a3b8e0b1fd5e194825af507bcf7b2f0
+    image: ghcr.io/diehlms/icfc-www:latest
     entrypoint: ["/bin/bash", "/rails/entrypoint.sh"]
     environment:
       - RAILS_ENV=production

@@ -47,5 +47,6 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'metrics', to: 'metrics#index'
   match '*path', to: redirect('/'), via: :all
 end

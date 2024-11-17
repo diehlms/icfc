@@ -29,7 +29,9 @@ jobs:
           echo "PUBLIC_VERSION=${{ github.sha }}" >> frontend/.env.production;
           echo "PUBLIC_ENVIRONMENT=production" >> frontend/.env.production;
           echo "PUBLIC_UPLOADS_S3_BUCKET=ironcityfishingclub" >> frontend/.env.production;
-          docker build . --tag ghcr.io/diehlms/icfc-www:${{ github.sha }}
+          docker build . -f Dockerfile.api --tag ghcr.io/diehlms/icfc-api:${{ github.sha }}
+          docker build . -f Dockerfile.www --tag ghcr.io/diehlms/icfc-www:${{ github.sha }}
+          docker push ghcr.io/diehlms/icfc-api:${{ github.sha }}
           docker push ghcr.io/diehlms/icfc-www:${{ github.sha }}
 
   deploy:
@@ -51,8 +53,10 @@ jobs:
 
       - name: Update Docker Compose File with Image
         run: |
-          export IMAGE="ghcr.io/diehlms/icfc-www:${{ github.sha }}"
-          yq eval ".services.web.image = \"$IMAGE\"" -i docker-compose-production.yml
+          export API_IMAGE="ghcr.io/diehlms/icfc-api:${{ github.sha }}";
+          export WWW_IMAGE="ghcr.io/diehlms/icfc-www:${{ github.sha }}";
+          yq eval ".services.web.image = \"$API_IMAGE\"" -i docker-compose-production.yml
+          yq eval ".services.nginx.image = \"$WWW_IMAGE\"" -i docker-compose-production.yml
 
       - name: Deploy to server
         env:
