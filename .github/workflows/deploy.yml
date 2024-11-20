@@ -25,8 +25,8 @@ jobs:
           touch frontend/.env.production;
           echo "PUBLIC_API_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz/api" >> frontend/.env.production;
           echo "PUBLIC_BASE_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz" >> frontend/.env.production;
-          echo "PUBLIC_INSEASON_RESERVATION_LINK=${{ PUBLIC_INSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
-          echo "PUBLIC_OUTSEASON_RESERVATION_LINK=${{ PUBLIC_OUTSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
+          echo "PUBLIC_INSEASON_RESERVATION_LINK=${{ env.PUBLIC_INSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
+          echo "PUBLIC_OUTSEASON_RESERVATION_LINK=${{ env.PUBLIC_OUTSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
           echo "PUBLIC_VERSION=${{ github.sha }}" >> frontend/.env.production;
           echo "PUBLIC_ENVIRONMENT=production" >> frontend/.env.production;
           echo "PUBLIC_UPLOADS_S3_BUCKET=ironcityfishingclub" >> frontend/.env.production;
