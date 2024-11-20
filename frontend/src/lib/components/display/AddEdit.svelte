@@ -22,7 +22,7 @@
 	export let displayAsButton: boolean = false;
 
 	let defaultModal = false;
-	let payload: any = {};
+	let payload: Record<string, any> = {};
 
 	const dispatch = createEventDispatcher();
 
@@ -41,7 +41,7 @@
 	}
 
 	function handleWysiwygInput(content: string, name: string) {
-		payload[name] = content;
+		payload = { ...payload, [name]: content };
 	}
 
 	function handleInput(event: any) {
@@ -54,16 +54,22 @@
 		payload = { ...payload, [name]: checked };
 	}
 
-	$: if (form && form.length) {
-		form.forEach((input) => {
-			if (input.value !== undefined) {
-				payload[input.name] = input.value;
-			}
-		});
+	function resetForm() {
+		payload = {};
+	}
+
+	$: {
+		if (!Object.keys(payload).length && form?.length) {
+			form.forEach((input) => {
+				if (input.value !== undefined) {
+					payload[input.name] = input.value;
+				}
+			});
+		}
 	}
 </script>
 
-<Modal bind:open={defaultModal}>
+<Modal bind:open={defaultModal} on:close={resetForm}>
 	<form class="flex flex-col space-y-1" on:submit|preventDefault={onSubmit}>
 		{#each form as input}
 			<div class="w-full">
@@ -79,7 +85,7 @@
 							id={input.name}
 							name={input.name}
 							on:input={handleInput}
-							bind:value={input.value}
+							value={input.value}
 						/>
 					</div>
 				{/if}
@@ -88,7 +94,7 @@
 				{#if input.type == 'richText'}
 					<Label for={input.name} class="block">{toTitleCase(input.name)}</Label>
 					<Wysiwyg
-						on:input={(e) => handleWysiwygInput(e.detail, input.name)}
+						on:wysiwygContentUpdate={(e) => handleWysiwygInput(e.detail, input.name)}
 						bind:content={input.value}
 					/>
 				{/if}
@@ -96,10 +102,10 @@
 			<div class="flex">
 				{#if input.type == 'checkbox'}
 					<Checkbox
-						bind:value={input.value}
+						value={input.value}
 						name={input.name}
 						on:change={handleCheck}
-						bind:checked={input.value}>{toTitleCase(input.name)}</Checkbox
+						checked={input.value}>{toTitleCase(input.name)}</Checkbox
 					>
 				{/if}
 			</div>
@@ -111,7 +117,7 @@
 						items={input.selectOptions}
 						name={input.name}
 						on:change={handleInput}
-						bind:value={input.value}
+						value={input.value}
 					/>
 				{/if}
 			</div>

@@ -10,7 +10,6 @@ module Api
       def index
         @rideshares = Rideshare.includes(:point_of_departure, :point_of_arrival).all.where('arriving_at > ?',
                                                                                            Date.today)
-        puts @rideshares
                                                                                            render json: @rideshares, each_serializer: RideshareSerializer
       end
 

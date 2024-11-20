@@ -17,7 +17,6 @@ module Api
         if @document.save
           render json: {}
         else
-          puts @document.errors.full_messages
           render json: {
             errors: @document.errors.full_messages
           }, status: :bad_request
@@ -38,7 +37,6 @@ module Api
       end
 
       def document
-        puts params[:id]
         @document = Document.find(params[:id])
       end
     end

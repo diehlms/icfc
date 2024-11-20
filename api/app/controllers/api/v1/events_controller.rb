@@ -20,10 +20,10 @@ module Api
 
       def create
         @event = Event.create!(event_params)
-        if event
-          render json: event
+        if @event
+          render json: @event
         else
-          render json: event.errors
+          render json: @event.errors
         end
       end
 

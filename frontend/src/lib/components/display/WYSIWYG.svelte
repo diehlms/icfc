@@ -10,7 +10,6 @@
 	let bubbleMenu: any;
 	let element: any;
 	let editor: any;
-	let initialized = false; // Track if the editor has been initialized with content
 
 	const dispatch = createEventDispatcher();
 
@@ -25,18 +24,13 @@
 			],
 			content: content || ``,
 			onUpdate: ({ editor }) => {
-				// Dispatch an 'input' event with the updated content
-				dispatch('input', editor.getHTML());
+				dispatch('wysiwygContentUpdate', editor.getHTML());
 			}
 		});
-
-		initialized = true;
 	});
 
-	// Only update the editor's content when it's first initialized or when content changes externally
-	$: if (editor && content && !initialized) {
+	$: if (editor && content !== null) {
 		editor.commands.setContent(content);
-		initialized = true; // Ensure this only runs once after initialization
 	}
 
 	onDestroy(() => {

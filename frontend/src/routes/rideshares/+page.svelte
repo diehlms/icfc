@@ -9,7 +9,7 @@
 	import FormBuilder, { FormInput } from '$lib/components/services/formBuilder';
 	import type { locationPointIn, rideshareIn } from '$lib/client';
 	import { createEntity } from '$lib/components/services/crud';
-	import { Button, FloatingLabelInput, Input, Label } from 'flowbite-svelte';
+	import { Button, Input} from 'flowbite-svelte';
 
 	let rideshares: IRideshare[] = [];
 	let loading: boolean = false;
@@ -28,7 +28,7 @@
 				.select(selectOptions, 'point_of_departure')
 				.select(selectOptions, 'point_of_arrival')
 				.checkbox('seeking')
-				.richText('description')
+				.richText('additional_information')
 				.number('number_of_passengers')
 				.dateTime('arriving_at')
 				.dateTime('departing_at')
@@ -59,20 +59,21 @@
 
 	const handleSubmit = (event: any) => {
 		loading = true;
+
 		const rideshareReq: rideshareIn = {
 			user_id: user.id,
-			point_of_departure_id: event.detail.pointOfDeparture,
-			point_of_arrival_id: event.detail.pointOfArrival,
-			number_of_passengers: parseInt(event.detail.numberOfPassengers),
-			seeking: true,
-			arriving_at: '2024-12-21',
-			departing_at: '2024-12-31',
-			additional_information: 'foo'
+			seeking: event.detail.seeking,
+			point_of_arrival_id: event.detail.point_of_arrival,
+			point_of_departure_id: event.detail.point_of_departure,
+			number_of_passengers: event.detail.number_of_passengers,
+			additional_information: event.detail.additional_information,
+			departing_at: event.detail.departing_at,
+			arriving_at: event.detail.arriving_at
 		};
 
 		client.restClient?.rideshares
 			.postV1Rideshares(rideshareReq)
-			.then((res) => {
+			.then(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,

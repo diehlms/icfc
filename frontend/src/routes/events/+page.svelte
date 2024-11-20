@@ -46,12 +46,12 @@
 			events: event.detail.event_title,
 			description: event.detail.description,
 			location: event.detail.location,
-			start_time: event.detail.fromDate,
-			end_time: event.detail.toDate
+			start_time: event.detail.start_time,
+			end_time: event.detail.end_time
 		};
 
 		client.restClient?.events
-			.postV1Events(eventReq)
+			.postV1Events({ event: eventReq })
 			.then(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
