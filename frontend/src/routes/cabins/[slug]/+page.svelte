@@ -24,6 +24,7 @@
 	import { hotSwapProductionUris } from '$lib/components/services/imageUtils';
 	import { createEntity, deleteEntity, editEntity } from '$lib/components/services/crud';
 	import { goto } from '$app/navigation';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	export let data: any;
 
@@ -180,11 +181,11 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err: any) => {
+			.catch((error: any) => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err,
+					toastMessage: processApiErrorsToString(error.body),
 					type: ToastTypes.error
 				}));
 			})

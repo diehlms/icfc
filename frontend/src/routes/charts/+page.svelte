@@ -8,11 +8,13 @@
 	import FormBuilder from '$lib/components/services/formBuilder';
 	import Table from '$lib/components/display/Table.svelte';
 	import type { chartOut } from '$lib/client';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	let _: IChart[] = [];
 	let loading: boolean = false;
 	let formData = new FormData();
 	let createChartForm = new FormBuilder().text('caption').attachment('chart').build();
+	let errors: any = undefined;
 
 	const handleSubmit = (event: any) => {
 		formData.append('chart[chart]', event.detail.files.accepted[0]);
@@ -29,11 +31,12 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err: any) => {
+			.catch((error: any) => {
+				errors = processApiErrorsToString(error.body)
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err,
+					toastMessage: errors,
 					type: ToastTypes.error
 				}));
 			});
@@ -69,6 +72,7 @@
 	on:triggerModalFormSubmit={(event) => handleSubmit(event)}
 	form={createChartForm}
 	openDrawerLabel="Add new chart"
+	{errors}
 />
 
 {#if loading}

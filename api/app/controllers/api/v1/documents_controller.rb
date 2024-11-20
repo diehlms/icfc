@@ -13,7 +13,7 @@ module Api
       end
 
       def create
-        @document = Document.create(documents_params)
+        @document = Document.new(documents_params)
         if @document.save
           render json: {}
         else

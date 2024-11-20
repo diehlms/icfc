@@ -4,6 +4,7 @@
 	import { Envelope, Phone, User } from 'svelte-heros-v2';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	let loading: boolean = true;
 	let profile: any;
@@ -14,11 +15,11 @@
 			.then((res) => {
 				profile = res;
 			})
-			.catch((err) => {
+			.catch((error: any) => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err.message,
+					toastMessage: processApiErrorsToString(error.body).message,
 					type: ToastTypes.error
 				}));
 			});

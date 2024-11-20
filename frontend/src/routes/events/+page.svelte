@@ -10,6 +10,7 @@
 	import FormBuilder from '$lib/components/services/formBuilder';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	type CalendarEvent = {
 		allDay: boolean;
@@ -39,6 +40,7 @@
 		.dateTime('start_time')
 		.dateTime('end_time')
 		.build();
+	let errors: any = undefined;
 
 	const handleSubmit = (event: any) => {
 		const eventReq: eventIn = {
@@ -60,11 +62,12 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err) => {
+			.catch((error: any) => {
+				errors = processApiErrorsToString(error.body)
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err,
+					toastMessage: errors,
 					type: ToastTypes.error
 				}));
 			});
@@ -106,6 +109,7 @@
 	on:triggerModalFormSubmit={handleSubmit}
 	form={createEventForm}
 	openDrawerLabel="Add new event"
+	{errors}
 />
 
 <div class="w-11/12">

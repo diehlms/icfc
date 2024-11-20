@@ -10,11 +10,13 @@
 	import type { locationPointIn, rideshareIn } from '$lib/client';
 	import { createEntity } from '$lib/components/services/crud';
 	import { Button, Input} from 'flowbite-svelte';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	let rideshares: IRideshare[] = [];
 	let loading: boolean = false;
 	let createRideshareForm: FormInput[];
 	let newLocation: string | undefined = undefined;
+	let errors: any = undefined;
 
 	const fetchData = () => {
 		client.restClient?.locationPoints.getV1LocationPoints().then((data: any) => {
@@ -81,11 +83,12 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err) => {
+			.catch((error: any) => {
+				errors = processApiErrorsToString(error.body)
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err,
+					toastMessage: errors,
 					type: ToastTypes.error
 				}));
 			});
@@ -116,14 +119,15 @@
 	const user = get(userStore);
 
 	$: rideshares;
+	$: errors;
 </script>
 
 <AddEdit
 	on:triggerModalFormSubmit={handleSubmit}
 	form={createRideshareForm}
 	openDrawerLabel="Add new rideshare"
+	{errors}
 />
-
 <div class="mb-3">
 	<Input
 		size="lg"

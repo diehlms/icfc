@@ -10,12 +10,14 @@
 	import { hotSwapProductionUris } from '$lib/components/services/imageUtils';
 	import { type galleryOut, type baseModel } from '$lib/client';
 	import { deleteEntity } from '$lib/components/services/crud';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	let createImageForm = new FormBuilder().text('caption').attachment('image').build();
 	let loading: boolean = false;
 	let images: any = [];
 	let formData = new FormData();
 	let isFetchingMore = false;
+	let errors: any = undefined;
 
 	const handleSubmit = (event: any) => {
 		formData.append('gallery[image]', event.detail.files.accepted[0]);
@@ -32,11 +34,12 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err: any) => {
+			.catch((error: any) => {
+				errors = processApiErrorsToString(error.body)
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err,
+					toastMessage: errors,
 					type: ToastTypes.error
 				}));
 			});
@@ -91,6 +94,7 @@
 	on:triggerModalFormSubmit={handleSubmit}
 	form={createImageForm}
 	openDrawerLabel="Add new pictures"
+	{errors}
 />
 
 {#if images && images.length > 0}

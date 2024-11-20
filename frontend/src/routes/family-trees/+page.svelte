@@ -14,6 +14,7 @@
 	let familyTrees: IFamilyTree[] = [];
 	let loading: boolean = true;
 	let createFamilyTreeForm = new FormBuilder().text('name').build();
+	let errors: any = undefined;
 
 	const fetchData = () => {
 		client.restClient?.familyTrees
@@ -62,6 +63,7 @@
 	on:triggerModalFormSubmit={handleSubmit}
 	form={createFamilyTreeForm}
 	openDrawerLabel="Add new family tree"
+	{errors}
 />
 
 {#if loading}

@@ -19,11 +19,11 @@ module Api
       end
 
       def create
-        @event = Event.create!(event_params)
-        if @event
+        @event = Event.new(event_params)
+        if @event.save
           render json: @event
         else
-          render json: @event.errors
+          render json: { errors: @event.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

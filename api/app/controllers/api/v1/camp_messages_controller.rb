@@ -13,11 +13,11 @@ module Api
       end
 
       def create
-        @camp_message = CampMessage.create!(camp_message_params)
-        if @camp_message
+        @camp_message = CampMessage.new(camp_message_params)
+        if @camp_message.save
           render json: @camp_message
         else
-          render json: @camp_message.errors
+          render json: { errors: @camp_message.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

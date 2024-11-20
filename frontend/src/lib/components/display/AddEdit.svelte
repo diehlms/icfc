@@ -20,6 +20,7 @@
 	export let form: FormInput[] = new FormBuilder().build();
 	export let openDrawerLabel: string = 'Add new';
 	export let displayAsButton: boolean = false;
+	export let errors: any = undefined;
 
 	let defaultModal = false;
 	let payload: Record<string, any> = {};
@@ -67,10 +68,14 @@
 			});
 		}
 	}
+	$: errors;
 </script>
 
 <Modal bind:open={defaultModal} on:close={resetForm}>
 	<form class="flex flex-col space-y-1" on:submit|preventDefault={onSubmit}>
+		{#if errors}
+			<span>{errors}</span>
+		{/if}
 		{#each form as input}
 			<div class="w-full">
 				{#if input.type == 'text' || input.type == 'password' || input.type == 'number' || input.type == 'datetime-local'}

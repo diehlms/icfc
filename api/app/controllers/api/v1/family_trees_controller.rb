@@ -24,7 +24,7 @@ module Api
         if @family_tree.save
           render json: @family_tree, status: :created
         else
-          render json: @family_tree.errors, status: :unprocessable_entity
+          render json: { errors: @family_tree.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

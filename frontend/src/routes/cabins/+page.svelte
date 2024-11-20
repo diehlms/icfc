@@ -8,6 +8,7 @@
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import FormBuilder from '$lib/components/services/formBuilder';
 	import type { cabinIn, cabinOut } from '$lib/client';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	let createCabinForm = new FormBuilder()
 		.text('name')
@@ -20,6 +21,7 @@
 		.build();
 	let cabins: ICabin[] = [];
 	let loading: boolean = true;
+	let errors: any = undefined;
 
 	onMount(() => {
 		client.restClient?.cabins
@@ -61,11 +63,12 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err) => {
+			.catch((error: any) => {
+				errors = processApiErrorsToString(error.body)
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err,
+					toastMessage: errors,
 					type: ToastTypes.error
 				}));
 			});
@@ -81,6 +84,7 @@
 	on:triggerModalFormSubmit={handleSubmit}
 	form={createCabinForm}
 	openDrawerLabel="Add Cabin"
+	{errors}
 />
 
 {#if loading}

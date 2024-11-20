@@ -13,8 +13,8 @@ module Api
       end
 
       def create
-        @cabin_attachment = CabinAttachment.create!(cabin_attachment_params)
-        if @cabin_attachment
+        @cabin_attachment = CabinAttachment.new(cabin_attachment_params)
+        if @cabin_attachment.save
           render json: {}
         else
           render json: @cabin_attachment.errors

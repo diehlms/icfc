@@ -13,11 +13,11 @@ module Api
       end
 
       def create
-        @article = Article.create!(article_params)
-        if @article
+        @article = Article.new(article_params)
+        if @article.save
           render json: @article
         else
-          render json: @article.errors
+          render json: { errors: @article.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

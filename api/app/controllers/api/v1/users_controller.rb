@@ -12,22 +12,7 @@ module Api
         render json: user, each_serializer: UserSerializer
       end
 
-      def create
-        @user = User.create!(user_params) if logged_in?
-        if @user
-          render json: @user
-        else
-          render json: @user.errors
-        end
-      end
-
       def show
-        user
-
-        render json: user, serializer: UserSerializer
-      end
-
-      def profile
         user
 
         render json: user, serializer: UserSerializer

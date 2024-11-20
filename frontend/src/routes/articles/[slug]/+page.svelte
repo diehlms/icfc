@@ -14,6 +14,7 @@
 	import { hotSwapProductionUris } from '$lib/components/services/imageUtils';
 	import { createEntity, deleteEntity, editEntity } from '$lib/components/services/crud';
 	import InteractiveImage from '$lib/components/display/InteractiveImage.svelte';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	let article: any;
 	let loading: boolean = true;
@@ -70,11 +71,11 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err: any) => {
+			.catch((error: any) => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err,
+					toastMessage: processApiErrorsToString(error.body),
 					type: ToastTypes.error
 				}));
 			})

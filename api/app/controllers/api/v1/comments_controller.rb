@@ -7,11 +7,11 @@ module Api
       before_action :check_authorization, only: %i[destroy]
 
       def create
-        @comment = Comment.create!(comment_params)
-        if @comment
+        @comment = Comment.new(comment_params)
+        if @comment.save
           render json: @comment
         else
-          render json: @comment.errors
+          render json: { errors: @comment.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

@@ -9,6 +9,7 @@
 	import Loader from '$lib/components/display/Loader.svelte';
 	import { hotSwapProductionUris } from '$lib/components/services/imageUtils';
 	import { formatDate } from '$lib/components/services/textFormatting';
+	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	let articles: articleOut[] = [];
 	let loading: boolean = false;
@@ -17,6 +18,7 @@
 	let fetchedAll: boolean = false;
 	let isFetchingMore = false;
 	let maxPageLength = 3;
+	let errors: any = undefined;
 
 	const fetchArticles = (page: number) => {
 		loading = true;
@@ -86,11 +88,13 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err) => {
+			.catch((error: any) => {
+				errors = processApiErrorsToString(error.body)
+				console.log(errors)
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err,
+					toastMessage: errors,
 					type: ToastTypes.error
 				}));
 			});
@@ -106,6 +110,7 @@
 	on:triggerModalFormSubmit={handleSubmit}
 	form={createArticleForm}
 	openDrawerLabel="Add new article"
+	{errors}
 />
 
 {#if articles}

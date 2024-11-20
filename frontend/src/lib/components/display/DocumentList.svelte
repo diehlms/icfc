@@ -53,7 +53,7 @@
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err,
+					toastMessage: processApiErrorsToString(err.body),
 					type: ToastTypes.error
 				}));
 			});
@@ -98,7 +98,7 @@
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
-					toastMessage: err,
+					toastMessage: processApiErrorsToString(err.body),
 					type: ToastTypes.error
 				}));
 			});

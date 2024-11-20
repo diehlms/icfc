@@ -13,8 +13,12 @@ module Api
       end
 
       def create
-        @chart = Chart.create!(charts_params)
-        render json: Chart.all
+        @chart = Chart.new(charts_params)
+        if @chart.save
+          render json: @chart
+        else
+          render json: { errors: @article.errors.full_messages }, status: :unprocessable_entity
+        end
       end
 
       def show

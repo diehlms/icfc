@@ -104,7 +104,6 @@
 	</Navbar>
 	<div class="stripe-container">
 		<div class="stripe stripe-red"></div>
-		<div class="stripe stripe-blue"></div>
 	</div>
 </div>
 
@@ -120,10 +119,6 @@
 	}
 
 	.stripe-red {
-		background-color: rgba(218, 0, 0, 0.3); /* Very light red */
-	}
-
-	.stripe-blue {
-		background-color: rgba(0, 0, 255, 0.3); /* Very light blue */
+		background-color: rgb(2, 137, 0); /* Very light red */
 	}
 </style>

@@ -14,11 +14,11 @@ module Api
       end
 
       def create
-        @gallery = Gallery.create!(galleries_params)
-        if @gallery
+        @gallery = Gallery.new(galleries_params)
+        if @gallery.save
           render json: {}
         else
-          render json: @gallery.errors
+          render json: { errors: @gallery.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

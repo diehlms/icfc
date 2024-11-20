@@ -14,13 +14,11 @@ module Api
       end
 
       def create
-        @rideshare = Rideshare.create!(rideshare_params)
+        @rideshare = Rideshare.new(rideshare_params)
         if @rideshare.save
           render json: Rideshare.all
         else
-          render json: {
-            errors: @rideshare.errors.full_messages
-          }, status: :bad_request
+          render json: { errors: @rideshare.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

@@ -13,8 +13,12 @@ module Api
       end
 
       def create
-        @location_point = LocationPoint.create!(location_point_params)
-        render json: LocationPoint.all
+        @location_point = LocationPoint.new(location_point_params)
+        if @location_point.save
+          render json: @location_point
+        else
+          render json: { errors: @location_point.errors.full_messages }, status: :unprocessable_entity
+        end
       end
 
       def destroy

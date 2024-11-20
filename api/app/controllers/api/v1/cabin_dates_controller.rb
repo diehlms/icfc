@@ -13,11 +13,11 @@ module Api
       end
 
       def create
-        @cabin_date = Cabindate.create!(cabin_date_params)
-        if @cabin_date
+        @cabin_date = Cabindate.new(cabin_date_params)
+        if @cabin_date.save
           render json: {}
         else
-          render json: @cabin_date.errors
+          render json: { errors: @cabin_date.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
