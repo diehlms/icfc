@@ -4,6 +4,7 @@
 
 	export let searchResults;
 	export let onClose;
+	export let q;
 
 	// Helper function to limit results
 	const limitResults = (array = [], limit = 5) => array.slice(0, limit);
@@ -105,7 +106,7 @@
 				</div>
 			{/if}
 
-			<a href="/search" class="block">
+			<a href="/search?q={q}" class="block">
 				<Button variant="outline" class="mt-2 flex w-full items-center justify-center gap-2">
 					View All Results
 				</Button>

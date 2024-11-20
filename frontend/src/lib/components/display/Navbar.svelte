@@ -1,6 +1,15 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import { Navbar, NavUl, NavBrand, NavHamburger, Button, Avatar, Input, NavLi } from 'flowbite-svelte';
+	import {
+		Navbar,
+		NavUl,
+		NavBrand,
+		NavHamburger,
+		Button,
+		Avatar,
+		Input,
+		NavLi
+	} from 'flowbite-svelte';
 	import { clientStore, toastStore, ToastTypes, userStore } from '$lib/stores';
 	import { get } from 'svelte/store';
 	import SearchResultsDropdown from './SearchResultsDropdown.svelte';
@@ -58,10 +67,14 @@
 		<NavHamburger />
 		<NavUl {hidden}>
 			<NavLi>
-				<Button outline><a target="_blank" href={`${PUBLIC_BASE_URL}/yearbook_curr.pdf`}>Yearbook</a></Button>
+				<Button outline
+					><a target="_blank" href={`${PUBLIC_BASE_URL}/yearbook_curr.pdf`}>Yearbook</a></Button
+				>
 			</NavLi>
 			<NavLi>
-				<Button outline><a target="_blank" href="https://www.paypal.com/ncp/payment/95N2K7CA3CPF4"></a>Pay Bill</Button>
+				<Button outline
+					><a target="_blank" href="https://www.paypal.com/ncp/payment/95N2K7CA3CPF4"></a>Pay Bill</Button
+				>
 			</NavLi>
 			<NavLi>
 				<Button outline on:click={emitLogOut}>Log Out</Button>
@@ -75,14 +88,14 @@
 			</NavLi>
 			<NavLi>
 				<div>
-					<Input
-						id="search-navbar"
-						placeholder="Search..."
-						on:input={handleSearchInput}
-					/>
+					<Input id="search-navbar" placeholder="Search..." on:input={handleSearchInput} />
 					{#if searchResults}
 						<div class="transform-translate-x-1/2 absolute left-1/2">
-							<SearchResultsDropdown {searchResults} onClose={() => handleClose()} />
+							<SearchResultsDropdown
+								q={searchQuery}
+								{searchResults}
+								onClose={() => handleClose()}
+							/>
 						</div>
 					{/if}
 				</div>
@@ -96,21 +109,21 @@
 </div>
 
 <style lang="scss">
-.stripe-container {
-  display: flex;
-  flex-direction: column;
-}
+	.stripe-container {
+		display: flex;
+		flex-direction: column;
+	}
 
-.stripe {
-  height: 4px;
-  width: 100%;
-}
+	.stripe {
+		height: 4px;
+		width: 100%;
+	}
 
-.stripe-red {
-  background-color: rgba(218, 0, 0, 0.3); /* Very light red */
-}
+	.stripe-red {
+		background-color: rgba(218, 0, 0, 0.3); /* Very light red */
+	}
 
-.stripe-blue {
-  background-color: rgba(0, 0, 255, 0.3); /* Very light blue */
-}
+	.stripe-blue {
+		background-color: rgba(0, 0, 255, 0.3); /* Very light blue */
+	}
 </style>

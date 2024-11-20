@@ -16,16 +16,16 @@
 	let loading = false;
 	let username = '';
 	let password = '';
-  let passwordConfirmation = '';
-  let email = '';
-  let phoneNumber = '';
-  let firstName = '';
-  let lastName = '';
+	let passwordConfirmation = '';
+	let email = '';
+	let phoneNumber = '';
+	let firstName = '';
+	let lastName = '';
 	let restClient: AppClient;
 
-  const VALID_EMAIL_REGEX = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i;
-  const VALID_PHONE_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
-  const VALID_PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+	const VALID_EMAIL_REGEX = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i;
+	const VALID_PHONE_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+	const VALID_PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 	clientStore.subscribe((value) => {
 		if (value.restClient !== null) {
@@ -46,9 +46,10 @@
 			firstname: firstName,
 			lastname: lastName,
 			email: email
-		}
+		};
 
-		await restClient.auth.postV1AuthSignup({user: newUser})
+		await restClient.auth
+			.postV1AuthSignup({ user: newUser })
 			.then(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
@@ -74,7 +75,7 @@
 
 <div class="landing-img">
 	<div class="login-card">
-		<Card class="max-w-none mx-auto my-12 w-3/4 p-5">
+		<Card class="mx-auto my-12 w-3/4 max-w-none p-5">
 			{#if loading}
 				<Loader />
 			{:else}
@@ -109,7 +110,12 @@
 							</ol>
 						</Helper>
 					{/if}
-					<Input class="m-2" type="password" bind:value={passwordConfirmation} placeholder="Password Confirmation" />
+					<Input
+						class="m-2"
+						type="password"
+						bind:value={passwordConfirmation}
+						placeholder="Password Confirmation"
+					/>
 					{#if password !== passwordConfirmation}
 						<Helper class="mt-2" color="red">
 							<span class="font-medium">Password inputs do not match</span>

@@ -40,14 +40,14 @@
 						};
 					});
 					editRideshareForm = new FormBuilder()
-					.select(selectOptions, 'point_of_departure')
-					.select(selectOptions, 'point_of_arrival')
-					.checkbox('seeking')
-					.richText('additional_information')
-					.number('number_of_passengers')
-					.dateTime('arriving_at')
-					.dateTime('departing_at')
-					.build(rideshare);
+						.select(selectOptions, 'point_of_departure')
+						.select(selectOptions, 'point_of_arrival')
+						.checkbox('seeking')
+						.richText('additional_information')
+						.number('number_of_passengers')
+						.dateTime('arriving_at')
+						.dateTime('departing_at')
+						.build(rideshare);
 				});
 			});
 
@@ -70,7 +70,7 @@
 	};
 
 	const editRideshare = (event: any) => {
-		loading = true;	
+		loading = true;
 		const rideshareUpdatePayload: rideshareUpdate = {
 			seeking: event.detail.seeking,
 			point_of_arrival_id: event.detail.point_of_arrival,

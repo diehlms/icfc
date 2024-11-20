@@ -95,13 +95,24 @@
 			</div>
 			<div class="flex">
 				{#if input.type == 'checkbox'}
-					<Checkbox bind:value={input.value} name={input.name} on:change={handleCheck} bind:checked={input.value}>{toTitleCase(input.name)}</Checkbox>
+					<Checkbox
+						bind:value={input.value}
+						name={input.name}
+						on:change={handleCheck}
+						bind:checked={input.value}>{toTitleCase(input.name)}</Checkbox
+					>
 				{/if}
 			</div>
 			<div class="flex">
 				{#if input.type == 'select'}
-					<Label for="role" />
-					<Select class="mt-2" items={input.selectOptions} name={input.name} on:change={handleInput} bind:value={input.value} />
+					<Label for={input.name} class="block">{toTitleCase(input.name)}</Label>
+					<Select
+						class="mt-2"
+						items={input.selectOptions}
+						name={input.name}
+						on:change={handleInput}
+						bind:value={input.value}
+					/>
 				{/if}
 			</div>
 			{#if input.type == 'attachment'}

@@ -89,7 +89,7 @@ resource "hcloud_firewall" "web_firewall" {
 
 resource "hcloud_server" "web_server" {
   name        = "web-server"
-  server_type = "cx11"
+  server_type = "cx22"
   image       = "ubuntu-22.04"
   location    = "nbg1"
 

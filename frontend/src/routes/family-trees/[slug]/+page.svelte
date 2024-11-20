@@ -55,10 +55,10 @@
 					type: ToastTypes.error
 				}));
 			});
-	}
+	};
 
 	onMount(() => {
-		fetchData()
+		fetchData();
 	});
 
 	const syncNodesAndEdges = () => {
@@ -113,7 +113,12 @@
 		const nodesFromStore = family.family_members.map((familyMember: familyMemberOut) => ({
 			id: familyMember.id.toString(),
 			type: 'familyMemberNode',
-			data: { label: familyMember.name, id: familyMember.id, author_id: familyMember.user_id, user: user },
+			data: {
+				label: familyMember.name,
+				id: familyMember.id,
+				author_id: familyMember.user_id,
+				user: user
+			},
 			position: positionsMap[familyMember.id] // Use the calculated positions
 		}));
 
@@ -141,7 +146,8 @@
 	const user = get(userStore);
 
 	const addFamilyMember = async () => {
-		nodes.update((currentNodes: any) => [...currentNodes, 
+		nodes.update((currentNodes: any) => [
+			...currentNodes,
 			{
 				id: `${newFamilyMemberName}-new`,
 				type: 'familyMemberNode',
@@ -151,35 +157,41 @@
 		]);
 		loading = true;
 		createEntity(
-			[{
-				name: newFamilyMemberName,
-				family_tree_id: family?.id,
-				user_id: user.id
-			}],
+			[
+				{
+					name: newFamilyMemberName,
+					family_tree_id: family?.id,
+					user_id: user.id
+				}
+			],
 			'Family Member',
 			client.restClient?.familyMembers.postV1FamilyMembers.bind(client.restClient.familyMembers)
-		).then(() => {
-			fetchData();
-		}).catch(error => {
-			toastStore.update((prevValue) => ({
-				...prevValue,
-				isOpen: true,
-				toastMessage: error.toString(),
-				type: ToastTypes.error
-			}));
-		}).finally(() => {
-			loading = false;
-		});
+		)
+			.then(() => {
+				fetchData();
+			})
+			.catch((error) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: error.toString(),
+					type: ToastTypes.error
+				}));
+			})
+			.finally(() => {
+				loading = false;
+			});
 	};
 
 	const deleteFamilyTree = (id: number) => {
-		loading = true
+		loading = true;
 		deleteEntity(
 			id,
 			{ user_id: user.id as number },
-			'Family Tree', client.restClient?.familyTrees.deleteV1FamilyTrees.bind(client.restClient.familyTrees)
-		)
-		loading = false
+			'Family Tree',
+			client.restClient?.familyTrees.deleteV1FamilyTrees.bind(client.restClient.familyTrees)
+		);
+		loading = false;
 	};
 
 	const handleConnect: OnConnect = async (event: any) => {
@@ -204,18 +216,21 @@
 			[newFamilyRelationship],
 			'Relationship',
 			client.restClient?.familyMembers.putV1FamilyMembers.bind(client.restClient.familyMembers)
-		).then(() => {
-			fetchData();
-		}).catch(error => {
-			toastStore.update((prevValue) => ({
-				...prevValue,
-				isOpen: true,
-				toastMessage: error.toString(),
-				type: ToastTypes.error
-			}));
-		}).finally(() => {
-			loading = false;
-		});
+		)
+			.then(() => {
+				fetchData();
+			})
+			.catch((error) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: error.toString(),
+					type: ToastTypes.error
+				}));
+			})
+			.finally(() => {
+				loading = false;
+			});
 	};
 
 	$: family;
@@ -230,7 +245,9 @@
 
 	<div class="mb-4 mt-4">
 		{#if updateAuthContext.userActionPermitted(family.user_id, user)}
-			<Button color="red" outline size="xs" on:click={() => deleteFamilyTree(family.id)}>Delete Family Tree</Button>
+			<Button color="red" outline size="xs" on:click={() => deleteFamilyTree(family.id)}
+				>Delete Family Tree</Button
+			>
 		{/if}
 	</div>
 

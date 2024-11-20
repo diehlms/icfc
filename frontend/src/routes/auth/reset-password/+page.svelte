@@ -32,7 +32,8 @@
 	});
 
 	async function sendRecoveryEmail() {
-		await restClient.passwordResets.postV1PasswordResets(email)
+		await restClient.passwordResets
+			.postV1PasswordResets(email)
 			.then((res: any) => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
@@ -52,8 +53,8 @@
 	}
 
 	async function resetPassword() {
-		await restClient.passwordResets.patchV1PasswordResets(
-			{
+		await restClient.passwordResets
+			.patchV1PasswordResets({
 				password_reset_token: token,
 				password: password,
 				password_confirmation: passwordConfirm
@@ -86,21 +87,11 @@
 			<form on:submit|preventDefault={resetPassword}>
 				<div class="mb-6">
 					<Label for="password" class="mb-2">Password</Label>
-					<Input
-						type="password"
-						id="password"
-						required
-						bind:value={password}
-					/>
+					<Input type="password" id="password" required bind:value={password} />
 				</div>
 				<div class="mb-6">
 					<Label for="confirmPassword" class="mb-2">Confirm password</Label>
-					<Input
-						type="password"
-						id="confirmPassword"
-						required
-						bind:value={passwordConfirm}
-					/>
+					<Input type="password" id="confirmPassword" required bind:value={passwordConfirm} />
 				</div>
 				<Button type="submit" outline={true} class="m-2 w-full">Reset Password</Button>
 			</form>

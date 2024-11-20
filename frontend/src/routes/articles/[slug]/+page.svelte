@@ -77,7 +77,8 @@
 					toastMessage: err,
 					type: ToastTypes.error
 				}));
-			}).finally(() => fetchData());
+			})
+			.finally(() => fetchData());
 	};
 
 	const createComment = () => {

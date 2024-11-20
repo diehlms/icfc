@@ -13,6 +13,6 @@ WORKDIR /app
 
 EXPOSE ${PORT}
 
-ENTRYPOINT ["/app/bin/docker-entrypoint.sh"]
+COPY entrypoint.sh .
 
-CMD ["rails", "server"]
+ENTRYPOINT [ "/bin/sh", "/app/entrypoint.sh" ]

@@ -35,9 +35,7 @@ class FormBuilder {
 	}
 
 	richText(name: string): FormBuilder {
-		this.formInputs.push(
-			new FormInput(name, FormTypes.richText)
-		);
+		this.formInputs.push(new FormInput(name, FormTypes.richText));
 		return this;
 	}
 
@@ -68,15 +66,7 @@ class FormBuilder {
 
 	select(options: any, name: string): FormBuilder {
 		this.formInputs.push(
-			new FormInput(
-				name,
-				FormTypes.select,
-				undefined,
-				undefined,
-				undefined,
-				undefined,
-				options
-			)
+			new FormInput(name, FormTypes.select, undefined, undefined, undefined, undefined, options)
 		);
 		return this;
 	}

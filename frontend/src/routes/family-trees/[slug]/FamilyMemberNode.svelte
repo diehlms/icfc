@@ -14,20 +14,20 @@
 	export let data: $$Props['data'];
 	export let isConnectable: $$Props['isConnectable'];
 
-	const client = get(clientStore)
+	const client = get(clientStore);
 	const { label, user } = data;
 
 	const deleteFamilyMember = () => {
-		deleteEntity(id, { user_id: user.id as number }, 'Family Member', client.restClient?.familyMembers.deleteV1FamilyMembers.bind(client.restClient.familyMembers))
+		deleteEntity(
+			id,
+			{ user_id: user.id as number },
+			'Family Member',
+			client.restClient?.familyMembers.deleteV1FamilyMembers.bind(client.restClient.familyMembers)
+		);
 	};
 </script>
 
-<Handle
-	type="target" 
-	position={Position.Top} 
-	style="background: #555;" 
-	{isConnectable} 
-/>
+<Handle type="target" position={Position.Top} style="background: #555;" {isConnectable} />
 
 <div>
 	<strong class="mr-4">{label}</strong>
@@ -36,13 +36,7 @@
 	{/if}
 </div>
 
-<Handle
-	type="source"
-	position={Position.Bottom}
-	id="a"
-	style="background: #555;"
-	{isConnectable}
-/>
+<Handle type="source" position={Position.Bottom} id="a" style="background: #555;" {isConnectable} />
 
 <style>
 	:global(.svelte-flow__node-familyMemberNode) {
@@ -55,7 +49,7 @@
 	}
 
 	/* Styling for handles to make them bigger and interactive */
-  :global(.svelte-flow__handle) {
+	:global(.svelte-flow__handle) {
 		width: 12px; /* Adjust the size as needed */
 		height: 12px; /* Adjust the size as needed */
 		border-radius: 50%; /* Make them round */
@@ -63,7 +57,7 @@
 		background-color: #777; /* Set a noticeable background color */
 	}
 
-  :global(.svelte-flow__handle:hover) {
-    background-color: #444; /* Darken the background color on hover */
-  }
+	:global(.svelte-flow__handle:hover) {
+		background-color: #444; /* Darken the background color on hover */
+	}
 </style>

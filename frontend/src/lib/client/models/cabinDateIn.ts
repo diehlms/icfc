@@ -3,9 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type cabinDateIn = (createUpdateBaseModel & {
-    cabin_id?: number;
-    startdate?: string;
-    enddate?: string;
-});
-
+export type cabinDateIn = createUpdateBaseModel & {
+	cabin_id?: number;
+	startdate?: string;
+	enddate?: string;
+};

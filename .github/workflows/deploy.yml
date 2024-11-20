@@ -21,11 +21,12 @@ jobs:
           password: ${{secrets.GITHUB_TOKEN}}
 
       - name: 'Build WWW Image'
-        
         run: |
           touch frontend/.env.production;
           echo "PUBLIC_API_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz/api" >> frontend/.env.production;
           echo "PUBLIC_BASE_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz" >> frontend/.env.production;
+          echo "PUBLIC_INSEASON_RESERVATION_LINK=${{ PUBLIC_INSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
+          echo "PUBLIC_OUTSEASON_RESERVATION_LINK=${{ PUBLIC_OUTSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
           echo "PUBLIC_VERSION=${{ github.sha }}" >> frontend/.env.production;
           echo "PUBLIC_ENVIRONMENT=production" >> frontend/.env.production;
           echo "PUBLIC_UPLOADS_S3_BUCKET=ironcityfishingclub" >> frontend/.env.production;
@@ -68,4 +69,5 @@ jobs:
           scp -i ~/.ssh/deploy_key docker-compose-production.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-production.yml
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \
+            docker compose -f docker-compose-production.yml pull && \
             docker compose -f docker-compose-production.yml up -d'

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {
-	Button,
-	Drawer,
+		Drawer,
 		Sidebar,
 		SidebarDropdownItem,
 		SidebarDropdownWrapper,
@@ -27,62 +26,62 @@
 	import { userStore } from '$lib/stores';
 	import { sineIn } from 'svelte/easing';
 	import { onMount } from 'svelte';
+	import { PUBLIC_INSEASON_RESERVATION_LINK, PUBLIC_OUTSEASON_RESERVATION_LINK } from '$env/static/public';
 
 	let sidebarOpen = false;
 	let showAdminLinks = false;
-  let transitionParams = {
-    x: -320,
-    duration: 200,
-    easing: sineIn
-  };
-  let breakPoint: number = 1024;
-  let width: number;
-  let backdrop: boolean = false;
-  let activateClickOutside = true;
-  let drawerHidden: boolean = false;
-  let user: any;
-  let initials: any;
-  
-  $: if (width >= breakPoint) {
-    drawerHidden = false;
-    activateClickOutside = false;
-  } else {
-    drawerHidden = true;
-    activateClickOutside = true;
-  }
+	let transitionParams = {
+		x: -320,
+		duration: 200,
+		easing: sineIn
+	};
+	let breakPoint: number = 1024;
+	let width: number;
+	let backdrop: boolean = false;
+	let activateClickOutside = true;
+	let drawerHidden: boolean = false;
+	let user: any;
+	let initials: any;
 
-  onMount(() => {
-    if (width >= breakPoint) {
-      drawerHidden = false;
-      activateClickOutside = false;
-    } else {
-      drawerHidden = true;
-      activateClickOutside = true;
-    }
-  });
+	$: if (width >= breakPoint) {
+		drawerHidden = false;
+		activateClickOutside = false;
+	} else {
+		drawerHidden = true;
+		activateClickOutside = true;
+	}
 
-  function toggleSidebar() {
-    sidebarOpen = !sidebarOpen;
-  }
-
-  userStore.subscribe((value) => {
-    user = value;
-    if (!!user.admin) {
-			showAdminLinks = true
+	onMount(() => {
+		if (width >= breakPoint) {
+			drawerHidden = false;
+			activateClickOutside = false;
+		} else {
+			drawerHidden = true;
+			activateClickOutside = true;
 		}
-  });
+	});
 
-  $: initials;
-  $: user;
+	function toggleSidebar() {
+		sidebarOpen = !sidebarOpen;
+	}
+
+	userStore.subscribe((value) => {
+		user = value;
+		if (!!user.admin) {
+			showAdminLinks = true;
+		}
+	});
+
+	$: initials;
+	$: user;
 </script>
 
 <div class="button-container">
-  <!-- Using a div styled as a button for full height control -->
-  <div class="toggle-button" on:click={toggleSidebar}>
-    <Bars3CenterLeft />
-  </div>
+	<!-- Using a div styled as a button for full height control -->
+	<div class="toggle-button" on:click={toggleSidebar}>
+		<Bars3CenterLeft />
+	</div>
 </div>
-
 
 <Drawer
 	transitionType="fly"
@@ -103,8 +102,8 @@
 							class="h-6 w-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
 						/>
 					</svelte:fragment>
-					<SidebarDropdownItem href="/" label="In Season" />
-					<SidebarDropdownItem href="/" label="Out of Season" />
+					<SidebarDropdownItem href={PUBLIC_INSEASON_RESERVATION_LINK} target="_blank" label="In Season" />
+					<SidebarDropdownItem href={PUBLIC_OUTSEASON_RESERVATION_LINK} target="_blank" label="Out of Season" />
 				</SidebarDropdownWrapper>
 				<SidebarDropdownWrapper label="Camp Info">
 					<svelte:fragment slot="icon">
@@ -120,7 +119,10 @@
 					<SidebarDropdownItem href="/camp-info/history" label="History" />
 					<SidebarDropdownItem href="/camp-info/bylaws" label="By Laws" />
 					<SidebarDropdownItem href="/camp-info/charitablegiving" label="Charitable Giving" />
-					<SidebarDropdownItem href="/camp-info/familyagreements" label="Family Agreements Policy" />
+					<SidebarDropdownItem
+						href="/camp-info/familyagreements"
+						label="Family Agreements Policy"
+					/>
 					<SidebarDropdownItem href="/camp-info/plannedgiving" label="Planned Giving" />
 				</SidebarDropdownWrapper>
 				<SidebarItem href="/profile" label="Profile">
@@ -182,35 +184,35 @@
 </Drawer>
 
 <style>
-  .button-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 24px; /* Set the width of the skinny button */
-    display: flex;
-    align-items: center; /* Center content vertically if needed */
-    justify-content: center; /* Center icon horizontally */
-    background-color: lightgrey; /* Initial color */
-    cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-  }
+	.button-container {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 24px; /* Set the width of the skinny button */
+		display: flex;
+		align-items: center; /* Center content vertically if needed */
+		justify-content: center; /* Center icon horizontally */
+		background-color: lightgrey; /* Initial color */
+		cursor: pointer;
+		transition: background-color 0.3s; /* Smooth transition for hover effect */
+	}
 
-  .toggle-button:hover {
-    background-color: grey; /* Change color on hover */
-  }
+	.toggle-button:hover {
+		background-color: grey; /* Change color on hover */
+	}
 
-  .toggle-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%; /* Ensure full button occupies full container width */
-    height: 100%; /* Cover entire height of the viewport */
-  }
+	.toggle-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%; /* Ensure full button occupies full container width */
+		height: 100%; /* Cover entire height of the viewport */
+	}
 
-  .toggle-button svg {
-    width: 12px; /* Adjust the icon size as necessary */
-    height: auto;
-    fill: currentColor; /* Ensure the icon takes the current color of the button */
-  }
+	.toggle-button svg {
+		width: 12px; /* Adjust the icon size as necessary */
+		height: auto;
+		fill: currentColor; /* Ensure the icon takes the current color of the button */
+	}
 </style>

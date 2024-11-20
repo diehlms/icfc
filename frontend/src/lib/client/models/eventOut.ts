@@ -5,8 +5,8 @@
 import type { author } from './author';
 import type { baseModel } from './baseModel';
 import type { eventIn } from './eventIn';
-export type eventOut = (baseModel & eventIn & {
-    id?: number;
-    user?: author;
-});
-
+export type eventOut = baseModel &
+	eventIn & {
+		id?: number;
+		user?: author;
+	};

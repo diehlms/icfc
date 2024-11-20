@@ -3,10 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type articleIn = (createUpdateBaseModel & {
-    title?: string;
-    content?: string;
-    pinned?: boolean;
-    user_id?: number;
-});
-
+export type articleIn = createUpdateBaseModel & {
+	title?: string;
+	content?: string;
+	pinned?: boolean;
+	user_id?: number;
+};

@@ -35,7 +35,6 @@ services:
       - postgres
     ports:
       - "3010:3000"
-      - "9394:9394"
     volumes:
       - gems:/usr/local/bundle
       - ./api:/app

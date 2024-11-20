@@ -4,5 +4,4 @@
 /* eslint-disable */
 import type { baseModel } from './baseModel';
 import type { documentIn } from './documentIn';
-export type documentOut = (baseModel & documentIn);
-
+export type documentOut = baseModel & documentIn;

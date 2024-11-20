@@ -3,9 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type galleryIn = (createUpdateBaseModel & {
-    image?: Blob;
-    caption?: string;
-    user_id?: number;
-});
-
+export type galleryIn = createUpdateBaseModel & {
+	image?: Blob;
+	caption?: string;
+	user_id?: number;
+};

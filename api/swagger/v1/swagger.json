@@ -1,0 +1,2496 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/v1/articles": {
+      "get": {
+        "summary": "list articles",
+        "security": [
+          {
+            "Bearer": [
+
+            ]
+          }
+        ],
+        "tags": [
+          "Articles"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "description": "Page number for pagination"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/articleOut"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create article",
+        "tags": [
+          "Articles"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "articleIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/articleIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/articleOut"
+            }
+          }
+        }
+      }
+    },
+    "/v1/articles/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "show article",
+        "tags": [
+          "Articles"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/articleOut"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "update article",
+        "tags": [
+          "Articles"
+        ],
+        "parameters": [
+          {
+            "name": "articleUpdate",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/articleUpdate"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/articleOut"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete article",
+        "tags": [
+          "Articles"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/auth/login": {
+      "post": {
+        "summary": "login authentication",
+        "tags": [
+          "Auth"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "login, get new session",
+        "parameters": [
+          {
+            "name": "loginPayload",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/loginPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/loginPayload"
+            }
+          }
+        }
+      }
+    },
+    "/v1/auth/signup": {
+      "post": {
+        "summary": "signup authentication",
+        "tags": [
+          "Auth"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "sign up",
+        "parameters": [
+          {
+            "name": "signupPayload",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/signupPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/signupPayload"
+            }
+          }
+        }
+      }
+    },
+    "/v1/auth/confirm_email/{token}": {
+      "parameters": [
+        {
+          "name": "token",
+          "in": "path",
+          "type": "string",
+          "description": "confirm token",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "confirm email",
+        "tags": [
+          "Auth"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "confirm email",
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/cabin_attachments": {
+      "post": {
+        "summary": "create cabin_attachment",
+        "tags": [
+          "Cabin Attachments"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/cabin_attachments/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "delete cabin_attachment",
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Cabin Attachments"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/cabin_dates": {
+      "post": {
+        "summary": "create cabin_date",
+        "tags": [
+          "Cabin Dates"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cabinDateIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/cabinDateIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/cabin_dates/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "delete cabin_date",
+        "tags": [
+          "Cabin Dates"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/cabins": {
+      "get": {
+        "summary": "list cabins",
+        "tags": [
+          "Cabins"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/cabinOut"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create cabin",
+        "tags": [
+          "Cabins"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cabinIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/cabinIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/cabinOut"
+            }
+          }
+        }
+      }
+    },
+    "/v1/cabins/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "show cabin",
+        "tags": [
+          "Cabins"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/cabinOut"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "update cabin",
+        "tags": [
+          "Cabins"
+        ],
+        "parameters": [
+          {
+            "name": "cabinUpdate",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/cabinUpdate"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/cabinOut"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete cabin",
+        "tags": [
+          "Cabins"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/camp_messages": {
+      "get": {
+        "summary": "list camp_messages",
+        "tags": [
+          "Camp Messages"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/campMessageOut"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create camp message",
+        "tags": [
+          "Camp Messages"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "campMessageIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/campMessageIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/campMessageOut"
+            }
+          }
+        }
+      }
+    },
+    "/v1/camp_messages/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "delete camp message",
+        "tags": [
+          "Camp Messages"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/charts": {
+      "get": {
+        "summary": "list charts",
+        "tags": [
+          "Charts"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/chartOut"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create chart",
+        "tags": [
+          "Charts"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/chartOut"
+            }
+          }
+        }
+      }
+    },
+    "/v1/charts/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "show chart",
+        "tags": [
+          "Charts"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/chartOut"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete chart",
+        "tags": [
+          "Charts"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/comments": {
+      "post": {
+        "summary": "create comment",
+        "tags": [
+          "Comments"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "articleIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/commentIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/comments/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "delete comment",
+        "tags": [
+          "Comments"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/committees": {
+      "get": {
+        "summary": "list committees",
+        "tags": [
+          "Committees"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "committeeOut",
+              "items": {
+                "$ref": "#/components/schemas/committeeOut"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/documents": {
+      "get": {
+        "summary": "list documents",
+        "tags": [
+          "Documents"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/documentOut"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create document",
+        "tags": [
+          "Documents"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/documents/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "delete document",
+        "tags": [
+          "Documents"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/entry/initial_payload": {
+      "get": {
+        "summary": "get initial payload",
+        "tags": [
+          "Entry"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/events": {
+      "get": {
+        "summary": "list events",
+        "tags": [
+          "Events"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/eventOut"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create event",
+        "tags": [
+          "Events"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "eventIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/eventIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/eventOut"
+            }
+          }
+        }
+      }
+    },
+    "/v1/events/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "show event",
+        "tags": [
+          "Events"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/eventOut"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "update event",
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "eventIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/eventIn"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/eventOut"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete event",
+        "tags": [
+          "Events"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/family_members": {
+      "post": {
+        "summary": "create family_member",
+        "tags": [
+          "Family Members"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "familyMemberIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/familyMemberIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "update family_member",
+        "tags": [
+          "Family Members"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "relationshipArray",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/relationshipArray"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/family_members/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "delete family_member",
+        "tags": [
+          "Family Members"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/family_trees": {
+      "get": {
+        "summary": "list family_trees",
+        "tags": [
+          "Family Trees"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/familyTreeOut"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create family_tree",
+        "tags": [
+          "Family Trees"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "familyTreeIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/familyTreeIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/family_trees/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "show family_tree",
+        "tags": [
+          "Family Trees"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/familyTreeOut"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete family_tree",
+        "tags": [
+          "Family Trees"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/galleries": {
+      "get": {
+        "summary": "list galleries",
+        "tags": [
+          "Galleries"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/galleryOut"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create gallery",
+        "tags": [
+          "Galleries"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "galleryIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/galleryIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/galleries/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "delete gallery",
+        "tags": [
+          "Galleries"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/location_points": {
+      "get": {
+        "summary": "list location_points",
+        "tags": [
+          "Location Points"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "create location_point",
+        "tags": [
+          "Location Points"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locationPointIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/locationPointIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/location_points/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "delete location_point",
+        "tags": [
+          "Location Points"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/password_resets": {
+      "post": {
+        "summary": "create password_reset",
+        "tags": [
+          "Password Resets"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "update password",
+        "tags": [
+          "Password Resets"
+        ],
+        "parameters": [
+          {
+            "name": "passwordResetPayload",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/passwordResetPayload"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/password_resets/init_reset_password": {
+      "get": {
+        "summary": "show password_reset",
+        "tags": [
+          "Password Resets"
+        ],
+        "parameters": [
+          {
+            "name": "password_reset_token",
+            "in": "query",
+            "type": "string",
+            "description": "password_reset_token"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/rideshares": {
+      "get": {
+        "summary": "list rideshares",
+        "tags": [
+          "Rideshares"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/rideshareOut"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create rideshare",
+        "tags": [
+          "Rideshares"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "rideshareIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/rideshareIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/rideshareOut"
+            }
+          }
+        }
+      }
+    },
+    "/v1/rideshares/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "string",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "show rideshare",
+        "tags": [
+          "Rideshares"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/rideshareOut"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "update rideshare",
+        "tags": [
+          "Rideshares"
+        ],
+        "parameters": [
+          {
+            "name": "rideshareIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/rideshareIn"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "schema": {
+              "$ref": "#/components/schemas/rideshareOut"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete rideshare",
+        "tags": [
+          "Rideshares"
+        ],
+        "parameters": [
+          {
+            "name": "req",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/search": {
+      "post": {
+        "summary": "create search",
+        "tags": [
+          "Search"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "searchIn",
+            "in": "body",
+            "schema": {
+              "$ref": "#/components/schemas/searchIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "summary": "list users",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "create user",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
+    "/v1/users/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "type": "integer",
+          "description": "id",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "show user",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "patch": {
+        "summary": "update user",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "put": {
+        "summary": "update user",
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete user",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://{defaultHost}",
+      "variables": {
+        "defaultHost": {
+          "default": "icfc.localhost:3010/api"
+        }
+      }
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Your Bearer token"
+      }
+    },
+    "schemas": {
+      "not_found": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "loginPayload": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "test@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          }
+        }
+      },
+      "passwordResetPayload": {
+        "type": "object",
+        "properties": {
+          "password_reset_token": {
+            "type": "string",
+            "format": "password"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          },
+          "password_confirmation": {
+            "type": "string",
+            "format": "password"
+          }
+        }
+      },
+      "signupPayload": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "example": ""
+          },
+          "lastname": {
+            "type": "string",
+            "example": ""
+          },
+          "phonenumber": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string",
+            "example": ""
+          },
+          "email": {
+            "type": "string",
+            "example": "test@gmail.com"
+          },
+          "password": {
+            "type": "password"
+          },
+          "password_confirmation": {
+            "type": "password"
+          }
+        }
+      },
+      "baseModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      },
+      "createUpdateBaseModel": {
+        "properties": {
+          "user_id": {
+            "type": "number"
+          }
+        }
+      },
+      "attachmentBaseModel": {
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "thumb": {
+            "type": "object"
+          },
+          "large": {
+            "type": "object"
+          }
+        }
+      },
+      "author": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "username": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "recently_joined?": {
+            "type": "boolean"
+          }
+        }
+      },
+      "articleIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "pinned": {
+            "type": "boolean"
+          },
+          "user_id": {
+            "type": "number"
+          }
+        }
+      },
+      "articleUpdate": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/baseModel"
+          },
+          {
+            "$ref": "#/components/schemas/articleIn"
+          },
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ]
+      },
+      "articleOut": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/baseModel"
+          },
+          {
+            "$ref": "#/components/schemas/articleIn"
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "image": {
+            "$ref": "#/components/schemas/attachmentBaseModel"
+          },
+          "user": {
+            "$ref": "#/components/schemas/author"
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/commentOut"
+            }
+          }
+        }
+      },
+      "cabinAttachmentIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "cabin_in": {
+            "type": "number"
+          },
+          "image": {
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "cabinAttachmentOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/cabinAttachmentIn"
+          },
+          {
+            "$ref": "#/components/schemas/baseModel"
+          }
+        ]
+      },
+      "cabinDateIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "cabin_id": {
+            "type": "number"
+          },
+          "startdate": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "enddate": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      },
+      "cabinDateOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/baseModel"
+          },
+          {
+            "$ref": "#/components/schemas/cabinDateIn"
+          }
+        ]
+      },
+      "cabinIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "bedrooms": {
+            "type": "number"
+          },
+          "washerdryer": {
+            "type": "boolean"
+          },
+          "dock": {
+            "type": "boolean"
+          },
+          "user_id": {
+            "type": "number"
+          },
+          "price_per_week": {
+            "type": "number"
+          },
+          "price_per_day": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "cabinOut": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/baseModel"
+          },
+          {
+            "$ref": "#/components/schemas/cabinIn"
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "cabindates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/cabinDateOut"
+            }
+          },
+          "cabin_attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/cabinAttachmentOut"
+            }
+          },
+          "user": {
+            "$ref": "#/components/schemas/author"
+          }
+        }
+      },
+      "cabinUpdate": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/cabinOut"
+          },
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ]
+      },
+      "campMessageIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "campMessageOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/campMessageIn"
+          },
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ]
+      },
+      "chartIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "caption": {
+            "type": "string"
+          }
+        }
+      },
+      "chartOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/chartIn"
+          },
+          {
+            "$ref": "#/components/schemas/baseModel"
+          }
+        ],
+        "properties": {
+          "chart": {
+            "$ref": "#/components/schemas/attachmentBaseModel"
+          },
+          "id": {
+            "type": "number"
+          },
+          "user": {
+            "$ref": "#/components/schemas/author"
+          }
+        }
+      },
+      "commentIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "number"
+          },
+          "article_id": {
+            "type": "number"
+          }
+        }
+      },
+      "commentOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/baseModel"
+          },
+          {
+            "$ref": "#/components/schemas/commentIn"
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        }
+      },
+      "committeeIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "committeeOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/baseModel"
+          },
+          {
+            "$ref": "#/components/schemas/committeeIn"
+          }
+        ]
+      },
+      "documentIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "document_title": {
+            "type": "string"
+          },
+          "document_folder": {
+            "type": "string"
+          },
+          "document": {
+            "$ref": "#/components/schemas/attachmentBaseModel"
+          }
+        }
+      },
+      "documentOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/baseModel"
+          },
+          {
+            "$ref": "#/components/schemas/documentIn"
+          }
+        ]
+      },
+      "eventIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "location": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "datetime"
+          },
+          "user_id": {
+            "type": "number"
+          }
+        }
+      },
+      "eventOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/baseModel"
+          },
+          {
+            "$ref": "#/components/schemas/eventIn"
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "user": {
+            "$ref": "#/components/schemas/author"
+          }
+        }
+      },
+      "eventUpdate": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/eventIn"
+          },
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ]
+      },
+      "familyTreeIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "familyTreeOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/baseModel"
+          },
+          {
+            "$ref": "#/components/schemas/familyTreeIn"
+          }
+        ],
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/author"
+          },
+          "family_members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/familyMemberOut"
+            }
+          }
+        }
+      },
+      "familyMemberIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "family_tree_id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "relationship": {
+            "type": "string"
+          },
+          "parent_ids": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "date_of_birth": {
+            "type": "string",
+            "format": "datetime"
+          }
+        }
+      },
+      "familyMemberOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/familyMemberIn"
+          },
+          {
+            "$ref": "#/components/schemas/baseModel"
+          }
+        ]
+      },
+      "locationPointIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "location_name": {
+            "type": "string"
+          },
+          "location_description": {
+            "type": "string"
+          }
+        }
+      },
+      "locationPointOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/locationPointIn"
+          },
+          {
+            "$ref": "#/components/schemas/baseModel"
+          }
+        ]
+      },
+      "galleryIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "image": {
+            "type": "string",
+            "format": "binary"
+          },
+          "caption": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "number"
+          }
+        }
+      },
+      "galleryOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/galleryIn"
+          },
+          {
+            "$ref": "#/components/schemas/baseModel"
+          }
+        ],
+        "properties": {
+          "image": {
+            "$ref": "#/components/schemas/attachmentBaseModel"
+          },
+          "user": {
+            "$ref": "#/components/schemas/author"
+          }
+        }
+      },
+      "rideshareIn": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ],
+        "properties": {
+          "user_id": {
+            "type": "number"
+          },
+          "number_of_passengers": {
+            "type": "number"
+          },
+          "additional_information": {
+            "type": "string"
+          },
+          "arriving_at": {
+            "type": "string"
+          },
+          "departing_at": {
+            "type": "string"
+          },
+          "point_of_arrival_id": {
+            "type": "string"
+          },
+          "point_of_departure_id": {
+            "type": "string"
+          },
+          "seeking": {
+            "type": "boolean"
+          }
+        }
+      },
+      "rideshareOut": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/rideshareIn"
+          },
+          {
+            "$ref": "#/components/schemas/baseModel"
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "user": {
+            "$ref": "#/components/schemas/author"
+          }
+        }
+      },
+      "rideshareUpdate": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/rideshareIn"
+          },
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ]
+      },
+      "userIn": {
+        "type": "object",
+        "properties": {
+        }
+      },
+      "relationshipArray": {
+        "type": "array",
+        "items": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/createUpdateBaseModel"
+            }
+          ],
+          "properties": {
+            "child": {
+              "type": "string"
+            },
+            "parent": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "child",
+            "parent"
+          ]
+        }
+      },
+      "searchIn": {
+        "type": "object",
+        "properties": {
+          "search": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

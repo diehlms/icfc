@@ -13,15 +13,14 @@
 	const client = get(clientStore);
 
 	onMount(async () => {
-
 		try {
 			client.restClient?.entry.getV1EntryInitialPayload().then((res: any) => {
 				articles = res.articles;
 				const currentDate = new Date();
 				const filteredCampers = res.campers.filter((camper: any) => {
-				const arrivalDate = new Date(camper.arrival);
-						const departureDate = new Date(camper.departure);
-						return arrivalDate <= currentDate && departureDate >= currentDate;
+					const arrivalDate = new Date(camper.arrival);
+					const departureDate = new Date(camper.departure);
+					return arrivalDate <= currentDate && departureDate >= currentDate;
 				});
 				campers = filteredCampers;
 				events = res.events;
@@ -105,7 +104,7 @@
 			<!-- Campers Card -->
 			<div class="flex flex-col justify-between rounded-lg bg-white p-6 shadow-md">
 				<h2 class="mb-4 text-xl font-semibold">Campers</h2>
-				<ul class="list-inside list-disc overflow-y-scroll max-h-32">
+				<ul class="max-h-32 list-inside list-disc overflow-y-scroll">
 					{#if campers.length > 0}
 						{#each campers as camper}
 							<li>{camper.title}</li>
@@ -115,10 +114,12 @@
 					{/if}
 				</ul>
 			</div>
-			<div class="img1 col-span-1 row-span-2 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-2">
-			</div>
-			<div class="img2 col-span-1 row-span-3 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-3">
-			</div>
+			<div
+				class="img1 col-span-1 row-span-2 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-2"
+			></div>
+			<div
+				class="img2 col-span-1 row-span-3 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-3"
+			></div>
 		</div>
 	{/if}
 </div>

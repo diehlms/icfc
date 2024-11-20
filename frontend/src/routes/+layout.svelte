@@ -15,7 +15,7 @@
 	import BreadCrumb from '$lib/components/display/BreadCrumb.svelte';
 	import { PUBLIC_API_URL } from '$env/static/public';
 	import CampMessageBanner from '$lib/components/display/CampMessageBanner.svelte';
-	
+
 	let message: string | null = null;
 	let restClient: AppClient;
 
@@ -50,7 +50,7 @@
 			if (!intendedPath.includes('reset-password') && !intendedPath.includes('confirm-email')) {
 				setTimeout(() => goto('/auth/login'), 0);
 			} else {
-				goto(intendedPath)
+				goto(intendedPath);
 			}
 		} else {
 			updateAuthContext.updateAuthContext();

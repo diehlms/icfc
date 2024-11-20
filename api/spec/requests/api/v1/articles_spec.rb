@@ -3,10 +3,12 @@ require 'swagger_helper'
 RSpec.describe 'api/v1/articles', type: :request do
   path '/v1/articles' do
     get('list articles') do
+      security [Bearer: []]
       tags 'Articles'
       parameter name: :page, in: :query, type: :integer, description: 'Page number for pagination'
       produces 'application/json'
       response(200, 'successful') do
+        let(:Authorization) { "Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdF9uYW1lIjoiRGllaGwiLCJsYXN0X25hbWUiOiJTaWxsZXJzIiwidXNlcl9pZCI6NCwiZW1haWwiOiJkaWVobHN0eEBnbWFpbC5jb20iLCJhZG1pbiI6dHJ1ZSwiZXhwIjoxNzMxODYyOTMxfQ.29Z3Bf5hy6SvlNkn0jfHzyM14SAE6pZ0MiFAgPTFQA4" }
         schema type: :array, items: { '$ref' => '#/components/schemas/articleOut' }
 
         after do |example|

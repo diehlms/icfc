@@ -85,7 +85,7 @@
 	<Loader />
 {:else if event}
 	<div class="flex items-center justify-center">
-		<Card class="max-w-none mx-auto my-12 w-3/4 p-5">
+		<Card class="mx-auto my-12 w-3/4 max-w-none p-5">
 			<div class="flex flex-col items-center">
 				<h1 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
 					{event.events}

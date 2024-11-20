@@ -8,7 +8,3 @@ Rails.application.middleware.unshift PrometheusExporter::Middleware
 PrometheusExporter::Instrumentation::ActiveRecord.start
 PrometheusExporter::Instrumentation::Process.start(type: 'web')
 
-# Create custom metrics (optional)
-# PrometheusExporter::Client.default.register(
-#   PrometheusExporter::Metric::Counter.new("custom_metric_name", "description")
-# )

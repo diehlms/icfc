@@ -4,7 +4,7 @@
 /* eslint-disable */
 import type { baseModel } from './baseModel';
 import type { commentIn } from './commentIn';
-export type commentOut = (baseModel & commentIn & {
-    id?: number;
-});
-
+export type commentOut = baseModel &
+	commentIn & {
+		id?: number;
+	};

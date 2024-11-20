@@ -12,7 +12,11 @@
 
 	export let foldersToShow: string[] = [];
 
-	let createDocumentForm = new FormBuilder().text('title').text('folder').attachment('document').build();
+	let createDocumentForm = new FormBuilder()
+		.text('title')
+		.text('folder')
+		.attachment('document')
+		.build();
 	let documents: documentOut[] = [];
 	let documentGroups = {};
 	let loading = true;
@@ -25,7 +29,7 @@
 			{ user_id: user.id as number },
 			'Document',
 			client.restClient?.documents.deleteV1Documents.bind(client.restClient.documents)
-		)
+		);
 		loading = false;
 	};
 
@@ -56,32 +60,32 @@
 	};
 
 	const downloadDocument = async (url: string, title: string) => {
-    try {
-      const response = await fetch(hotSwapProductionUris(url));
-      if (!response.ok) {
-				console.error(response)
-        throw new Error('Failed to download document');
-      }
-      const blob = await response.blob();
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = title;
-      link.click();
-      toastStore.update((prevValue) => ({
-        ...prevValue,
-        isOpen: true,
-        toastMessage: 'Document downloaded!',
-        type: ToastTypes.success,
-      }));
-    } catch (error: any) {
-      toastStore.update((prevValue) => ({
-        ...prevValue,
-        isOpen: true,
-        toastMessage: error.message,
-        type: ToastTypes.error,
-      }));
-    }
-  };
+		try {
+			const response = await fetch(hotSwapProductionUris(url));
+			if (!response.ok) {
+				console.error(response);
+				throw new Error('Failed to download document');
+			}
+			const blob = await response.blob();
+			const link = document.createElement('a');
+			link.href = window.URL.createObjectURL(blob);
+			link.download = title;
+			link.click();
+			toastStore.update((prevValue) => ({
+				...prevValue,
+				isOpen: true,
+				toastMessage: 'Document downloaded!',
+				type: ToastTypes.success
+			}));
+		} catch (error: any) {
+			toastStore.update((prevValue) => ({
+				...prevValue,
+				isOpen: true,
+				toastMessage: error.message,
+				type: ToastTypes.error
+			}));
+		}
+	};
 
 	onMount(() => {
 		client.restClient?.documents
@@ -128,9 +132,13 @@
 						<a href={item.document.url}>{item.document_title}</a>
 						<div class="float-right">
 							<Badge color="blue">
-								<span on:click={() => downloadDocument(item.document.url, item.document_title)}>Download</span></Badge>
-								<Badge color="red"><span on:click={() => deleteDocument(item.id)}>Delete</span>
-								</Badge>
+								<span on:click={() => downloadDocument(item.document.url, item.document_title)}
+									>Download</span
+								></Badge
+							>
+							<Badge color="red"
+								><span on:click={() => deleteDocument(item.id)}>Delete</span>
+							</Badge>
 						</div>
 					</span>
 				</Listgroup>

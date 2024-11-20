@@ -70,7 +70,8 @@
 					toastMessage: error,
 					type: ToastTypes.error
 				}));
-			}).finally(() => {
+			})
+			.finally(() => {
 				loading = false;
 			});
 	};
@@ -109,7 +110,7 @@
 			client.restClient?.cabins.deleteV1Cabins.bind(client.restClient?.cabins)
 		);
 		loading = false;
-		goto('/cabins')
+		goto('/cabins');
 	};
 
 	const deleteCabinDate = (id: number) => {
@@ -128,8 +129,10 @@
 			id,
 			{ user_id: user.id as number },
 			'Image',
-			client.restClient?.cabinAttachments.deleteV1CabinAttachments.bind(client.restClient?.cabinAttachments)
-		).finally(() => fetchData())
+			client.restClient?.cabinAttachments.deleteV1CabinAttachments.bind(
+				client.restClient?.cabinAttachments
+			)
+		).finally(() => fetchData());
 	};
 
 	const editCabin = (event: any) => {
@@ -184,7 +187,8 @@
 					toastMessage: err,
 					type: ToastTypes.error
 				}));
-			}).finally(() => fetchData());
+			})
+			.finally(() => fetchData());
 	};
 
 	$: cabin;

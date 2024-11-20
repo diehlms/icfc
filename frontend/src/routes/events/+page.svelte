@@ -33,12 +33,12 @@
 
 	let loading: boolean = false;
 	let createEventForm = new FormBuilder()
-					.text('event_title')
-					.text('location')
-					.richText('description')
-					.dateTime('start_time')
-					.dateTime('end_time')
-					.build();
+		.text('event_title')
+		.text('location')
+		.richText('description')
+		.dateTime('start_time')
+		.dateTime('end_time')
+		.build();
 
 	const handleSubmit = (event: any) => {
 		const eventReq: eventIn = {

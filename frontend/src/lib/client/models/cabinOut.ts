@@ -7,10 +7,10 @@ import type { baseModel } from './baseModel';
 import type { cabinAttachmentOut } from './cabinAttachmentOut';
 import type { cabinDateOut } from './cabinDateOut';
 import type { cabinIn } from './cabinIn';
-export type cabinOut = (baseModel & cabinIn & {
-    id?: number;
-    cabindates?: Array<cabinDateOut>;
-    cabin_attachments?: Array<cabinAttachmentOut>;
-    user?: author;
-});
-
+export type cabinOut = baseModel &
+	cabinIn & {
+		id?: number;
+		cabindates?: Array<cabinDateOut>;
+		cabin_attachments?: Array<cabinAttachmentOut>;
+		user?: author;
+	};

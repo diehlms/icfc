@@ -5,10 +5,15 @@
 		<div>
 			<p>The Story of the Club</p>
 			<p>From the Golden Jubilee Handbook (1931)</p>
-			<small>(The historical sketches following have been prepared with the assistance and collaboration of Rev. Dr. Charles L. Smith and Rev. Dr. Joseph W. Miles, the story of the Club prior to 1900 being contributed by Dr. Smith)</small>
+			<small
+				>(The historical sketches following have been prepared with the assistance and collaboration
+				of Rev. Dr. Charles L. Smith and Rev. Dr. Joseph W. Miles, the story of the Club prior to
+				1900 being contributed by Dr. Smith)</small
+			>
 		</div>
 		<p>
-			<em>This is the story of the events of fifty years ago, concerning which there are so very few
+			<em
+				>This is the story of the events of fifty years ago, concerning which there are so very few
 				now living who can say with this writer: “Of them I was a part.”</em
 			>
 		</p>

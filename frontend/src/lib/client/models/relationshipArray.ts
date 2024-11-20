@@ -3,7 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type relationshipArray = Array<(createUpdateBaseModel & {
-    child: string;
-    parent: string;
-})>;
+export type relationshipArray = Array<
+	createUpdateBaseModel & {
+		child: string;
+		parent: string;
+	}
+>;

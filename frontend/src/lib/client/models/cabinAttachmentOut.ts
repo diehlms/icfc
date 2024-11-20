@@ -4,5 +4,4 @@
 /* eslint-disable */
 import type { baseModel } from './baseModel';
 import type { cabinAttachmentIn } from './cabinAttachmentIn';
-export type cabinAttachmentOut = (cabinAttachmentIn & baseModel);
-
+export type cabinAttachmentOut = cabinAttachmentIn & baseModel;
