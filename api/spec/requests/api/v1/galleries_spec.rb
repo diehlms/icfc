@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/galleries', type: :request do
   path '/v1/galleries' do
     get('list galleries') do
       tags 'Galleries'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -22,6 +23,7 @@ RSpec.describe 'api/v1/galleries', type: :request do
 
     post('create gallery') do
       tags 'Galleries'
+           security [{Bearer: []}]
       produces 'application/json'
       parameter name: :galleryIn, in: :body, schema: { '$ref' => '#/components/schemas/galleryIn' }
       response(200, 'successful') do
@@ -42,6 +44,7 @@ RSpec.describe 'api/v1/galleries', type: :request do
 
     delete('delete gallery') do
       tags 'Galleries'
+           security [{Bearer: []}]
       parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
       consumes 'application/json'

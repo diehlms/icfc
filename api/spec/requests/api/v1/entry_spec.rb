@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/entry', type: :request do
   path '/v1/entry/initial_payload' do
     get('get initial payload') do
       tags 'Entry'
+           security [{Bearer: []}]
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {

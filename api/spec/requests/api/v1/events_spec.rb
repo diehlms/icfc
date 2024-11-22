@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/events', type: :request do
   path '/v1/events' do
     get('list events') do
       tags 'Events'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -22,6 +23,7 @@ RSpec.describe 'api/v1/events', type: :request do
 
     post('create event') do
       tags 'Events'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :eventIn, in: :body, schema: { '$ref' => '#/components/schemas/eventIn' }

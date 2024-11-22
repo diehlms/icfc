@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/location_points', type: :request do
   path '/v1/location_points' do
     get('list location_points') do
       tags 'Location Points'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -20,6 +21,7 @@ RSpec.describe 'api/v1/location_points', type: :request do
 
     post('create location_point') do
       tags 'Location Points'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :locationPointIn, in: :body, schema: { '$ref' => '#/components/schemas/locationPointIn' }
@@ -41,6 +43,7 @@ RSpec.describe 'api/v1/location_points', type: :request do
 
     delete('delete location_point') do
       tags 'Location Points'
+           security [{Bearer: []}]
       parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
       consumes 'application/json'

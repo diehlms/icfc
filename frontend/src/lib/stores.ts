@@ -21,7 +21,7 @@ export interface IToastStore {
 }
 
 export interface IClientStore {
-	authCookie: string | null;
+	authCookie: string | null | undefined;
 	restClient: AppClient | null;
 	apiUrl: string;
 	authenticated: boolean;

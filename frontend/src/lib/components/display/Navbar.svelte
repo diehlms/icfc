@@ -14,6 +14,7 @@
 	import { get } from 'svelte/store';
 	import SearchResultsDropdown from './SearchResultsDropdown.svelte';
 	import { PUBLIC_BASE_URL } from '$env/static/public';
+	import burgee from '../../../assets/images/burgee.png'
 
 	let searchQuery = '';
 	let searchResults: any[] = [];
@@ -62,18 +63,19 @@
 <div class="z-50">
 	<Navbar let:hidden>
 		<NavBrand href="/">
-			<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">ICFC</span>
+			<img src={burgee} alt="Burgee" height=48 width=36 />
+			<!-- <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">ICFC</span> -->
 		</NavBrand>
 		<NavHamburger />
 		<NavUl {hidden}>
 			<NavLi>
 				<Button outline
-					><a target="_blank" href={`${PUBLIC_BASE_URL}/yearbook_curr.pdf`}>Yearbook</a></Button
+					><a target="_blank" href={`${PUBLIC_BASE_URL}/hosted_files/yearbook_curr.pdf`}>Yearbook</a></Button
 				>
 			</NavLi>
 			<NavLi>
 				<Button outline
-					><a target="_blank" href="https://www.paypal.com/ncp/payment/95N2K7CA3CPF4"></a>Pay Bill</Button
+					><a target="_blank" href="https://www.paypal.com/ncp/payment/95N2K7CA3CPF4">Pay Bill</a></Button
 				>
 			</NavLi>
 			<NavLi>

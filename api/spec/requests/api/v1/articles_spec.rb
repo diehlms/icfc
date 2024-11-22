@@ -3,12 +3,11 @@ require 'swagger_helper'
 RSpec.describe 'api/v1/articles', type: :request do
   path '/v1/articles' do
     get('list articles') do
-      security [Bearer: []]
       tags 'Articles'
+      security [{Bearer: []}]
       parameter name: :page, in: :query, type: :integer, description: 'Page number for pagination'
       produces 'application/json'
       response(200, 'successful') do
-        let(:Authorization) { "Bearer eyJhbGciOiJIUzI1NiJ9.eyJmaXJzdF9uYW1lIjoiRGllaGwiLCJsYXN0X25hbWUiOiJTaWxsZXJzIiwidXNlcl9pZCI6NCwiZW1haWwiOiJkaWVobHN0eEBnbWFpbC5jb20iLCJhZG1pbiI6dHJ1ZSwiZXhwIjoxNzMxODYyOTMxfQ.29Z3Bf5hy6SvlNkn0jfHzyM14SAE6pZ0MiFAgPTFQA4" }
         schema type: :array, items: { '$ref' => '#/components/schemas/articleOut' }
 
         after do |example|
@@ -24,6 +23,7 @@ RSpec.describe 'api/v1/articles', type: :request do
 
     post('create article') do
       tags 'Articles'
+      security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :articleIn, in: :body, schema: { '$ref' => '#/components/schemas/articleIn' }
@@ -46,6 +46,7 @@ RSpec.describe 'api/v1/articles', type: :request do
     parameter name: 'id', in: :path, type: :integer, description: 'id'
     get('show article') do
       tags 'Articles'
+      security [{Bearer: []}]
       produces 'application/json'
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/articleOut'
@@ -64,6 +65,7 @@ RSpec.describe 'api/v1/articles', type: :request do
 
     put('update article') do
       tags 'Articles'
+      security [{Bearer: []}]
       parameter name: :articleUpdate, in: :body, schema: { '$ref' => '#/components/schemas/articleUpdate' }
       consumes 'application/json'
       produces 'application/json'
@@ -84,6 +86,7 @@ RSpec.describe 'api/v1/articles', type: :request do
 
     delete('delete article') do
       tags 'Articles'
+      security [{Bearer: []}]
       parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       consumes 'application/json'
       produces 'application/json'

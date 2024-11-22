@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/camp_messages', type: :request do
   path '/v1/camp_messages' do
     get('list camp_messages') do
       tags 'Camp Messages'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -22,6 +23,7 @@ RSpec.describe 'api/v1/camp_messages', type: :request do
 
     post('create camp message') do
       tags 'Camp Messages'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :campMessageIn, in: :body, schema: { '$ref' => '#/components/schemas/campMessageIn' }
@@ -42,9 +44,9 @@ RSpec.describe 'api/v1/camp_messages', type: :request do
 
   path '/v1/camp_messages/{id}' do
     parameter name: 'id', in: :path, type: :integer, description: 'id'
-
     delete('delete camp message') do
       tags 'Camp Messages'
+           security [{Bearer: []}]
       parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
       consumes 'application/json'

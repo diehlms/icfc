@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/documents', type: :request do
   path '/v1/documents' do
     get('list documents') do
       tags 'Documents'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -22,6 +23,7 @@ RSpec.describe 'api/v1/documents', type: :request do
 
     post('create document') do
       tags 'Documents'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -42,6 +44,7 @@ RSpec.describe 'api/v1/documents', type: :request do
 
     delete('delete document') do
       tags 'Documents'
+           security [{Bearer: []}]
       parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
       consumes 'application/json'

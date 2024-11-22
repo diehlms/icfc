@@ -4,23 +4,17 @@
 /* eslint-disable */
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-export class DefaultService {
+export class LogsService {
     constructor(public readonly httpRequest: BaseHttpRequest) {}
     /**
-     * update user
-     * @param id id
+     * get logs
      * @returns any successful
      * @throws ApiError
      */
-    public putV1Users(
-        id: number,
-    ): CancelablePromise<any> {
+    public getV1Logs(): CancelablePromise<any> {
         return this.httpRequest.request({
-            method: 'PUT',
-            url: '/v1/users/{id}',
-            path: {
-                'id': id,
-            },
+            method: 'GET',
+            url: '/v1/logs',
         });
     }
 }

@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/rideshares', type: :request do
   path '/v1/rideshares' do
     get('list rideshares') do
       tags 'Rideshares'
+           security [{Bearer: []}]
       produces 'application/json'
       response(200, 'successful') do
         schema type: :array, items: { '$ref' => '#/components/schemas/rideshareOut' }
@@ -21,6 +22,7 @@ RSpec.describe 'api/v1/rideshares', type: :request do
 
     post('create rideshare') do
       tags 'Rideshares'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :rideshareIn, in: :body, schema: { '$ref' => '#/components/schemas/rideshareIn' }
@@ -43,6 +45,7 @@ RSpec.describe 'api/v1/rideshares', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
     get('show rideshare') do
       tags 'Rideshares'
+           security [{Bearer: []}]
       produces 'application/json'
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/rideshareOut'
@@ -61,6 +64,7 @@ RSpec.describe 'api/v1/rideshares', type: :request do
 
     put('update rideshare') do
       tags 'Rideshares'
+           security [{Bearer: []}]
       parameter name: :rideshareIn, in: :body, schema: { '$ref' => '#/components/schemas/rideshareIn' }
       consumes 'application/json'
       produces 'application/json'
@@ -81,6 +85,7 @@ RSpec.describe 'api/v1/rideshares', type: :request do
 
     delete('delete rideshare') do
       tags 'Rideshares'
+           security [{Bearer: []}]
       parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
       consumes 'application/json'

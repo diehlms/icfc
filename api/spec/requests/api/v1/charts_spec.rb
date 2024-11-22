@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/charts', type: :request do
   path '/v1/charts' do
     get('list charts') do
       tags 'Charts'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -22,6 +23,7 @@ RSpec.describe 'api/v1/charts', type: :request do
 
     post('create chart') do
       tags 'Charts'
+           security [{Bearer: []}]
       produces 'application/json'
       response(200, 'successful') do
         schema '$ref' => '#/components/schemas/chartOut'
@@ -43,6 +45,7 @@ RSpec.describe 'api/v1/charts', type: :request do
 
     get('show chart') do
       tags 'Charts'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -63,6 +66,7 @@ RSpec.describe 'api/v1/charts', type: :request do
 
     delete('delete chart') do
       tags 'Charts'
+           security [{Bearer: []}]
       parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
       consumes 'application/json'

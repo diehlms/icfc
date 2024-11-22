@@ -5,7 +5,7 @@ import { ImageUploadClient } from './imageUploadClient';
 import { PUBLIC_API_URL } from '$env/static/public';
 
 export default {
-	isTokenExpired(token: string) {
+	isTokenExpired(token: string): boolean {
 		const arrayToken = token.split('.');
 		const tokenPayload = JSON.parse(atob(arrayToken[1]));
 		return Math.floor(new Date().getTime() / 1000) >= tokenPayload?.sub;
@@ -13,31 +13,33 @@ export default {
 	userActionPermitted(entity_user_id: number, user: any): boolean {
 		return user && (user.admin || entity_user_id === user.id);
 	},
-	updateAuthContext() {
+	async updateAuthContext(fallbackToken?: string): Promise<number> {
 		const apiUrl = PUBLIC_API_URL;
-		let authToken: string | null = get(clientStore).authCookie;
+		let authToken: string | null | undefined = get(clientStore).authCookie;
 		let arrayToken: string[] | undefined;
 		let tokenPayload: any;
 
 		if (authToken === null) {
 			authToken = localStorage.getItem('authToken');
-			arrayToken = authToken?.split('.') as string[];
+		} else {
+			authToken = fallbackToken
 		}
+
+		arrayToken = authToken?.split('.') as string[];
 
 		if (arrayToken) {
 			tokenPayload = JSON.parse(atob(arrayToken[1]));
+			userStore.update((store: IUserStore) => {
+				return {
+					...store,
+					id: tokenPayload['user_id'],
+					admin: tokenPayload['admin'],
+					firstName: tokenPayload['first_name'],
+					lastName: tokenPayload['last_name'],
+					email: tokenPayload['email']
+				};
+			});
 		}
-
-		userStore.update((store: IUserStore) => {
-			return {
-				...store,
-				id: tokenPayload['user_id'],
-				admin: tokenPayload['admin'],
-				firstName: tokenPayload['first_name'],
-				lastName: tokenPayload['last_name'],
-				email: tokenPayload['email']
-			};
-		});
 
 		clientStore.update((store: IClientStore) => {
 			const restClientAuthenticated = new AppClient({
@@ -57,5 +59,7 @@ export default {
 				imageUploadClient: imageUploadClient
 			};
 		});
+
+		return 1
 	}
 };

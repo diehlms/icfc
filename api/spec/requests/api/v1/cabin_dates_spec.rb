@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/cabin_dates', type: :request do
   path '/v1/cabin_dates' do
     post('create cabin_date') do
       tags 'Cabin Dates'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :cabinDateIn, in: :body, schema: { '$ref' => '#/components/schemas/cabinDateIn' }
@@ -25,6 +26,7 @@ RSpec.describe 'api/v1/cabin_dates', type: :request do
 
     delete('delete cabin_date') do
       tags 'Cabin Dates'
+           security [{Bearer: []}]
       parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
       consumes 'application/json'

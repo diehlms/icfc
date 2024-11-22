@@ -73,6 +73,7 @@ export { FamilyMembersService } from './services/FamilyMembersService';
 export { FamilyTreesService } from './services/FamilyTreesService';
 export { GalleriesService } from './services/GalleriesService';
 export { LocationPointsService } from './services/LocationPointsService';
+export { LogsService } from './services/LogsService';
 export { PasswordResetsService } from './services/PasswordResetsService';
 export { RidesharesService } from './services/RidesharesService';
 export { SearchService } from './services/SearchService';

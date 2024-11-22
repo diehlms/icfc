@@ -12,6 +12,7 @@
 	let userToDelete: number | undefined = undefined;
 	let messages: campMessageOut[] = [];
 	let loading: boolean = false;
+	let logs: any = undefined;
 
 	onMount(() => {
 		client.restClient?.campMessages
@@ -27,6 +28,18 @@
 					type: ToastTypes.error
 				}));
 			});
+		
+		client.restClient?.logs.getV1Logs({ user_id: user.id}).then((res: any) => {
+			logs = res;
+			console.log(logs)
+		}).catch((error: any) => {
+			toastStore.update((prevValue) => ({
+				...prevValue,
+				isOpen: true,
+				toastMessage: processApiErrorsToString(error.body),
+				type: ToastTypes.error
+			}));
+		});
 	});
 
 
@@ -77,6 +90,7 @@
 	const client = get(clientStore);
 
 	$: messages;
+	$: logs;
 </script>
 
 <h1>Settings</h1>
@@ -130,4 +144,16 @@
 			>
 		</Input>
 	</div>
+	<h1>Logs</h1>
+	{#if logs}
+	<div class="max-w-1/2">
+		<pre>
+			<code class="block bg-gray-800 text-green-400 whitespace-pre-wrap p-2">
+{#each logs.logs as logLine}
+	{logLine}
+{/each}
+			</code>
+		</pre>
+	</div>	
+	{/if}
 {/if}

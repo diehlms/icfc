@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/family_trees', type: :request do
   path '/v1/family_trees' do
     get('list family_trees') do
       tags 'Family Trees'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -22,6 +23,7 @@ RSpec.describe 'api/v1/family_trees', type: :request do
 
     post('create family_tree') do
       tags 'Family Trees'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :familyTreeIn, in: :body, schema: { '$ref' => '#/components/schemas/familyTreeIn' }
@@ -43,6 +45,7 @@ RSpec.describe 'api/v1/family_trees', type: :request do
 
     get('show family_tree') do
       tags 'Family Trees'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do

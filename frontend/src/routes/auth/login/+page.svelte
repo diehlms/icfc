@@ -8,7 +8,7 @@
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	onMount(async () => {
-		if (!!localStorage.getItem('authToken')) {
+		if (localStorage.getItem('authToken') !== null) {
 			goto('/');
 		}
 	});
@@ -44,8 +44,9 @@
 					isOpen: true,
 					type: ToastTypes.success
 				}));
-				updateAuthContext.updateAuthContext();
-				goto('/');
+				updateAuthContext.updateAuthContext(res.token).then(() => {
+					goto('/');
+				});
 			})
 			.catch((error: any) => {
 				toastStore.update((prevValue) => ({

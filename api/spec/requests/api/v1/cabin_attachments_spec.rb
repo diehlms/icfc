@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/cabin_attachments', type: :request do
   path '/v1/cabin_attachments' do
     post('create cabin_attachment') do
       tags 'Cabin Attachments'
+           security [{Bearer: []}]
       produces 'application/json'
       response(200, 'successful') do
         after do |example|
@@ -27,6 +28,7 @@ RSpec.describe 'api/v1/cabin_attachments', type: :request do
       consumes 'application/json'
       produces 'application/json'
       tags 'Cabin Attachments'
+           security [{Bearer: []}]
       response(200, 'successful') do
         let(:id) { '123' }
 

@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/comments', type: :request do
   path '/v1/comments' do
     post('create comment') do
       tags 'Comments'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :articleIn, in: :body, schema: { '$ref' => '#/components/schemas/commentIn' }
@@ -25,6 +26,7 @@ RSpec.describe 'api/v1/comments', type: :request do
 
     delete('delete comment') do
       tags 'Comments'
+           security [{Bearer: []}]
       parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
       consumes 'application/json'

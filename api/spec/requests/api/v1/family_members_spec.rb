@@ -4,6 +4,7 @@ RSpec.describe 'api/v1/family_members', type: :request do
   path '/v1/family_members' do
     post('create family_member') do
       tags 'Family Members'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :familyMemberIn, in: :body, schema: { '$ref' => '#/components/schemas/familyMemberIn' }
@@ -21,6 +22,7 @@ RSpec.describe 'api/v1/family_members', type: :request do
 
     put('update family_member') do
       tags 'Family Members'
+           security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :relationshipArray, in: :body, schema: { '$ref' => '#/components/schemas/relationshipArray' }
@@ -41,6 +43,7 @@ RSpec.describe 'api/v1/family_members', type: :request do
     parameter name: 'id', in: :path, type: :integer, description: 'id'
     delete('delete family_member') do
       tags 'Family Members'
+           security [{Bearer: []}]
       parameter name: :req, in: :body, schema: { '$ref' => '#/components/schemas/createUpdateBaseModel' }
       produces 'application/json'
       consumes 'application/json'

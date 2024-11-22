@@ -30,12 +30,22 @@ class ApplicationController < ActionController::Base
 
   def check_admin_only
     model = instance_variable_get("@#{controller_name.singularize}")
-    authorize_resource(model, params[:user_id], true) if model.present?
+
+    if model.present?
+      authorize_resource(model, params[:user_id], true)
+    else
+      user = User.find_by(id: params[:user_id])
+      if user&.admin?
+        true
+      else
+        render json: { error: 'Not admin user' }, status: :forbidden
+        false
+      end
+    end
   end
 
   def authorize_resource(model, user_id_param, strict)
     user = User.find_by(id: user_id_param)
-
     logger.warn 'User ID not found in params' if user_id_param.nil?
 
     if (!strict && user&.admin?) || user&.admin? || (model.respond_to?(:user_id) && model.user_id == user_id_param.to_i)

@@ -4,20 +4,7 @@ RSpec.describe 'api/v1/users', type: :request do
   path '/v1/users' do
     get('list users') do
       tags 'Users'
-      response(200, 'successful') do
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
-    post('create user') do
-      tags 'Users'
+           security [{Bearer: []}]
       response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
@@ -52,6 +39,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
     patch('update user') do
       tags 'Users'
+           security [{Bearer: []}]
       response(200, 'successful') do
         let(:id) { '123' }
         after do |example|
@@ -66,6 +54,7 @@ RSpec.describe 'api/v1/users', type: :request do
     end
 
     put('update user') do
+           security [{Bearer: []}]
       response(200, 'successful') do
         let(:id) { '123' }
         after do |example|
@@ -81,6 +70,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
     delete('delete user') do
       tags 'Users'
+           security [{Bearer: []}]
       response(200, 'successful') do
         let(:id) { '123' }
         after do |example|

@@ -4,4 +4,5 @@
 /* eslint-disable */
 import type { cabinOut } from './cabinOut';
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type cabinUpdate = cabinOut & createUpdateBaseModel;
+export type cabinUpdate = (cabinOut & createUpdateBaseModel);
+

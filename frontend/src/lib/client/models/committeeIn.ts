@@ -3,7 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type committeeIn = createUpdateBaseModel & {
-	url?: string;
-	name?: string;
-};
+export type committeeIn = (createUpdateBaseModel & {
+    url?: string;
+    name?: string;
+});
+

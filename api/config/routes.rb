@@ -26,6 +26,7 @@ Rails.application.routes.draw do
           patch :upload_image
         end
       end
+      resources :logs, only: :index
       resources :authentications
       resources :cabin_attachments
       resources :camp_messages

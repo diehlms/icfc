@@ -2,6 +2,7 @@
 	import {
 		Drawer,
 		Sidebar,
+		SidebarBrand,
 		SidebarDropdownItem,
 		SidebarDropdownWrapper,
 		SidebarGroup,
@@ -27,6 +28,7 @@
 	import { sineIn } from 'svelte/easing';
 	import { onMount } from 'svelte';
 	import { PUBLIC_INSEASON_RESERVATION_LINK, PUBLIC_OUTSEASON_RESERVATION_LINK } from '$env/static/public';
+	import mapleleaf from '../../../assets/images/mapleleaf.png'
 
 	let sidebarOpen = false;
 	let showAdminLinks = false;
@@ -42,6 +44,11 @@
 	let drawerHidden: boolean = false;
 	let user: any;
 	let initials: any;
+  let site = {
+    name: 'ICFC',
+    href: '/',
+    img: mapleleaf
+  };
 
 	$: if (width >= breakPoint) {
 		drawerHidden = false;
@@ -96,6 +103,7 @@
 	<Sidebar>
 		<SidebarWrapper class="bg-transparent">
 			<SidebarGroup>
+				<SidebarBrand {site} />
 				<SidebarDropdownWrapper label="Reservations">
 					<svelte:fragment slot="icon">
 						<Ticket

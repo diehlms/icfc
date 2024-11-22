@@ -1,15 +1,13 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/v1/committees', type: :request do
-  path '/v1/committees' do
-    get('list committees') do
-      tags 'Committees'
+RSpec.describe 'api/v1/logs', type: :request do
+  path '/v1/logs' do
+    get('get logs') do
+      tags 'Logs'
            security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
-        schema type: :committeeOut, items: { '$ref' => '#/components/schemas/committeeOut' }
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {

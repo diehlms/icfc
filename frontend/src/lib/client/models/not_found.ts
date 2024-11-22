@@ -3,5 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type not_found = {
-	message?: string;
+    message?: string;
 };
+

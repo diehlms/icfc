@@ -63,7 +63,7 @@
 
 	async function logout(): Promise<void> {
 		localStorage.removeItem('authToken');
-		clientStore.update((prevValue) => ({
+		await clientStore.update((prevValue) => ({
 			...prevValue,
 			restClient: new AppClient({
 				BASE: PUBLIC_API_URL

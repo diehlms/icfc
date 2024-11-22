@@ -6,7 +6,7 @@ RSpec.configure do |config|
   config.openapi_root = Rails.root.join('swagger').to_s
   config.openapi_specs = {
     'v1/swagger.json' => {
-      swagger: '2.0',
+      openapi: '3.0.3',
       info: {
         title: 'API V1',
         version: 'v1'
@@ -25,10 +25,10 @@ RSpec.configure do |config|
       components: {
         securitySchemes: {
           Bearer: {
+            description: 'JWT key necessary to use API calls',
             type: :apiKey,
             name: 'Authorization',
-            in: :header,
-            description: 'Your Bearer token'
+            in: :header
           }
         },
         schemas: {
@@ -640,7 +640,8 @@ RSpec.configure do |config|
             }
           }
         },
-      }
+      },
+      security: [ { Bearer: [] } ]
     }
   }
 
