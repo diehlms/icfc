@@ -34,7 +34,7 @@
 	async function sendRecoveryEmail() {
 		await restClient.passwordResets
 			.postV1PasswordResets(email)
-			.then((res: any) => {
+			.then(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
@@ -42,7 +42,7 @@
 					type: ToastTypes.success
 				}));
 			})
-			.catch((err) => {
+			.catch(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
@@ -54,7 +54,7 @@
 
 	async function resetPassword() {
 		await restClient.passwordResets
-			.patchV1PasswordResets({
+			.putV1PasswordResets({
 				password_reset_token: token,
 				password: password,
 				password_confirmation: passwordConfirm

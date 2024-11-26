@@ -55,6 +55,7 @@
 		"@tinymce/tinymce-svelte": "^3.0.0",
 		"@tiptap/core": "^2.6.5",
 		"@tiptap/extension-bubble-menu": "^2.6.5",
+		"@tiptap/extension-text-align": "^2.10.3",
 		"@tiptap/pm": "^2.6.5",
 		"@tiptap/starter-kit": "^2.6.5",
 		"@xyflow/svelte": "^0.1.9",

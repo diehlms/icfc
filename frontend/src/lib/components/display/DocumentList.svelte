@@ -9,6 +9,7 @@
 	import type { documentOut } from '$lib/client';
 	import { deleteEntity } from '../services/crud';
 	import { hotSwapProductionUris } from '../services/imageUtils';
+	import { processApiErrorsToString } from '../services/errorHandler';
 
 	export let foldersToShow: string[] = [];
 
@@ -126,7 +127,7 @@
 <Tabs>
 	{#each Object.entries(documentGroups) as [folderName, docs]}
 		{#if foldersToShow.indexOf(folderName) > -1}
-			<TabItem title={toTitleCase(folderName)} {open}>
+			<TabItem title={toTitleCase(folderName)} open={true}>
 				<Listgroup items={docs} let:item class="mb-4">
 					<span class="text-sm text-gray-500 dark:text-gray-400">
 						<a href={item.document.url}>{item.document_title}</a>

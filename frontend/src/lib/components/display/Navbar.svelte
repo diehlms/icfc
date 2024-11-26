@@ -64,7 +64,6 @@
 	<Navbar let:hidden>
 		<NavBrand href="/">
 			<img src={burgee} alt="Burgee" height=48 width=36 />
-			<!-- <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">ICFC</span> -->
 		</NavBrand>
 		<NavHamburger />
 		<NavUl {hidden}>
@@ -105,7 +104,7 @@
 		</NavUl>
 	</Navbar>
 	<div class="stripe-container">
-		<div class="stripe stripe-red"></div>
+		<div class="stripe bg-emerald-950"></div>
 	</div>
 </div>
 
@@ -118,9 +117,5 @@
 	.stripe {
 		height: 4px;
 		width: 100%;
-	}
-
-	.stripe-red {
-		background-color: rgb(2, 137, 0); /* Very light red */
 	}
 </style>

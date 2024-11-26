@@ -59,15 +59,19 @@
 		}
 	};
 
-	// Attach the scroll event listener and fetch initial images
 	onMount(() => {
-		fetchArticles(currentPage); // Initial fetch
-		const scrollContainer = document.querySelector('.main-ui-window');
-		scrollContainer?.addEventListener('scroll', handleScroll);
-
-		return () => {
-			window.removeEventListener('scroll', handleScroll); // Clean up scroll listener
-		};
+		fetchArticles(currentPage);
+		
+		const scrollContainer = document.querySelector('.article-flow');
+		
+		if (scrollContainer) {
+			scrollContainer.addEventListener('scroll', handleScroll);
+			scrollContainer.addEventListener('touchmove', handleScroll);
+			return () => {
+				scrollContainer.removeEventListener('scroll', handleScroll);
+				scrollContainer.removeEventListener('touchmove', handleScroll);
+			};
+		}
 	});
 
 	const handleSubmit = (event: any) => {
@@ -114,7 +118,7 @@
 />
 
 {#if articles}
-	<div class="w-full space-y-6">
+	<div class="article-flow w-full space-y-6">
 		{#each articles as article}
 			<div
 				class="relative w-full rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
@@ -169,3 +173,13 @@
 		{/if}
 	</div>
 {/if}
+
+
+<style lang="scss">
+	@media (max-width: 932px) {
+		.article-flow {
+			height: 135vh;
+			overflow-y: auto;
+		}
+  }
+</style>

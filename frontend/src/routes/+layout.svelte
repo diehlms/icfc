@@ -107,30 +107,29 @@
 <Footer />
 
 <style>
-	.main-ui-window {
-		flex-grow: 1;
-		margin-top: 1rem;
-		padding-left: 7rem;
-		padding-right: 5rem;
-	}
+  .main-ui-window {
+    flex-grow: 1;
+    margin-top: 1rem;
+    padding-left: 7rem;
+    padding-right: 5rem;
+  }
+  .flex {
+    display: flex;
+  }
+  .flex-1 {
+    flex: 1;
+  }
+  .h-screen {
+    height: 100vh;
+  }
 
-	.flex {
-		display: flex;
-	}
-
-	.flex-1 {
-		flex: 1;
-	}
-
-	.h-screen {
-		height: 100vh;
-	}
-
-	.mt-2 {
-		margin-top: 0.5rem;
-	}
-
-	.p-10 {
-		padding: 2.5rem;
-	}
+  @media (max-width: 768px) {
+    .main-ui-window {
+      padding-left: 32px;
+      padding-right: 10px;
+    }
+    .flex {
+      flex-direction: column;
+    }
+  }
 </style>

@@ -143,9 +143,11 @@
 		{openDrawerLabel}
 	</Button>
 {:else}
-	<SpeedDial defaultClass="fixed end-6 bottom-12">
-		<SpeedDialButton on:click={() => (defaultModal = true)} name={openDrawerLabel}>
-			<Plus class="h-6 w-6" />
-		</SpeedDialButton>
-	</SpeedDial>
+	<div class="absolute z-50">
+		<SpeedDial defaultClass="fixed end-6 bottom-12">
+			<SpeedDialButton on:click={() => (defaultModal = true)} name={openDrawerLabel}>
+				<Plus class="h-6 w-6" />
+			</SpeedDialButton>
+		</SpeedDial>
+	</div>
 {/if}
