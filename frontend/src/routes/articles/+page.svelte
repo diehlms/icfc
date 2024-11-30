@@ -176,10 +176,8 @@
 
 
 <style lang="scss">
-	@media (max-width: 932px) {
-		.article-flow {
-			height: 135vh;
-			overflow-y: auto;
-		}
-  }
+	.article-flow {
+		height: 75vh;
+		overflow-y: auto;
+	}
 </style>

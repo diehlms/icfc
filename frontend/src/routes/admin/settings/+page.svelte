@@ -31,7 +31,6 @@
 		
 		client.restClient?.logs.getV1Logs({ user_id: user.id}).then((res: any) => {
 			logs = res;
-			console.log(logs)
 		}).catch((error: any) => {
 			toastStore.update((prevValue) => ({
 				...prevValue,

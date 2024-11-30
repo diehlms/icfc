@@ -3,12 +3,13 @@ import { clientStore, userStore, type IClientStore, type IUserStore } from '$lib
 import { get } from 'svelte/store';
 import { ImageUploadClient } from './imageUploadClient';
 import { PUBLIC_API_URL } from '$env/static/public';
+import { goto } from '$app/navigation';
 
 export default {
 	isTokenExpired(token: string): boolean {
 		const arrayToken = token.split('.');
 		const tokenPayload = JSON.parse(atob(arrayToken[1]));
-		return Math.floor(new Date().getTime() / 1000) >= tokenPayload?.sub;
+		return Math.floor(new Date().getTime() / 1000) >= tokenPayload?.exp;
 	},
 	userActionPermitted(entity_user_id: number, user: any): boolean {
 		return user && (user.admin || entity_user_id === user.id);
@@ -23,6 +24,11 @@ export default {
 			authToken = localStorage.getItem('authToken');
 		} else {
 			authToken = fallbackToken
+		}
+
+		if (this.isTokenExpired(authToken as string)) {
+			localStorage.removeItem('authToken');
+			goto('/auth/login')
 		}
 
 		arrayToken = authToken?.split('.') as string[];

@@ -29,7 +29,8 @@
 		if (value.restClient !== null) {
 			restClient = value.restClient;
 		} else {
-			// Rest Client not initialized, will need to programatically refresh page
+			// Rest Client not initialized, will need 
+			// to programatically refresh page
 			invalidateAll();
 		}
 	});
