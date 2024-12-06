@@ -23,12 +23,12 @@ export default {
 		if (authToken === null) {
 			authToken = localStorage.getItem('authToken');
 		} else {
-			authToken = fallbackToken
+			authToken = fallbackToken;
 		}
 
 		if (this.isTokenExpired(authToken as string)) {
 			localStorage.removeItem('authToken');
-			goto('/auth/login')
+			goto('/auth/login');
 		}
 
 		arrayToken = authToken?.split('.') as string[];
@@ -66,6 +66,6 @@ export default {
 			};
 		});
 
-		return 1
+		return 1;
 	}
 };

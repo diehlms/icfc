@@ -5,5 +5,4 @@
 import type { articleIn } from './articleIn';
 import type { baseModel } from './baseModel';
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type articleUpdate = (baseModel & articleIn & createUpdateBaseModel);
-
+export type articleUpdate = baseModel & articleIn & createUpdateBaseModel;

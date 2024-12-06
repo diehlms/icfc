@@ -4,5 +4,4 @@
 /* eslint-disable */
 import type { campMessageIn } from './campMessageIn';
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type campMessageOut = (campMessageIn & createUpdateBaseModel);
-
+export type campMessageOut = campMessageIn & createUpdateBaseModel;

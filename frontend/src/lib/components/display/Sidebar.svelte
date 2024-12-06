@@ -27,10 +27,13 @@
 	import { userStore } from '$lib/stores';
 	import { sineIn } from 'svelte/easing';
 	import { onMount } from 'svelte';
-	import { PUBLIC_INSEASON_RESERVATION_LINK, PUBLIC_OUTSEASON_RESERVATION_LINK } from '$env/static/public';
-	import mapleleaf from '../../../assets/images/mapleleaf.png'
+	import {
+		PUBLIC_INSEASON_RESERVATION_LINK,
+		PUBLIC_OUTSEASON_RESERVATION_LINK
+	} from '$env/static/public';
+	import mapleleaf from '../../../assets/images/mapleleaf.png';
 
-	let sidebarOpen = false;
+	let sidebarOpen = true;
 	let showAdminLinks = false;
 	let transitionParams = {
 		x: -320,
@@ -44,11 +47,11 @@
 	let drawerHidden: boolean = false;
 	let user: any;
 	let initials: any;
-  let site = {
-    name: 'ICFC',
-    href: '/',
-    img: mapleleaf
-  };
+	let site = {
+		name: 'ICFC',
+		href: '/',
+		img: mapleleaf
+	};
 
 	$: if (width >= breakPoint) {
 		drawerHidden = false;
@@ -83,10 +86,11 @@
 	$: user;
 </script>
 
-<div class="button-container">
-	<!-- Using a div styled as a button for full height control -->
+<div class="button-container bg-emerald-900">
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="toggle-button" on:click={toggleSidebar}>
-		<Bars3CenterLeft />
+		<Bars3CenterLeft class="text-color-white" />
 	</div>
 </div>
 
@@ -105,31 +109,75 @@
 				<SidebarBrand {site} />
 				<SidebarDropdownWrapper class="text-emerald-50 hover:text-emerald-950" label="Reservations">
 					<svelte:fragment slot="icon">
-						<Ticket
-						/>
+						<Ticket />
 					</svelte:fragment>
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href={PUBLIC_INSEASON_RESERVATION_LINK} target="_blank" label="In Season" />
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href={PUBLIC_OUTSEASON_RESERVATION_LINK} target="_blank" label="Out of Season" />
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href={PUBLIC_INSEASON_RESERVATION_LINK}
+						target="_blank"
+						label="In Season"
+					/>
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href={PUBLIC_OUTSEASON_RESERVATION_LINK}
+						target="_blank"
+						label="Out of Season"
+					/>
 				</SidebarDropdownWrapper>
 				<SidebarDropdownWrapper class="text-emerald-50 hover:text-emerald-950" label="Camp Info">
 					<svelte:fragment slot="icon">
-						<EllipsisHorizontalCircle
-						/>
+						<EllipsisHorizontalCircle />
 					</svelte:fragment>
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href="/camp-info/archives" label="Archives" />
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href="/camp-info/customs" label="Customs" />
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href="/camp-info/committeeprimer" label="Committees" />
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href="/camp-info/membership" label="Membership" />
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href="/camp-info/forms" label="Forms" />
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href="/camp-info/history" label="History" />
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href="/camp-info/bylaws" label="By Laws" />
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href="/camp-info/charitablegiving" label="Charitable Giving" />
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href="/camp-info/archives"
+						label="Archives"
+					/>
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href="/camp-info/customs"
+						label="Customs"
+					/>
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href="/camp-info/committeeprimer"
+						label="Committees"
+					/>
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href="/camp-info/membership"
+						label="Membership"
+					/>
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href="/camp-info/forms"
+						label="Forms"
+					/>
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href="/camp-info/history"
+						label="History"
+					/>
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href="/camp-info/bylaws"
+						label="By Laws"
+					/>
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href="/camp-info/charitablegiving"
+						label="Charitable Giving"
+					/>
 					<SidebarDropdownItem
 						class="text-emerald-50 hover:text-emerald-950"
 						href="/camp-info/familyagreements"
 						label="Family Agreements Policy"
 					/>
-					<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href="/camp-info/plannedgiving" label="Planned Giving" />
+					<SidebarDropdownItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href="/camp-info/plannedgiving"
+						label="Planned Giving"
+					/>
 				</SidebarDropdownWrapper>
 				<SidebarItem class="text-emerald-50 hover:text-emerald-950" href="/profile" label="Profile">
 					<svelte:fragment slot="icon">
@@ -141,7 +189,11 @@
 						<Photo />
 					</svelte:fragment>
 				</SidebarItem>
-				<SidebarItem class="text-emerald-50 hover:text-emerald-950" href="/articles" label="Articles">
+				<SidebarItem
+					class="text-emerald-50 hover:text-emerald-950"
+					href="/articles"
+					label="Articles"
+				>
 					<svelte:fragment slot="icon">
 						<ChatBubbleLeftEllipsis />
 					</svelte:fragment>
@@ -156,7 +208,11 @@
 						<Clipboard />
 					</svelte:fragment>
 				</SidebarItem>
-				<SidebarItem class="text-emerald-50 hover:text-emerald-950" href="/rideshares" label="Rideshares">
+				<SidebarItem
+					class="text-emerald-50 hover:text-emerald-950"
+					href="/rideshares"
+					label="Rideshares"
+				>
 					<svelte:fragment slot="icon">
 						<Map />
 					</svelte:fragment>
@@ -171,7 +227,11 @@
 						<Users />
 					</svelte:fragment>
 				</SidebarItem>
-				<SidebarItem class="text-emerald-50 hover:text-emerald-950" href="/family-trees" label="Family Trees">
+				<SidebarItem
+					class="text-emerald-50 hover:text-emerald-950"
+					href="/family-trees"
+					label="Family Trees"
+				>
 					<svelte:fragment slot="icon">
 						<UserGroup />
 					</svelte:fragment>
@@ -179,9 +239,13 @@
 				{#if user && user.admin}
 					<SidebarDropdownWrapper class="text-emerald-50 hover:text-emerald-950" label="Admin">
 						<svelte:fragment slot="icon">
-							<Cog						/>
+							<Cog />
 						</svelte:fragment>
-						<SidebarDropdownItem class="text-emerald-50 hover:text-emerald-950" href="/admin/settings" label="Settings" />
+						<SidebarDropdownItem
+							class="text-emerald-50 hover:text-emerald-950"
+							href="/admin/settings"
+							label="Settings"
+						/>
 					</SidebarDropdownWrapper>
 				{/if}
 			</SidebarGroup>
@@ -199,7 +263,7 @@
 		display: flex;
 		align-items: center; /* Center content vertically if needed */
 		justify-content: center; /* Center icon horizontally */
-		background-color: lightgrey; /* Initial color */
+		/* background-color: lightgrey; Initial color */
 		cursor: pointer;
 		transition: background-color 0.3s; /* Smooth transition for hover effect */
 	}

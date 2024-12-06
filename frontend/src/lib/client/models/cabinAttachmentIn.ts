@@ -3,8 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type cabinAttachmentIn = (createUpdateBaseModel & {
-    cabin_in?: number;
-    image?: Blob;
-});
-
+export type cabinAttachmentIn = createUpdateBaseModel & {
+	cabin_in?: number;
+	image?: Blob;
+};

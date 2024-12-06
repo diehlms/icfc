@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type chartIn = (createUpdateBaseModel & {
-    caption?: string;
-});
-
+export type chartIn = createUpdateBaseModel & {
+	caption?: string;
+};

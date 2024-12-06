@@ -12,7 +12,12 @@ class ApplicationController < ActionController::Base
 
       begin
         @decoded = JsonWebToken.decode(token)
-        @current_user = User.find(@decoded[:user_id])
+
+        if @decoded != nil
+          @current_user = User.find(@decoded[:user_id])
+        else
+          render json: { errors: 'Missing token' }, status: :unauthorized
+        end
       rescue ActiveRecord::RecordNotFound => e
         render json: { errors: "User not found: #{e.message}" }, status: :unauthorized
       rescue JWT::DecodeError => e

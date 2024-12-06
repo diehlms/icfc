@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Loader from '$lib/components/display/Loader.svelte';
+	import { formatDate } from '$lib/components/services/textFormatting';
 	import { clientStore } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
@@ -56,7 +57,9 @@
 	$: events;
 </script>
 
-<div class="p-8">
+<div class="background-image"></div>
+
+<div class="landing-page p-8">
 	{#if loading}
 		<Loader />
 	{:else if error}
@@ -64,20 +67,20 @@
 	{:else if events && campers && articles}
 		<h1 class="mb-4 text-center text-4xl font-bold">Iron City Fishing Club</h1>
 
-		<div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-			<!-- Breakfast Card -->
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-4">
 			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
 				<h2 class="mb-4 text-xl font-semibold">Today's Breakfast</h2>
 				<p class="text-gray-600">{getBreakfast()}</p>
 			</div>
 
-			<!-- Events Card -->
 			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
 				<h2 class="mb-4 text-xl font-semibold">This Week's Events</h2>
 				<ul class="list-inside list-disc">
 					{#if events.length > 0}
 						{#each events as event}
-							<li>{event.title} - {event.date}</li>
+							<li>
+								{event.events} - {formatDate(event.start_time)} to {formatDate(event.end_time)}
+							</li>
 						{/each}
 					{:else}
 						<span>No events this week!</span>
@@ -85,8 +88,7 @@
 				</ul>
 			</div>
 
-			<!-- Articles Card -->
-			<div class="flex flex-col justify-between rounded-lg bg-white p-6 shadow-md">
+			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
 				<h2 class="mb-4 text-xl font-semibold">Recent Articles</h2>
 				<ul class="list-inside list-disc">
 					{#if articles.length > 0}
@@ -101,8 +103,7 @@
 				</ul>
 			</div>
 
-			<!-- Campers Card -->
-			<div class="flex flex-col justify-between rounded-lg bg-white p-6 shadow-md">
+			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
 				<h2 class="mb-4 text-xl font-semibold">Campers</h2>
 				<ul class="max-h-32 list-inside list-disc overflow-y-scroll">
 					{#if campers.length > 0}
@@ -114,30 +115,27 @@
 					{/if}
 				</ul>
 			</div>
-			<div
+			<!-- <div
 				class="img1 col-span-1 row-span-2 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-2"
 			></div>
 			<div
 				class="img2 col-span-1 row-span-3 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-3"
-			></div>
+			></div> -->
 		</div>
 	{/if}
 </div>
 
 <style lang="scss">
-	.img1 {
-		background-image: url('../assets/images/flags.jpg');
+	.background-image {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url('../assets/images/flags.jpg'); // '../assets/images/boardwalk.jpg'
 		background-size: cover;
-		background-position: bottom;
-		height: 30vh;
-		overflow-y: hidden;
-	}
-
-	.img2 {
-		background-image: url('../assets/images/boardwalk.jpg');
-		background-size: cover;
-		background-position: bottom;
-		height: 60vh;
-		overflow-y: hidden;
+		background-position: center;
+		opacity: 0.3;
+		z-index: -1;
 	}
 </style>

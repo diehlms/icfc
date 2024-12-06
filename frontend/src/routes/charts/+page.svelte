@@ -32,7 +32,7 @@
 				}));
 			})
 			.catch((error: any) => {
-				errors = processApiErrorsToString(error.body)
+				errors = processApiErrorsToString(error.body);
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { campMessageOut } from '$lib/client/models/campMessageOut';
 	import { clientStore, toastStore, ToastTypes } from '$lib/stores';
-	import { Banner } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 	import { Megaphone } from 'svelte-heros-v2';
 	import { processApiErrorsToString } from '../services/errorHandler';

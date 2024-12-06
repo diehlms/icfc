@@ -61,9 +61,9 @@
 
 	onMount(() => {
 		fetchArticles(currentPage);
-		
+
 		const scrollContainer = document.querySelector('.article-flow');
-		
+
 		if (scrollContainer) {
 			scrollContainer.addEventListener('scroll', handleScroll);
 			scrollContainer.addEventListener('touchmove', handleScroll);
@@ -93,8 +93,7 @@
 				}));
 			})
 			.catch((error: any) => {
-				errors = processApiErrorsToString(error.body)
-				console.log(errors)
+				errors = processApiErrorsToString(error.body);
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
@@ -173,7 +172,6 @@
 		{/if}
 	</div>
 {/if}
-
 
 <style lang="scss">
 	.article-flow {

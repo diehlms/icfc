@@ -210,7 +210,7 @@
 		<Listgroup items={article.comments} let:item class="w-full p-3">
 			<Timestamps textAlign={'text-left'} model={item} />
 			<pre class="mb-4 whitespace-pre-wrap text-base text-gray-700 dark:text-gray-300">
-{@html item.content}</pre>
+	{@html item.content}</pre>
 			{#if updateAuthContext.userActionPermitted(item.user_id, user)}
 				<Button outline size="xs" color="red" on:click={() => deleteComment(item.id)}
 					><Trash /></Button

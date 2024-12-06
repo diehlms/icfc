@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export type loginPayload = {
-    email: string;
-    password?: string;
+	email: string;
+	password?: string;
 };
-

@@ -28,31 +28,31 @@
 					type: ToastTypes.error
 				}));
 			});
-		
-		client.restClient?.logs.getV1Logs({ user_id: user.id}).then((res: any) => {
-			logs = res;
-		}).catch((error: any) => {
-			toastStore.update((prevValue) => ({
-				...prevValue,
-				isOpen: true,
-				toastMessage: processApiErrorsToString(error.body),
-				type: ToastTypes.error
-			}));
-		});
-	});
 
+		client.restClient?.logs
+			.getV1Logs({ user_id: user.id })
+			.then((res: any) => {
+				logs = res;
+			})
+			.catch((error: any) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: processApiErrorsToString(error.body),
+					type: ToastTypes.error
+				}));
+			});
+	});
 
 	const handleCampMessage = (event: Event) => {
 		const { target } = event;
 		campMessage = target.value;
 	};
 
-
 	const handleUserToDelete = (event: Event) => {
 		const { target } = event;
 		userToDelete = target.value;
 	};
-
 
 	const sendCampMessage = () => {
 		loading = true;
@@ -82,8 +82,8 @@
 			{ user_id: user.id as number },
 			'User',
 			client.restClient?.users.deleteV1Users.bind(client.restClient.users)
-		)
-	}
+		);
+	};
 
 	const user = get(userStore);
 	const client = get(clientStore);
@@ -123,7 +123,8 @@
 			on:input={handleCampMessage}
 			bind:value={campMessage}
 		>
-			<Button slot="right" size="sm" color="green" outline on:click={sendCampMessage}>Send camp message</Button
+			<Button slot="right" size="sm" color="green" outline on:click={sendCampMessage}
+				>Send camp message</Button
 			>
 		</Input>
 	</div>
@@ -139,20 +140,19 @@
 			on:input={handleUserToDelete}
 			bind:value={userToDelete}
 		>
-			<Button slot="right" size="sm" color="red" outline on:click={deleteUser}>Delete User</Button
-			>
+			<Button slot="right" size="sm" color="red" outline on:click={deleteUser}>Delete User</Button>
 		</Input>
 	</div>
 	<h1>Logs</h1>
 	{#if logs}
-	<div class="max-w-1/2">
-		<pre>
-			<code class="block bg-gray-800 text-green-400 whitespace-pre-wrap p-2">
+		<div class="max-w-1/2">
+			<pre>
+			<code class="block whitespace-pre-wrap bg-gray-800 p-2 text-green-400">
 {#each logs.logs as logLine}
-	{logLine}
-{/each}
+						{logLine}
+					{/each}
 			</code>
 		</pre>
-	</div>	
+		</div>
 	{/if}
 {/if}

@@ -4,5 +4,4 @@
 /* eslint-disable */
 import type { baseModel } from './baseModel';
 import type { committeeIn } from './committeeIn';
-export type committeeOut = (baseModel & committeeIn);
-
+export type committeeOut = baseModel & committeeIn;

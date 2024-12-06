@@ -5,8 +5,8 @@
 import type { author } from './author';
 import type { baseModel } from './baseModel';
 import type { rideshareIn } from './rideshareIn';
-export type rideshareOut = (rideshareIn & baseModel & {
-    id?: number;
-    user?: author;
-});
-
+export type rideshareOut = rideshareIn &
+	baseModel & {
+		id?: number;
+		user?: author;
+	};

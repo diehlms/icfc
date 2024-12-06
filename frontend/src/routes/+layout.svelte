@@ -29,7 +29,7 @@
 		if (value.restClient !== null) {
 			restClient = value.restClient;
 		} else {
-			// Rest Client not initialized, will need 
+			// Rest Client not initialized, will need
 			// to programatically refresh page
 			invalidateAll();
 		}
@@ -108,29 +108,30 @@
 <Footer />
 
 <style>
-  .main-ui-window {
-    flex-grow: 1;
-    margin-top: 1rem;
-    padding-left: 7rem;
-    padding-right: 5rem;
-  }
-  .flex {
-    display: flex;
-  }
-  .flex-1 {
-    flex: 1;
-  }
-  .h-screen {
-    height: 100vh;
-  }
+	.main-ui-window {
+		flex-grow: 1;
+		margin-top: 1rem;
+		padding-left: 7rem;
+		padding-right: 5rem;
+		height: 180vh;
+	}
+	.flex {
+		display: flex;
+	}
+	.flex-1 {
+		flex: 1;
+	}
+	.h-screen {
+		height: 100vh;
+	}
 
-  @media (max-width: 768px) {
-    .main-ui-window {
-      padding-left: 32px;
-      padding-right: 10px;
-    }
-    .flex {
-      flex-direction: column;
-    }
-  }
+	@media (max-width: 768px) {
+		.main-ui-window {
+			padding-left: 32px;
+			padding-right: 10px;
+		}
+		.flex {
+			flex-direction: column;
+		}
+	}
 </style>

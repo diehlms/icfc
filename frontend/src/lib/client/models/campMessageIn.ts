@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type campMessageIn = (createUpdateBaseModel & {
-    message?: string;
-});
-
+export type campMessageIn = createUpdateBaseModel & {
+	message?: string;
+};

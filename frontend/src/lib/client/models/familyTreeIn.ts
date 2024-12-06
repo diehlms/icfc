@@ -3,7 +3,6 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type familyTreeIn = (createUpdateBaseModel & {
-    name?: string;
-});
-
+export type familyTreeIn = createUpdateBaseModel & {
+	name?: string;
+};

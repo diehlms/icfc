@@ -63,6 +63,14 @@ resource "hcloud_firewall" "web_firewall" {
     source_ips = ["${var.home_ip}/32"]
   }
 
+  rule {
+    direction  = "in"
+    protocol   = "tcp"
+    port       = "22"
+    source_ips = ["98.109.77.204/32"]
+  }
+
+
   # grafana
   rule {
     direction  = "in"

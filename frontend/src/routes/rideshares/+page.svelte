@@ -9,7 +9,7 @@
 	import FormBuilder, { FormInput } from '$lib/components/services/formBuilder';
 	import type { locationPointIn, rideshareIn } from '$lib/client';
 	import { createEntity } from '$lib/components/services/crud';
-	import { Button, Input} from 'flowbite-svelte';
+	import { Button, Input } from 'flowbite-svelte';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
 	let rideshares: IRideshare[] = [];
@@ -84,7 +84,7 @@
 				}));
 			})
 			.catch((error: any) => {
-				errors = processApiErrorsToString(error.body)
+				errors = processApiErrorsToString(error.body);
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,

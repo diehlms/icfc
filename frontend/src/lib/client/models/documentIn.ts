@@ -4,9 +4,8 @@
 /* eslint-disable */
 import type { attachmentBaseModel } from './attachmentBaseModel';
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type documentIn = (createUpdateBaseModel & {
-    document_title?: string;
-    document_folder?: string;
-    document?: attachmentBaseModel;
-});
-
+export type documentIn = createUpdateBaseModel & {
+	document_title?: string;
+	document_folder?: string;
+	document?: attachmentBaseModel;
+};

@@ -7,10 +7,10 @@ import type { attachmentBaseModel } from './attachmentBaseModel';
 import type { author } from './author';
 import type { baseModel } from './baseModel';
 import type { commentOut } from './commentOut';
-export type articleOut = (baseModel & articleIn & {
-    id?: number;
-    image?: attachmentBaseModel;
-    user?: author;
-    comments?: Array<commentOut>;
-});
-
+export type articleOut = baseModel &
+	articleIn & {
+		id?: number;
+		image?: attachmentBaseModel;
+		user?: author;
+		comments?: Array<commentOut>;
+	};

@@ -3,13 +3,15 @@
 	export let year = new Date().getFullYear();
 </script>
 
-<footer>
-	<p>&copy; {year} ICFC. All rights reserved. Version {PUBLIC_VERSION}</p>
+<footer class="bg-emerald-900">
+	<p class="text-emerald-50">
+		&copy; {year} ICFC | Version {PUBLIC_VERSION} | <a href="/api-docs">API Documentation</a> |
+		<a href="https://github.com/diehlms/icfc">Source</a>
+	</p>
 </footer>
 
 <style>
 	footer {
-		background-color: #eee;
 		padding: 10px;
 		z-index: 899;
 		text-align: center;
@@ -23,6 +25,5 @@
 	p {
 		margin: 0;
 		font-size: 14px;
-		color: #555555;
 	}
 </style>

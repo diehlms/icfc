@@ -3,8 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
-export type locationPointIn = (createUpdateBaseModel & {
-    location_name?: string;
-    location_description?: string;
-});
-
+export type locationPointIn = createUpdateBaseModel & {
+	location_name?: string;
+	location_description?: string;
+};
