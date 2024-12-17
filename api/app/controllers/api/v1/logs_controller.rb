@@ -1,5 +1,5 @@
 class Api::V1::LogsController < ApplicationController
-  # before_action :check_admin_only
+  before_action :check_admin_only
 
   def index
     logs_file_path = Rails.root.join("log", "#{Rails.env}.log")

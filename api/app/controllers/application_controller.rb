@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  # protect_from_forgery
   around_action :label_metrics
 
   def authorize_request

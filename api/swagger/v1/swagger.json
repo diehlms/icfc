@@ -1621,6 +1621,26 @@
         }
       }
     },
+    "/v1/toggle_maintenance": {
+      "post": {
+        "summary": "toggle maintenance_mode",
+        "tags": [
+          "Maintenance"
+        ],
+        "security": [
+          {
+            "Bearer": [
+
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful"
+          }
+        }
+      }
+    },
     "/v1/password_resets": {
       "post": {
         "summary": "create password_reset",
