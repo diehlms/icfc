@@ -12,9 +12,9 @@ variable "hcloud_token" {
   sensitive   = true
 }
 
-variable "home_ip" {
+variable "home_ips" {
   description = "My home network IP address (CIDR notation)"
-  type        = string
+  type        = list(string)
 }
 
 variable "username" {
@@ -56,35 +56,41 @@ resource "hcloud_firewall" "web_firewall" {
     source_ips = ["0.0.0.0/0", "::/0"]
   }
 
-  rule {
-    direction  = "in"
-    protocol   = "tcp"
-    port       = "22"
-    source_ips = ["${var.home_ip}/32"]
-  }
+  dynamic "rule" {
+    for_each = var.home_ips
 
-  rule {
-    direction  = "in"
-    protocol   = "tcp"
-    port       = "22"
-    source_ips = ["98.109.77.204/32"]
+    content {
+      direction = "in"
+      protocol = "tcp"
+      port = "22"
+      source_ips = ["${rule.value}/32"]
+    }
   }
-
 
   # grafana
-  rule {
-    direction  = "in"
-    protocol   = "tcp"
-    port       = "3001"
-    source_ips = ["${var.home_ip}/32"]
+
+  dynamic "rule" {
+    for_each = var.home_ips
+
+    content {
+      direction = "in"
+      protocol = "tcp"
+      port = "3001"
+      source_ips = ["${rule.value}/32"]
+    }
   }
 
   # prometheus
-  rule {
-    direction  = "in"
-    protocol   = "tcp"
-    port       = "9090"
-    source_ips = ["${var.home_ip}/32"]
+
+  dynamic "rule" {
+    for_each = var.home_ips
+
+    content {
+      direction = "in"
+      protocol = "tcp"
+      port = "9090"
+      source_ips = ["${rule.value}/32"]
+    }
   }
 
   rule {
