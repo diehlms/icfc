@@ -5,12 +5,11 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore private cabin info 
-
 /app/assets/javascripts/cabins
 /app/views/pages/charitable_gift
 
 # Ignore bundler config.
-.bundle
+**/.bundle
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -53,3 +52,6 @@ terraform.tfvars
 .terraform/
 
 **/log
+
+# PG dump files
+latest.dump

@@ -25,6 +25,7 @@ services:
     networks:
       - icfc
   api:
+    platform: linux/amd64
     build:
       context: ./api
       dockerfile: Dockerfile

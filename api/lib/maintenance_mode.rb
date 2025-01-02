@@ -14,7 +14,8 @@ class MaintenanceMode
   private
 
   def maintenance_mode_active?
-    ENV.fetch("MAINTENANCE_MODE_ACTIVE", nil)
+    false
+    # ENV.fetch("MAINTENANCE_MODE_ACTIVE", nil)
   end
 
   def rack_response

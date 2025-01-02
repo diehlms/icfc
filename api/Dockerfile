@@ -1,4 +1,4 @@
-FROM arm64v8/ruby:3.2.2-bullseye
+FROM ruby:3.2.2-bullseye
 
 ENV GEM_HOME="/app/.bundle"
 ENV PATH $GEM_HOME/bin:$GEM_HOME/gems/bin:$PATH
