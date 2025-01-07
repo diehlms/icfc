@@ -113,16 +113,13 @@
 		margin-top: 1rem;
 		padding-left: 7rem;
 		padding-right: 5rem;
-		height: 180vh;
+		margin-bottom: 1rem;
 	}
 	.flex {
 		display: flex;
 	}
 	.flex-1 {
 		flex: 1;
-	}
-	.h-screen {
-		height: 100vh;
 	}
 
 	@media (max-width: 768px) {

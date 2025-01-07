@@ -8,18 +8,14 @@
 		Button,
 		Select,
 		Label,
-		SpeedDial,
-		SpeedDialButton,
 		Modal
 	} from 'flowbite-svelte';
 	import { PencilSquare, RocketLaunch } from 'svelte-heros-v2';
 	import { createEventDispatcher } from 'svelte';
-	import { Plus } from 'svelte-heros-v2';
 	import AttachmentUploader from './AttachmentUploader.svelte';
 
 	export let form: FormInput[] = new FormBuilder().build();
 	export let openDrawerLabel: string = 'Add new';
-	export let displayAsButton: boolean = false;
 	export let errors: any = undefined;
 
 	let defaultModal = false;
@@ -72,7 +68,7 @@
 </script>
 
 <Modal bind:open={defaultModal} on:close={resetForm}>
-	<form class="flex flex-col space-y-1" on:submit|preventDefault={onSubmit}>
+	<form class="bg-grey-500/[.06] p-5 rounded-sm flex flex-col space-y-1" on:submit|preventDefault={onSubmit}>
 		{#if errors}
 			<span>{errors}</span>
 		{/if}
@@ -137,17 +133,9 @@
 	</form>
 </Modal>
 
-{#if displayAsButton}
-	<Button color="yellow" size="xs" on:click={() => (defaultModal = true)} outline>
+<div class="mb-4">
+	<Button size="xs" on:click={() => (defaultModal = true)} outline>
 		<PencilSquare />
 		{openDrawerLabel}
-	</Button>
-{:else}
-	<div class="absolute z-50">
-		<SpeedDial defaultClass="fixed end-6 bottom-12">
-			<SpeedDialButton on:click={() => (defaultModal = true)} name={openDrawerLabel}>
-				<Plus class="h-6 w-6" />
-			</SpeedDialButton>
-		</SpeedDial>
-	</div>
-{/if}
+	</Button>	
+</div>

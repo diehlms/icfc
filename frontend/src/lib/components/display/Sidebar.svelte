@@ -236,18 +236,6 @@
 						<UserGroup />
 					</svelte:fragment>
 				</SidebarItem>
-				{#if user && user.admin}
-					<SidebarDropdownWrapper class="text-emerald-50 hover:text-emerald-950" label="Admin">
-						<svelte:fragment slot="icon">
-							<Cog />
-						</svelte:fragment>
-						<SidebarDropdownItem
-							class="text-emerald-50 hover:text-emerald-950"
-							href="/admin/settings"
-							label="Settings"
-						/>
-					</SidebarDropdownWrapper>
-				{/if}
 			</SidebarGroup>
 		</SidebarWrapper>
 	</Sidebar>

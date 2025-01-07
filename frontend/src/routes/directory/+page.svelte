@@ -42,7 +42,7 @@
 		tableData={users}
 		tableName="Directory"
 		selectable={false}
-		columnNames={['admin', 'recentlyJoined', 'name', 'username', 'email', 'phoneNumber']}
+		columnNames={['name', 'username', 'email', 'phoneNumber', 'admin', 'recentlyJoined']}
 		searchableAttribute="Name"
 		showSearch={false}
 	/>

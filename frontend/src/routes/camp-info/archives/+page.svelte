@@ -2,4 +2,6 @@
 	import DocumentList from '$lib/components/display/DocumentList.svelte';
 </script>
 
-<DocumentList foldersToShow={['dailyBilges', 'backBayBilges']} />
+<div class="h-full pb-10">
+	<DocumentList foldersToShow={['dailyBilges', 'backBayBilges']} />
+</div>

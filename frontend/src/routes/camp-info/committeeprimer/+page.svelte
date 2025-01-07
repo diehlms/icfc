@@ -40,7 +40,7 @@
 	$: committees;
 </script>
 
-<div>
+<div class="h-full pb-10">
 	{#if committees.length > 0}
 		<h1 class="my-4 text-3xl font-bold">Committees:</h1>
 		<Listgroup items={committees} let:item class="mb-4">
@@ -204,29 +204,3 @@
 		</p>
 	</div>
 </div>
-
-<style>
-	.text-container {
-		margin-top: 1.5rem;
-	}
-
-	.list-disc {
-		list-style-type: disc;
-	}
-
-	.list-inside {
-		padding-left: 1rem;
-	}
-
-	.mt-4 {
-		margin-top: 1rem;
-	}
-
-	.mt-8 {
-		margin-top: 2rem;
-	}
-
-	.font-semibold {
-		font-weight: 600;
-	}
-</style>

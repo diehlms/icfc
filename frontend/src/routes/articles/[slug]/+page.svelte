@@ -148,6 +148,7 @@
 {#if loading}
 	<Loader />
 {:else if article}
+<div class="h-full pb-10">
 	<h1>
 		{article.title}
 		{#if updateAuthContext.userActionPermitted(article.user_id, user)}
@@ -218,4 +219,5 @@
 			{/if}
 		</Listgroup>
 	{/if}
+</div>
 {/if}

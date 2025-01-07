@@ -1,4 +1,4 @@
-<div class="reactPageAppContainer">
+<div class="h-full pb-10">
 	<h1 class="my-4 text-3xl font-bold">Iron City Fishing Club By Laws</h1>
 
 	<div class="rounded border border-blue-500 bg-blue-100 px-4 py-3 text-blue-700">

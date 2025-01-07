@@ -137,9 +137,11 @@
 									>Download</span
 								></Badge
 							>
-							<Badge color="red"
-								><span on:click={() => deleteDocument(item.id)}>Delete</span>
-							</Badge>
+							{#if user.admin === true}
+								<Badge color="red"
+									><span on:click={() => deleteDocument(item.id)}>Delete</span>
+								</Badge>
+							{/if}
 						</div>
 					</span>
 				</Listgroup>

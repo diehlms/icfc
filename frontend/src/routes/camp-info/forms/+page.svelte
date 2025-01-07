@@ -2,4 +2,6 @@
 	import DocumentList from '$lib/components/display/DocumentList.svelte';
 </script>
 
-<DocumentList foldersToShow={['forms']} />
+<div class="h-full pb-10">
+	<DocumentList foldersToShow={['forms']} />
+</div>

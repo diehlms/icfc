@@ -1,4 +1,4 @@
-<div class="reactPageAppContainer">
+<div class="h-full pb-10">
 	<h1 class="my-4 text-3xl font-bold">Planned Giving</h1>
 
 	<div class="text-container mt-4">

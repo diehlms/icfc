@@ -112,6 +112,6 @@
 	{errors}
 />
 
-<div class="w-11/12">
+<div class="w-11/12 h-full pb-10">
 	<Calendar {plugins} {options} />
 </div>

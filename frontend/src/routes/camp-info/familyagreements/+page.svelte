@@ -1,4 +1,4 @@
-<div class="reactPageAppContainer">
+<div class="h-full pb-10">
 	<h1 class="my-4 text-3xl font-bold">Family Agreements</h1>
 
 	<div class="rounded border border-blue-500 bg-blue-100 px-4 py-3 text-blue-700">
@@ -34,25 +34,3 @@
 		</p>
 	</div>
 </div>
-
-<style>
-	.text-container {
-		margin-top: 1.5rem;
-	}
-
-	.bg-blue-100 {
-		background-color: #ebf8ff;
-	}
-
-	.border-blue-500 {
-		border-color: #4299e1;
-	}
-
-	.text-blue-700 {
-		color: #2b6cb0;
-	}
-
-	.rounded {
-		border-radius: 0.375rem;
-	}
-</style>

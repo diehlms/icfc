@@ -1,4 +1,4 @@
-<div class="reactPageAppContainer">
+<div class="h-full pb-10">
 	<h1 class="my-4 text-3xl font-bold">Customs</h1>
 
 	<div class="rounded border border-blue-500 bg-blue-100 px-4 py-3 text-blue-700">
@@ -125,49 +125,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.text-container {
-		margin-top: 1.5rem;
-	}
-
-	.list-decimal {
-		list-style-type: decimal;
-	}
-
-	.list-disc {
-		list-style-type: disc;
-	}
-
-	.list-inside {
-		padding-left: 1rem;
-	}
-
-	.bg-green-100 {
-		background-color: #f0fff4;
-	}
-
-	.border-green-500 {
-		border-color: #48bb78;
-	}
-
-	.text-green-700 {
-		color: #2f855a;
-	}
-
-	.rounded {
-		border-radius: 0.375rem;
-	}
-
-	.mt-4 {
-		margin-top: 1rem;
-	}
-
-	.font-semibold {
-		font-weight: 600;
-	}
-
-	.text-sm {
-		font-size: 0.875rem;
-	}
-</style>
