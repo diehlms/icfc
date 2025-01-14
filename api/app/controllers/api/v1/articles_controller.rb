@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'prometheus_exporter/client'
-
 module Api
   module V1
     class ArticlesController < ApplicationController

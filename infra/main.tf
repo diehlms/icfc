@@ -80,19 +80,6 @@ resource "hcloud_firewall" "web_firewall" {
     }
   }
 
-  # prometheus
-
-  dynamic "rule" {
-    for_each = var.home_ips
-
-    content {
-      direction = "in"
-      protocol = "tcp"
-      port = "9090"
-      source_ips = ["${rule.value}/32"]
-    }
-  }
-
   rule {
     direction  = "out"
     protocol   = "tcp"
