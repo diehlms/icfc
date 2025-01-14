@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import type { campMessageOut } from '$lib/client';
 	import Loader from '$lib/components/display/Loader.svelte';
 	import { createEntity, deleteEntity } from '$lib/components/services/crud';
@@ -15,8 +16,12 @@
 	let logs: any = undefined;
 
 	onMount(() => {
+		if (!user.admin) {
+			goto('/');
+		}
+
 		client.restClient?.campMessages
-			.getV1CampMessages()
+			.getV1CampMessages({ user_id: user.id })
 			.then((res: campMessageOut[]) => {
 				messages = res;
 			})

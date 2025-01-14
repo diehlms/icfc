@@ -35,6 +35,7 @@ class ApplicationController < ActionController::Base
   def check_admin_only
     model = instance_variable_get("@#{controller_name.singularize}")
 
+    puts model
     if model.present?
       authorize_resource(model, params[:user_id], true)
     else

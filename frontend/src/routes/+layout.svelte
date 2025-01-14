@@ -113,7 +113,7 @@
 		margin-top: 1rem;
 		padding-left: 7rem;
 		padding-right: 5rem;
-		margin-bottom: 1rem;
+		margin-bottom: 7rem;
 	}
 	.flex {
 		display: flex;

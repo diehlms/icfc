@@ -203,11 +203,11 @@
 						<CalendarDays />
 					</svelte:fragment>
 				</SidebarItem>
-				<SidebarItem class="text-emerald-50 hover:text-emerald-950" href="/charts" label="Charts">
+				<!-- <SidebarItem class="text-emerald-50 hover:text-emerald-950" href="/charts" label="Charts">
 					<svelte:fragment slot="icon">
 						<Clipboard />
 					</svelte:fragment>
-				</SidebarItem>
+				</SidebarItem> -->
 				<SidebarItem
 					class="text-emerald-50 hover:text-emerald-950"
 					href="/rideshares"
