@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'prometheus_exporter/client'
+
 module Api
   module V1
     class ArticlesController < ApplicationController
@@ -8,6 +10,7 @@ module Api
       before_action :check_authorization, only: %i[upload_image update destroy]
 
       def index
+        $camp_message_requests_counter.observe(1)
         @articles = Article.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
         render json: @articles, each_serializer: ArticleSerializer
       end

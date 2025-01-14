@@ -212,10 +212,6 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.3)
-    prometheus-client (4.2.3)
-      base64
-    prometheus_exporter (2.1.1)
-      webrick
     psych (3.3.4)
     public_suffix (5.0.1)
     puma (3.12.6)
@@ -269,6 +265,7 @@ GEM
     reverse_markdown (2.1.1)
       nokogiri
     rexml (3.2.5)
+    rollbar (3.6.0)
     rouge (4.1.2)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
@@ -360,7 +357,6 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webrick (1.9.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -392,14 +388,13 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   open-weather
   pg
-  prometheus-client
-  prometheus_exporter
   psych (< 4)
   puma (~> 3.11)
   rack-cors
   rails (~> 6.1.3.2)
   rails-controller-testing
   redis (~> 4.0)
+  rollbar
   rspec-rails
   rswag-api
   rswag-specs
