@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: ghcr.io/diehlms/icfc-www:latest
+    image: ghcr.io/diehlms/icfc-www-staging:latest
     ports:
       - "80:80"
       - "443:443"
@@ -21,7 +21,7 @@ services:
     networks:
       - app_network
   web:
-    image: ghcr.io/diehlms/icfc-www:latest
+    image: ghcr.io/diehlms/icfc-api-staging:latest
     entrypoint: ["/bin/bash", "/rails/entrypoint.sh"]
     environment:
       - RAILS_ENV=staging

@@ -20,11 +20,26 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
-      - name: 'Build WWW Image'
+      - name: 'Build Staging WWW Image'
         run: |
-          touch frontend/.env.production;
+          touch frontend/.env.staging;
           echo "PUBLIC_API_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz/api" >> frontend/.env.production;
           echo "PUBLIC_BASE_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz" >> frontend/.env.production;
+          echo "PUBLIC_INSEASON_RESERVATION_LINK=${{ vars.PUBLIC_INSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
+          echo "PUBLIC_OUTSEASON_RESERVATION_LINK=${{ vars.PUBLIC_OUTSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
+          echo "PUBLIC_VERSION=${{ github.sha }}" >> frontend/.env.staging;
+          echo "PUBLIC_ENVIRONMENT=staging" >> frontend/.env.staging;
+          echo "PUBLIC_UPLOADS_S3_BUCKET=ironcityfishingclub" >> frontend/.env.staging;
+          docker build . -f Dockerfile.api --tag ghcr.io/diehlms/icfc-api-staging:${{ github.sha }}
+          docker build . -f Dockerfile.www --tag ghcr.io/diehlms/icfc-www-staging:${{ github.sha }}
+          docker push ghcr.io/diehlms/icfc-api-staging:${{ github.sha }}
+          docker push ghcr.io/diehlms/icfc-www-staging:${{ github.sha }}
+
+      - name: 'Build Production WWW Image'
+        run: |
+          touch frontend/.env.production;
+          echo "PUBLIC_API_URL=https://icfc.net/api" >> frontend/.env.production;
+          echo "PUBLIC_BASE_URL=https://icfc.net" >> frontend/.env.production;
           echo "PUBLIC_INSEASON_RESERVATION_LINK=${{ vars.PUBLIC_INSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
           echo "PUBLIC_OUTSEASON_RESERVATION_LINK=${{ vars.PUBLIC_OUTSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
           echo "PUBLIC_VERSION=${{ github.sha }}" >> frontend/.env.production;

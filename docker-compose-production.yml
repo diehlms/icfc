@@ -21,7 +21,7 @@ services:
     networks:
       - app_network
   web:
-    image: ghcr.io/diehlms/icfc-www:latest
+    image: ghcr.io/diehlms/icfc-api:latest
     entrypoint: ["/bin/bash", "/rails/entrypoint.sh"]
     environment:
       - RAILS_ENV=production
