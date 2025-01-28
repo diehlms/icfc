@@ -15,6 +15,10 @@ test:
   <<: *default
   database: test_icfc
 
+development:
+  <<: *default
+  database: staging_icfc
+
 production:
   <<: *default
   database: production_icfc

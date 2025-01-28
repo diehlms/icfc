@@ -5,7 +5,7 @@ require 'active_support/core_ext/integer/time'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.force_ssl = true
-  config.hosts = ['caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz', 'icfc.net']
+  config.hosts = ['caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz', 'test.icfc.net']
   # Code is not reloaded between requests.
   config.cache_classes = true
   # Eager load code on boot. This eager loads most of Rails and
@@ -18,7 +18,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
   config.action_mailer.delivery_method = :smtp
   config.x.mail_from = %(ICFC Dev <#{ENV.fetch('DEFAULT_FROM_EMAIL_ADDRESS')}>)
-  config.action_mailer.default_url_options = { host: 'icfc.net' }
+  config.action_mailer.default_url_options = { host: 'caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz' }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
     address: ENV.fetch("SMTP_HOST"),

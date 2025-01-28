@@ -51,14 +51,6 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - icfc
-  alertmanager:
-    image: prom/alertmanager:v0.27.0
-    env_file:
-      - ".env"
-    ports:
-      - "9093:9093"
-    networks:
-      - icfc
 
 volumes:
   gems:
