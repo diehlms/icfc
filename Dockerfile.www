@@ -1,8 +1,11 @@
 # Step 1: Frontend Build
 FROM node:18-alpine AS build
+
+ARG ENVIRONMENT_FILE=".env.production"
+
 WORKDIR /app
 
-COPY frontend/.env.production .env
+COPY frontend/${ENVIRONMENT_FILE} .env
 COPY frontend/package*.json ./
 RUN npm install
 COPY frontend/. .

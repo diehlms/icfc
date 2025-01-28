@@ -9,9 +9,9 @@ services:
       - ./certbot:/certs
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     depends_on:
-    - web
+      - web
     networks:
-    - app_network
+      - app_network
   certbot:
     image: certbot/certbot:v3.0.0
     volumes:
