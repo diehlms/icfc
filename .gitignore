@@ -56,4 +56,5 @@ terraform.tfvars
 # PG dump files
 latest.dump
 .env.*
-terraform.tfstate*
+terraform.tfstate
+terraform.tfstate.backup
