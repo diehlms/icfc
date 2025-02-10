@@ -67,8 +67,6 @@ resource "hcloud_firewall" "web_firewall" {
     }
   }
 
-  # grafana
-
   dynamic "rule" {
     for_each = var.home_ips
 
@@ -76,6 +74,28 @@ resource "hcloud_firewall" "web_firewall" {
       direction = "in"
       protocol = "tcp"
       port = "3001"
+      source_ips = ["${rule.value}/32"]
+    }
+  }
+
+  dynamic "rule" {
+    for_each = var.home_ips
+
+    content {
+      direction = "in"
+      protocol = "tcp"
+      port = "8080"
+      source_ips = ["${rule.value}/32"]
+    }
+  }
+
+  dynamic "rule" {
+    for_each = var.home_ips
+
+    content {
+      direction = "in"
+      protocol = "tcp"
+      port = "8081"
       source_ips = ["${rule.value}/32"]
     }
   }

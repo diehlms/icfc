@@ -50,7 +50,7 @@ jobs:
           docker push ghcr.io/diehlms/icfc-api:${{ github.sha }}
           docker push ghcr.io/diehlms/icfc-www:${{ github.sha }}
 
-  deploy:
+  deploy_staging:
     runs-on: [self-hosted, linux, X64]
     needs: [publish]
     steps:
@@ -67,36 +67,21 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
 
-      # TODO: make next two steps manually triggered for prod deploys
       - name: Update Docker Compose File with Image
         run: |
           export API_IMAGE="ghcr.io/diehlms/icfc-api:${{ github.sha }}";
           export WWW_IMAGE="ghcr.io/diehlms/icfc-www:${{ github.sha }}";
-          yq eval ".services.web.image = \"$API_IMAGE\"" -i docker-compose-staging.yml
-          yq eval ".services.nginx.image = \"$WWW_IMAGE\"" -i docker-compose-staging.yml
-          yq eval ".services.web.image = \"$API_IMAGE\"" -i docker-compose-production.yml
-          yq eval ".services.nginx.image = \"$WWW_IMAGE\"" -i docker-compose-production.yml
+          yq eval ".services.staging_api.image = \"$API_IMAGE\"" -i docker-compose-deployed.yml
+          yq eval ".services.staging_www.image = \"$WWW_IMAGE\"" -i docker-compose-deployed.yml
 
       - name: Deploy to server
         env:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
-          scp -i ~/.ssh/deploy_key proxy/nginx.staging.conf $DEPLOY_USER@$DEPLOY_HOST:~/app/proxy/nginx.staging.conf
-          scp -i ~/.ssh/deploy_key proxy/nginx.prod.conf $DEPLOY_USER@$DEPLOY_HOST:~/app/proxy/nginx.prod.conf
-          scp -i ~/.ssh/deploy_key docker-compose-staging.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-staging.yml
-          scp -i ~/.ssh/deploy_key docker-compose-production.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-production.yml
-          
-          echo "Deploying staging..."
-
+          scp -i ~/.ssh/deploy_key proxy/nginx.frontends.conf $DEPLOY_USER@$DEPLOY_HOST:~/app/proxy/nginx.frontends.conf
+          scp -i ~/.ssh/deploy_key docker-compose-deployed.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-deployed.yml
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \
-            docker compose -f docker-compose-staging.yml pull && \
-            docker compose -f docker-compose-staging.yml up -d'
-
-          echo "Deploying production..."
-
-          ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
-            cd ~/app && \
-            docker compose -f docker-compose-production.yml pull && \
-            docker compose -f docker-compose-production.yml up -d'
+            docker compose -f docker-compose-deployed.yml pull && \
+            docker compose -f docker-compose-deployed.yml up -d'
