@@ -171,7 +171,7 @@
 						/>
 					{/if}
 					<Button class="ml-3" outline color="blue" size="sm">
-						<a href={`mailto:${rideshare.user.email}`}> Contact User </a>
+						<a href={`mailto:${rideshare.user.email}`}>Contact User: {rideshare.user.email}</a>
 					</Button>
 				</div>
 			</Card>
