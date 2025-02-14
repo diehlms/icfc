@@ -50,7 +50,7 @@ jobs:
           docker push ghcr.io/diehlms/icfc-api:${{ github.sha }}
           docker push ghcr.io/diehlms/icfc-www:${{ github.sha }}
 
-  deploy_staging:
+  deploy:
     runs-on: [self-hosted, linux, X64]
     needs: [publish]
     steps:
@@ -87,4 +87,4 @@ jobs:
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \
             docker compose -f docker-compose-deployed.yml pull && \
-            docker compose -f docker-compose-deployed.yml up -d'
+            docker compose -f docker-compose-deployed.yml up -d --remove-orphans'
