@@ -69,51 +69,12 @@ jobs:
 
       - name: Update Docker Compose File with Image
         run: |
-          export API_IMAGE="ghcr.io/diehlms/icfc-api-staging:${{ github.sha }}";
-          export WWW_IMAGE="ghcr.io/diehlms/icfc-www-staging:${{ github.sha }}";
-          yq eval ".services.staging_api.image = \"$API_IMAGE\"" -i docker-compose-deployed.yml
-          yq eval ".services.staging_www.image = \"$WWW_IMAGE\"" -i docker-compose-deployed.yml
-
-      - name: Deploy to server
-        env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-        run: |
-          scp -i ~/.ssh/deploy_key proxy/nginx.frontends.conf $DEPLOY_USER@$DEPLOY_HOST:~/app/proxy/nginx.frontends.conf
-          scp -i ~/.ssh/deploy_key docker-compose-deployed.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-deployed.yml
-          ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
-            cd ~/app && \
-            docker compose -f docker-compose-deployed.yml pull && \
-            docker compose -f docker-compose-deployed.yml up -d'
-
-  deploy_production:
-    runs-on: [self-hosted, linux, X64]
-    needs: [publish,deploy_staging]
-    steps:
-      - uses: trstringer/manual-approval@v1
-        with:
-          secret: ${{ github.TOKEN }}
-          approvers: diehlms
-          minimum-approvals: 1
-          exclude-workflow-initiator-as-approver: false
-
-      - uses: actions/checkout@v2
-
-      - uses: Homebrew/actions/setup-homebrew@master
-
-      - name: Configure SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-
-      - name: Update Docker Compose File with Image
-        run: |
+          export STAGING_API_IMAGE="ghcr.io/diehlms/icfc-api-staging:${{ github.sha }}";
+          export STAGING_WWW_IMAGE="ghcr.io/diehlms/icfc-www-staging:${{ github.sha }}";
           export API_IMAGE="ghcr.io/diehlms/icfc-api:${{ github.sha }}";
           export WWW_IMAGE="ghcr.io/diehlms/icfc-www:${{ github.sha }}";
+          yq eval ".services.staging_api.image = \"$STAGING_API_IMAGE\"" -i docker-compose-deployed.yml
+          yq eval ".services.staging_www.image = \"$STAGING_WWW_IMAGE\"" -i docker-compose-deployed.yml
           yq eval ".services.production_api.image = \"$API_IMAGE\"" -i docker-compose-deployed.yml
           yq eval ".services.production_www.image = \"$WWW_IMAGE\"" -i docker-compose-deployed.yml
 
@@ -122,7 +83,6 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
-          scp -i ~/.ssh/deploy_key proxy/nginx.frontends.conf $DEPLOY_USER@$DEPLOY_HOST:~/app/proxy/nginx.frontends.conf
           scp -i ~/.ssh/deploy_key docker-compose-deployed.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-deployed.yml
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \
