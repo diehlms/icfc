@@ -28,8 +28,6 @@ services:
   # PROD
   production_www:
     image: ghcr.io/diehlms/icfc-www-staging:latest
-    volumes:
-      - ./proxy/test.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 4000:4000
     networks:
@@ -62,8 +60,6 @@ services:
       - deployed_network
   staging_www:
     image: ghcr.io/diehlms/icfc-www-staging:latest
-    volumes:
-      - ./proxy/test.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 4001:4000
     networks:
