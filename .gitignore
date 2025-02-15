@@ -58,3 +58,5 @@ latest.dump
 .env.*
 terraform.tfstate
 terraform.tfstate.backup
+
+**/uploads/*
