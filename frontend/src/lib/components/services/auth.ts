@@ -29,7 +29,7 @@ export default {
 		if (this.isTokenExpired(authToken as string)) {
 			console.error("Your auth token has expired; please refresh the page and log in again.");
 			localStorage.removeItem('authToken');
-			goto('/auth/login');
+			location.reload()
 		}
 
 		arrayToken = authToken?.split('.') as string[];

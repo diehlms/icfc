@@ -59,14 +59,3 @@ volumes:
 
 networks:
   icfc:
-
-x-mutagen:
-  sync:
-    gems:
-      alpha: "./api"
-      beta: "volume://gems"
-      mode: "two-way-safe"
-    frontend-node-modules:
-      alpha: "./frontend"
-      beta: "volume://frontend-node-modules"
-      mode: "two-way-safe"

@@ -15,7 +15,7 @@ test:
   <<: *default
   database: test_icfc
 
-development:
+staging:
   <<: *default
   database: staging_icfc
 
