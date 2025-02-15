@@ -3,7 +3,7 @@
 class DocumentUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  if Rails.env.production?
+  if Rails.env.production? || Rails.env.staging?
     storage :aws
   else
     storage :file
