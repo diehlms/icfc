@@ -55,7 +55,7 @@ export const editEntity = (
 	entityName: string,
 	callback: (id: number, payload: object) => Promise<void>
 ): Promise<void> => {
-	callback(id, payload)
+	return callback(id, payload)
 		.then(() => {
 			toastStore.update((prevValue) => ({
 				...prevValue,
