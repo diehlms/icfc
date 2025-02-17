@@ -5,7 +5,7 @@ require 'active_support/core_ext/integer/time'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.force_ssl = true
-  config.hosts = ['caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz', 'test.icfc.net']
+  config.hosts = ['caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz']
   # Code is not reloaded between requests.
   config.cache_classes = true
   # Eager load code on boot. This eager loads most of Rails and
