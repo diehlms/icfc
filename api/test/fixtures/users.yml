@@ -1,0 +1,26 @@
+one:
+  id: 1
+  firstname: "Regular"
+  lastname: "User"
+  email: "user@example.com"
+  password_digest: "<hashed_password>"
+  admin: false
+  created_at: <%= 1.day.ago.to_s(:db) %>
+
+two:
+  id: 3
+  firstname: "Regular2"
+  lastname: "Use2r"
+  email: "user2@example.com"
+  password_digest: "<hashed_password>"
+  admin: false
+  created_at: <%= 1.day.ago.to_s(:db) %>
+
+admin:
+  id: 2
+  firstname: "Admin"
+  lastname: "User"
+  email: "admin@example.com"
+  password_digest: "<hashed_password>"
+  admin: true
+  created_at: <%= 1.day.ago.to_s(:db) %>

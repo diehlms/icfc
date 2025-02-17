@@ -1,7 +1,0 @@
-diehl:
-  username: diehlsillers
-  email: icfc.net
-  password_digest: <%= User.digest('password') %>
-  remember_digest: "1"
-  admin: true
-  email_confirmed: true

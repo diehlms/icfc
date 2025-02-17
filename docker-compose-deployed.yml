@@ -1,0 +1,92 @@
+services:
+  caddy:
+    image: caddy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - production_api
+      - production_www
+      - staging_api
+      - staging_www
+    networks:
+      - deployed_network
+  production_www:
+    image: ghcr.io/diehlms/icfc-www-staging:latest
+    restart: always
+    ports:
+      - 4000:4000
+    networks:
+      - deployed_network
+  production_api:
+    image: ghcr.io/diehlms/icfc-api:latest
+    restart: always
+    entrypoint: ["/bin/bash", "/rails/entrypoint.sh"]
+    environment:
+      - RAILS_ENV=production
+      - RAILS_SERVE_STATIC_FILES=true
+    ports:
+      - 3000:3000
+    env_file:
+      - .env.production
+    volumes:
+      - ./entrypoint.sh:/rails/entrypoint.sh
+    networks:
+      - deployed_network
+  productionpostgres: # no underscores allowed
+    image: postgres:16-bullseye
+    restart: always
+    ports:
+      - 8881:5432
+    env_file:
+      - .env.production
+    volumes:
+      - postgres-data-production:/var/lib/postgresql/data
+    networks:
+      - deployed_network
+  staging_www:
+    image: ghcr.io/diehlms/icfc-www-staging:latest
+    restart: always
+    ports:
+      - 4001:4000
+    networks:
+      - deployed_network
+  staging_api:
+    image: ghcr.io/diehlms/icfc-api-staging:latest
+    restart: always
+    entrypoint: ["/bin/bash", "/rails/entrypoint.sh"]
+    environment:
+      - RAILS_ENV=staging
+      - RAILS_SERVE_STATIC_FILES=true
+    ports:
+      - 3001:3000
+    env_file:
+      - .env.staging
+    volumes:
+      - ./entrypoint.sh:/rails/entrypoint.sh
+    networks:
+      - deployed_network
+  stagingpostgres:
+    image: postgres:16-bullseye
+    restart: always
+    ports:
+      - "8882:5432"
+    env_file:
+      - .env.staging
+    volumes:
+      - postgres-data-staging:/var/lib/postgresql/data
+    networks:
+      - deployed_network
+volumes:
+  postgres-data-production:
+  postgres-data-staging:
+  caddy_data:
+  caddy_config:
+networks:
+  deployed_network:
+    driver: bridge

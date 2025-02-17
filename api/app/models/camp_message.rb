@@ -1,0 +1,2 @@
+class CampMessage < ApplicationRecord
+end

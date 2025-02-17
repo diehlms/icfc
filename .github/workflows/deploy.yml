@@ -1,0 +1,90 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  publish:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: 'Login to GitHub Container Registry'
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: 'Build Staging WWW Image'
+        run: |
+          touch frontend/.env.staging;
+          echo "PUBLIC_API_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz/api" >> frontend/.env.production;
+          echo "PUBLIC_BASE_URL=https://caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz" >> frontend/.env.production;
+          echo "PUBLIC_INSEASON_RESERVATION_LINK=${{ vars.PUBLIC_INSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
+          echo "PUBLIC_OUTSEASON_RESERVATION_LINK=${{ vars.PUBLIC_OUTSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
+          echo "PUBLIC_VERSION=${{ github.sha }}" >> frontend/.env.staging;
+          echo "PUBLIC_ENVIRONMENT=staging" >> frontend/.env.staging;
+          echo "PUBLIC_UPLOADS_S3_BUCKET=ironcityfishingclub" >> frontend/.env.staging;
+          docker build . -f Dockerfile.api --tag ghcr.io/diehlms/icfc-api-staging:${{ github.sha }}
+          docker build . -f Dockerfile.www --build-arg ENVIRONMENT_FILE=".env.staging" --tag ghcr.io/diehlms/icfc-www-staging:${{ github.sha }}
+          docker push ghcr.io/diehlms/icfc-api-staging:${{ github.sha }}
+          docker push ghcr.io/diehlms/icfc-www-staging:${{ github.sha }}
+
+      - name: 'Build Production WWW Image'
+        run: |
+          touch frontend/.env.production;
+          echo "PUBLIC_API_URL=https://icfc.net/api" >> frontend/.env.production;
+          echo "PUBLIC_BASE_URL=https://icfc.net" >> frontend/.env.production;
+          echo "PUBLIC_INSEASON_RESERVATION_LINK=${{ vars.PUBLIC_INSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
+          echo "PUBLIC_OUTSEASON_RESERVATION_LINK=${{ vars.PUBLIC_OUTSEASON_RESERVATION_LINK }}" >> frontend/.env.production;
+          echo "PUBLIC_VERSION=${{ github.sha }}" >> frontend/.env.production;
+          echo "PUBLIC_ENVIRONMENT=production" >> frontend/.env.production;
+          echo "PUBLIC_UPLOADS_S3_BUCKET=ironcityfishingclub" >> frontend/.env.production;
+          docker build . -f Dockerfile.api --tag ghcr.io/diehlms/icfc-api:${{ github.sha }}
+          docker build . -f Dockerfile.www --tag ghcr.io/diehlms/icfc-www:${{ github.sha }}
+          docker push ghcr.io/diehlms/icfc-api:${{ github.sha }}
+          docker push ghcr.io/diehlms/icfc-www:${{ github.sha }}
+
+  deploy:
+    runs-on: [self-hosted, linux, X64]
+    needs: [publish]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+      - name: Update Docker Compose File with Image
+        run: |
+          export STAGING_API_IMAGE="ghcr.io/diehlms/icfc-api-staging:${{ github.sha }}";
+          export STAGING_WWW_IMAGE="ghcr.io/diehlms/icfc-www-staging:${{ github.sha }}";
+          export API_IMAGE="ghcr.io/diehlms/icfc-api:${{ github.sha }}";
+          export WWW_IMAGE="ghcr.io/diehlms/icfc-www:${{ github.sha }}";
+          yq eval ".services.staging_api.image = \"$STAGING_API_IMAGE\"" -i docker-compose-deployed.yml
+          yq eval ".services.staging_www.image = \"$STAGING_WWW_IMAGE\"" -i docker-compose-deployed.yml
+          yq eval ".services.production_api.image = \"$API_IMAGE\"" -i docker-compose-deployed.yml
+          yq eval ".services.production_www.image = \"$WWW_IMAGE\"" -i docker-compose-deployed.yml
+
+      - name: Deploy to server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          scp -i ~/.ssh/deploy_key docker-compose-deployed.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-deployed.yml
+          ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
+            cd ~/app && \
+            docker compose -f docker-compose-deployed.yml pull && \
+            docker compose -f docker-compose-deployed.yml up -d --remove-orphans'

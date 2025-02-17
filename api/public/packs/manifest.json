@@ -1,0 +1,50 @@
+{
+  "application.js": "/packs/js/application-b98f2ee46f017e0f3168.js",
+  "application.js.map": "/packs/js/application-b98f2ee46f017e0f3168.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs/js/application-b98f2ee46f017e0f3168.js"
+      ],
+      "js.map": [
+        "/packs/js/application-b98f2ee46f017e0f3168.js.map"
+      ]
+    },
+    "index": {
+      "js": [
+        "/packs/js/index-e50149d69db9c0bec42f.js"
+      ],
+      "js.map": [
+        "/packs/js/index-e50149d69db9c0bec42f.js.map"
+      ]
+    },
+    "server_rendering": {
+      "js": [
+        "/packs/js/server_rendering-170b424f59037a476062.js"
+      ],
+      "js.map": [
+        "/packs/js/server_rendering-170b424f59037a476062.js.map"
+      ]
+    }
+  },
+  "index.js": "/packs/js/index-e50149d69db9c0bec42f.js",
+  "index.js.map": "/packs/js/index-e50149d69db9c0bec42f.js.map",
+  "media/fonts/brand-icons.eot": "/packs/media/fonts/brand-icons-d68fa3e6.eot",
+  "media/fonts/brand-icons.svg": "/packs/media/fonts/brand-icons-6729d297.svg",
+  "media/fonts/brand-icons.ttf": "/packs/media/fonts/brand-icons-65a2fb6d.ttf",
+  "media/fonts/brand-icons.woff": "/packs/media/fonts/brand-icons-cac87dc0.woff",
+  "media/fonts/brand-icons.woff2": "/packs/media/fonts/brand-icons-278156e4.woff2",
+  "media/fonts/icons.eot": "/packs/media/fonts/icons-a01e3f2d.eot",
+  "media/fonts/icons.svg": "/packs/media/fonts/icons-62d9dae4.svg",
+  "media/fonts/icons.ttf": "/packs/media/fonts/icons-c656b8ca.ttf",
+  "media/fonts/icons.woff": "/packs/media/fonts/icons-425399f8.woff",
+  "media/fonts/icons.woff2": "/packs/media/fonts/icons-38c6d8ba.woff2",
+  "media/fonts/outline-icons.eot": "/packs/media/fonts/outline-icons-752905fa.eot",
+  "media/fonts/outline-icons.svg": "/packs/media/fonts/outline-icons-9c4845b4.svg",
+  "media/fonts/outline-icons.ttf": "/packs/media/fonts/outline-icons-53671035.ttf",
+  "media/fonts/outline-icons.woff": "/packs/media/fonts/outline-icons-ddae9b1b.woff",
+  "media/fonts/outline-icons.woff2": "/packs/media/fonts/outline-icons-687a4990.woff2",
+  "media/images/flags.png": "/packs/media/images/flags-99f63ae7.png",
+  "server_rendering.js": "/packs/js/server_rendering-170b424f59037a476062.js",
+  "server_rendering.js.map": "/packs/js/server_rendering-170b424f59037a476062.js.map"
+}

@@ -1,0 +1,21 @@
+FROM ruby:3.2.2-bullseye AS rails-builder
+
+ENV appuser=rails
+WORKDIR /rails
+
+RUN apt-get update && apt-get install -y \
+    nodejs \
+    git
+
+COPY api/Gemfile api/Gemfile.lock ./
+RUN bundle install --jobs 4 --retry 3
+
+COPY api/. .
+
+RUN adduser --disabled-password --gecos "" ${appuser}
+RUN chown -R ${appuser}:${appuser} /rails
+RUN chmod 755 /rails
+
+USER ${appuser}
+
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
