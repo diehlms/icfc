@@ -3,7 +3,6 @@ import { clientStore, userStore, type IClientStore, type IUserStore } from '$lib
 import { get } from 'svelte/store';
 import { ImageUploadClient } from './imageUploadClient';
 import { PUBLIC_API_URL } from '$env/static/public';
-import { goto } from '$app/navigation';
 
 export default {
 	isTokenExpired(token: string): boolean {

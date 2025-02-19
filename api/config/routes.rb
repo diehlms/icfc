@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get '/password_resets/init_reset_password', to: 'password_resets#init_reset_password'
       post '/password_resets', to: 'password_resets#create'
       put '/password_resets', to: 'password_resets#update'
+      post '/verify_captcha', to: 'captcha#verify'
 
       resources :articles do
         member do

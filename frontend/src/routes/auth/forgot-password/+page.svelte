@@ -5,6 +5,40 @@
 	import { Card, Input, Button } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
+	import { PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
+	import { Recaptcha } from "svelte-recaptcha-v2";
+	import { PUBLIC_API_URL } from '$env/static/public';
+
+	const onCaptchaReady = (event: any) => {
+		console.log("recaptcha init has completed.")
+	};
+
+	const onCaptchaSuccess = async (event: any) => {
+		console.log("token received");
+		const response = await fetch(
+			`${PUBLIC_API_URL}/v1/verify_captcha`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ token: event.detail.token })
+			}
+		);
+		captchaVerified = response.ok
+		
+	};
+
+	const onCaptchaError = (event: any) => {
+		console.log("recaptcha init has failed.");
+	};
+
+	const onCaptchaExpire = (event: any) => {
+		console.log("recaptcha api has expired");
+	};
+
+	const onCaptchaClose = (event: any) => {
+		console.log("google decided to challange the user");
+	};
 
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken')) {
@@ -13,34 +47,56 @@
 	});
 
 	let email = '';
+	let captchaVerified = false;
 
 	const clients = get(clientStore);
 
 	async function sendRecoveryEmail() {
-		await clients.restClient?.passwordResets
-			.postV1PasswordResets({ email: email })
-			.then((_: any) => {
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: 'Recovery email sent, please check your email.',
-					type: ToastTypes.success
-				}));
-			})
-			.catch((error) => {
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					isOpen: true,
-					toastMessage: `${processApiErrorsToString(error.body)}`,
-					type: ToastTypes.error
-				}));
-			});
+		if (captchaVerified) {
+			await clients.restClient?.passwordResets
+				.postV1PasswordResets({ email: email })
+				.then((_: any) => {
+					toastStore.update((prevValue) => ({
+						...prevValue,
+						isOpen: true,
+						toastMessage: 'Recovery email sent, please check your email.',
+						type: ToastTypes.success
+					}));
+				})
+				.catch((error) => {
+					toastStore.update((prevValue) => ({
+						...prevValue,
+						isOpen: true,
+						toastMessage: `${processApiErrorsToString(error.body)}`,
+						type: ToastTypes.error
+					}));
+				});
+		} else {
+			toastStore.update((prevValue) => ({
+				...prevValue,
+				isOpen: true,
+				toastMessage: `Captcha verification failed. Please refresh page`,
+				type: ToastTypes.error
+			}));
+		}
+
 	}
+
 </script>
 
 <div class="landing-img">
 	<Card class="login-card mx-auto my-8 w-96">
 		<form on:submit|preventDefault={sendRecoveryEmail}>
+			<Recaptcha
+				sitekey={PUBLIC_CAPTCHA_SITE_KEY}
+				badge={"top"}
+				size={"normal"}
+				on:success={onCaptchaSuccess}
+				on:error={onCaptchaError}
+				on:expired={onCaptchaExpire}
+				on:close={onCaptchaClose}
+				on:ready={onCaptchaReady} 
+			/>
 			<Input class="m-2" type="text" bind:value={email} placeholder="Email" />
 			<Button type="submit" outline={true} class="m-2 w-full">Send Recovery Email</Button>
 		</form>
@@ -59,25 +115,7 @@
 		overflow-y: hidden;
 	}
 
-	.landing-img {
-		.login-card {
-			max-height: 70vh;
-		}
-	}
-
-	.login-logo {
-		max-height: 15vh;
-		max-width: 15vw;
-	}
-
 	.inline {
 		padding-top: 10px;
-	}
-
-	.login-logo {
-		display: block;
-		margin: 15px auto; /* Centers the image horizontally */
-		padding-top: 15px;
-		padding-bottom: 15px;
 	}
 </style>

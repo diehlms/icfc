@@ -6,8 +6,45 @@
 	import type { AppClient, signupPayload } from '$lib/client';
 	import Loader from '$lib/components/display/Loader.svelte';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
-	import { Turnstile } from 'svelte-turnstile';
-	import { PUBLIC_ENVIRONMENT, PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
+	import { PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
+	import { Recaptcha } from "svelte-recaptcha-v2";
+	import { PUBLIC_API_URL } from '$env/static/public';
+
+	onMount(async () => {
+		if (!!localStorage.getItem('authToken')) {
+			goto('/');
+		}
+	});
+
+	const onCaptchaReady = (event: any) => {
+		console.log("recaptcha init has completed.")
+	};
+
+	const onCaptchaSuccess = async (event: any) => {
+		console.log("token received");
+		const response = await fetch(
+			`${PUBLIC_API_URL}/v1/verify_captcha`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ token: event.detail.token })
+			}
+		);
+		captchaVerified = response.ok
+	};
+
+	const onCaptchaError = (event: any) => {
+		console.log("recaptcha init has failed.");
+	};
+
+	const onCaptchaExpire = (event: any) => {
+		console.log("recaptcha api has expired");
+	};
+
+	const onCaptchaClose = (event: any) => {
+		console.log("google decided to challange the user");
+	};
 
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken')) {
@@ -24,6 +61,7 @@
 	let firstName = '';
 	let lastName = '';
 	let restClient: AppClient;
+	let captchaVerified = false;
 
 	const VALID_EMAIL_REGEX = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i;
 	const VALID_PHONE_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
@@ -37,41 +75,50 @@
 		}
 	});
 
-	async function handleSignup() {
+	async function handleSignup() {	
 		loading = true;
 
-		const newUser: signupPayload = {
-			username: username,
-			password: password,
-			phonenumber: phoneNumber,
-			password_confirmation: passwordConfirmation,
-			firstname: firstName,
-			lastname: lastName,
-			email: email
-		};
+		if (captchaVerified) {
+			const newUser: signupPayload = {
+				username: username,
+				password: password,
+				phonenumber: phoneNumber,
+				password_confirmation: passwordConfirmation,
+				firstname: firstName,
+				lastname: lastName,
+				email: email
+			};
 
-		await restClient.auth
-			.postV1AuthSignup({ user: newUser })
-			.then(() => {
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					toastMessage: 'You have successfully registered. Please check your email for validation.',
-					isOpen: true,
-					type: ToastTypes.success
-				}));
-				goto('/auth/login');
-			})
-			.catch((error: any) => {
-				toastStore.update((prevValue) => ({
-					...prevValue,
-					toastMessage: `${processApiErrorsToString(error.body)}`,
-					isOpen: true,
-					type: ToastTypes.error
-				}));
-			})
-			.finally(() => {
-				loading = false;
-			});
+			await restClient.auth
+				.postV1AuthSignup({ user: newUser })
+				.then(() => {
+					toastStore.update((prevValue) => ({
+						...prevValue,
+						toastMessage: 'You have successfully registered. Please check your email for validation.',
+						isOpen: true,
+						type: ToastTypes.success
+					}));
+					goto('/auth/login');
+				})
+				.catch((error: any) => {
+					toastStore.update((prevValue) => ({
+						...prevValue,
+						toastMessage: `${processApiErrorsToString(error.body)}`,
+						isOpen: true,
+						type: ToastTypes.error
+					}));
+				})
+				.finally(() => {
+					loading = false;
+				});
+		} else {
+			toastStore.update((prevValue) => ({
+				...prevValue,
+				isOpen: true,
+				toastMessage: `Captcha verification failed. Please refresh page`,
+				type: ToastTypes.error
+			}));
+		}
 	}
 </script>
 
@@ -123,9 +170,16 @@
 							<span class="font-medium">Password inputs do not match</span>
 						</Helper>
 					{/if}
-					{#if PUBLIC_ENVIRONMENT === 'production'}
-						<Turnstile siteKey={PUBLIC_CAPTCHA_SITE_KEY} />
-					{/if}
+					<Recaptcha
+						sitekey={PUBLIC_CAPTCHA_SITE_KEY}
+						badge={"top"}
+						size={"normal"}
+						on:success={onCaptchaSuccess}
+						on:error={onCaptchaError}
+						on:expired={onCaptchaExpire}
+						on:close={onCaptchaClose}
+						on:ready={onCaptchaReady} 
+					/>
 					<Button type="submit" outline={true} class="m-2 w-full">Sign Up</Button>
 				</form>
 				<div class="inline">
