@@ -31,6 +31,7 @@ jobs:
           echo "PUBLIC_VERSION=${{ github.sha }}" >> frontend/.env.staging;
           echo "PUBLIC_ENVIRONMENT=staging" >> frontend/.env.staging;
           echo "PUBLIC_UPLOADS_S3_BUCKET=ironcityfishingclub" >> frontend/.env.staging;
+          echo "PUBLIC_CAPTCHA_SITE_KEY=${{ vars.PUBLIC_CAPTCHA_SITE_KEY }}" >> frontend/.env.staging
           docker build . -f Dockerfile.api --tag ghcr.io/diehlms/icfc-api-staging:${{ github.sha }}
           docker build . -f Dockerfile.www --build-arg ENVIRONMENT_FILE=".env.staging" --tag ghcr.io/diehlms/icfc-www-staging:${{ github.sha }}
           docker push ghcr.io/diehlms/icfc-api-staging:${{ github.sha }}
