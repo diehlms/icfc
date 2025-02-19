@@ -6,7 +6,6 @@
 	import { goto, invalidateAll } from '$app/navigation';
 	import { AppClient } from '$lib/client';
 	import { PUBLIC_ENVIRONMENT, PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
-	import { Turnstile } from 'svelte-turnstile';
 	
 	onMount(async () => {
 		const url = $page.url;
