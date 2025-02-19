@@ -181,6 +181,7 @@ GEM
       net-imap
       net-pop
       net-smtp
+    mailtrap (2.2.0)
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
@@ -385,6 +386,7 @@ DEPENDENCIES
   jwt
   listen (>= 3.0.5, < 3.2)
   lograge (~> 0.14.0)
+  mailtrap
   mini_magick (~> 4.8)
   open-weather
   pg

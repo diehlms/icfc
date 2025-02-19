@@ -46,6 +46,7 @@ jobs:
           echo "PUBLIC_VERSION=${{ github.sha }}" >> frontend/.env.production;
           echo "PUBLIC_ENVIRONMENT=production" >> frontend/.env.production;
           echo "PUBLIC_UPLOADS_S3_BUCKET=ironcityfishingclub" >> frontend/.env.production;
+          echo "PUBLIC_CAPTCHA_SITE_KEY=${{ vars.PUBLIC_CAPTCHA_SITE_KEY }}" >> frontend/.env.production
           docker build . -f Dockerfile.api --tag ghcr.io/diehlms/icfc-api:${{ github.sha }}
           docker build . -f Dockerfile.www --tag ghcr.io/diehlms/icfc-www:${{ github.sha }}
           docker push ghcr.io/diehlms/icfc-api:${{ github.sha }}

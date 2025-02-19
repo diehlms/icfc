@@ -6,6 +6,8 @@
 	import type { AppClient, signupPayload } from '$lib/client';
 	import Loader from '$lib/components/display/Loader.svelte';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
+	import { Turnstile } from 'svelte-turnstile';
+	import { PUBLIC_ENVIRONMENT, PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
 
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken')) {
@@ -120,6 +122,9 @@
 						<Helper class="mt-2" color="red">
 							<span class="font-medium">Password inputs do not match</span>
 						</Helper>
+					{/if}
+					{#if PUBLIC_ENVIRONMENT === 'production'}
+						<Turnstile siteKey={PUBLIC_CAPTCHA_SITE_KEY} />
 					{/if}
 					<Button type="submit" outline={true} class="m-2 w-full">Sign Up</Button>
 				</form>

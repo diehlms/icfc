@@ -5,7 +5,9 @@
 	import { page } from '$app/stores';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { AppClient } from '$lib/client';
-
+	import { PUBLIC_ENVIRONMENT, PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
+	import { Turnstile } from 'svelte-turnstile';
+	
 	onMount(async () => {
 		const url = $page.url;
 		const resetToken = url.searchParams.get('token');
@@ -100,6 +102,9 @@
 		<Card class="login-card mx-auto my-8 w-96">
 			<form on:submit|preventDefault={sendRecoveryEmail}>
 				<Input class="m-2" type="text" bind:value={email} placeholder="Email" />
+				{#if PUBLIC_ENVIRONMENT === 'production'}
+					<Turnstile siteKey={PUBLIC_CAPTCHA_SITE_KEY} />
+				{/if}
 				<Button type="submit" outline={true} class="m-2 w-full">Send Recovery Email</Button>
 			</form>
 			<a class="forgot-pw" href="/auth/forgot-password">Forgot Password?</a>

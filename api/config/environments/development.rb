@@ -29,18 +29,10 @@ Rails.application.configure do
   end
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :mailtrap
   config.x.mail_from = %(ICFC Dev <#{ENV.fetch('DEFAULT_FROM_EMAIL_ADDRESS')}>)
-  config.action_mailer.default_url_options = { host: 'caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz' }
+  config.action_mailer.default_url_options = { host: 'icfc.net' }
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.smtp_settings = {
-    address: ENV.fetch("SMTP_HOST"),
-    port: '587',
-    user_name: ENV.fetch("SMTP_USERNAME"),
-    password: ENV.fetch("SMTP_PASSWORD"),
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
   # Raise exceptions for disallowed deprecations.
