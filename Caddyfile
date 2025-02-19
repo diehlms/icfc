@@ -1,4 +1,4 @@
-www.test.icfc.net, test.icfc.net {
+www.icfc.net, icfc.net {
   reverse_proxy /api* production_api:3000
   reverse_proxy /api-docs* production_api:3000
   reverse_proxy /hosted_files* production_api:3000

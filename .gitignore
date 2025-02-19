@@ -60,3 +60,5 @@ terraform.tfstate
 terraform.tfstate.backup
 
 **/uploads/*
+
+**/*.DS_Store
