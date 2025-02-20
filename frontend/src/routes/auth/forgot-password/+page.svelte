@@ -52,34 +52,24 @@
 	const clients = get(clientStore);
 
 	async function sendRecoveryEmail() {
-		if (captchaVerified) {
-			await clients.restClient?.passwordResets
-				.postV1PasswordResets({ email: email })
-				.then((_: any) => {
-					toastStore.update((prevValue) => ({
-						...prevValue,
-						isOpen: true,
-						toastMessage: 'Recovery email sent, please check your email.',
-						type: ToastTypes.success
-					}));
-				})
-				.catch((error) => {
-					toastStore.update((prevValue) => ({
-						...prevValue,
-						isOpen: true,
-						toastMessage: `${processApiErrorsToString(error.body)}`,
-						type: ToastTypes.error
-					}));
-				});
-		} else {
-			toastStore.update((prevValue) => ({
-				...prevValue,
-				isOpen: true,
-				toastMessage: `Captcha verification failed. Please refresh page`,
-				type: ToastTypes.error
-			}));
-		}
-
+		await clients.restClient?.passwordResets
+			.postV1PasswordResets({ email: email })
+			.then((_: any) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: 'Recovery email sent, please check your email.',
+					type: ToastTypes.success
+				}));
+			})
+			.catch((error) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					isOpen: true,
+					toastMessage: `${processApiErrorsToString(error.body)}`,
+					type: ToastTypes.error
+				}));
+			});
 	}
 
 </script>
@@ -87,7 +77,8 @@
 <div class="landing-img">
 	<Card class="login-card mx-auto my-8 w-96">
 		<form on:submit|preventDefault={sendRecoveryEmail}>
-			<Recaptcha
+			<!-- todo: add back recaptcha -->
+			<!-- <Recaptcha
 				sitekey={PUBLIC_CAPTCHA_SITE_KEY}
 				badge={"top"}
 				size={"normal"}
@@ -96,7 +87,7 @@
 				on:expired={onCaptchaExpire}
 				on:close={onCaptchaClose}
 				on:ready={onCaptchaReady} 
-			/>
+			/> -->
 			<Input class="m-2" type="text" bind:value={email} placeholder="Email" />
 			<Button type="submit" outline={true} class="m-2 w-full">Send Recovery Email</Button>
 		</form>

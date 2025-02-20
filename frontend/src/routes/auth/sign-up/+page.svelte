@@ -78,47 +78,38 @@
 	async function handleSignup() {	
 		loading = true;
 
-		if (captchaVerified) {
-			const newUser: signupPayload = {
-				username: username,
-				password: password,
-				phonenumber: phoneNumber,
-				password_confirmation: passwordConfirmation,
-				firstname: firstName,
-				lastname: lastName,
-				email: email
-			};
+		const newUser: signupPayload = {
+			username: username,
+			password: password,
+			phonenumber: phoneNumber,
+			password_confirmation: passwordConfirmation,
+			firstname: firstName,
+			lastname: lastName,
+			email: email
+		};
 
-			await restClient.auth
-				.postV1AuthSignup({ user: newUser })
-				.then(() => {
-					toastStore.update((prevValue) => ({
-						...prevValue,
-						toastMessage: 'You have successfully registered. Please check your email for validation.',
-						isOpen: true,
-						type: ToastTypes.success
-					}));
-					goto('/auth/login');
-				})
-				.catch((error: any) => {
-					toastStore.update((prevValue) => ({
-						...prevValue,
-						toastMessage: `${processApiErrorsToString(error.body)}`,
-						isOpen: true,
-						type: ToastTypes.error
-					}));
-				})
-				.finally(() => {
-					loading = false;
-				});
-		} else {
-			toastStore.update((prevValue) => ({
-				...prevValue,
-				isOpen: true,
-				toastMessage: `Captcha verification failed. Please refresh page`,
-				type: ToastTypes.error
-			}));
-		}
+		await restClient.auth
+			.postV1AuthSignup({ user: newUser })
+			.then(() => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					toastMessage: 'You have successfully registered. Please check your email for validation.',
+					isOpen: true,
+					type: ToastTypes.success
+				}));
+				goto('/auth/login');
+			})
+			.catch((error: any) => {
+				toastStore.update((prevValue) => ({
+					...prevValue,
+					toastMessage: `${processApiErrorsToString(error.body)}`,
+					isOpen: true,
+					type: ToastTypes.error
+				}));
+			})
+			.finally(() => {
+				loading = false;
+			});
 	}
 </script>
 
@@ -170,7 +161,8 @@
 							<span class="font-medium">Password inputs do not match</span>
 						</Helper>
 					{/if}
-					<Recaptcha
+					<!-- todo: add back recaptcha -->
+					<!-- <Recaptcha
 						sitekey={PUBLIC_CAPTCHA_SITE_KEY}
 						badge={"top"}
 						size={"normal"}
@@ -179,7 +171,7 @@
 						on:expired={onCaptchaExpire}
 						on:close={onCaptchaClose}
 						on:ready={onCaptchaReady} 
-					/>
+					/> -->
 					<Button type="submit" outline={true} class="m-2 w-full">Sign Up</Button>
 				</form>
 				<div class="inline">
