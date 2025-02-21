@@ -91,13 +91,11 @@
 	<Loader />
 {:else if cabins.length > 0}
 	<Table
-		tableActions={[]}
 		tableData={cabins}
 		tableName="Cabins"
 		selectable={false}
 		columnNames={['name', 'bedrooms', 'dock', 'pricePerDay', 'pricePerWeek', 'washerDryer']}
 		searchableAttribute="Name"
-		showSearch={false}
 		followable={true}
 	/>
 {:else}

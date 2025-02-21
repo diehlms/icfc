@@ -148,76 +148,76 @@
 {#if loading}
 	<Loader />
 {:else if article}
-<div class="h-full pb-10">
-	<h1>
-		{article.title}
-		{#if updateAuthContext.userActionPermitted(article.user_id, user)}
-			<Button color="red" size="xs" on:click={() => deleteArticle(article.id)}><Trash /></Button>
-			<AddEdit
-				on:triggerModalFormSubmit={editArticle}
-				form={editArticleForm}
-				openDrawerLabel=""
-				displayAsButton={true}
-			/>
-		{/if}
-	</h1>
-	<Timestamps textAlign="text-left" model={article} />
-	<Hr />
-	<div class="flex">
-		<div class="{!!article.image.url ? 'w-2/3' : 'w-full'} p-4">
-			<div class="article-content p-6">
-				<pre
-					class="mb-4 whitespace-pre-wrap text-base text-gray-700 dark:text-gray-300">{@html article.content}</pre>
+	<div class="h-full pb-10">
+		<h1>
+			{article.title}
+			{#if updateAuthContext.userActionPermitted(article.user_id, user)}
+				<Button color="red" size="xs" on:click={() => deleteArticle(article.id)}><Trash /></Button>
+				<AddEdit
+					on:triggerModalFormSubmit={editArticle}
+					form={editArticleForm}
+					openDrawerLabel=""
+					displayAsButton={true}
+				/>
+			{/if}
+		</h1>
+		<Timestamps textAlign="text-left" model={article} />
+		<Hr />
+		<div class="flex">
+			<div class="{!!article.image.url ? 'w-2/3' : 'w-full'} p-4">
+				<div class="article-content p-6">
+					<pre
+						class="mb-4 whitespace-pre-wrap text-base text-gray-700 dark:text-gray-300">{@html article.content}</pre>
+				</div>
 			</div>
+
+			{#if !!article.image.url}
+				<div class="w-1/3 p-4">
+					<Gallery class="gap-4">
+						<InteractiveImage
+							on:handleDelete={() => {}}
+							item={{
+								src: hotSwapProductionUris(article.image.url),
+								alt: `Image for ${article.title}`
+							}}
+							isOwner={() => updateAuthContext.userActionPermitted(article.id, user)}
+						/>
+					</Gallery>
+				</div>
+			{/if}
 		</div>
 
-		{#if !!article.image.url}
-			<div class="w-1/3 p-4">
-				<Gallery class="gap-4">
-					<InteractiveImage
-						on:handleDelete={() => {}}
-						item={{
-							src: hotSwapProductionUris(article.image.url),
-							alt: `Image for ${article.title}`
-						}}
-						isOwner={() => updateAuthContext.userActionPermitted(article.id, user)}
-					/>
-				</Gallery>
-			</div>
+		{#if updateAuthContext.userActionPermitted(article.user_id, user)}
+			<AttachmentUploader on:triggerAttachmentUpload={handleArticleImageUpload} />
+		{/if}
+
+		<div class="mt-4">
+			<form>
+				<Textarea on:change={handleInput} class="mb-4" placeholder="Write a comment...">
+					<div slot="footer" class="flex items-center justify-between">
+						<Button color="green" outline on:click={createComment} type="submit"
+							><RocketLaunch /></Button
+						>
+					</div>
+				</Textarea>
+			</form>
+		</div>
+
+		<Hr />
+
+		<h2 class="mb-2">Comments</h2>
+
+		{#if article.comments && article.comments.length > 0}
+			<Listgroup items={article.comments} let:item class="w-full p-3">
+				<Timestamps textAlign={'text-left'} model={item} />
+				<pre class="mb-4 whitespace-pre-wrap text-base text-gray-700 dark:text-gray-300">
+	{@html item.content}</pre>
+				{#if updateAuthContext.userActionPermitted(item.user_id, user)}
+					<Button outline size="xs" color="red" on:click={() => deleteComment(item.id)}
+						><Trash /></Button
+					>
+				{/if}
+			</Listgroup>
 		{/if}
 	</div>
-
-	{#if updateAuthContext.userActionPermitted(article.user_id, user)}
-		<AttachmentUploader on:triggerAttachmentUpload={handleArticleImageUpload} />
-	{/if}
-
-	<div class="mt-4">
-		<form>
-			<Textarea on:change={handleInput} class="mb-4" placeholder="Write a comment...">
-				<div slot="footer" class="flex items-center justify-between">
-					<Button color="green" outline on:click={createComment} type="submit"
-						><RocketLaunch /></Button
-					>
-				</div>
-			</Textarea>
-		</form>
-	</div>
-
-	<Hr />
-
-	<h2 class="mb-2">Comments</h2>
-
-	{#if article.comments && article.comments.length > 0}
-		<Listgroup items={article.comments} let:item class="w-full p-3">
-			<Timestamps textAlign={'text-left'} model={item} />
-			<pre class="mb-4 whitespace-pre-wrap text-base text-gray-700 dark:text-gray-300">
-	{@html item.content}</pre>
-			{#if updateAuthContext.userActionPermitted(item.user_id, user)}
-				<Button outline size="xs" color="red" on:click={() => deleteComment(item.id)}
-					><Trash /></Button
-				>
-			{/if}
-		</Listgroup>
-	{/if}
-</div>
 {/if}

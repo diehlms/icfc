@@ -1,10 +1,6 @@
 <script lang="ts">
 	import type { TableRow } from '$lib/interfaces/TableRow';
-	import {
-		toCamelCase,
-		toTitleCase,
-		type ITableAction
-	} from '$lib/components/services/textFormatting';
+	import { toCamelCase, toTitleCase } from '$lib/components/services/textFormatting';
 	import {
 		Table,
 		TableBody,
@@ -19,46 +15,59 @@
 	import { page } from '$app/stores';
 
 	export let searchTerm = '';
-	export let tableData: TableRow[];
+	export let tableData: TableRow[] = [];
 	export let tableName: string;
 	export let selectable: boolean;
 	export let columnNames: string[];
 	export let searchableAttribute: string;
-	export let tableActions: ITableAction[];
 	export let followable: boolean = false;
-	export let showSearch: boolean = true;
 
-	let filteredTableItems: TableRow[];
-	let allRowsSelected: boolean = false;
+	let filteredTableItems: TableRow[] = tableData;
 	let paginatedItems: TableRow[] = tableData;
+	let allRowsSelected: boolean = false;
 
-	$: tableData;
-	$: {
-		filteredTableItems = tableData.filter(
-			(item: any) =>
-				item[searchableAttribute]?.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
-		);
-		allRowsSelected;
-	}
+	let sortColumn: string = '';
+	let sortDescending: boolean = false;
 
 	function selectAll() {
 		allRowsSelected = !allRowsSelected;
 		tableData.forEach((item) => {
-			item.checked = !item.checked;
+			item.checked = allRowsSelected;
 		});
 	}
 
-	function checkItem(opt: any) {
+	function checkItem(opt: TableRow) {
 		opt.checked = !opt.checked;
 	}
 
-	function follow(row: any) {
+	function follow(row: TableRow) {
 		if (followable) {
 			let unsubscribe = page.subscribe(($page) => {
 				goto(`${$page.url.pathname}/${row.id}`);
 			});
 			unsubscribe();
 		}
+	}
+
+	function sortTable() {
+		if (sortColumn) {
+			filteredTableItems.sort((a, b) => {
+				const aValue = (a[toCamelCase(sortColumn)] || '').toString();
+				const bValue = (b[toCamelCase(sortColumn)] || '').toString();
+				return sortDescending ? bValue.localeCompare(aValue) : aValue.localeCompare(bValue);
+			});
+		}
+		paginatedItems = [...filteredTableItems];
+	}
+
+	function toggleSort(column: string) {
+		if (sortColumn === column) {
+			sortDescending = !sortDescending;
+		} else {
+			sortColumn = column;
+			sortDescending = false;
+		}
+		sortTable();
 	}
 </script>
 
@@ -74,7 +83,10 @@
 				</TableHeadCell>
 			{/if}
 			{#each columnNames as column}
-				<TableHeadCell>{column === 'rawhtml' ? '' : toTitleCase(column)}</TableHeadCell>
+				<TableHeadCell on:click={() => toggleSort(column)} style="cursor: pointer;">
+					{column === 'rawhtml' ? '' : toTitleCase(column)}
+					{sortColumn === column ? (sortDescending ? '↓' : '↑') : ''}
+				</TableHeadCell>
 			{/each}
 		</TableHead>
 		<TableBody>
@@ -87,11 +99,11 @@
 					{/if}
 					{#each columnNames as column}
 						{#if data[toCamelCase(column)]?.toString() === 'true' || data[toCamelCase(column)]?.toString() === 'false'}
-							<TableBodyCell
-								><Indicator
+							<TableBodyCell>
+								<Indicator
 									color={data[toCamelCase(column)].toString() === 'true' ? 'green' : 'red'}
-								/></TableBodyCell
-							>
+								/>
+							</TableBodyCell>
 						{:else if column === 'rawhtml'}
 							<TableBodyCell>{@html data[toCamelCase(column)]}</TableBodyCell>
 						{:else}
@@ -103,9 +115,3 @@
 		</TableBody>
 	</Table>
 </div>
-
-<style>
-	.table-cell-hover:hover {
-		cursor: pointer;
-	}
-</style>

@@ -6,45 +6,6 @@
 	import type { AppClient, signupPayload } from '$lib/client';
 	import Loader from '$lib/components/display/Loader.svelte';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
-	import { PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
-	import { Recaptcha } from "svelte-recaptcha-v2";
-	import { PUBLIC_API_URL } from '$env/static/public';
-
-	onMount(async () => {
-		if (!!localStorage.getItem('authToken')) {
-			goto('/');
-		}
-	});
-
-	const onCaptchaReady = (event: any) => {
-		console.log("recaptcha init has completed.")
-	};
-
-	const onCaptchaSuccess = async (event: any) => {
-		console.log("token received");
-		const response = await fetch(
-			`${PUBLIC_API_URL}/v1/verify_captcha`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({ token: event.detail.token })
-			}
-		);
-		captchaVerified = response.ok
-	};
-
-	const onCaptchaError = (event: any) => {
-		console.log("recaptcha init has failed.");
-	};
-
-	const onCaptchaExpire = (event: any) => {
-		console.log("recaptcha api has expired");
-	};
-
-	const onCaptchaClose = (event: any) => {
-		console.log("google decided to challange the user");
-	};
 
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken')) {
@@ -61,7 +22,6 @@
 	let firstName = '';
 	let lastName = '';
 	let restClient: AppClient;
-	let captchaVerified = false;
 
 	const VALID_EMAIL_REGEX = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i;
 	const VALID_PHONE_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
@@ -75,7 +35,7 @@
 		}
 	});
 
-	async function handleSignup() {	
+	async function handleSignup() {
 		loading = true;
 
 		const newUser: signupPayload = {

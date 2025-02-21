@@ -617,8 +617,33 @@ RSpec.configure do |config|
             ]
           },
           userIn: {
-            type: :object,
-            properties: {}
+            allOf: [
+              { '$ref' => '#/components/schemas/createUpdateBaseModel' },
+              { '$ref' => '#/components/schemas/baseModel' },
+            ],
+            properties: {
+              username: {
+                type: :string
+              },
+              phone_number: {
+                type: :string
+              },
+              firstname: {
+                type: :string
+              },
+              lastname: {
+                type: :string
+              },
+              user_id: {
+                type: :number
+              }
+            }
+          },
+          userUpdate: {
+            allOf: [
+              { '$ref' => '#/components/schemas/userIn' },
+              { '$ref' => '#/components/schemas/createUpdateBaseModel' }
+            ]
           },
           relationshipArray: {
             type: :array,

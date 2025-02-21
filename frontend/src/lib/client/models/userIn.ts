@@ -2,4 +2,13 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type userIn = {};
+import type { baseModel } from './baseModel';
+import type { createUpdateBaseModel } from './createUpdateBaseModel';
+export type userIn = createUpdateBaseModel &
+	baseModel & {
+		username?: string;
+		phone_number?: string;
+		firstname?: string;
+		lastname?: string;
+		user_id?: number;
+	};

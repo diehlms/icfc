@@ -31,6 +31,14 @@ module Api
         log_in @user
       end
 
+      def update
+        if user.update(user_params)
+          render json: { message: 'User updated!', user: @user }, status: :ok
+        else
+          render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+
       def toggle_verified
         user.toggle!(:verified)
         UserMailer.verified_confirmation(user).deliver

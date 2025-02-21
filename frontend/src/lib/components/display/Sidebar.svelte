@@ -161,7 +161,7 @@
 					<SidebarDropdownItem
 						class="text-emerald-50 hover:text-emerald-950"
 						href="/camp-info/bylaws"
-						label="By Laws"
+						label="Bylaws"
 					/>
 					<SidebarDropdownItem
 						class="text-emerald-50 hover:text-emerald-950"
@@ -203,11 +203,6 @@
 						<CalendarDays />
 					</svelte:fragment>
 				</SidebarItem>
-				<!-- <SidebarItem class="text-emerald-50 hover:text-emerald-950" href="/charts" label="Charts">
-					<svelte:fragment slot="icon">
-						<Clipboard />
-					</svelte:fragment>
-				</SidebarItem> -->
 				<SidebarItem
 					class="text-emerald-50 hover:text-emerald-950"
 					href="/rideshares"

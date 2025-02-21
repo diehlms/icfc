@@ -39,7 +39,7 @@ export const clientStore = writable<IClientStore>({
 	authCookie: null,
 	restClient: null,
 	authenticated: false,
-	imageUploadClient: null,
+	imageUploadClient: null
 });
 
 export const userStore = writable<IUserStore>({

@@ -200,7 +200,7 @@
 		<Spinner size="12" />
 	</div>
 {:else if cabin}
-	<div class="container mx-auto max-w-7xl p-4 h-full">
+	<div class="container mx-auto h-full max-w-7xl p-4">
 		<div class="flex flex-col gap-4 lg:flex-row">
 			<div class="w-full lg:w-3/4">
 				<Card>

@@ -1956,7 +1956,7 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "summary": "update user",
         "tags": [
           "Users"
@@ -1968,24 +1968,21 @@
             ]
           }
         ],
-        "responses": {
-          "200": {
-            "description": "successful"
-          }
-        }
-      },
-      "put": {
-        "summary": "update user",
-        "security": [
-          {
-            "Bearer": [
+        "parameters": [
 
-            ]
-          }
         ],
         "responses": {
           "200": {
             "description": "successful"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/userUpdate"
+              }
+            }
           }
         }
       },
@@ -2765,9 +2762,41 @@
         ]
       },
       "userIn": {
-        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          },
+          {
+            "$ref": "#/components/schemas/baseModel"
+          }
+        ],
         "properties": {
+          "username": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "number"
+          }
         }
+      },
+      "userUpdate": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/userIn"
+          },
+          {
+            "$ref": "#/components/schemas/createUpdateBaseModel"
+          }
+        ]
       },
       "relationshipArray": {
         "type": "array",

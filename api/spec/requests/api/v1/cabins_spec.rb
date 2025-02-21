@@ -23,7 +23,7 @@ RSpec.describe 'api/v1/cabins', type: :request do
 
     post('create cabin') do
       tags 'Cabins'
-           security [{Bearer: []}]
+      security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       parameter name: :cabinIn, in: :body, schema: { '$ref' => '#/components/schemas/cabinIn' }
@@ -46,7 +46,7 @@ RSpec.describe 'api/v1/cabins', type: :request do
     parameter name: 'id', in: :path, type: :integer, description: 'id'
     get('show cabin') do
       tags 'Cabins'
-           security [{Bearer: []}]
+      security [{Bearer: []}]
       consumes 'application/json'
       produces 'application/json'
       response(200, 'successful') do
@@ -67,7 +67,7 @@ RSpec.describe 'api/v1/cabins', type: :request do
 
     put('update cabin') do
       tags 'Cabins'
-           security [{Bearer: []}]
+      security [{Bearer: []}]
       parameter name: :cabinUpdate, in: :body, schema: { '$ref' => '#/components/schemas/cabinUpdate' }
       consumes 'application/json'
       produces 'application/json'

@@ -14,7 +14,6 @@ import { CampMessagesService } from './services/CampMessagesService';
 import { ChartsService } from './services/ChartsService';
 import { CommentsService } from './services/CommentsService';
 import { CommitteesService } from './services/CommitteesService';
-import { DefaultService } from './services/DefaultService';
 import { DocumentsService } from './services/DocumentsService';
 import { EntryService } from './services/EntryService';
 import { EventsService } from './services/EventsService';
@@ -23,6 +22,7 @@ import { FamilyTreesService } from './services/FamilyTreesService';
 import { GalleriesService } from './services/GalleriesService';
 import { LocationPointsService } from './services/LocationPointsService';
 import { LogsService } from './services/LogsService';
+import { MaintenanceService } from './services/MaintenanceService';
 import { PasswordResetsService } from './services/PasswordResetsService';
 import { RidesharesService } from './services/RidesharesService';
 import { SearchService } from './services/SearchService';
@@ -38,7 +38,6 @@ export class AppClient {
 	public readonly charts: ChartsService;
 	public readonly comments: CommentsService;
 	public readonly committees: CommitteesService;
-	public readonly default: DefaultService;
 	public readonly documents: DocumentsService;
 	public readonly entry: EntryService;
 	public readonly events: EventsService;
@@ -47,6 +46,7 @@ export class AppClient {
 	public readonly galleries: GalleriesService;
 	public readonly locationPoints: LocationPointsService;
 	public readonly logs: LogsService;
+	public readonly maintenance: MaintenanceService;
 	public readonly passwordResets: PasswordResetsService;
 	public readonly rideshares: RidesharesService;
 	public readonly search: SearchService;
@@ -76,7 +76,6 @@ export class AppClient {
 		this.charts = new ChartsService(this.request);
 		this.comments = new CommentsService(this.request);
 		this.committees = new CommitteesService(this.request);
-		this.default = new DefaultService(this.request);
 		this.documents = new DocumentsService(this.request);
 		this.entry = new EntryService(this.request);
 		this.events = new EventsService(this.request);
@@ -85,6 +84,7 @@ export class AppClient {
 		this.galleries = new GalleriesService(this.request);
 		this.locationPoints = new LocationPointsService(this.request);
 		this.logs = new LogsService(this.request);
+		this.maintenance = new MaintenanceService(this.request);
 		this.passwordResets = new PasswordResetsService(this.request);
 		this.rideshares = new RidesharesService(this.request);
 		this.search = new SearchService(this.request);

@@ -38,12 +38,10 @@
 	<Loader />
 {:else}
 	<Table
-		tableActions={[]}
 		tableData={users}
 		tableName="Directory"
 		selectable={false}
 		columnNames={['name', 'username', 'email', 'phoneNumber', 'admin', 'recentlyJoined']}
 		searchableAttribute="Name"
-		showSearch={false}
 	/>
 {/if}

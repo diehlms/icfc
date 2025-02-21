@@ -86,6 +86,7 @@ jobs:
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
+          scp -i ~/.ssh/deploy_key Caddyfile $DEPLOY_USER@$DEPLOY_HOST:~/app/Caddyfile
           scp -i ~/.ssh/deploy_key docker-compose-deployed.yml $DEPLOY_USER@$DEPLOY_HOST:~/app/docker-compose-deployed.yml
           ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST '\
             cd ~/app && \

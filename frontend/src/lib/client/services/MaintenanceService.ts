@@ -4,21 +4,17 @@
 /* eslint-disable */
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
-export class DefaultService {
+export class MaintenanceService {
 	constructor(public readonly httpRequest: BaseHttpRequest) {}
 	/**
-	 * update user
-	 * @param id id
+	 * toggle maintenance_mode
 	 * @returns any successful
 	 * @throws ApiError
 	 */
-	public putV1Users(id: number): CancelablePromise<any> {
+	public postV1ToggleMaintenance(): CancelablePromise<any> {
 		return this.httpRequest.request({
-			method: 'PUT',
-			url: '/v1/users/{id}',
-			path: {
-				id: id
-			}
+			method: 'POST',
+			url: '/v1/toggle_maintenance'
 		});
 	}
 }

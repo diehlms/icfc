@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { userUpdate } from '../models/userUpdate';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 export class UsersService {
@@ -35,16 +36,19 @@ export class UsersService {
 	/**
 	 * update user
 	 * @param id id
+	 * @param requestBody
 	 * @returns any successful
 	 * @throws ApiError
 	 */
-	public patchV1Users(id: number): CancelablePromise<any> {
+	public putV1Users(id: number, requestBody?: userUpdate): CancelablePromise<any> {
 		return this.httpRequest.request({
-			method: 'PATCH',
+			method: 'PUT',
 			url: '/v1/users/{id}',
 			path: {
 				id: id
-			}
+			},
+			body: requestBody,
+			mediaType: 'application/json'
 		});
 	}
 	/**

@@ -148,7 +148,6 @@
 	<Loader />
 {:else}
 	<Table
-		tableActions={[]}
 		tableData={rideshares}
 		tableName="Rideshares"
 		selectable={false}
@@ -162,6 +161,5 @@
 		]}
 		followable={true}
 		searchableAttribute="Name"
-		showSearch={false}
 	/>
 {/if}

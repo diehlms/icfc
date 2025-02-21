@@ -2,14 +2,7 @@
 	import FormBuilder, { FormInput } from '$lib/components/services/formBuilder';
 	import { toTitleCase } from '$lib/components/services/textFormatting';
 	import Wysiwyg from './WYSIWYG.svelte';
-	import {
-		FloatingLabelInput,
-		Checkbox,
-		Button,
-		Select,
-		Label,
-		Modal
-	} from 'flowbite-svelte';
+	import { FloatingLabelInput, Checkbox, Button, Select, Label, Modal } from 'flowbite-svelte';
 	import { PencilSquare, RocketLaunch } from 'svelte-heros-v2';
 	import { createEventDispatcher } from 'svelte';
 	import AttachmentUploader from './AttachmentUploader.svelte';
@@ -68,7 +61,10 @@
 </script>
 
 <Modal bind:open={defaultModal} on:close={resetForm}>
-	<form class="bg-grey-500/[.06] p-5 rounded-sm flex flex-col space-y-1" on:submit|preventDefault={onSubmit}>
+	<form
+		class="bg-grey-500/[.06] flex flex-col space-y-1 rounded-sm p-5"
+		on:submit|preventDefault={onSubmit}
+	>
 		{#if errors}
 			<span>{errors}</span>
 		{/if}
@@ -137,5 +133,5 @@
 	<Button size="xs" on:click={() => (defaultModal = true)} outline>
 		<PencilSquare />
 		{openDrawerLabel}
-	</Button>	
+	</Button>
 </div>
