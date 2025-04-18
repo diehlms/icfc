@@ -2,7 +2,7 @@ module Api
   module V1
     class AuthenticationsController < ApplicationController
       def login
-        @user = User.find_by(email: params[:email])
+        @user = User.find_by(email: params[:email].downcase)
         if @user&.authenticate(params[:password])
           token = JsonWebToken.encode(
             first_name: @user.firstname,
