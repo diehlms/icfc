@@ -50,7 +50,6 @@
 		client.restClient?.galleries
 			.getV1Galleries()
 			.then((data: galleryOut[]) => {
-				console.log(data)
 				const newImages = data.map((_: galleryOut) => ({
 					id: _.id,
 					user_id: _.user_id,

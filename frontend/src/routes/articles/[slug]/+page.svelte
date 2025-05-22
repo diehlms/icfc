@@ -28,7 +28,6 @@
 		client.restClient?.articles
 			.getV1Articles1(data.id)
 			.then((data) => {
-				console.log(data)
 				article = data;
 				editArticleForm = new FormBuilder().text('title').richText('content').build(article);
 			})
