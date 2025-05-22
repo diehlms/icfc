@@ -102,7 +102,7 @@
 		<InteractiveImage
 			on:handleDelete={() => deletePhoto(item.id)}
 			{item}
-			isOwner={() => updateAuthContext.userActionPermitted(item.id, user.id)}
+			isOwner={() => updateAuthContext.userActionPermitted(item.user.id, user.id)}
 		/>
 	</Gallery>
 {/if}

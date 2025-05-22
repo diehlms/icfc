@@ -86,7 +86,7 @@
 	$: user;
 </script>
 
-<div class="button-container bg-emerald-900">
+<div class="button-container bg-emerald-900 not-printable">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div class="toggle-button" on:click={toggleSidebar}>
@@ -212,7 +212,7 @@
 						<Map />
 					</svelte:fragment>
 				</SidebarItem>
-				<SidebarItem class="text-emerald-50 hover:text-emerald-950" href="/cabins" label="Cabins">
+				<SidebarItem class="text-emerald-50 hover:text-emerald-950" href="/cabins" label="Cottage Rentals">
 					<svelte:fragment slot="icon">
 						<Home />
 					</svelte:fragment>

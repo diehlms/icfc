@@ -107,7 +107,7 @@
 						</div>
 					</div>
 					<div>
-						<p class="font-semibold">Description:</p>
+						<p class="font-semibold rendered-HTML">Description:</p>
 						<p>{@html event.description}</p>
 					</div>
 				</div>

@@ -129,7 +129,7 @@
 	</form>
 </Modal>
 
-<div class="mb-4">
+<div class="not-printable mb-4">
 	<Button size="xs" on:click={() => (defaultModal = true)} outline>
 		<PencilSquare />
 		{openDrawerLabel}

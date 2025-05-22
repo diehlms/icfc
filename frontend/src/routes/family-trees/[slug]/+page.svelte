@@ -244,7 +244,7 @@
 	<p>{family.name}</p>
 
 	<div class="mb-4 mt-4">
-		{#if updateAuthContext.userActionPermitted(family.user_id, user)}
+		{#if updateAuthContext.userActionPermitted(family.user.id, user)}
 			<Button color="red" outline size="xs" on:click={() => deleteFamilyTree(family.id)}
 				>Delete Family Tree</Button
 			>

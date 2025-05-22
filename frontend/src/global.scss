@@ -24,6 +24,10 @@
 	}
 }
 
+@media print {
+	.not-printable { display: none; }
+}
+
 .toast {
 	width: 33vw;
 	position: fixed;

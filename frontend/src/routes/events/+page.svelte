@@ -11,6 +11,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
+	import { Button } from 'flowbite-svelte'
 
 	type CalendarEvent = {
 		allDay: boolean;
@@ -73,6 +74,10 @@
 			});
 	};
 
+	const printCalendar = () => {
+		window.print()
+	}
+
 	onMount(() => {
 		loading = true;
 		client.restClient?.events
@@ -113,5 +118,27 @@
 />
 
 <div class="h-full w-11/12 pb-10">
-	<Calendar {plugins} {options} />
+	<div class="calendar">
+		<Calendar {plugins} {options} />
+	</div>
+	<div class="mt-5 not-printable">
+		<Button color="blue" class="not-printable" on:click={printCalendar}>Print Calendar</Button>
+	</div>
 </div>
+
+<style>
+	@media print {
+		body > * {
+			display: none !important;
+		}
+		.calendar {
+			display: block !important;
+			width: 100vw;
+			height: 80vh;
+			margin: 0 auto;
+			page-break-inside: avoid;
+			transform: scale(0.8);
+			transform-origin: top left;
+		}
+	}
+</style>
