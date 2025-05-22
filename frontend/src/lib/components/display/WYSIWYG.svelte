@@ -2,7 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
-	import TextAlign from '@tiptap/extension-text-align'; // Import text align extension
+	import TextAlign from '@tiptap/extension-text-align';
 	import { createEventDispatcher } from 'svelte';
 
 	export let content: string | null = null;
@@ -15,7 +15,7 @@
 			element: element,
 			extensions: [
 				StarterKit,
-				TextAlign.configure({ types: ['heading', 'paragraph'] }) // Enable text-align
+				TextAlign.configure({ types: ['heading', 'paragraph'] })
 			],
 			content: content || ``,
 			onUpdate: ({ editor }) => {

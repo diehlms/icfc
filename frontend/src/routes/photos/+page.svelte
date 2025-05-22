@@ -50,6 +50,7 @@
 		client.restClient?.galleries
 			.getV1Galleries()
 			.then((data: galleryOut[]) => {
+				console.log(data)
 				const newImages = data.map((_: galleryOut) => ({
 					id: _.id,
 					user_id: _.user_id,
@@ -102,7 +103,7 @@
 		<InteractiveImage
 			on:handleDelete={() => deletePhoto(item.id)}
 			{item}
-			isOwner={() => updateAuthContext.userActionPermitted(item.id, user.id)}
+			isOwner={() => updateAuthContext.userActionPermitted(item.user.id, user.id)}
 		/>
 	</Gallery>
 {/if}

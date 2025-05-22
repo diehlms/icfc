@@ -57,7 +57,7 @@ resource "hcloud_firewall" "web_firewall" {
   }
 
   dynamic "rule" {
-    for_each = var.home_ips
+    for_each = toset(var.home_ips)
 
     content {
       direction = "in"
@@ -68,7 +68,7 @@ resource "hcloud_firewall" "web_firewall" {
   }
 
   dynamic "rule" {
-    for_each = var.home_ips
+    for_each = toset(var.home_ips)
 
     content {
       direction = "in"
@@ -125,7 +125,7 @@ resource "hcloud_server" "web_server" {
     ipv6_enabled = true
   }
 
-  ssh_keys = [data.hcloud_ssh_key.my_key.id]
+  # ssh_keys = [data.hcloud_ssh_key.my_key.id]
 
   connection {
     type        = "ssh"

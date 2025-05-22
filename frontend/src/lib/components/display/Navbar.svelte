@@ -60,7 +60,7 @@
 	$: searchResults;
 </script>
 
-<div class="z-50">
+<div class="not-printable z-50">
 	<Navbar let:hidden>
 		<NavBrand href="/">
 			<img src={burgee} alt="Burgee" height="48" width="36" />

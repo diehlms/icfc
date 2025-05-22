@@ -28,6 +28,7 @@
 		client.restClient?.articles
 			.getV1Articles1(data.id)
 			.then((data) => {
+				console.log(data)
 				article = data;
 				editArticleForm = new FormBuilder().text('title').richText('content').build(article);
 			})
@@ -151,7 +152,7 @@
 	<div class="h-full pb-10">
 		<h1>
 			{article.title}
-			{#if updateAuthContext.userActionPermitted(article.user_id, user)}
+			{#if updateAuthContext.userActionPermitted(article.user.id, user)}
 				<Button color="red" size="xs" on:click={() => deleteArticle(article.id)}><Trash /></Button>
 				<AddEdit
 					on:triggerModalFormSubmit={editArticle}
@@ -164,10 +165,9 @@
 		<Timestamps textAlign="text-left" model={article} />
 		<Hr />
 		<div class="flex">
-			<div class="{!!article.image.url ? 'w-2/3' : 'w-full'} p-4">
-				<div class="article-content p-6">
-					<pre
-						class="mb-4 whitespace-pre-wrap text-base text-gray-700 dark:text-gray-300">{@html article.content}</pre>
+			<div class="{!!article.image.url ? 'w-2/3' : 'w-full'}">
+				<div class="article-content">
+					{@html article.content}
 				</div>
 			</div>
 
@@ -180,14 +180,14 @@
 								src: hotSwapProductionUris(article.image.url),
 								alt: `Image for ${article.title}`
 							}}
-							isOwner={() => updateAuthContext.userActionPermitted(article.id, user)}
+							isOwner={() => updateAuthContext.userActionPermitted(article.user.id, user)}
 						/>
 					</Gallery>
 				</div>
 			{/if}
 		</div>
 
-		{#if updateAuthContext.userActionPermitted(article.user_id, user)}
+		{#if updateAuthContext.userActionPermitted(article.user.id, user)}
 			<AttachmentUploader on:triggerAttachmentUpload={handleArticleImageUpload} />
 		{/if}
 
