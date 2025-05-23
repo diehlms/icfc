@@ -5,8 +5,7 @@
 
 <footer class="not-printable bg-emerald-900">
 	<p class="text-emerald-50">
-		&copy; {year} ICFC | Version {PUBLIC_VERSION} | <a href="/api-docs">API Documentation</a> |
-		<a href="https://github.com/diehlms/icfc">Source</a>
+		&copy; {year} ICFC | Version {PUBLIC_VERSION}
 	</p>
 </footer>
 

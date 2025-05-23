@@ -4,12 +4,22 @@
 	import { clientStore } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
+	import { Listgroup } from 'flowbite-svelte';
 
 	let campers: any[] = [];
 	let articles: any[] = [];
 	let events: any[] = [];
 	let error: any;
 	let loading = true;
+	let simpleList = [
+		"Office Telephone: 705-375-2300 (in season only)",
+		"Moe's Number: 705-746-6699",
+		"Lisa's Number: 705-346-1191",
+		"Gregoire Home Telephone: 705-375-5633",
+		"Randy Grisdale: 705-774-4179",
+		"ICFC Email: ICFC@vianet.on.ca",
+		"ICFC Fax: 705-375-0405",
+	];
 
 	const client = get(clientStore);
 
@@ -108,19 +118,22 @@
 				<ul class="max-h-32 list-inside list-disc overflow-y-scroll">
 					{#if campers.length > 0}
 						{#each campers as camper}
-							<li>{camper.title}</li>
+							<li>{camper.name}</li>
 						{/each}
 					{:else}
 						<span>No campers this week!</span>
 					{/if}
 				</ul>
 			</div>
-			<!-- <div
-				class="img1 col-span-1 row-span-2 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-2"
-			></div>
-			<div
-				class="img2 col-span-1 row-span-3 overflow-hidden rounded-lg bg-gray-100 shadow-md md:col-span-3"
-			></div> -->
+		</div>
+
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-1 mt-5">
+			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
+				<h2 class="mb-4 text-xl font-semibold">Important Contacts</h2>
+				<Listgroup items={simpleList} let:item class="w-full">
+					<span>{item}</span>	
+				</Listgroup>
+			</div>
 		</div>
 	{/if}
 </div>
@@ -132,7 +145,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-image: url('../assets/images/flags.jpg'); // '../assets/images/boardwalk.jpg'
+		background-image: url('../assets/images/flags.jpg');
 		background-size: cover;
 		background-position: center;
 		opacity: 0.3;

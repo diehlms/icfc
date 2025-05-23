@@ -8,7 +8,7 @@
 	import { onMount } from 'svelte';
 	import InteractiveImage from '$lib/components/display/InteractiveImage.svelte';
 	import { hotSwapProductionUris } from '$lib/components/services/imageUtils';
-	import { type galleryOut, type baseModel } from '$lib/client';
+	import { type galleryOut } from '$lib/client';
 	import { deleteEntity } from '$lib/components/services/crud';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 
