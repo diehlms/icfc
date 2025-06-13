@@ -392,6 +392,12 @@ RSpec.configure do |config|
             properties: {
               id: {
                 type: :number
+              },
+              author_email: {
+                type: :string
+              },
+              author_username: {
+                type: :string
               }
             }
           },
@@ -435,6 +441,9 @@ RSpec.configure do |config|
           eventIn: {
             allOf: [{ '$ref' => '#/components/schemas/createUpdateBaseModel' }],
             properties: {
+              title: {
+                type: :string
+              },
               location: {
                 type: :string
               },
@@ -451,7 +460,10 @@ RSpec.configure do |config|
               },
               user_id: {
                 type: :number
-              }
+              },
+              all_day: {
+                type: :boolean
+              },
             }
           },
           eventOut: {

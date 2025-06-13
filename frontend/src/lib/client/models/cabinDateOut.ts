@@ -4,4 +4,5 @@
 /* eslint-disable */
 import type { baseModel } from './baseModel';
 import type { cabinDateIn } from './cabinDateIn';
-export type cabinDateOut = baseModel & cabinDateIn;
+export type cabinDateOut = (baseModel & cabinDateIn);
+

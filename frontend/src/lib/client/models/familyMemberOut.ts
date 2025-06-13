@@ -4,4 +4,5 @@
 /* eslint-disable */
 import type { baseModel } from './baseModel';
 import type { familyMemberIn } from './familyMemberIn';
-export type familyMemberOut = familyMemberIn & baseModel;
+export type familyMemberOut = (familyMemberIn & baseModel);
+

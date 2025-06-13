@@ -89,7 +89,7 @@
 					{#if events.length > 0}
 						{#each events as event}
 							<li>
-								{event.events} - {formatDate(event.start_time)} to {formatDate(event.end_time)}
+								<a href={`/events/${event.id}`}>{event.title} - {formatDate(event.start_time)} to {formatDate(event.end_time)}</a>
 							</li>
 						{/each}
 					{:else}

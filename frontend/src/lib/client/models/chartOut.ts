@@ -6,9 +6,9 @@ import type { attachmentBaseModel } from './attachmentBaseModel';
 import type { author } from './author';
 import type { baseModel } from './baseModel';
 import type { chartIn } from './chartIn';
-export type chartOut = chartIn &
-	baseModel & {
-		chart?: attachmentBaseModel;
-		id?: number;
-		user?: author;
-	};
+export type chartOut = (chartIn & baseModel & {
+    chart?: attachmentBaseModel;
+    id?: number;
+    user?: author;
+});
+
