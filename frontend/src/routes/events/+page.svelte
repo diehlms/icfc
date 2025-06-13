@@ -4,7 +4,6 @@
 	import Interaction from '@event-calendar/interaction';
 	import { clientStore, toastStore, ToastTypes, userStore } from '$lib/stores';
 	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
 	import type { eventIn, eventOut } from '$lib/client';
 	import AddEdit from '$lib/components/display/AddEdit.svelte';
 	import FormBuilder from '$lib/components/services/formBuilder';
@@ -12,6 +11,7 @@
 	import { page } from '$app/stores';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 	import { Button } from 'flowbite-svelte'
+	import Loader from '$lib/components/display/Loader.svelte';
 
 	type CalendarEvent = {
 		allDay: boolean;
@@ -40,22 +40,26 @@
 		.richText('description')
 		.dateTime('start_time')
 		.dateTime('end_time')
-		.build();
+		.checkbox('all_day')
+		.build({
+			"all_day": true
+		});
 	let errors: any = undefined;
 
 	const handleSubmit = (event: any) => {
 		const eventReq: eventIn = {
-			user_id: user.id as number,
-			events: event.detail.event_title,
+			user_id: $userStore.id as number,
+			title: event.detail.event_title,
 			description: event.detail.description,
 			location: event.detail.location,
 			start_time: event.detail.start_time,
-			end_time: event.detail.end_time
+			end_time: event.detail.end_time,
+			all_day: event.detail.all_day,
 		};
-
-		client.restClient?.events
+		$clientStore.restClient?.events
 			.postV1Events({ event: eventReq })
 			.then(() => {
+				fetchData();
 				toastStore.update((prevValue) => ({
 					...prevValue,
 					isOpen: true,
@@ -78,18 +82,19 @@
 		window.print()
 	}
 
-	onMount(() => {
-		loading = true;
-		client.restClient?.events
+	const fetchData = () => {
+		$clientStore.restClient?.events
 			.getV1Events()
 			.then((data: eventOut[]) => {
-				options.events = data.map((event: any) => {
+				options.events = data.map((event: eventOut) => {
+					const startTime = new Date(event.start_time)
+					const endTime = new Date(event.end_time);
 					const calendarEvent: CalendarEvent = {
 						id: event.id,
-						title: event.location,
-						start: new Date(event.start_time).toISOString(),
-						end: new Date(event.end_time).toISOString(),
-						allDay: true
+						title: event.title,
+						start: startTime.toISOString(),
+						end: endTime.toISOString(),
+						allDay: event.all_day
 					};
 					return calendarEvent;
 				});
@@ -102,11 +107,16 @@
 					toastMessage: error,
 					type: ToastTypes.error
 				}));
+			}).finally(_ => {
+				loading = false;
 			});
+	}
+
+	onMount(() => {
+		loading = true;
+		fetchData()
 	});
 
-	const client = get(clientStore);
-	const user = get(userStore);
 	$: options;
 </script>
 
@@ -117,14 +127,18 @@
 	{errors}
 />
 
-<div class="h-full w-11/12 pb-10">
-	<div class="calendar">
-		<Calendar {plugins} {options} />
+{#if loading}
+	<Loader />
+{:else}
+	<div class="h-full w-11/12 pb-10">
+		<div class="calendar">
+			<Calendar {plugins} {options} />
+		</div>
+		<div class="mt-5 not-printable">
+			<Button color="blue" class="not-printable" on:click={printCalendar}>Print Calendar</Button>
+		</div>
 	</div>
-	<div class="mt-5 not-printable">
-		<Button color="blue" class="not-printable" on:click={printCalendar}>Print Calendar</Button>
-	</div>
-</div>
+{/if}
 
 <style>
 	@media print {

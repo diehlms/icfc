@@ -208,9 +208,13 @@
 
 		{#if article.comments && article.comments.length > 0}
 			<Listgroup items={article.comments} let:item class="w-full p-3">
-				<Timestamps textAlign={'text-left'} model={item} />
+				<p class="mt-4 text-left text-xs text-gray-500">
+					Created: {new Date(item?.created_at).toLocaleDateString()} | Last Updated: {new Date(
+						item?.updated_at
+					).toLocaleDateString()} | {item.author_username} ({item.author_email})
+				</p>
 				<pre class="mb-4 whitespace-pre-wrap text-base text-gray-700 dark:text-gray-300">
-	{@html item.content}</pre>
+{@html item.content}</pre>
 				{#if updateAuthContext.userActionPermitted(item.user_id, user)}
 					<Button outline size="xs" color="red" on:click={() => deleteComment(item.id)}
 						><Trash /></Button

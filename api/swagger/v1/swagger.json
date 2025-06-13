@@ -2457,6 +2457,12 @@
         "properties": {
           "id": {
             "type": "number"
+          },
+          "author_email": {
+            "type": "string"
+          },
+          "author_username": {
+            "type": "string"
           }
         }
       },
@@ -2520,6 +2526,9 @@
           }
         ],
         "properties": {
+          "title": {
+            "type": "string"
+          },
           "location": {
             "type": "string"
           },
@@ -2536,6 +2545,9 @@
           },
           "user_id": {
             "type": "number"
+          },
+          "all_day": {
+            "type": "boolean"
           }
         }
       },

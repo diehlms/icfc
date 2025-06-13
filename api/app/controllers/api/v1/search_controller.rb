@@ -15,7 +15,7 @@ module Api
         @users = User.where('lower(firstname) LIKE ? OR lower(lastname) LIKE ? OR lower(username) LIKE ?',
                             "%#{params[:search].downcase}%", "%#{params[:search].downcase}%",
                             "%#{params[:search].downcase}%")
-        @events = Event.where('lower(events) LIKE ? OR lower(description) LIKE ?', "%#{params[:search].downcase}",
+        @events = Event.where('lower(title) LIKE ? OR lower(description) LIKE ?', "%#{params[:search].downcase}",
                               "%#{params[:search].downcase}%")
 
         render json: {

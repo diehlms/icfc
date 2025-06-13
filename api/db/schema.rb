@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_11_204133) do
+ActiveRecord::Schema.define(version: 2025_06_12_201821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -115,12 +115,13 @@ ActiveRecord::Schema.define(version: 2024_11_11_204133) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string "events"
+    t.string "title"
     t.string "location"
-    t.date "start_time"
-    t.date "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.string "description"
     t.integer "user_id"
+    t.boolean "all_day", default: true
   end
 
   create_table "families", force: :cascade do |t|

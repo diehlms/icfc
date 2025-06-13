@@ -4,4 +4,5 @@
 /* eslint-disable */
 import type { baseModel } from './baseModel';
 import type { locationPointIn } from './locationPointIn';
-export type locationPointOut = locationPointIn & baseModel;
+export type locationPointOut = (locationPointIn & baseModel);
+

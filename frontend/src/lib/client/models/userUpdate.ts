@@ -4,4 +4,5 @@
 /* eslint-disable */
 import type { createUpdateBaseModel } from './createUpdateBaseModel';
 import type { userIn } from './userIn';
-export type userUpdate = userIn & createUpdateBaseModel;
+export type userUpdate = (userIn & createUpdateBaseModel);
+
