@@ -35,7 +35,7 @@
 
 	let loading: boolean = false;
 	let createEventForm = new FormBuilder()
-		.text('event_title')
+		.text('title')
 		.text('location')
 		.richText('description')
 		.dateTime('start_time')
@@ -49,7 +49,7 @@
 	const handleSubmit = (event: any) => {
 		const eventReq: eventIn = {
 			user_id: $userStore.id as number,
-			title: event.detail.event_title,
+			title: event.detail.title,
 			description: event.detail.description,
 			location: event.detail.location,
 			start_time: event.detail.start_time,
