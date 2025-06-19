@@ -7,10 +7,10 @@
   import updateAuthContext from '$lib/components/services/auth';
   import AddEdit from '$lib/components/display/AddEdit.svelte';
   import FormBuilder, { FormInput } from '$lib/components/services/formBuilder';
-  import Timestamps from '$lib/components/display/Timestamps.svelte';
   import { Trash } from 'svelte-heros-v2';
   import type { eventUpdate } from '$lib/client';
   import { deleteEntity, editEntity } from '$lib/components/services/crud';
+	import { goto } from '$app/navigation';
 
   let event: any;
   let loading: boolean = true;
@@ -18,12 +18,12 @@
   export let data: any;
 
   const fetchData = () => {
-    client.restClient?.events
+    $clientStore.restClient?.events
       .getV1Events1(data.id)
       .then((data) => {
         event = data;
         editEventForm = new FormBuilder()
-          .text('event_title')
+          .text('title')
           .text('location')
           .richText('description')
           .dateTime('start_time')
@@ -51,8 +51,8 @@
       id,
       { user_id: user.id as number },
       'Event',
-      client.restClient?.events.deleteV1Events.bind(client.restClient?.events)
-    );
+      $clientStore.restClient?.events.deleteV1Events.bind($clientStore.restClient?.events)
+    ).finally(() => goto('/events'));
     loading = false;
   };
 
@@ -62,24 +62,23 @@
       start_time: payload.detail.start_time,
       end_time: payload.detail.end_time,
       location: payload.detail.location,
-      events: payload.detail.event_title,
+      title: payload.detail.title,
       description: payload.detail.description
     };
     editEntity(
       event.id as number,
       { event: eventUpdatePayload, user_id: user.id as number },
       'Event',
-      client.restClient?.events.putV1Events.bind(client.restClient.events)
+      $clientStore.restClient?.events.putV1Events.bind($clientStore.restClient.events)
     );
     fetchData();
     loading = false;
   };
 
   const user = get(userStore);
-  const client = get(clientStore);
 
   const formatDate = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    const options: Intl.DateTimeFormatOptions = { timeZone: 'UTC', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 

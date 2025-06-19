@@ -10,6 +10,7 @@
 	import { formatDate } from '$lib/components/services/textFormatting';
 	import type { locationPointOut, rideshareOut, rideshareUpdate } from '$lib/client';
 	import { deleteEntity, editEntity } from '$lib/components/services/crud';
+	import { goto } from '$app/navigation';
 
 	let loading: boolean = true;
 	let rideshare: rideshareOut;
@@ -65,7 +66,7 @@
 			{ user_id: user.id as number },
 			'Rideshare',
 			client.restClient?.rideshares.deleteV1Rideshares.bind(client.restClient?.rideshares)
-		);
+		).finally(() => goto('/rideshares'));;
 		loading = false;
 	};
 

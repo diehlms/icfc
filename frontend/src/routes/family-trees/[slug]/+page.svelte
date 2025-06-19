@@ -16,6 +16,7 @@
 	import updateAuthContext from '$lib/components/services/auth';
 	import FamilyMemberNode from './FamilyMemberNode.svelte';
 	import { createEntity, deleteEntity } from '$lib/components/services/crud';
+	import { goto } from '$app/navigation';
 
 	export let data: any;
 
@@ -190,7 +191,7 @@
 			{ user_id: user.id as number },
 			'Family Tree',
 			client.restClient?.familyTrees.deleteV1FamilyTrees.bind(client.restClient.familyTrees)
-		);
+		).finally(() => goto('/family-trees'));
 		loading = false;
 	};
 

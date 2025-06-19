@@ -85,10 +85,7 @@ class FormBuilder {
 							// Append default time "T00:00"
 							input.value = `${dateStr}T00:00`;
 						} else {
-							// If it already has time component, just format it
-							const dateTime = new Date(dateStr);
-							dateTime.setMinutes(dateTime.getMinutes() - dateTime.getTimezoneOffset());
-							input.value = dateTime.toISOString().slice(0, 16);
+							input.value = dateStr.slice(0, 16);
 						}
 					} else if (input.type === FormTypes.select) {
 						const selectedOption = input.selectOptions?.filter(
