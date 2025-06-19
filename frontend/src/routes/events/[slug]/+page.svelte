@@ -28,6 +28,7 @@
           .richText('description')
           .dateTime('start_time')
           .dateTime('end_time')
+          .checkbox('all_day')
           .build(event);
       })
       .catch((error) => {
@@ -63,7 +64,8 @@
       end_time: payload.detail.end_time,
       location: payload.detail.location,
       title: payload.detail.title,
-      description: payload.detail.description
+      description: payload.detail.description,
+      all_day: payload.detail.all_day,
     };
     editEntity(
       event.id as number,
