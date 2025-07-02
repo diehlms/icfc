@@ -15,9 +15,13 @@
 	import BreadCrumb from '$lib/components/display/BreadCrumb.svelte';
 	import { PUBLIC_API_URL } from '$env/static/public';
 	import CampMessageBanner from '$lib/components/display/CampMessageBanner.svelte';
+	import {
+		XMark
+	} from 'svelte-heros-v2';
 
 	let message: string | null = null;
 	let restClient: AppClient;
+	let showSidebarHint = true;
 
 	$: authenticated = $clientStore.authenticated;
 
@@ -81,6 +85,10 @@
 		goto('/auth/login');
 		await resolveAuth();
 	}
+
+	function closeHint() {
+		showSidebarHint = false;
+	}
 </script>
 
 {#if message}
@@ -100,6 +108,24 @@
 				<slot />
 			</div>
 		</div>
+		{#if showSidebarHint}
+			<div class="sidebar-hint-widget">
+				<div class="hint-content">
+					<div class="hint-text">
+						<p class="text-sm font-medium text-gray-700">
+							💡 Click the green bar on the left to open navigation
+						</p>
+					</div>
+					<button
+						class="hint-close-btn"
+						on:click={closeHint}
+						aria-label="Close hint"
+					>
+						<XMark class="w-4 h-4" />
+					</button>
+				</div>
+			</div>
+		{/if}
 	</main>
 {:else}
 	<slot />
@@ -129,6 +155,67 @@
 		}
 		.flex {
 			flex-direction: column;
+		}
+	}
+	
+	.sidebar-hint-widget {
+		position: fixed;
+		bottom: 20px;
+		left: 40px;
+		z-index: 1000;
+		background: white;
+		border: 1px solid #e5e7eb;
+		border-radius: 8px;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+		padding: 12px 16px;
+		max-width: 280px;
+		animation: slideInUp 0.3s ease-out;
+	}
+
+	.hint-content {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.hint-text {
+		flex: 1;
+	}
+
+	.hint-close-btn {
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 4px;
+		border-radius: 4px;
+		color: #6b7280;
+		transition: all 0.2s;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.hint-close-btn:hover {
+		background-color: #f3f4f6;
+		color: #374151;
+	}
+
+	@keyframes slideInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.sidebar-hint-widget {
+			left: 20px;
+			right: 20px;
+			max-width: none;
 		}
 	}
 </style>

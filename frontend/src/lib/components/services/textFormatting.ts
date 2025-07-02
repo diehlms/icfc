@@ -75,6 +75,7 @@ export function formatDate(dateString: string) {
 		month: 'long',
 		day: 'numeric',
 		hour: 'numeric',
-		minute: 'numeric'
+		minute: 'numeric',
+		timeZone: 'UTC'
 	});
 }
