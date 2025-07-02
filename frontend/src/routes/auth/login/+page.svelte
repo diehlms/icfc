@@ -6,6 +6,7 @@
 	import type { AppClient } from '$lib/client';
 	import updateAuthContext from '$lib/components/services/auth';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
+	import PasswordInput from '$lib/components/display/PasswordInput.svelte';
 
 	onMount(async () => {
 		if (localStorage.getItem('authToken') !== null) {
@@ -66,7 +67,7 @@
 			<h1>Iron City Fishing Club</h1>
 			<form on:submit|preventDefault={handleLogin}>
 				<Input class="m-2" type="text" bind:value={username} placeholder="Username" />
-				<Input class="m-2" type="password" bind:value={password} placeholder="Password" />
+				<PasswordInput class="m-2" bind:value={password} placeholder="Password" />
 				<Button type="submit" outline={true} class="m-2 w-full">Log in</Button>
 			</form>
 			<div class="inline">

@@ -5,6 +5,7 @@
 	import { page } from '$app/stores';
 	import { goto, invalidateAll } from '$app/navigation';
 	import { AppClient } from '$lib/client';
+	import PasswordInput from '$lib/components/display/PasswordInput.svelte';
 
 	onMount(async () => {
 		const url = $page.url;
@@ -87,11 +88,11 @@
 			<form on:submit|preventDefault={resetPassword}>
 				<div class="mb-6">
 					<Label for="password" class="mb-2">Password</Label>
-					<Input type="password" id="password" required bind:value={password} />
+					<PasswordInput id="password" required bind:value={password} />
 				</div>
 				<div class="mb-6">
 					<Label for="confirmPassword" class="mb-2">Confirm password</Label>
-					<Input type="password" id="confirmPassword" required bind:value={passwordConfirm} />
+					<PasswordInput id="confirmPassword" required bind:value={passwordConfirm} placeholder="Confirm password" />
 				</div>
 				<Button type="submit" outline={true} class="m-2 w-full">Reset Password</Button>
 			</form>

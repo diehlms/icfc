@@ -19,10 +19,8 @@
 		EllipsisHorizontalCircle,
 		Ticket,
 		Map,
-		Clipboard,
 		Users,
 		Bars3CenterLeft,
-		Cog
 	} from 'svelte-heros-v2';
 	import { userStore } from '$lib/stores';
 	import { sineIn } from 'svelte/easing';

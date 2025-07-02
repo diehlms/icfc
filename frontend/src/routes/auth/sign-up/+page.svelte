@@ -6,6 +6,7 @@
 	import type { AppClient, signupPayload } from '$lib/client';
 	import Loader from '$lib/components/display/Loader.svelte';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
+	import PasswordInput from '$lib/components/display/PasswordInput.svelte';
 
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken')) {
@@ -97,7 +98,7 @@
 							<span class="font-medium">Invalid telephone number</span>
 						</Helper>
 					{/if}
-					<Input class="m-2" type="password" bind:value={password} placeholder="Password" />
+					<PasswordInput class="m-2" bind:value={password} placeholder="Password" />
 					{#if password && !password.match(VALID_PASSWORD_REGEX)}
 						<Helper class="mt-2" color="red">
 							<span class="font-medium">Invalid password</span>
@@ -110,9 +111,8 @@
 							</ol>
 						</Helper>
 					{/if}
-					<Input
+					<PasswordInput
 						class="m-2"
-						type="password"
 						bind:value={passwordConfirmation}
 						placeholder="Password Confirmation"
 					/>
