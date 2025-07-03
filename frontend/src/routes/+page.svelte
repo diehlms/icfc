@@ -77,25 +77,38 @@
 	{:else if events && campers && articles}
 		<h1 class="mb-4 text-center text-4xl font-bold">Iron City Fishing Club</h1>
 
-		<div class="grid grid-cols-1 gap-6 md:grid-cols-4">
+		<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md opacity-80">
+			<h2 class="mb-4 text-xl font-semibold">This Week's Events</h2>
+			<ul class="list-inside list-disc">
+				{#if events.length > 0}
+					{#each events as event}
+						<li class="text-teal-600">
+							<a href={`/events/${event.id}`}>{event.title} - {formatDate(event.start_time)}</a>
+						</li>
+					{/each}
+				{:else}
+					<span>No events this week!</span>
+				{/if}
+			</ul>
+		</div>
+
+		<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md mt-5 mb-5 opacity-80">
+			<h2 class="mb-4 text-xl font-semibold">Campers</h2>
+			<ul class="max-h-32 list-inside list-disc overflow-y-scroll">
+				{#if campers.length > 0}
+					{#each campers as camper}
+						<li>{camper.name}</li>
+					{/each}
+				{:else}
+					<span>No campers this week!</span>
+				{/if}
+			</ul>
+		</div>
+
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-2 opacity-80">
 			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
 				<h2 class="mb-4 text-xl font-semibold">Today's Breakfast</h2>
 				<p class="text-gray-600">{getBreakfast()}</p>
-			</div>
-
-			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
-				<h2 class="mb-4 text-xl font-semibold">This Week's Events</h2>
-				<ul class="list-inside list-disc">
-					{#if events.length > 0}
-						{#each events as event}
-							<li>
-								<a href={`/events/${event.id}`}>{event.title} - {formatDate(event.start_time)} to {formatDate(event.end_time)}</a>
-							</li>
-						{/each}
-					{:else}
-						<span>No events this week!</span>
-					{/if}
-				</ul>
 			</div>
 
 			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
@@ -103,7 +116,7 @@
 				<ul class="list-inside list-disc">
 					{#if articles.length > 0}
 						{#each articles as article}
-							<li>
+							<li class="text-teal-600">
 								<a href={`/articles/${article.id}`}>{article.title}</a>
 							</li>
 						{/each}
@@ -112,22 +125,9 @@
 					{/if}
 				</ul>
 			</div>
-
-			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
-				<h2 class="mb-4 text-xl font-semibold">Campers</h2>
-				<ul class="max-h-32 list-inside list-disc overflow-y-scroll">
-					{#if campers.length > 0}
-						{#each campers as camper}
-							<li>{camper.name}</li>
-						{/each}
-					{:else}
-						<span>No campers this week!</span>
-					{/if}
-				</ul>
-			</div>
 		</div>
 
-		<div class="grid grid-cols-1 gap-6 md:grid-cols-1 mt-5">
+		<div class="grid grid-cols-1 gap-6 md:grid-cols-1 mt-5 opacity-80">
 			<div class="flex flex-col justify-start rounded-lg bg-white p-6 shadow-md">
 				<h2 class="mb-4 text-xl font-semibold">Important Contacts</h2>
 				<Listgroup items={simpleList} let:item class="w-full">
