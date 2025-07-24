@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { clientStore, toastStore, ToastTypes } from '$lib/stores';
-	import { Card, Input, Button, Label } from 'flowbite-svelte';
+	import { Card, Input, Button, Label, Helper } from 'flowbite-svelte';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { goto, invalidateAll } from '$app/navigation';
-	import { AppClient } from '$lib/client';
+	import { goto } from '$app/navigation';
 	import PasswordInput from '$lib/components/display/PasswordInput.svelte';
 
 	onMount(async () => {
@@ -21,19 +20,11 @@
 	let token: string;
 	let password = '';
 	let passwordConfirm = '';
-	let restClient: AppClient;
 
-	clientStore.subscribe((value) => {
-		if (value.restClient !== null) {
-			restClient = value.restClient;
-		} else {
-			// Rest Client not initialized, will need to programatically refresh page
-			invalidateAll();
-		}
-	});
+	const VALID_PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 	async function sendRecoveryEmail() {
-		await restClient.passwordResets
+		await $clientStore.restClient.passwordResets
 			.postV1PasswordResets(email)
 			.then(() => {
 				toastStore.update((prevValue) => ({
@@ -54,7 +45,7 @@
 	}
 
 	async function resetPassword() {
-		await restClient.passwordResets
+		await $clientStore.restClient.passwordResets
 			.putV1PasswordResets({
 				password_reset_token: token,
 				password: password,
@@ -88,12 +79,29 @@
 			<form on:submit|preventDefault={resetPassword}>
 				<div class="mb-6">
 					<Label for="password" class="mb-2">Password</Label>
+					{#if password && !password.match(VALID_PASSWORD_REGEX)}
+						<Helper class="mt-2" color="red">
+							<span class="font-medium">Invalid password</span>
+							Passwords must adhere to the following rules:
+							<ol>
+								<li>Be more than 8 characters</li>
+								<li>Contain at least one digit</li>
+								<li>Contain a lower case letter</li>
+								<li>Contain an upper case letter</li>
+							</ol>
+						</Helper>
+					{/if}
 					<PasswordInput id="password" required bind:value={password} />
 				</div>
 				<div class="mb-6">
 					<Label for="confirmPassword" class="mb-2">Confirm password</Label>
 					<PasswordInput id="confirmPassword" required bind:value={passwordConfirm} placeholder="Confirm password" />
 				</div>
+				{#if password !== passwordConfirm}
+					<Helper class="mt-2" color="red">
+						<span class="font-medium">Password inputs do not match</span>
+					</Helper>
+				{/if}
 				<Button type="submit" outline={true} class="m-2 w-full">Reset Password</Button>
 			</form>
 		</Card>

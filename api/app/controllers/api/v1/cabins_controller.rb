@@ -14,7 +14,7 @@ module Api
 
       def create
         @cabin = Cabin.new(cabin_params)
-        if @cabin
+        if @cabin.save
           render json: @cabin
         else
           render json: { errors: @cabin.errors.full_messages }, status: :unprocessable_entity

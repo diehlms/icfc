@@ -17,7 +17,7 @@
 		"Lisa's Number: 705-346-1191",
 		"Gregoire Home Telephone: 705-375-5633",
 		"Randy Grisdale: 705-774-4179",
-		"ICFC Email: ICFC@vianet.on.ca",
+		"ICFC Email (office): office@icfc.net",
 		"ICFC Fax: 705-375-0405",
 	];
 

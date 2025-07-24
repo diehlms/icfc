@@ -226,7 +226,7 @@
 								{#if !!cabin.price_per_week}
 									${cabin.price_per_week}
 								{:else}
-									Price not Available
+									Price not available
 								{/if}
 							</p>
 							<p class="mb-2">
@@ -234,7 +234,7 @@
 								{#if !!cabin.price_per_day}
 									${cabin.price_per_day}
 								{:else}
-									Price not Available
+									Price not available
 								{/if}
 							</p>
 							<p class="mb-2">
