@@ -121,17 +121,6 @@
 							<span class="font-medium">Password inputs do not match</span>
 						</Helper>
 					{/if}
-					<!-- todo: add back recaptcha -->
-					<!-- <Recaptcha
-						sitekey={PUBLIC_CAPTCHA_SITE_KEY}
-						badge={"top"}
-						size={"normal"}
-						on:success={onCaptchaSuccess}
-						on:error={onCaptchaError}
-						on:expired={onCaptchaExpire}
-						on:close={onCaptchaClose}
-						on:ready={onCaptchaReady} 
-					/> -->
 					<Button type="submit" outline={true} class="m-2 w-full">Sign Up</Button>
 				</form>
 				<div class="inline">
