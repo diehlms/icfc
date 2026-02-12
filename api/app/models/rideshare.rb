@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class Rideshare < ApplicationRecord
+  extend T::Sig
+
   belongs_to :user
 
   belongs_to :point_of_departure, class_name: 'LocationPoint', foreign_key: 'point_of_departure_id'

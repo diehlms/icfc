@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class Comment < ApplicationRecord
+  extend T::Sig
+
   belongs_to :user
   belongs_to :article
 

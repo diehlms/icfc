@@ -1,4 +1,9 @@
+# typed: true
+# frozen_string_literal: true
+
 class UserSerializer < ActiveModel::Serializer
+  extend T::Sig
+
   attributes :id,
              :email,
              :username,
@@ -14,6 +19,7 @@ class UserSerializer < ActiveModel::Serializer
              :slug,
              :recently_joined?
 
+  sig { returns(T::Boolean) }
   def recently_joined?
     Date.today.prev_month < object.created_at
   end

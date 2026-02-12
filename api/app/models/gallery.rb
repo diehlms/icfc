@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class Gallery < ApplicationRecord
+  extend T::Sig
+
   self.per_page = 30
 
   validates :image, presence: true

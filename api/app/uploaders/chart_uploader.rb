@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class ChartUploader < CarrierWave::Uploader::Base
+  extend T::Sig
+
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -14,6 +17,7 @@ class ChartUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
+  sig { returns(String) }
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
@@ -37,6 +41,7 @@ class ChartUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
+  sig { returns(T::Array[String]) }
   def extension_white_list
     %w[shp zip gpx pdf csv]
   end

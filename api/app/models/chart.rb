@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class Chart < ApplicationRecord
+  extend T::Sig
+
   self.per_page = 30
 
   belongs_to :user

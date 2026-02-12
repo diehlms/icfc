@@ -1,0 +1,8 @@
+--dir
+.
+--ignore=tmp/
+--ignore=vendor/
+--ignore=.bundle/
+--ignore=spec/
+--ignore=config/spring.rb
+--suppress-payload-superclass-redefinition-for=RDoc::Markup::Heading

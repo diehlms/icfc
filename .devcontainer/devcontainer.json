@@ -1,15 +1,9 @@
 {
   "name": "ICFC Development",
-  "build": {
-    "dockerfile": "../Dockerfile.dev",
-    "context": ".."
-  },
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
   "workspaceFolder": "/workspace",
-  "runArgs": ["--network=host", "--env-file=${localWorkspaceFolder}/.env"],
-  "mounts": [
-    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
-  ],
-  "forwardPorts": [3010, 5173, 8882],
+  "forwardPorts": [3010, 5173, 5432, 6379],
   "portsAttributes": {
     "3010": {
       "label": "Rails API",
@@ -19,8 +13,12 @@
       "label": "Frontend",
       "onAutoForward": "notify"
     },
-    "8882": {
+    "5432": {
       "label": "PostgreSQL",
+      "onAutoForward": "ignore"
+    },
+    "6379": {
+      "label": "Redis",
       "onAutoForward": "ignore"
     }
   },

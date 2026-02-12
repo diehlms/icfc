@@ -1,4 +1,9 @@
+# typed: true
+# frozen_string_literal: true
+
 class EventSerializer < ActiveModel::Serializer
+  extend T::Sig
+
   attributes :title,
              :location,
              :start_time,

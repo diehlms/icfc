@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class FamilyMember < ApplicationRecord
+  extend T::Sig
+
   belongs_to :family_tree
   belongs_to :family_tree
   belongs_to :parent, class_name: 'FamilyMember', optional: true

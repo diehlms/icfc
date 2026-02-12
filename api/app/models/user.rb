@@ -1,6 +1,8 @@
+# typed: true
 # frozen_string_literal: true
 
 class User < ActiveRecord::Base
+  extend T::Sig
   extend FriendlyId
   attr_accessor :remember_token
 
@@ -17,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :family_trees, dependent: :destroy
   has_many :family_members, dependent: :destroy
 
-  before_save { self.email = email.downcase }
+  before_save :downcase_email
 
   self.per_page = 20
 
@@ -33,17 +35,20 @@ class User < ActiveRecord::Base
 
   friendly_id :username, use: :slugged
 
+  sig { params(string: String).returns(BCrypt::Password) }
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost:)
   end
 
+  sig { void }
   def email_activate
     self.email_confirmed = true
     self.confirm_token = nil
     save!(validate: false)
   end
 
+  sig { void }
   def send_password_reset
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
@@ -51,21 +56,25 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver
   end
 
+  sig { returns(String) }
   def self.new_token
     SecureRandom.urlsafe_base64
   end
 
+  sig { void }
   def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
+  sig { params(remember_token: String).returns(T::Boolean) }
   def authenticated?(remember_token)
     return false if remember_digest.nil?
 
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
+  sig { params(column: Symbol).void }
   def generate_token(column)
     loop do
       self[column] = SecureRandom.urlsafe_base64.to_s
@@ -73,12 +82,19 @@ class User < ActiveRecord::Base
     end
   end
 
+  sig { void }
   def forget
     update_attribute(:remember_digest, nil)
   end
 
   private
 
+  sig { void }
+  def downcase_email
+    self.email = T.must(email).downcase
+  end
+
+  sig { void }
   def confirmation_token
     return unless confirm_token.blank?
 

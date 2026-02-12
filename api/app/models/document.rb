@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class Document < ApplicationRecord
+  extend T::Sig
+
   validates :document_title, length: { maximum: 30, minimum: 5 }, presence: true
   validates :document_folder, length: { maximum: 30, minimum: 5 }, presence: true
   validates :document, presence: true

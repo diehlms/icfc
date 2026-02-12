@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class Cabin < ApplicationRecord
+  extend T::Sig
+
   validates :name, presence: true
   validates :bedrooms, presence: true, length: { maximum: 1 }
   has_many :cabindates, dependent: :destroy

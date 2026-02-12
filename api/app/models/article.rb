@@ -1,6 +1,8 @@
+# typed: true
 # frozen_string_literal: true
 
 class Article < ApplicationRecord
+  extend T::Sig
   extend FriendlyId
   self.per_page = 3
 
