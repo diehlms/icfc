@@ -1,5 +1,22 @@
-# typed: true
 # frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: comments
+#
+#  id         :bigint           not null, primary key
+#  content    :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  article_id :integer
+#  user_id    :bigint
+#
+# Foreign Keys
+#
+#  fk_rails_...  (article_id => articles.id)
+#  fk_rails_...  (user_id => users.id)
+#
+# typed: true
 
 class CommentSerializer < ActiveModel::Serializer
   extend T::Sig

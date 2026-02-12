@@ -35,6 +35,7 @@ gem 'rollbar'
 gem 'sorbet-runtime'
 
 group :development, :test do
+  gem 'herb'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails'

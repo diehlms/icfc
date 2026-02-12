@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# == Route Map
+#
+
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
@@ -16,7 +19,7 @@ Rails.application.routes.draw do
       get '/entry/this_weeks_events', to: 'entry#this_weeks_events'
       put '/family_members', to: 'family_members#update'
       post '/search', to: 'search#search'
-    
+
       get '/password_resets/init_reset_password', to: 'password_resets#init_reset_password'
       post '/password_resets', to: 'password_resets#create'
       put '/password_resets', to: 'password_resets#update'

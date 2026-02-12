@@ -1,5 +1,28 @@
-# typed: true
 # frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: articles
+#
+#  id         :bigint           not null, primary key
+#  content    :string
+#  image      :string
+#  pinned     :boolean          default(FALSE)
+#  slug       :string
+#  title      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_articles_on_slug  (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
+# typed: true
 
 class ArticleSerializer < ActiveModel::Serializer
   extend T::Sig

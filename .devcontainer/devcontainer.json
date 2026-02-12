@@ -3,7 +3,7 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspace",
-  "forwardPorts": [3010, 5173, 5432, 6379],
+  "forwardPorts": [3010, 5173, 5433, 6379],
   "portsAttributes": {
     "3010": {
       "label": "Rails API",
@@ -13,7 +13,7 @@
       "label": "Frontend",
       "onAutoForward": "notify"
     },
-    "5432": {
+    "5433": {
       "label": "PostgreSQL",
       "onAutoForward": "ignore"
     },
