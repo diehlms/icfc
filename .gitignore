@@ -16,6 +16,11 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
+api/log/*
+api/tmp/*
+!api/log/.keep
+!api/tmp/.keep
+
 /log/*
 /tmp/*
 !/log/.keep
