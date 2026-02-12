@@ -3,20 +3,16 @@
 class ApplicationController < ActionController::Base
   around_action :label_metrics
 
+  private
+
   def authorize_request
     header = request.headers['Authorization']
+    token = header&.split(' ')&.last
 
-    if header.present?
-      token = header.split(' ').last
-
+    if token
       begin
         @decoded = JsonWebToken.decode(token)
-
-        if @decoded != nil
-          @current_user = User.find(@decoded[:user_id])
-        else
-          render json: { errors: 'Missing token' }, status: :unauthorized
-        end
+        @current_user = User.find(@decoded[:user_id])
       rescue ActiveRecord::RecordNotFound => e
         render json: { errors: "User not found: #{e.message}" }, status: :unauthorized
       rescue JWT::DecodeError => e
@@ -33,32 +29,13 @@ class ApplicationController < ActionController::Base
   end
 
   def check_admin_only
-    model = instance_variable_get("@#{controller_name.singularize}")
-
-    puts model
-    if model.present?
-      authorize_resource(model, params[:user_id], true)
-    else
-      user = User.find_by(id: params[:user_id])
-      if user&.admin?
-        true
-      else
-        render json: { error: 'Not admin user' }, status: :forbidden
-        false
-      end
-    end
+    render json: { error: 'Not admin user' }, status: :forbidden unless @current_user&.admin?
   end
 
   def authorize_resource(model, user_id_param, strict)
-    user = User.find_by(id: user_id_param)
-    logger.warn 'User ID not found in params' if user_id_param.nil?
+    return true if @current_user&.admin?
 
-    if (!strict && user&.admin?) || user&.admin? || (model.respond_to?(:user_id) && model.user_id == user_id_param.to_i)
-      true
-    else
-      render json: { error: 'Unauthorized access' }, status: :forbidden
-      false
-    end
+    render json: { error: 'Unauthorized access' }, status: :forbidden unless model.user_id == @current_user.id
   end
 
   def append_info_to_payload(payload)

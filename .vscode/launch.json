@@ -1,0 +1,90 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "rdbg",
+      "name": "Attach to Rails API",
+      "request": "attach",
+      "rdbgPath": "rdbg",
+      "debugPort": "38698",
+      "localfs": true,
+      "autoAttach": "legacy"
+    },
+    {
+      "type": "rdbg",
+      "name": "Attach to RSpec Tests",
+      "request": "attach",
+      "rdbgPath": "rdbg",
+      "debugPort": "38699",
+      "localfs": true,
+      "autoAttach": "legacy"
+    },
+    {
+      "type": "rdbg",
+      "name": "Debug Rails API (Launch & Attach)",
+      "request": "launch",
+      "rdbgPath": "rdbg",
+      "command": "rails",
+      "script": "server",
+      "args": ["-b", "0.0.0.0", "-p", "3000"],
+      "cwd": "${workspaceFolder}/api",
+      "env": {
+        "RAILS_ENV": "development"
+      },
+      "useBundler": true
+    },
+    {
+      "type": "rdbg",
+      "name": "Debug Current RSpec File",
+      "request": "launch",
+      "rdbgPath": "rdbg",
+      "command": "rspec",
+      "script": "${file}",
+      "args": [],
+      "cwd": "${workspaceFolder}/api",
+      "env": {
+        "RAILS_ENV": "test"
+      },
+      "useBundler": true
+    },
+    {
+      "type": "rdbg",
+      "name": "Debug All RSpec Tests",
+      "request": "launch",
+      "rdbgPath": "rdbg",
+      "command": "rspec",
+      "args": [],
+      "cwd": "${workspaceFolder}/api",
+      "env": {
+        "RAILS_ENV": "test"
+      },
+      "useBundler": true
+    },
+    {
+      "type": "frontend",
+      "name": "Frontend",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/frontend/src",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "/*": "${workspaceFolder}/frontend/*"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Full Stack (API + Frontend)",
+      "configurations": [
+        "Attach to Rails API",
+        "Frontend"
+      ],
+      "preLaunchTask": "Run All Services (API + Frontend)",
+      "presentation": {
+        "hidden": false,
+        "group": "full-stack",
+        "order": 1
+      }
+    }
+  ]
+}

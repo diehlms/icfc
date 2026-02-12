@@ -120,6 +120,9 @@ GEM
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.3)
+    debug (1.11.1)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
     diff-lcs (1.5.0)
     e2mmap (0.1.0)
     erubi (1.12.0)
@@ -150,6 +153,11 @@ GEM
     image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
+    io-console (0.8.2)
+    irb (1.16.0)
+      pp (>= 0.6.0)
+      rdoc (>= 4.0.0)
+      reline (>= 0.4.2)
     jaro_winkler (1.5.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -165,6 +173,7 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
+    language_server-protocol (3.17.0.5)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -213,6 +222,10 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.3)
+    pp (0.6.3)
+      prettyprint
+    prettyprint (0.2.0)
+    prism (0.29.0)
     psych (3.3.4)
     public_suffix (5.0.1)
     puma (3.12.6)
@@ -259,8 +272,11 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rbs (2.8.4)
+    rdoc (6.3.4.1)
     redis (4.8.1)
     regexp_parser (2.8.0)
+    reline (0.6.3)
+      io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
     reverse_markdown (2.1.1)
@@ -308,6 +324,10 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
       parser (>= 3.2.1.0)
+    ruby-lsp (0.17.2)
+      language_server-protocol (~> 3.17.0)
+      prism (>= 0.29.0, < 0.30)
+      sorbet-runtime (>= 0.5.10782)
     ruby-progressbar (1.13.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
@@ -335,6 +355,7 @@ GEM
       thor (~> 1.0)
       tilt (~> 2.0)
       yard (~> 0.9, >= 0.9.24)
+    sorbet-runtime (0.5.12366)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -380,6 +401,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   carrierwave
   carrierwave-aws
+  debug
   fog-aws
   friendly_id (~> 5.2.4)
   jbuilder (~> 2.5)
@@ -402,6 +424,7 @@ DEPENDENCIES
   rswag-specs
   rswag-ui
   rubocop
+  ruby-lsp
   sassc-rails
   solargraph
   spring

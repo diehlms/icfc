@@ -1,0 +1,135 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Rails API (Debug Mode)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/api && bundle exec rdbg -n --open --port 38698 -c -- bin/rails server -b 0.0.0.0 -p 3000",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^([^\\s].*):(\\d+):\\s*(.*)$",
+          "file": 1,
+          "line": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*DEBUGGER.*$",
+          "endsPattern": "^.*Listening on.*$|^.*Use Ctrl-C to stop.*$"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "servers"
+      }
+    },
+    {
+      "label": "Run Rails API (Normal Mode)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/api && bundle exec rails server -b 0.0.0.0 -p 3000",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^([^\\s].*):(\\d+):\\s*(.*)$",
+          "file": 1,
+          "line": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Booting.*$",
+          "endsPattern": "^.*Listening on.*$|^.*Use Ctrl-C to stop.*$"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "servers"
+      }
+    },
+    {
+      "label": "Run Frontend Dev Server",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/frontend && npm run dev",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^([^\\s].*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*VITE.*$",
+          "endsPattern": "^.*Local:.*$|^.*ready in.*$"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "servers"
+      }
+    },
+    {
+      "label": "Run All Services (API + Frontend)",
+      "dependsOn": [
+        "Run Rails API (Debug Mode)",
+        "Run Frontend Dev Server"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Run RSpec Tests",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/api && bundle exec rspec",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    },
+    {
+      "label": "Run RSpec Tests (Debug Mode)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/api && bundle exec rdbg -n --open --port 38699 -c -- bundle exec rspec ${input:specFile}",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    },
+    {
+      "label": "Run Minitest Tests",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/api && bundle exec rails test",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "group": "tests"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "specFile",
+      "type": "promptString",
+      "description": "Enter the spec file path (or leave blank for all)",
+      "default": ""
+    }
+  ]
+}

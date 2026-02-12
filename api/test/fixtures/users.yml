@@ -3,7 +3,7 @@ one:
   firstname: "Regular"
   lastname: "User"
   email: "user@example.com"
-  password_digest: "<hashed_password>"
+  password_digest: <%= BCrypt::Password.create('password') %>
   admin: false
   created_at: <%= 1.day.ago.to_s(:db) %>
 
@@ -12,7 +12,7 @@ two:
   firstname: "Regular2"
   lastname: "Use2r"
   email: "user2@example.com"
-  password_digest: "<hashed_password>"
+  password_digest: <%= BCrypt::Password.create('password') %>
   admin: false
   created_at: <%= 1.day.ago.to_s(:db) %>
 
@@ -21,6 +21,15 @@ admin:
   firstname: "Admin"
   lastname: "User"
   email: "admin@example.com"
-  password_digest: "<hashed_password>"
+  password_digest: <%= BCrypt::Password.create('password') %>
   admin: true
+  created_at: <%= 1.day.ago.to_s(:db) %>
+
+unconfirmed:
+  id: 4
+  firstname: "Un"
+  lastname: "Confirmed"
+  email: "unconfirmed@example.com"
+  password_digest: <%= BCrypt::Password.create('password') %>
+  admin: false
   created_at: <%= 1.day.ago.to_s(:db) %>

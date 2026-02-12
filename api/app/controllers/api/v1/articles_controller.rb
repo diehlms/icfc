@@ -7,6 +7,8 @@ module Api
       before_action :article, only: %i[upload_image show update destroy]
       before_action :check_authorization, only: %i[upload_image update destroy]
 
+      rescue_from ActionController::ParameterMissing, with: :handle_missing_params
+
       def index
         @articles = Article.paginate(page: params[:page], per_page: 3).order(created_at: :desc)
         render json: @articles, each_serializer: ArticleSerializer
@@ -54,6 +56,10 @@ module Api
       end
 
       private
+
+      def handle_missing_params(exception)
+        render json: { error: "Missing parameter: #{exception.param}" }, status: :unprocessable_entity
+      end
 
       def article_params
         params.require(:article).permit(:title, :content, :image, :pinned, :user_id)
