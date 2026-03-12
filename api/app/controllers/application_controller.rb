@@ -47,7 +47,6 @@ class ApplicationController < ActionController::Base
     payload[:request_id] = request.uuid # Add request ID for traceability
   end
 
-  private
 
   def label_metrics
     Thread.current['metrics_labels'] = { controller: params[:controller], action: params[:action] }

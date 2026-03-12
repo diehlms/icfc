@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 # == Schema Information
@@ -10,7 +11,6 @@
 #  updated_at :datetime         not null
 #  user_id    :integer
 #
-# typed: true
 
 class FamilyTree < ApplicationRecord
   extend T::Sig

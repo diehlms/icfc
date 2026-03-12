@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 # == Schema Information
@@ -23,7 +24,6 @@
 #
 #  fk_rails_...  (family_tree_id => family_trees.id)
 #
-# typed: true
 
 class FamilyMember < ApplicationRecord
   extend T::Sig

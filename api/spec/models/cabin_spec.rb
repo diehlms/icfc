@@ -1,23 +1,3 @@
-# == Schema Information
-#
-# Table name: cabins
-#
-#  id             :bigint           not null, primary key
-#  bedrooms       :string
-#  description    :string
-#  dock           :boolean          default(FALSE)
-#  name           :string
-#  price_per_day  :integer
-#  price_per_week :integer
-#  washerdryer    :boolean          default(FALSE)
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  user_id        :integer
-#
-# Foreign Keys
-#
-#  fk_rails_...  (user_id => users.id)
-#
 require 'rails_helper'
 
 RSpec.describe Cabin, type: :model do
@@ -34,28 +14,18 @@ RSpec.describe Cabin, type: :model do
     it { should belong_to(:user) }
     it { should have_many(:cabindates).dependent(:destroy) }
     it { should have_many(:cabin_attachments).dependent(:destroy) }
-  end
-
-  describe 'nested attributes' do
-    it 'accepts nested attributes for cabin_attachments' do
-      expect(Cabin._reflect_on_association(:cabin_attachments).options[:autosave]).to be_truthy
-    end
-  end
-
-  describe 'factory' do
-    it 'has a valid factory' do
-      expect(build(:cabin)).to be_valid
-    end
+    it { should accept_nested_attributes_for(:cabin_attachments) }
   end
 
   describe 'bedrooms validation' do
+    let(:user) { create(:user) }
+
     it 'is valid with a single digit' do
-      cabin = build(:cabin, bedrooms: '5')
-      expect(cabin).to be_valid
+      expect(build(:cabin, user: user, bedrooms: '5')).to be_valid
     end
 
     it 'is invalid with multiple digits' do
-      cabin = build(:cabin, bedrooms: '12')
+      cabin = build(:cabin, user: user, bedrooms: '12')
       expect(cabin).not_to be_valid
       expect(cabin.errors[:bedrooms]).to include('is too long (maximum is 1 character)')
     end

@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 # == Schema Information
@@ -15,7 +16,6 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-# typed: true
 
 class Gallery < ApplicationRecord
   extend T::Sig

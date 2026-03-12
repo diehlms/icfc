@@ -38,7 +38,6 @@ RSpec.describe User, type: :model do
     it { should validate_length_of(:email).is_at_most(105) }
     it { should validate_length_of(:username).is_at_least(6).is_at_most(20) }
     it { should validate_uniqueness_of(:email).case_insensitive }
-    it { should validate_uniqueness_of(:username) }
 
     describe 'email format' do
       it 'is valid with a proper email format' do

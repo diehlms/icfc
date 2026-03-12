@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 # == Schema Information
@@ -21,7 +22,6 @@
 #  fk_rails_...  (point_of_arrival_id => location_points.id)
 #  fk_rails_...  (point_of_departure_id => location_points.id)
 #
-# typed: true
 
 class Rideshare < ApplicationRecord
   extend T::Sig

@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 # == Schema Information
@@ -13,7 +14,6 @@
 #
 #  fk_rails_...  (cabin_id => cabins.id)
 #
-# typed: true
 
 class Cabindate < ApplicationRecord
   extend T::Sig

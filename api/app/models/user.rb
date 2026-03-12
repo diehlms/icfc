@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 # == Schema Information
@@ -28,7 +29,6 @@
 #  index_users_on_email_id  (email_id)
 #  index_users_on_slug      (slug) UNIQUE
 #
-# typed: true
 
 class User < ActiveRecord::Base
   extend T::Sig
