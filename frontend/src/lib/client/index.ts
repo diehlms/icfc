@@ -54,6 +54,7 @@ export type { rideshareOut } from './models/rideshareOut';
 export type { rideshareUpdate } from './models/rideshareUpdate';
 export type { searchIn } from './models/searchIn';
 export type { signupPayload } from './models/signupPayload';
+export type { userCreate } from './models/userCreate';
 export type { userIn } from './models/userIn';
 export type { userUpdate } from './models/userUpdate';
 

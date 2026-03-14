@@ -29,8 +29,6 @@ admin = User.create!(
   email: "admin@example.com",
   password: "Password123!",
   password_confirmation: "Password123!",
-
-  
   admin: true,
   verified: true,
   email_confirmed: true

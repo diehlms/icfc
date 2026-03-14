@@ -5,7 +5,8 @@ module Api
     class UsersController < ApplicationController
       before_action :authorize_request
       before_action :user, only: %i[show update destroy]
-      before_action :check_authorization, only: %i[update destroy]
+      before_action :check_authorization, only: %i[update]
+      before_action :check_admin_only, only: %i[destroy create]
 
       def index
         @user = User.all
@@ -16,6 +17,15 @@ module Api
         user
 
         render json: user, serializer: UserSerializer
+      end
+
+      def create
+        @user = User.new(admin_create_params.merge(verified: true, email_confirmed: true))
+        if @user.save
+          render json: { message: 'User created!', user: @user }, status: :created
+        else
+          render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+        end
       end
 
       def destroy
@@ -48,6 +58,10 @@ module Api
 
       def user_params
         params.require(:user).permit(:username, :firstname, :lastname, :email, :phone_number)
+      end
+
+      def admin_create_params
+        params.require(:user).permit(:username, :firstname, :lastname, :email, :phone_number, :password, :password_confirmation)
       end
 
       def user

@@ -2,6 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { userCreate } from '../models/userCreate';
 import type { userUpdate } from '../models/userUpdate';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
@@ -16,6 +17,22 @@ export class UsersService {
         return this.httpRequest.request({
             method: 'GET',
             url: '/v1/users',
+        });
+    }
+    /**
+     * create user (admin only)
+     * @param requestBody
+     * @returns any successful
+     * @throws ApiError
+     */
+    public postV1Users(
+        requestBody?: { user?: userCreate },
+    ): CancelablePromise<any> {
+        return this.httpRequest.request({
+            method: 'POST',
+            url: '/v1/users',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
     /**

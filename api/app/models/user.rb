@@ -38,11 +38,10 @@ class User < ActiveRecord::Base
   before_create :confirmation_token
   has_secure_password
   has_many :articles, dependent: :destroy
-  has_many :comments, through: :articles
+  has_many :comments, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :cabins, dependent: :destroy
   has_many :galleries, dependent: :destroy
-  has_many :events, dependent: :destroy
   has_many :charts, dependent: :destroy
   has_many :rideshares, dependent: :destroy
   has_many :family_trees, dependent: :destroy

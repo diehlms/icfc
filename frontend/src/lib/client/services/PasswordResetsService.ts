@@ -14,13 +14,15 @@ export class PasswordResetsService {
      * @throws ApiError
      */
     public postV1PasswordResets(
-        email?: string,
+        email?: { email?: string },
+        captchaToken?: string,
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/v1/password_resets',
             query: {
                 'email': email,
+                'captcha_token': captchaToken,
             },
         });
     }

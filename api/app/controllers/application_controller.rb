@@ -1,10 +1,14 @@
+# typed: true
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  extend T::Sig
+
   around_action :label_metrics
 
   private
 
+  sig { void }
   def authorize_request
     header = request.headers['Authorization']
     token = header&.split(' ')&.last
@@ -23,36 +27,46 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  sig { void }
   def check_authorization
     model = instance_variable_get("@#{controller_name.singularize}")
     authorize_resource(model, params[:user_id], false) if model.present?
   end
 
+  sig { void }
+  def verify_captcha!
+    unless CaptchaService.verify(params[:captcha_token].to_s)
+      render json: { error: 'Captcha verification failed' }, status: :unprocessable_entity
+    end
+  end
+
+  sig { void }
   def check_admin_only
     render json: { error: 'Not admin user' }, status: :forbidden unless @current_user&.admin?
   end
 
-  def authorize_resource(model, user_id_param, strict)
-    return true if @current_user&.admin?
+  sig { params(model: T.untyped, _user_id_param: T.untyped, _strict: T::Boolean).void }
+  def authorize_resource(model, _user_id_param, _strict)
+    return if @current_user&.admin?
 
     render json: { error: 'Unauthorized access' }, status: :forbidden unless model.user_id == @current_user.id
   end
 
+  sig { params(payload: T::Hash[T.untyped, T.untyped]).void }
   def append_info_to_payload(payload)
     super
     payload[:host] = request.host
     payload[:remote_ip] = request.remote_ip
     payload[:ip] = request.ip
-    payload[:user_id] = @current_user&.id || 'guest' # Add user context if available
-    payload[:request_id] = request.uuid # Add request ID for traceability
+    payload[:user_id] = @current_user&.id || 'guest'
+    payload[:request_id] = request.uuid
   end
 
-
+  sig { void }
   def label_metrics
     Thread.current['metrics_labels'] = { controller: params[:controller], action: params[:action] }
-    yield # call the action
+    yield
   ensure
-    # reset to nil so nothing else can access it
     Thread.current['metrics_labels'] = nil
   end
 end

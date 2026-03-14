@@ -61,7 +61,7 @@
       "useBundler": true
     },
     {
-      "type": "frontend",
+      "type": "chrome",
       "name": "Frontend",
       "request": "launch",
       "url": "http://localhost:5173",

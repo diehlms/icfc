@@ -1,6 +1,11 @@
+# typed: true
+# frozen_string_literal: true
+
 module Api
   module V1
     class AuthenticationsController < ApplicationController
+      before_action :verify_captcha!, only: %i[signup]
+
       def login
         @user = User.find_by(email: params[:email].downcase)
         if @user&.authenticate(params[:password])

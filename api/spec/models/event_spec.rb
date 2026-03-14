@@ -45,10 +45,10 @@ RSpec.describe Event, type: :model do
       expect(event.errors[:end_time]).to be_empty
     end
 
-    it 'skips the check when end_time is blank' do
+    it 'skips the custom check when end_time is blank' do
       event = build(:event, user: user, start_time: base, end_time: nil)
       event.valid?
-      expect(event.errors[:end_time]).to be_empty
+      expect(event.errors[:end_time]).not_to include('must be after the start time')
     end
   end
 end

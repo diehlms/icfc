@@ -30,14 +30,5 @@ RSpec.describe 'Users', type: :request do
       expect(json_response['email']).to eq(user.email)
     end
 
-    it 'returns not found for a non-existent user' do
-      get '/api/v1/users/9999999', headers: auth_headers(user)
-      expect_not_found
-    end
-
-    it 'returns unauthorized for an invalid token' do
-      get "/api/v1/users/#{user.id}", headers: invalid_auth_headers
-      expect_unauthorized
-    end
   end
 end

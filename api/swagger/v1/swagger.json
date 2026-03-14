@@ -13,9 +13,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "parameters": [
@@ -51,14 +49,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -101,9 +95,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -126,14 +118,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -163,14 +151,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -194,9 +178,7 @@
           "Auth"
         ],
         "description": "login, get new session",
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -227,9 +209,7 @@
           "Auth"
         ],
         "description": "sign up",
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -286,9 +266,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -312,17 +290,13 @@
       ],
       "delete": {
         "summary": "delete cabin_attachment",
-        "parameters": [
-
-        ],
+        "parameters": [],
         "tags": [
           "Cabin Attachments"
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -349,14 +323,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -392,14 +362,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -424,9 +390,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -452,14 +416,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -502,9 +462,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -527,14 +485,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -564,14 +518,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -596,9 +546,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -624,14 +572,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -674,14 +618,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -706,9 +646,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -734,9 +672,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -772,9 +708,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -797,14 +731,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -829,14 +759,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -872,14 +798,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -904,9 +826,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -934,9 +854,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -962,9 +880,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -993,14 +909,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1025,9 +937,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -1045,9 +955,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -1073,14 +981,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -1139,9 +1043,7 @@
         "tags": [
           "Events"
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -1169,9 +1071,7 @@
         "tags": [
           "Events"
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1196,14 +1096,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1226,14 +1122,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1269,14 +1161,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1301,9 +1189,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -1329,14 +1215,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1372,9 +1254,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -1395,9 +1275,7 @@
         "tags": [
           "Family Trees"
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1422,9 +1300,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -1450,14 +1326,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1484,14 +1356,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1516,9 +1384,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -1534,14 +1400,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1577,14 +1439,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1609,9 +1467,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -1629,9 +1485,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -1667,9 +1521,7 @@
         "tags": [
           "Password Resets"
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1717,9 +1569,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -1745,14 +1595,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -1795,9 +1641,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -1820,14 +1664,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful",
@@ -1857,14 +1697,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1889,14 +1725,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1921,14 +1753,50 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
           "200": {
             "description": "successful"
+          }
+        }
+      },
+      "post": {
+        "summary": "create user (admin only)",
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/userIn"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user": {
+                    "$ref": "#/components/schemas/userCreate"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -1963,14 +1831,10 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
-        "parameters": [
-
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "successful"
@@ -1993,9 +1857,7 @@
         ],
         "security": [
           {
-            "Bearer": [
-
-            ]
+            "Bearer": []
           }
         ],
         "responses": {
@@ -2839,14 +2701,41 @@
             "type": "string"
           }
         }
+      },
+      "userCreate": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          },
+          "password_confirmation": {
+            "type": "string",
+            "format": "password"
+          },
+          "phone_number": {
+            "type": "string"
+          }
+        }
       }
     }
   },
   "security": [
     {
-      "Bearer": [
-
-      ]
+      "Bearer": []
     }
   ]
 }

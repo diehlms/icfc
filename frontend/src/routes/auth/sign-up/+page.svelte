@@ -7,6 +7,8 @@
 	import Loader from '$lib/components/display/Loader.svelte';
 	import { processApiErrorsToString } from '$lib/components/services/errorHandler';
 	import PasswordInput from '$lib/components/display/PasswordInput.svelte';
+	import { Recaptcha } from 'svelte-recaptcha-v2';
+	import { PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
 
 	onMount(async () => {
 		if (!!localStorage.getItem('authToken')) {
@@ -22,7 +24,14 @@
 	let phoneNumber = '';
 	let firstName = '';
 	let lastName = '';
+	let captchaToken = '';
 	let restClient: AppClient;
+
+	let captchaError = '';
+
+	function onCaptchaSuccess(e: any) { captchaToken = e.detail.response; captchaError = ''; }
+	function onCaptchaExpire() { captchaToken = ''; captchaError = 'Captcha expired, please try again.'; }
+	function onCaptchaError() { captchaToken = ''; captchaError = 'Captcha failed, please try again.'; }
 
 	const VALID_EMAIL_REGEX = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i;
 	const VALID_PHONE_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
@@ -50,7 +59,7 @@
 		};
 
 		await restClient.auth
-			.postV1AuthSignup({ user: newUser })
+			.postV1AuthSignup({ user: newUser, captcha_token: captchaToken })
 			.then(() => {
 				toastStore.update((prevValue) => ({
 					...prevValue,
@@ -121,7 +130,18 @@
 							<span class="font-medium">Password inputs do not match</span>
 						</Helper>
 					{/if}
-					<Button type="submit" outline={true} class="m-2 w-full">Sign Up</Button>
+					<div class="m-2">
+					<Recaptcha
+						sitekey={PUBLIC_CAPTCHA_SITE_KEY}
+						on:success={onCaptchaSuccess}
+						on:expire={onCaptchaExpire}
+						on:error={onCaptchaError}
+					/>
+				</div>
+				{#if captchaError}
+					<Helper class="mx-2 mt-1" color="red">{captchaError}</Helper>
+				{/if}
+				<Button type="submit" outline={true} class="m-2 w-full" disabled={!captchaToken}>Sign Up</Button>
 				</form>
 				<div class="inline">
 					<a class="float-left" href="/auth/forgot-password">Forgot password?</a>

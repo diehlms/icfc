@@ -1,14 +1,17 @@
+# typed: true
 # frozen_string_literal: true
 
 module Api
   module V1
     class PasswordResetsController < ApplicationController
+      before_action :verify_captcha!, only: %i[create]
+
       def create
         user = User.find_by_email(params[:email][:email].downcase)
         user&.send_password_reset
-        render json: {
-          message: 'If the email provided is associated with an account, please check the inbox for password reset instructions'
-        }
+        msg = 'If the email provided is associated with an account, ' \
+              'please check the inbox for password reset instructions'
+        render json: { message: msg }
       end
 
       def init_reset_password

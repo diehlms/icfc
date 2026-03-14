@@ -21,6 +21,7 @@
 		Map,
 		Users,
 		Bars3CenterLeft,
+		Cog6Tooth,
 	} from 'svelte-heros-v2';
 	import { userStore } from '$lib/stores';
 	import { sineIn } from 'svelte/easing';
@@ -229,6 +230,17 @@
 						<UserGroup />
 					</svelte:fragment>
 				</SidebarItem>
+				{#if showAdminLinks}
+					<SidebarItem
+						class="text-emerald-50 hover:text-emerald-950"
+						href="/admin/settings"
+						label="Admin Settings"
+					>
+						<svelte:fragment slot="icon">
+							<Cog6Tooth />
+						</svelte:fragment>
+					</SidebarItem>
+				{/if}
 			</SidebarGroup>
 		</SidebarWrapper>
 	</Sidebar>

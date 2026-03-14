@@ -33,8 +33,8 @@ export class AuthService {
      * @throws ApiError
      */
     public postV1AuthSignup(
-        requestBody?: signupPayload,
-    ): CancelablePromise<signupPayload> {
+        requestBody?: { user?: signupPayload; captcha_token?: string },
+    ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'POST',
             url: '/v1/auth/signup',
