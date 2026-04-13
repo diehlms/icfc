@@ -9,10 +9,6 @@
       "label": "Rails API",
       "onAutoForward": "notify"
     },
-    "5173": {
-      "label": "Frontend",
-      "onAutoForward": "notify"
-    },
     "5433": {
       "label": "PostgreSQL",
       "onAutoForward": "ignore"

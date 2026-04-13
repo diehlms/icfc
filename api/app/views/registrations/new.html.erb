@@ -1,0 +1,68 @@
+<div class="min-h-screen flex items-center justify-center py-8 relative"
+     style="background-image: url('<%= asset_path('lodge.jpg') %>'); background-size: cover; background-position: bottom;">
+  <div class="absolute inset-0 bg-black/50"></div>
+  <div class="bg-white rounded-lg shadow-md p-8 w-full max-w-md relative z-10">
+    <h1 class="text-2xl font-bold text-emerald-900 mb-2 text-center">Create Account</h1>
+    <p class="text-sm text-gray-500 text-center mb-6">Iron City Fishing Club</p>
+
+    <%= form_with model: @user, url: signup_path, data: { controller: "form-validity" }, class: "space-y-4" do |f| %>
+      <% if @user.errors.any? %>
+        <div class="bg-red-50 border border-red-200 rounded p-3 text-sm text-red-700">
+          <ul class="list-disc list-inside space-y-1">
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <%= f.label :firstname, "First Name", class: "form-label" %>
+          <%= f.text_field :firstname, required: true, class: "form-control" %>
+        </div>
+        <div>
+          <%= f.label :lastname, "Last Name", class: "form-label" %>
+          <%= f.text_field :lastname, required: true, class: "form-control" %>
+        </div>
+      </div>
+      <div>
+        <%= f.label :username, "Username (6–20 characters)", class: "form-label" %>
+        <%= f.text_field :username, required: true, minlength: 6, maxlength: 20, class: "form-control" %>
+        <%= render "shared/field_errors", object: @user, attribute: :username %>
+      </div>
+      <div>
+        <%= f.label :email, "Email", class: "form-label" %>
+        <%= f.email_field :email, required: true, maxlength: 105, class: "form-control" %>
+        <%= render "shared/field_errors", object: @user, attribute: :email %>
+      </div>
+      <div>
+        <%= f.label :phone_number, "Phone Number", class: "form-label" %>
+        <%= f.telephone_field :phone_number, class: "form-control" %>
+      </div>
+      <div data-controller="password-visibility">
+        <%= f.label :password, "Password", class: "form-label" %>
+        <p class="text-xs text-gray-400 mb-1">Min 8 chars, must include uppercase letter and number</p>
+        <div class="relative">
+          <%= f.password_field :password, required: true, minlength: 8,
+                data: { password_visibility_target: "input" },
+                class: "form-control pr-10" %>
+          <button type="button" data-action="click->password-visibility#toggle"
+                  class="absolute inset-y-0 right-2 flex items-center text-gray-500 hover:text-gray-800 text-xs">
+            Show
+          </button>
+        </div>
+        <%= render "shared/field_errors", object: @user, attribute: :password %>
+      </div>
+      <div>
+        <%= f.label :password_confirmation, "Confirm Password", class: "form-label" %>
+        <%= f.password_field :password_confirmation, required: true, class: "form-control" %>
+      </div>
+      <%= f.submit "Create Account", data: { form_validity_target: "submit" }, class: "btn-primary w-full" %>
+    <% end %>
+
+    <p class="mt-4 text-center text-sm text-gray-600">
+      Already have an account? <%= link_to "Sign in", login_path, class: "text-emerald-700 hover:underline" %>
+    </p>
+  </div>
+</div>

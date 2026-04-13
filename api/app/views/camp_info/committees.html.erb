@@ -1,0 +1,24 @@
+<%= render "breadcrumb", title: "Committees" %>
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <table class="w-full text-sm">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="text-left px-4 py-2 font-medium text-gray-700">Name</th>
+        <th class="text-left px-4 py-2 font-medium text-gray-700">Link</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <% @committees.each do |committee| %>
+        <tr>
+          <td class="px-4 py-2"><%= committee.name %></td>
+          <td class="px-4 py-2">
+            <% if committee.url.present? %>
+              <%= link_to committee.url, committee.url, target: "_blank", rel: "noopener",
+                    class: "text-emerald-700 hover:underline" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

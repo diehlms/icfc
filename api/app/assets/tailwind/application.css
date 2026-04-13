@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@source "../../views/**/*.html.erb";
+@source "../../components/**/*.html.erb";
+@source "../../helpers/**/*.rb";
+@source "../../../javascript/**/*.js";
+
+@layer components {
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+
+  .form-control {
+    @apply block w-full rounded border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .form-control-sm {
+    @apply block w-full rounded border border-gray-300 bg-white px-3 py-1 text-xs text-gray-900 placeholder:text-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 font-semibold text-sm cursor-pointer transition-colors select-none disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-sm {
+    @apply inline-flex items-center justify-center gap-1 rounded bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-1.5 font-semibold text-xs cursor-pointer transition-colors select-none disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 px-4 py-2 font-medium text-sm cursor-pointer transition-colors select-none;
+  }
+
+  .modal-dialog {
+    @apply p-0 rounded-lg shadow-xl w-full max-w-lg mx-auto open:flex open:flex-col backdrop:bg-black/50 border-0;
+  }
+}
+
+@theme {
+  --color-emerald-50: #ecfdf5;
+  --color-emerald-100: #d1fae5;
+  --color-emerald-200: #a7f3d0;
+  --color-emerald-300: #6ee7b7;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-emerald-600: #059669;
+  --color-emerald-700: #047857;
+  --color-emerald-800: #065f46;
+  --color-emerald-900: #064e3b;
+  --color-emerald-950: #022c22;
+}

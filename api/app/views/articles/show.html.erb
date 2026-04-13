@@ -1,0 +1,75 @@
+<div class="max-w-3xl">
+  <div class="mb-4 flex items-center gap-3">
+    <%= link_to "← Articles", articles_path, class: "text-sm text-emerald-700 hover:underline" %>
+    <% if @article.user_id == current_user.id || current_user.admin? %>
+      <%= link_to edit_article_path(@article), class: "text-gray-400 hover:text-emerald-600", title: "Edit" do %>
+        <%= heroicon "pencil-square", options: { class: "w-4 h-4" } %>
+      <% end %>
+      <%= button_to @article, method: :delete, class: "text-gray-400 hover:text-red-500 bg-transparent border-0 p-0 cursor-pointer",
+            title: "Delete", data: { turbo_confirm: "Delete this article?" } do %>
+        <%= heroicon "trash", options: { class: "w-4 h-4" } %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <article class="bg-white rounded-lg shadow p-6 mb-6">
+    <h1 class="text-2xl font-bold text-emerald-900 mb-1"><%= @article.title %></h1>
+    <p class="text-sm text-gray-500 mb-4">
+      By <%= @article.user&.firstname %> <%= @article.user&.lastname %> &middot;
+      <%= @article.created_at.strftime('%B %-d, %Y') %>
+    </p>
+
+    <% if @article.image? %>
+      <img src="<%= @article.image_url %>" alt="<%= @article.title %>"
+           class="w-full max-h-80 object-cover rounded mb-4">
+    <% end %>
+
+    <div class="prose prose-emerald max-w-none text-gray-800">
+      <%= raw @article.content %>
+    </div>
+
+    <% if @article.user_id == current_user.id || current_user.admin? %>
+      <div class="mt-6 pt-4 border-t">
+        <h3 class="text-sm font-medium text-gray-700 mb-2">Upload Image</h3>
+        <%= form_with url: upload_image_article_path(@article), method: :patch, multipart: true, data: { controller: "form-validity" }, class: "flex gap-2" do |f| %>
+          <%= f.file_field :image, name: "article[image]", accept: "image/*", required: true, class: "text-sm" %>
+          <%= f.submit "Upload", data: { form_validity_target: "submit" }, class: "bg-emerald-700 text-white px-3 py-1 rounded text-sm cursor-pointer hover:bg-emerald-800" %>
+        <% end %>
+      </div>
+    <% end %>
+  </article>
+
+  <section class="bg-white rounded-lg shadow p-6">
+    <h2 class="text-lg font-semibold mb-4">Comments (<%= @comments.count %>)</h2>
+
+    <%= form_with url: article_comments_path(@article), data: { controller: "form-validity" }, class: "mb-6 flex gap-2" do |f| %>
+      <%= f.text_field :content, placeholder: "Add a comment…",
+            name: "comment[content]",
+            required: true,
+            maxlength: 1000,
+            class: "form-control flex-1" %>
+      <%= f.submit "Post", data: { form_validity_target: "submit" }, class: "btn-sm" %>
+    <% end %>
+
+    <div class="space-y-3">
+      <% @comments.each do |comment| %>
+        <div class="flex items-start justify-between border-b pb-3">
+          <div>
+            <p class="text-sm font-medium text-gray-800">
+              <%= comment.user&.firstname %> <%= comment.user&.lastname %>
+              <span class="text-gray-400 font-normal ml-2"><%= comment.created_at.strftime('%b %-d') %></span>
+            </p>
+            <p class="text-sm text-gray-700 mt-0.5"><%= comment.content %></p>
+          </div>
+          <% if comment.user_id == current_user.id || current_user.admin? %>
+            <%= button_to article_comment_path(@article, comment), method: :delete,
+                  class: "text-gray-400 hover:text-red-500 bg-transparent border-0 cursor-pointer",
+                  title: "Delete comment", data: { turbo_confirm: "Delete comment?" } do %>
+              <%= heroicon "x-mark", options: { class: "w-4 h-4" } %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>

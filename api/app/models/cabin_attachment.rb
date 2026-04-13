@@ -19,5 +19,6 @@
 class CabinAttachment < ApplicationRecord
   extend T::Sig
 
+  belongs_to :cabin
   mount_uploader :image, ImageUploader
 end

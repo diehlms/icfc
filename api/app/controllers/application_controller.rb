@@ -5,9 +5,38 @@ class ApplicationController < ActionController::Base
   extend T::Sig
 
   around_action :label_metrics
+  helper_method :current_user, :logged_in?
 
   private
 
+  sig { returns(T.nilable(User)) }
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+  end
+
+  sig { returns(T::Boolean) }
+  def logged_in?
+    current_user.present?
+  end
+
+  sig { void }
+  def authenticate_user!
+    redirect_to login_path, alert: 'Please log in to continue.' unless logged_in?
+  end
+
+  sig { void }
+  def require_verified!
+    return if current_user&.verified?
+
+    redirect_to root_path, alert: 'Your account must be verified before you can post content.'
+  end
+
+  sig { void }
+  def require_admin!
+    redirect_to root_path, alert: 'Not authorized.' unless current_user&.admin?
+  end
+
+  # JWT-based auth for API controllers
   sig { void }
   def authorize_request
     header = request.headers['Authorization']
@@ -58,7 +87,7 @@ class ApplicationController < ActionController::Base
     payload[:host] = request.host
     payload[:remote_ip] = request.remote_ip
     payload[:ip] = request.ip
-    payload[:user_id] = @current_user&.id || 'guest'
+    payload[:user_id] = @current_user&.id || current_user&.id || 'guest'
     payload[:request_id] = request.uuid
   end
 

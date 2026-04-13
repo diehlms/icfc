@@ -1,0 +1,20 @@
+<h1 class="text-2xl font-bold text-emerald-900 mb-6">Camp Information</h1>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  <% [
+    ["History",           camp_info_history_path],
+    ["Customs",           camp_info_customs_path],
+    ["Membership",        camp_info_membership_path],
+    ["Committees",        camp_info_committees_path],
+    ["Bylaws",            camp_info_bylaws_path],
+    ["Charitable Giving", camp_info_charitable_giving_path],
+    ["Family Agreements", camp_info_family_agreements_path],
+    ["Planned Giving",    camp_info_planned_giving_path],
+    ["Forms & Documents", camp_info_forms_path],
+    ["Archives",          camp_info_archives_path],
+  ].each do |label, path| %>
+    <%= link_to path, class: "bg-white rounded-lg shadow p-5 hover:shadow-md hover:border-emerald-300 border border-transparent transition block" do %>
+      <span class="text-emerald-800 font-semibold"><%= label %></span>
+    <% end %>
+  <% end %>
+</div>

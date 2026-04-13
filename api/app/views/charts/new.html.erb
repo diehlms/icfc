@@ -1,0 +1,43 @@
+<div data-controller="chart-builder" class="flex flex-col gap-6">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold text-emerald-900">Chart Builder</h1>
+    <div class="flex gap-2">
+      <button data-action="click->chart-builder#undo" class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded text-sm font-medium">
+        Undo Point
+      </button>
+      <button data-action="click->chart-builder#clear" class="bg-white border border-gray-300 hover:bg-gray-50 text-red-600 px-4 py-2 rounded text-sm font-medium">
+        Clear All
+      </button>
+    </div>
+  </div>
+
+  <div class="bg-amber-50 border border-amber-200 text-amber-900 p-4 rounded-lg text-sm flex gap-3">
+    <%= heroicon "information-circle", options: { class: "w-5 h-5 flex-shrink-0 text-amber-600" } %>
+    <p>
+      <strong>Disclaimer:</strong> All routes are approximate and should be uploaded to GPS apps like Garmins for better reflection of real world conditions. Use for planning purposes only.
+    </p>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-lg overflow-hidden relative">
+    <div id="chart-map" data-chart-builder-target="map" class="h-[600px] w-full z-0"></div>
+    
+    <div class="absolute bottom-6 left-6 right-6 z-[1000] pointer-events-none">
+      <div class="bg-white/95 backdrop-blur-sm p-4 rounded-lg shadow-xl border border-emerald-100 flex flex-col md:flex-row gap-4 pointer-events-auto max-w-2xl mx-auto">
+        <div class="flex-1">
+          <input type="text" 
+                 data-chart-builder-target="caption" 
+                 placeholder="Route Caption (e.g., Deep Bay to Club)"
+                 class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500">
+        </div>
+        <button data-action="click->chart-builder#save" 
+                class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-6 rounded text-sm transition-colors shadow-sm">
+          Save Chart (GPX)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-sm text-gray-500 italic">
+    Click on the map to add points and build your boating route.
+  </div>
+</div>

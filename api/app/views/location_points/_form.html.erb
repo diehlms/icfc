@@ -1,0 +1,13 @@
+<%= form_with model: location_point, url: location_points_path,
+      data: { turbo_frame: "new_location_form", controller: "form-validity" },
+      class: "flex gap-2 mt-2" do |f| %>
+  <%= f.text_field :location_name, placeholder: "New location name",
+        required: true,
+        maxlength: 105,
+        class: "form-control-sm flex-1",
+        autofocus: true %>
+  <%= f.submit "Add", data: { form_validity_target: "submit" }, class: "btn-sm" %>
+  <% if location_point.errors.any? %>
+    <span class="text-red-600 text-xs self-center"><%= location_point.errors.full_messages.first %></span>
+  <% end %>
+<% end %>

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe JsonWebToken do
   let(:payload) { { user_id: 42 } }
-  let(:secret) { Rails.application.secrets.secret_key_base }
+  let(:secret) { Rails.application.secret_key_base }
 
   describe '.encode' do
     it 'returns a string' do

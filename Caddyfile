@@ -5,11 +5,3 @@ www.icfc.net, icfc.net {
   reverse_proxy /uploads* production_api:3000
   reverse_proxy production_www:4000
 }
-
-www.caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz, caqqdrrb6ke2g9yrmeauhbkhg.diehlsillers.xyz {
-  reverse_proxy /api* staging_api:3000
-  reverse_proxy /api-docs* staging_api:3000
-  reverse_proxy /hosted_files* staging_api:3000
-  reverse_proxy /uploads* staging_api:3000
-  reverse_proxy staging_www:4000
-}

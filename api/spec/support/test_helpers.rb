@@ -2,7 +2,7 @@
 
 module TestHelpers
   def generate_token(user)
-    JWT.encode({ user_id: user.id }, Rails.application.secrets.secret_key_base, 'HS256')
+    JWT.encode({ user_id: user.id }, Rails.application.secret_key_base, 'HS256')
   end
 
   def auth_headers(user)
@@ -46,6 +46,10 @@ module TestHelpers
     expect(response).to have_http_status(:no_content)
   end
 end
+
+  def web_login(user)
+    post login_path, params: { email: user.email, password: 'StrongPass123' }
+  end
 
 RSpec.configure do |config|
   config.include TestHelpers, type: :request

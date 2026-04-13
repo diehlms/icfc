@@ -9,7 +9,7 @@ module ActiveSupport
     fixtures :all
     
     def generate_token(user)
-      JWT.encode({ user_id: user.id }, Rails.application.secrets.secret_key_base, 'HS256')
+      JWT.encode({ user_id: user.id }, Rails.application.secret_key_base, 'HS256')
     end
 
     def auth_headers(user)

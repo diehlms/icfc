@@ -1,0 +1,48 @@
+<div class="mb-4">
+  <%= link_to "← Rideshares", rideshares_path, class: "text-sm text-emerald-700 hover:underline" %>
+</div>
+<div class="bg-white rounded-lg shadow p-6 max-w-lg">
+  <h1 class="text-xl font-bold text-emerald-900 mb-4">
+    <%= @rideshare.seeking? ? "Seeking Ride" : "Offering Ride" %>
+  </h1>
+  <dl class="space-y-2 text-sm">
+    <div class="flex justify-between">
+      <dt class="font-medium text-gray-600">From</dt>
+      <dd><%= @rideshare.point_of_departure&.location_name %></dd>
+    </div>
+    <div class="flex justify-between">
+      <dt class="font-medium text-gray-600">To</dt>
+      <dd><%= @rideshare.point_of_arrival&.location_name %></dd>
+    </div>
+    <div class="flex justify-between">
+      <dt class="font-medium text-gray-600">Departing</dt>
+      <dd><%= @rideshare.departing_at.strftime('%B %-d, %Y at %-I:%M %p') %></dd>
+    </div>
+    <div class="flex justify-between">
+      <dt class="font-medium text-gray-600">Arriving</dt>
+      <dd><%= @rideshare.arriving_at.strftime('%B %-d, %Y at %-I:%M %p') %></dd>
+    </div>
+    <div class="flex justify-between">
+      <dt class="font-medium text-gray-600">Passengers</dt>
+      <dd><%= @rideshare.number_of_passengers %></dd>
+    </div>
+    <% if @rideshare.additional_information.present? %>
+      <div>
+        <dt class="font-medium text-gray-600 mb-1">Notes</dt>
+        <dd class="text-gray-700"><%= @rideshare.additional_information %></dd>
+      </div>
+    <% end %>
+  </dl>
+  <% if @rideshare.user_id == current_user.id || current_user.admin? %>
+    <div class="mt-6 flex gap-3">
+      <%= link_to edit_rideshare_path(@rideshare), class: "text-gray-400 hover:text-emerald-600", title: "Edit" do %>
+        <%= heroicon "pencil-square", options: { class: "w-4 h-4" } %>
+      <% end %>
+      <%= button_to @rideshare, method: :delete,
+            class: "text-gray-400 hover:text-red-500 bg-transparent border-0 cursor-pointer",
+            title: "Delete", data: { turbo_confirm: "Delete?" } do %>
+        <%= heroicon "trash", options: { class: "w-4 h-4" } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

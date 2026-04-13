@@ -1,0 +1,58 @@
+<div data-controller="modal">
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-emerald-900">Rideshares</h1>
+  <button data-action="click->modal#open" class="btn-primary">Post Rideshare</button>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden mb-6" data-controller="table-sort">
+  <table class="w-full text-sm" data-table-sort-target="table">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Type</th>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>From</th>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>To</th>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Departing</th>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Passengers</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <% @rideshares.each do |rs| %>
+        <tr>
+          <td class="px-4 py-2">
+            <span class="<%= rs.seeking? ? 'text-blue-600' : 'text-green-600' %> font-medium">
+              <%= rs.seeking? ? "Seeking" : "Offering" %>
+            </span>
+          </td>
+          <td class="px-4 py-2 text-gray-700"><%= rs.point_of_departure&.location_name %></td>
+          <td class="px-4 py-2 text-gray-700"><%= rs.point_of_arrival&.location_name %></td>
+          <td class="px-4 py-2 text-gray-600"><%= rs.departing_at.strftime('%b %-d, %-I:%M %p') %></td>
+          <td class="px-4 py-2 text-gray-600"><%= rs.number_of_passengers %></td>
+          <td class="px-4 py-2 text-right">
+            <%= link_to "Details", rideshare_path(rs), class: "text-xs text-emerald-600 hover:underline mr-2" %>
+            <% if rs.user_id == current_user.id || current_user.admin? %>
+              <%= button_to rs, method: :delete,
+                    class: "text-gray-400 hover:text-red-500 bg-transparent border-0 cursor-pointer inline-flex",
+                    title: "Delete", data: { turbo_confirm: "Delete rideshare?" } do %>
+                <%= heroicon "trash", options: { class: "w-4 h-4" } %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<dialog data-modal-target="dialog" data-action="click->modal#backdropClose" class="modal-dialog">
+  <div class="p-6 w-full">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-semibold">Post Rideshare</h2>
+      <button data-action="click->modal#close" class="text-gray-400 hover:text-gray-600">
+        <%= heroicon "x-mark", options: { class: "w-5 h-5" } %>
+      </button>
+    </div>
+    <%= render "form", rideshare: @rideshare, location_points: @location_points %>
+  </div>
+</dialog>
+</div>

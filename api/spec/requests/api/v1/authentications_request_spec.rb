@@ -20,7 +20,7 @@ RSpec.describe 'Authentications', type: :request do
       it 'encodes user info in the token' do
         post '/api/v1/auth/login', params: { email: user.email, password: password }
         token = json_response['token']
-        decoded = JWT.decode(token, Rails.application.secrets.secret_key_base, true, algorithm: 'HS256').first
+        decoded = JWT.decode(token, Rails.application.secret_key_base, true, algorithm: 'HS256').first
         expect(decoded['user_id']).to eq(user.id)
         expect(decoded['email']).to eq(user.email)
       end

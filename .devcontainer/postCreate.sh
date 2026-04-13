@@ -27,15 +27,6 @@ gem install debug rdbg
 echo "Preparing database..."
 rails db:prepare || echo "Database setup failed, but continuing..."
 
-# Navigate to frontend directory
-cd /workspace/frontend
-
-# Install Node dependencies (if needed)
-if [ -f "package.json" ]; then
-    echo "Installing Node.js dependencies..."
-    npm install || echo "npm install failed, but continuing..."
-fi
-
 cd /workspace
 
 # Set up claude local env
@@ -43,10 +34,5 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 
 echo "PostCreate setup complete!"
-echo ""
-echo "Installed CLI tools:"
-echo "  - Claude Code CLI: claude --version"
-echo "  - Node.js version: $(node --version)"
-echo "  - npm version: $(npm --version)"
 echo ""
 echo "Environment variables loaded from .env"

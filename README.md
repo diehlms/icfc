@@ -2,11 +2,16 @@
 
 ## Developer Setup
 
-Requires:
+In a devcontainer-friendly IDE (VSCode, etc), ensure you have the devcontainers extension installed.
 
-- docker (with compose)
+Follow the extension's prompt to build the image in .devcontainer (In VSCode, CMD+SHIFT+P -> "build devcontainer")
 
-Steps:
+Once inside the container, run:
 
-- from root directory, run `docker compose up -d`
-- navigate to the [running app](http://icfc.localhost:4000) in your browser
+```sh
+api/bin/rails db:prepare;
+api/bin/rails db:seed;
+api/foreman -f Procfile.dev;
+```
+
+Then, in your browser go to `http://localhost:3000`. Log in using one of the accounts in the seed file (`db/seeds.rb`)

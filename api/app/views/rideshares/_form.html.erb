@@ -1,0 +1,60 @@
+<%= form_with model: rideshare, data: { controller: "form-validity" }, class: "space-y-4" do |f| %>
+  <% if rideshare.errors.any? %>
+    <div class="bg-red-50 border border-red-200 rounded p-3 text-sm text-red-700">
+      <ul class="list-disc list-inside">
+        <% rideshare.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="flex items-center gap-2">
+    <%= f.check_box :seeking, class: "rounded border-gray-300 text-emerald-600" %>
+    <%= f.label :seeking, "Seeking a ride (unchecked = offering)", class: "text-sm text-gray-700" %>
+  </div>
+  <div>
+    <%= f.label :point_of_departure_id, "Departing From", class: "form-label" %>
+    <%= f.select :point_of_departure_id,
+          location_points.map { |lp| [lp.location_name, lp.id] },
+          { include_blank: "Select location" },
+          id: "rideshare_point_of_departure_id",
+          class: "form-control" %>
+  </div>
+  <div>
+    <%= f.label :point_of_arrival_id, "Arriving At", class: "form-label" %>
+    <%= f.select :point_of_arrival_id,
+          location_points.map { |lp| [lp.location_name, lp.id] },
+          { include_blank: "Select location" },
+          id: "rideshare_point_of_arrival_id",
+          class: "form-control" %>
+  </div>
+  <turbo-frame id="new_location_form">
+    <%= link_to "Add new location", new_location_point_path, data: { turbo_frame: "new_location_form" }, class: "text-xs text-emerald-600 hover:underline" %>
+  </turbo-frame>
+  <div class="grid grid-cols-2 gap-3">
+    <div>
+      <%= f.label :departing_at, "Departing At", class: "form-label" %>
+      <%= f.datetime_local_field :departing_at, required: true, class: "form-control" %>
+      <%= render "shared/field_errors", object: rideshare, attribute: :departing_at %>
+    </div>
+    <div>
+      <%= f.label :arriving_at, "Arriving At", class: "form-label" %>
+      <%= f.datetime_local_field :arriving_at, required: true, class: "form-control" %>
+      <%= render "shared/field_errors", object: rideshare, attribute: :arriving_at %>
+    </div>
+  </div>
+  <div>
+    <%= f.label :number_of_passengers, "Passengers (1–7)", class: "form-label" %>
+    <%= f.number_field :number_of_passengers, required: true, min: 1, max: 7, class: "form-control" %>
+    <%= render "shared/field_errors", object: rideshare, attribute: :number_of_passengers %>
+  </div>
+  <div>
+    <%= f.label :additional_information, "Notes", class: "form-label" %>
+    <%= f.text_area :additional_information, required: true, rows: 2, maxlength: 500, class: "form-control" %>
+    <%= render "shared/field_errors", object: rideshare, attribute: :additional_information %>
+  </div>
+  <div class="flex gap-3">
+    <%= f.submit rideshare.persisted? ? "Save Changes" : "Post", data: { form_validity_target: "submit" }, class: "btn-primary" %>
+    <% if rideshare.persisted? %>
+      <%= link_to "Cancel", rideshares_path, class: "text-sm text-gray-500 hover:underline self-center" %>
+    <% end %>
+  </div>
+<% end %>

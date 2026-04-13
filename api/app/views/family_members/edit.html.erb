@@ -1,0 +1,52 @@
+<div class="mb-4">
+  <%= link_to "← Back to Tree", family_tree_path(@family_tree), class: "text-sm text-emerald-700 hover:underline" %>
+</div>
+<h1 class="text-xl font-bold text-emerald-900 mb-4">Edit Member</h1>
+
+<div class="bg-white rounded-lg shadow p-6 max-w-md">
+  <%= form_with model: [@family_tree, @member], data: { controller: "form-validity" }, class: "space-y-4" do |f| %>
+    <% if @member.errors.any? %>
+      <div class="bg-red-50 border border-red-200 rounded p-3 text-sm text-red-700">
+        <ul class="list-disc list-inside space-y-1">
+          <% @member.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <%= f.label :name, class: "form-label" %>
+      <%= f.text_field :name, required: true, class: "form-control" %>
+    </div>
+    <div>
+      <%= f.label :relationship, class: "form-label" %>
+      <%= f.select :relationship,
+            FamilyMember.relationships.keys.map { |r| [r.capitalize, r] },
+            { include_blank: "Select…" },
+            class: "form-control" %>
+    </div>
+    <div>
+      <%= f.label :date_of_birth, class: "form-label" %>
+      <%= f.date_field :date_of_birth, class: "form-control" %>
+    </div>
+    <div>
+      <p class="form-label">Parents (select up to 2)</p>
+      <div class="space-y-1 max-h-40 overflow-y-auto border rounded p-2">
+        <% @all_members.each do |m| %>
+          <label class="flex items-center gap-2 text-sm cursor-pointer">
+            <%= check_box_tag "family_member[parent_ids][]", m.id,
+                  @member.parent_ids.map(&:to_s).include?(m.id.to_s),
+                  id: "parent_#{m.id}" %>
+            <span><%= m.name %> <span class="text-gray-400 text-xs capitalize">(<%= m.relationship %>)</span></span>
+          </label>
+        <% end %>
+      </div>
+      <%= hidden_field_tag "family_member[parent_ids][]", "" %>
+      <%= render "shared/field_errors", object: @member, attribute: :parent_ids %>
+    </div>
+    <div class="flex gap-3">
+      <%= f.submit "Save Changes", data: { form_validity_target: "submit" }, class: "btn-primary" %>
+      <%= link_to "Cancel", family_tree_path(@family_tree), class: "text-sm text-gray-500 hover:underline self-center" %>
+    </div>
+  <% end %>
+</div>
