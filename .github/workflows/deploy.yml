@@ -45,8 +45,7 @@ jobs:
 
       - name: Update Docker Compose File with Image
         run: |
-          export API_IMAGE="ghcr.io/diehlms/icfc-api:${{ github.sha }}";
-          export WWW_IMAGE="ghcr.io/diehlms/icfc-www:${{ github.sha }}";
+          export API_IMAGE="ghcr.io/diehlms/icfc-api:${{ github.sha }}"
           yq eval ".services.production_api.image = \"$API_IMAGE\"" -i docker-compose-deployed.yml
 
       - name: Deploy to server
