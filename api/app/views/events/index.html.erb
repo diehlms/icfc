@@ -4,11 +4,12 @@
   <button data-action="click->modal#open" class="btn-primary">New Event</button>
 </div>
 
+<%# Weekly calendar grid %>
+<turbo-frame id="calendar">
 <%# Week navigation %>
 <div class="flex items-center justify-between mb-4 bg-white rounded-lg shadow px-4 py-3">
   <%= link_to events_path(week: (@week_start - 7).iso8601),
-        class: "text-emerald-700 hover:text-emerald-900 font-medium text-sm",
-        data: { turbo_frame: "calendar" } do %>
+        class: "text-emerald-700 hover:text-emerald-900 font-medium text-sm" do %>
     ← Prev week
   <% end %>
 
@@ -17,14 +18,11 @@
   </span>
 
   <%= link_to events_path(week: (@week_start + 7).iso8601),
-        class: "text-emerald-700 hover:text-emerald-900 font-medium text-sm",
-        data: { turbo_frame: "calendar" } do %>
+        class: "text-emerald-700 hover:text-emerald-900 font-medium text-sm" do %>
     Next week →
   <% end %>
 </div>
 
-<%# Weekly calendar grid %>
-<turbo-frame id="calendar">
   <div class="bg-white rounded-lg shadow overflow-hidden mb-6">
     <%# Day headers %>
     <div class="grid grid-cols-7 border-b">

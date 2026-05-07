@@ -11,7 +11,7 @@
     <%= f.label :seeking, "Seeking a ride (unchecked = offering)", class: "text-sm text-gray-700" %>
   </div>
   <div>
-    <%= f.label :point_of_departure_id, "Departing From", class: "form-label" %>
+    <%= f.label :point_of_departure_id, class: "form-label" do %>Departing From<%= required_mark %><% end %>
     <%= f.select :point_of_departure_id,
           location_points.map { |lp| [lp.location_name, lp.id] },
           { include_blank: "Select location" },
@@ -19,7 +19,7 @@
           class: "form-control" %>
   </div>
   <div>
-    <%= f.label :point_of_arrival_id, "Arriving At", class: "form-label" %>
+    <%= f.label :point_of_arrival_id, class: "form-label" do %>Arriving At<%= required_mark %><% end %>
     <%= f.select :point_of_arrival_id,
           location_points.map { |lp| [lp.location_name, lp.id] },
           { include_blank: "Select location" },
@@ -31,23 +31,23 @@
   </turbo-frame>
   <div class="grid grid-cols-2 gap-3">
     <div>
-      <%= f.label :departing_at, "Departing At", class: "form-label" %>
+      <%= f.label :departing_at, class: "form-label" do %>Departing At<%= required_mark %><% end %>
       <%= f.datetime_local_field :departing_at, required: true, class: "form-control" %>
       <%= render "shared/field_errors", object: rideshare, attribute: :departing_at %>
     </div>
     <div>
-      <%= f.label :arriving_at, "Arriving At", class: "form-label" %>
+      <%= f.label :arriving_at, class: "form-label" do %>Arriving At<%= required_mark %><% end %>
       <%= f.datetime_local_field :arriving_at, required: true, class: "form-control" %>
       <%= render "shared/field_errors", object: rideshare, attribute: :arriving_at %>
     </div>
   </div>
   <div>
-    <%= f.label :number_of_passengers, "Passengers (1–7)", class: "form-label" %>
+    <%= f.label :number_of_passengers, class: "form-label" do %>Passengers (1–7)<%= required_mark %><% end %>
     <%= f.number_field :number_of_passengers, required: true, min: 1, max: 7, class: "form-control" %>
     <%= render "shared/field_errors", object: rideshare, attribute: :number_of_passengers %>
   </div>
   <div>
-    <%= f.label :additional_information, "Notes", class: "form-label" %>
+    <%= f.label :additional_information, class: "form-label" do %>Notes<%= required_mark %><% end %>
     <%= f.text_area :additional_information, required: true, rows: 2, maxlength: 500, class: "form-control" %>
     <%= render "shared/field_errors", object: rideshare, attribute: :additional_information %>
   </div>

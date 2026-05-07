@@ -8,28 +8,28 @@
   <% end %>
 
   <div>
-    <%= f.label :title, class: "form-label" %>
+    <%= f.label :title, class: "form-label" do %>Title<%= required_mark %><% end %>
     <%= f.text_field :title, required: true, maxlength: 50, class: "form-control" %>
     <%= render "shared/field_errors", object: event, attribute: :title %>
   </div>
   <div>
-    <%= f.label :location, class: "form-label" %>
+    <%= f.label :location, class: "form-label" do %>Location<%= required_mark %><% end %>
     <%= f.text_field :location, required: true, maxlength: 100, class: "form-control" %>
     <%= render "shared/field_errors", object: event, attribute: :location %>
   </div>
   <div>
-    <%= f.label :description, class: "form-label" %>
+    <%= f.label :description, class: "form-label" do %>Description<%= required_mark %><% end %>
     <%= f.text_area :description, required: true, maxlength: 10000, rows: 3, class: "form-control" %>
     <%= render "shared/field_errors", object: event, attribute: :description %>
   </div>
   <div class="grid grid-cols-2 gap-3">
     <div>
-      <%= f.label :start_time, "Start", class: "form-label" %>
+      <%= f.label :start_time, class: "form-label" do %>Start<%= required_mark %><% end %>
       <%= f.datetime_local_field :start_time, required: true, class: "form-control" %>
       <%= render "shared/field_errors", object: event, attribute: :start_time %>
     </div>
     <div>
-      <%= f.label :end_time, "End", class: "form-label" %>
+      <%= f.label :end_time, class: "form-label" do %>End<%= required_mark %><% end %>
       <%= f.datetime_local_field :end_time, required: true, class: "form-control" %>
       <%= render "shared/field_errors", object: event, attribute: :end_time %>
     </div>

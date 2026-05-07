@@ -12,6 +12,10 @@ module ApplicationHelper
     link_to label, path, class: css
   end
 
+  def required_mark
+    content_tag(:span, " *", class: "text-red-500 ml-0.5", aria: { hidden: "true" })
+  end
+
   def breakfast_today
     case Date.today.wday
     when 2, 4, 6 then 'Egg Day'

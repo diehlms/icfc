@@ -10,13 +10,13 @@
   <% end %>
 
   <div>
-    <%= f.label :title, class: "form-label" %>
+    <%= f.label :title, class: "form-label" do %>Title<%= required_mark %><% end %>
     <%= f.text_field :title, required: true, maxlength: 50, class: "form-control" %>
     <%= render "shared/field_errors", object: article, attribute: :title %>
   </div>
 
   <div>
-    <%= f.label :content, class: "form-label" %>
+    <%= f.label :content, class: "form-label" do %>Content<%= required_mark %><% end %>
     <%= f.rich_text_area :content, required: true %>
     <%= render "shared/field_errors", object: article, attribute: :content %>
   </div>

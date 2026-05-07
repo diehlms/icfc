@@ -7,6 +7,11 @@
        class="block px-3 py-2 rounded text-emerald-200 hover:bg-emerald-800 text-sm">
       Pay Bill
     </a>
+    <% yearbook_url = ENV.fetch('YEARBOOK_LINK', '/yearbooks/2022yearbook.pdf') %>
+    <a href="<%= yearbook_url %>" target="_blank" rel="noopener"
+       class="block px-3 py-2 rounded text-emerald-200 hover:bg-emerald-800 text-sm">
+      Yearbook
+    </a>
         <div data-controller="disclosure">
       <button data-action="click->disclosure#toggle"
               class="w-full text-left px-3 py-2 rounded text-emerald-200 hover:bg-emerald-800 flex items-center justify-between text-sm">
@@ -48,7 +53,6 @@
     <%= helpers.nav_link "Articles",    articles_path %>
     <%= helpers.nav_link "Events",      events_path %>
     <%= helpers.nav_link "Photos",      galleries_path %>
-    <%= helpers.nav_link "Charts",      charts_path %>
     <%= helpers.nav_link "Cabins",      cabins_path %>
     <%= helpers.nav_link "Rideshares",  rideshares_path %>
     <%= helpers.nav_link "Directory",   users_path %>
