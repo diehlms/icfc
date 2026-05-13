@@ -1,0 +1,124 @@
+{
+	"/": [
+		"src/routes/+page.ts",
+		"src/routes/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/admin": [
+		"src/routes/+layout.server.ts"
+	],
+	"/admin/settings": [
+		"src/routes/+layout.server.ts"
+	],
+	"/articles": [
+		"src/routes/+layout.server.ts"
+	],
+	"/articles/[slug]": [
+		"src/routes/articles/[slug]/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/auth": [
+		"src/routes/+layout.server.ts"
+	],
+	"/auth/confirm-email": [
+		"src/routes/+layout.server.ts"
+	],
+	"/auth/confirm-email/[slug]": [
+		"src/routes/+layout.server.ts"
+	],
+	"/auth/forgot-password": [
+		"src/routes/+layout.server.ts"
+	],
+	"/auth/login": [
+		"src/routes/+layout.server.ts"
+	],
+	"/auth/reset-password": [
+		"src/routes/+layout.server.ts"
+	],
+	"/auth/sign-up": [
+		"src/routes/+layout.server.ts"
+	],
+	"/cabins": [
+		"src/routes/+layout.server.ts"
+	],
+	"/cabins/[slug]": [
+		"src/routes/cabins/[slug]/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info": [
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info/archives": [
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info/bylaws": [
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info/charitablegiving": [
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info/committeeprimer": [
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info/customs": [
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info/familyagreements": [
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info/forms": [
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info/history": [
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info/membership": [
+		"src/routes/+layout.server.ts"
+	],
+	"/camp-info/plannedgiving": [
+		"src/routes/+layout.server.ts"
+	],
+	"/charts": [
+		"src/routes/+layout.server.ts"
+	],
+	"/charts/[slug]": [
+		"src/routes/charts/[slug]/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/directory": [
+		"src/routes/+layout.server.ts"
+	],
+	"/events": [
+		"src/routes/+layout.server.ts"
+	],
+	"/events/[slug]": [
+		"src/routes/events/[slug]/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/family-trees": [
+		"src/routes/+layout.server.ts"
+	],
+	"/family-trees/[slug]": [
+		"src/routes/family-trees/[slug]/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/info": [
+		"src/routes/+layout.server.ts"
+	],
+	"/photos": [
+		"src/routes/+layout.server.ts"
+	],
+	"/profile": [
+		"src/routes/+layout.server.ts"
+	],
+	"/rideshares": [
+		"src/routes/+layout.server.ts"
+	],
+	"/rideshares/[slug]": [
+		"src/routes/rideshares/[slug]/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/search": [
+		"src/routes/+layout.server.ts"
+	]
+}

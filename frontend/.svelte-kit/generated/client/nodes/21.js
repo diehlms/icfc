@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/camp-info/customs/+page.svelte";
