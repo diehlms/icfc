@@ -1,0 +1,59 @@
+<h1 class="text-2xl font-bold text-emerald-900 mb-6">Member Directory</h1>
+
+<div class="mb-4" data-controller="table-filter">
+  <input type="text"
+         placeholder="Search by name…"
+         data-action="input->table-filter#filter"
+         data-table-filter-target="input"
+         class="form-control w-full max-w-sm">
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden" data-controller="table-sort">
+  <table class="w-full text-sm" data-table-filter-target="table" data-table-sort-target="table">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Name</th>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Username</th>
+        <% if current_user.verified? %>
+          <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Email</th>
+          <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Phone</th>
+        <% end %>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Admin</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <% @users.each do |user| %>
+        <tr>
+          <td class="px-4 py-2">
+            <%= link_to "#{user.firstname} #{user.lastname}", user_path(user), class: "text-emerald-700 hover:underline" %>
+          </td>
+          <td class="px-4 py-2 text-gray-600"><%= user.username %></td>
+          <% if current_user.verified? %>
+            <td class="px-4 py-2 text-gray-600"><%= user.email %></td>
+            <td class="px-4 py-2 text-gray-600"><%= user.phone_number %></td>
+          <% end %>
+          <td class="px-4 py-2">
+            <% if user.admin? %>
+              <span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded text-xs font-medium">Admin</span>
+            <% end %>
+          </td>
+          <td class="px-4 py-2 text-right flex items-center justify-end gap-3">
+            <% if current_user.admin? %>
+              <%= button_to user.verified? ? "Unverify" : "Verify", verify_user_path(user), method: :patch,
+                    class: "text-xs #{user.verified? ? 'text-orange-500' : 'text-emerald-600'} hover:underline bg-transparent border-0 cursor-pointer" %>
+              <% unless user == current_user %>
+                <%= button_to user_path(user), method: :delete,
+                      class: "text-gray-400 hover:text-red-500 bg-transparent border-0 cursor-pointer inline-flex",
+                      title: "Delete user",
+                      data: { turbo_confirm: "Delete #{user.firstname} #{user.lastname}? This cannot be undone." } do %>
+                  <%= heroicon "trash", options: { class: "w-4 h-4" } %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

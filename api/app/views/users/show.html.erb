@@ -1,0 +1,32 @@
+<div class="mb-4">
+  <%= link_to "← Directory", users_path, class: "text-sm text-emerald-700 hover:underline" %>
+</div>
+
+<div class="bg-white rounded-lg shadow p-6 max-w-lg">
+  <h1 class="text-2xl font-bold text-emerald-900 mb-4">
+    <%= @user.firstname %> <%= @user.lastname %>
+  </h1>
+  <dl class="space-y-2 text-sm">
+    <div class="flex justify-between border-b pb-2">
+      <dt class="font-medium text-gray-600">Username</dt>
+      <dd><%= @user.username %></dd>
+    </div>
+    <div class="flex justify-between border-b pb-2">
+      <dt class="font-medium text-gray-600">Email</dt>
+      <dd><%= @user.email %></dd>
+    </div>
+    <div class="flex justify-between border-b pb-2">
+      <dt class="font-medium text-gray-600">Phone</dt>
+      <dd><%= @user.phone_number.presence || "—" %></dd>
+    </div>
+    <div class="flex justify-between">
+      <dt class="font-medium text-gray-600">Status</dt>
+      <dd>
+        <%= @user.verified? ? "Verified" : "Unverified" %>
+        <% if @user.admin? %>
+          · <span class="text-emerald-700">Admin</span>
+        <% end %>
+      </dd>
+    </div>
+  </dl>
+</div>

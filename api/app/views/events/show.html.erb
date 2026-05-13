@@ -1,0 +1,50 @@
+<div class="max-w-lg">
+  <div class="mb-4 flex items-center gap-3">
+    <%= link_to "← Events", events_path, class: "text-sm text-emerald-700 hover:underline" %>
+    <% if @event.user_id == current_user.id || current_user.admin? %>
+      <%= link_to edit_event_path(@event), class: "text-gray-400 hover:text-emerald-600", title: "Edit" do %>
+        <%= heroicon "pencil-square", options: { class: "w-4 h-4" } %>
+      <% end %>
+      <%= button_to @event, method: :delete,
+            class: "text-gray-400 hover:text-red-500 bg-transparent border-0 cursor-pointer",
+            title: "Delete", data: { turbo_confirm: "Delete \"#{@event.title}\"?" } do %>
+        <%= heroicon "trash", options: { class: "w-4 h-4" } %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="bg-white rounded-lg shadow p-6">
+    <h1 class="text-2xl font-bold text-emerald-900 mb-1"><%= @event.title %></h1>
+    <p class="text-sm text-gray-500 mb-4">
+      Added by <%= @event.user&.firstname %> <%= @event.user&.lastname %>
+    </p>
+
+    <dl class="space-y-3 text-sm">
+      <div>
+        <dt class="font-medium text-gray-600">When</dt>
+        <dd class="text-gray-800 mt-0.5">
+          <% if @event.all_day? %>
+            <%= @event.start_time.strftime('%A, %B %-d, %Y') %> (all day)
+          <% elsif @event.start_time.to_date == @event.end_time.to_date %>
+            <%= @event.start_time.strftime('%A, %B %-d, %Y') %>
+            &middot; <%= @event.start_time.strftime('%-I:%M %p') %> – <%= @event.end_time.strftime('%-I:%M %p') %>
+          <% else %>
+            <%= @event.start_time.strftime('%B %-d') %> – <%= @event.end_time.strftime('%B %-d, %Y') %>
+          <% end %>
+        </dd>
+      </div>
+      <% if @event.location.present? %>
+        <div>
+          <dt class="font-medium text-gray-600">Location</dt>
+          <dd class="text-gray-800 mt-0.5"><%= @event.location %></dd>
+        </div>
+      <% end %>
+      <% if @event.description.present? %>
+        <div>
+          <dt class="font-medium text-gray-600">Description</dt>
+          <dd class="text-gray-800 mt-0.5 whitespace-pre-wrap"><%= @event.description %></dd>
+        </div>
+      <% end %>
+    </dl>
+  </div>
+</div>

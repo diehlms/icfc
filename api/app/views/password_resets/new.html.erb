@@ -1,0 +1,20 @@
+<div class="min-h-screen flex items-center justify-center relative"
+     style="background-image: url('<%= asset_path('lodge.jpg') %>'); background-size: cover; background-position: bottom;">
+  <div class="absolute inset-0 bg-black/50"></div>
+  <div class="bg-white rounded-lg shadow-md p-8 w-full max-w-md relative z-10">
+    <h2 class="text-xl font-bold text-emerald-900 mb-2 text-center">Reset Password</h2>
+    <p class="text-sm text-gray-500 text-center mb-6">Enter your email and we'll send you a reset link.</p>
+
+    <%= form_with url: new_password_reset_path, method: :post, data: { controller: "form-validity" }, class: "space-y-4" do |f| %>
+      <div>
+        <%= f.label :email, "Email", class: "form-label" %>
+        <%= f.email_field :email, required: true, class: "form-control", autofocus: true %>
+      </div>
+      <%= f.submit "Send Reset Link", data: { form_validity_target: "submit" }, class: "btn-primary w-full" %>
+    <% end %>
+
+    <p class="mt-4 text-center text-sm text-gray-600">
+      <%= link_to "Back to sign in", login_path, class: "text-emerald-700 hover:underline" %>
+    </p>
+  </div>
+</div>

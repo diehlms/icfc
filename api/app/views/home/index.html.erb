@@ -1,0 +1,76 @@
+<div class="relative">
+  <div class="fixed inset-0 -z-10 bg-cover bg-center opacity-20"
+       style="background-image: url('<%= asset_path('flags.jpg') %>')"></div>
+
+  <h1 class="text-3xl font-bold text-center text-emerald-900 mb-6">Iron City Fishing Club</h1>
+
+  <div class="space-y-4">
+    <div class="bg-white/80 rounded-lg shadow p-6">
+      <h2 class="text-lg font-semibold mb-3">This Week's Events</h2>
+      <% if @events.any? %>
+        <ul class="list-disc list-inside space-y-1">
+          <% @events.each do |event| %>
+            <li>
+              <%= link_to "#{event.title} — #{event.start_time.strftime('%b %-d')}", events_path,
+                    class: "text-teal-600 hover:underline" %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-gray-500">No events this week.</p>
+      <% end %>
+    </div>
+
+    <div class="bg-white/80 rounded-lg shadow p-6">
+      <h2 class="text-lg font-semibold mb-3">Current Campers</h2>
+      <% if @campers.any? %>
+        <ul class="list-disc list-inside max-h-32 overflow-y-auto space-y-0.5">
+          <% @campers.each do |camper| %>
+            <li><%= camper[:name] %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-gray-500">No campers this week.</p>
+      <% end %>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-white/80 rounded-lg shadow p-6">
+        <h2 class="text-lg font-semibold mb-2">Today's Breakfast</h2>
+        <p class="text-gray-600"><%= breakfast_today %></p>
+      </div>
+
+      <div class="bg-white/80 rounded-lg shadow p-6">
+        <h2 class="text-lg font-semibold mb-3">Recent Articles</h2>
+        <% if @articles.any? %>
+          <ul class="list-disc list-inside space-y-1">
+            <% @articles.each do |article| %>
+              <li>
+                <%= link_to article.title, article, class: "text-teal-600 hover:underline" %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-gray-500">No articles yet.</p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="bg-white/80 rounded-lg shadow p-6">
+      <h2 class="text-lg font-semibold mb-3">Important Contacts</h2>
+      <ul class="divide-y divide-gray-100">
+        <% [
+          "Office Telephone: 705-375-2300 (in season only)",
+          "Moe's Number: 705-746-6699",
+          "Lisa's Number: 705-346-1191",
+          "Gregoire Home Telephone: 705-375-5633",
+          "Randy Grisdale: 705-774-4179",
+          "ICFC Email (office): office@icfc.net",
+          "ICFC Fax: 705-375-0405"
+        ].each do |contact| %>
+          <li class="py-2 text-sm text-gray-700"><%= contact %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

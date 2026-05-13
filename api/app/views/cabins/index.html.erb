@@ -1,0 +1,61 @@
+<div data-controller="modal">
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-emerald-900">Cabins</h1>
+  <button data-action="click->modal#open" class="btn-primary">Add Cabin</button>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden mb-6" data-controller="table-sort">
+  <table class="w-full text-sm" data-table-sort-target="table">
+    <thead class="bg-gray-50">
+      <tr>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Name</th>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Bedrooms</th>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>$/Day</th>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>$/Week</th>
+        <th class="text-left px-4 py-2 font-medium text-gray-700" data-sortable>Amenities</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <% @cabins.each do |cabin| %>
+        <tr>
+          <td class="px-4 py-2">
+            <%= link_to cabin.name, cabin, class: "font-medium text-emerald-700 hover:underline" %>
+          </td>
+          <td class="px-4 py-2 text-gray-600"><%= cabin.bedrooms %></td>
+          <td class="px-4 py-2 text-gray-600"><%= number_to_currency(cabin.price_per_day) %></td>
+          <td class="px-4 py-2 text-gray-600"><%= number_to_currency(cabin.price_per_week) %></td>
+          <td class="px-4 py-2 text-gray-600">
+            <%= cabin.dock? ? "Dock" : "" %>
+            <%= cabin.washerdryer? ? "W/D" : "" %>
+          </td>
+          <td class="px-4 py-2 text-right">
+            <% if cabin.user_id == current_user.id || current_user.admin? %>
+              <%= link_to edit_cabin_path(cabin), class: "text-gray-400 hover:text-emerald-600 inline-flex mr-2", title: "Edit" do %>
+                <%= heroicon "pencil-square", options: { class: "w-4 h-4" } %>
+              <% end %>
+              <%= button_to cabin, method: :delete,
+                    class: "text-gray-400 hover:text-red-500 bg-transparent border-0 cursor-pointer inline-flex",
+                    title: "Delete", data: { turbo_confirm: "Delete cabin?" } do %>
+                <%= heroicon "trash", options: { class: "w-4 h-4" } %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<dialog data-modal-target="dialog" data-action="click->modal#backdropClose" class="modal-dialog">
+  <div class="p-6 w-full">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-semibold">Add Cabin</h2>
+      <button data-action="click->modal#close" class="text-gray-400 hover:text-gray-600">
+        <%= heroicon "x-mark", options: { class: "w-5 h-5" } %>
+      </button>
+    </div>
+    <%= render "form", cabin: @cabin %>
+  </div>
+</dialog>
+</div>

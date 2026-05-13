@@ -1,16 +1,17 @@
 FROM ruby:3.2.2-bullseye AS rails-builder
 
 ENV appuser=rails
+ENV RAILS_ENV=production
 WORKDIR /rails
 
-RUN apt-get update && apt-get install -y \
-    nodejs \
-    git
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
 
 COPY api/Gemfile api/Gemfile.lock ./
 RUN bundle install --jobs 4 --retry 3
 
 COPY api/. .
+
+RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
 RUN adduser --disabled-password --gecos "" ${appuser}
 RUN chown -R ${appuser}:${appuser} /rails

@@ -1,0 +1,43 @@
+{
+  "name": "ICFC Development",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [3010, 5173, 5433, 6379],
+  "portsAttributes": {
+    "3010": {
+      "label": "Rails API",
+      "onAutoForward": "notify"
+    },
+    "5433": {
+      "label": "PostgreSQL",
+      "onAutoForward": "ignore"
+    },
+    "6379": {
+      "label": "Redis",
+      "onAutoForward": "ignore"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      },
+      "extensions": [
+        "davidanson.vscode-markdownlint",
+        "fredwangwang.vscode-hcl-format",
+        "hashicorp.terraform",
+        "misogi.ruby-rubocop",
+        "ms-azuretools.vscode-containers",
+        "ms-azuretools.vscode-docker",
+        "ms-ossdata.vscode-pgsql",
+        "ms-python.debugpy",
+        "shopify.ruby-lsp",
+        "svelte.svelte-vscode",
+        "koichisasada.vscode-rdbg"
+      ]
+    }
+  },
+  "postCreateCommand": "bash /workspace/.devcontainer/postCreate.sh",
+  "remoteUser": "root"
+}

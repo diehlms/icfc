@@ -1,0 +1,7 @@
+<% @flash.each do |type, message| %>
+  <div data-controller="flash"
+       class="border px-4 py-3 rounded mb-2 flex items-center justify-between <%= css_for(type) %>">
+    <span><%= message %></span>
+    <button data-action="click->flash#dismiss" class="ml-4 font-bold opacity-60 hover:opacity-100">✕</button>
+  </div>
+<% end %>

@@ -1,0 +1,119 @@
+<div class="mb-4 flex items-center gap-3">
+  <%= link_to "← Cabins", cabins_path, class: "text-sm text-emerald-700 hover:underline" %>
+  <% if @cabin.user_id == current_user.id || current_user.admin? %>
+    <%= link_to edit_cabin_path(@cabin), class: "text-gray-400 hover:text-emerald-600", title: "Edit" do %>
+      <%= heroicon "pencil-square", options: { class: "w-4 h-4" } %>
+    <% end %>
+    <%= button_to @cabin, method: :delete,
+          class: "text-gray-400 hover:text-red-500 bg-transparent border-0 cursor-pointer",
+          title: "Delete", data: { turbo_confirm: "Delete cabin?" } do %>
+      <%= heroicon "trash", options: { class: "w-4 h-4" } %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <div class="lg:col-span-2 space-y-4">
+    <div class="bg-white rounded-lg shadow p-6">
+      <h1 class="text-2xl font-bold text-emerald-900 mb-2"><%= @cabin.name %></h1>
+      <dl class="grid grid-cols-2 gap-2 text-sm mb-4">
+        <div><dt class="font-medium text-gray-600">Bedrooms</dt><dd><%= @cabin.bedrooms %></dd></div>
+        <div><dt class="font-medium text-gray-600">Per Day</dt><dd><%= number_to_currency(@cabin.price_per_day) %></dd></div>
+        <div><dt class="font-medium text-gray-600">Per Week</dt><dd><%= number_to_currency(@cabin.price_per_week) %></dd></div>
+        <div>
+          <dt class="font-medium text-gray-600">Amenities</dt>
+          <dd>
+            <%= @cabin.dock? ? "Dock " : "" %>
+            <%= @cabin.washerdryer? ? "W/D" : "" %>
+          </dd>
+        </div>
+      </dl>
+      <% if @cabin.description.present? %>
+        <p class="text-gray-700 text-sm"><%= @cabin.description %></p>
+      <% end %>
+    </div>
+
+    <% if @attachments.any? %>
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-lg font-semibold mb-3">Photos</h2>
+        <div class="grid grid-cols-3 gap-2">
+          <% @attachments.each do |att| %>
+            <div class="relative group">
+              <img src="<%= att.image_url %>" alt="" class="w-full h-28 object-cover rounded">
+              <% if @cabin.user_id == current_user.id || current_user.admin? %>
+                <%= button_to cabin_cabin_attachment_path(@cabin, att), method: :delete,
+                      class: "absolute top-1 right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition cursor-pointer border-0",
+                      title: "Remove photo", data: { turbo_confirm: "Remove photo?" } do %>
+                  <%= heroicon "x-mark", options: { class: "w-3 h-3" } %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="space-y-4">
+    <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-semibold mb-3">Availability</h2>
+      <% if @cabin_dates.any? %>
+        <ul class="space-y-1 text-sm mb-4">
+          <% @cabin_dates.each do |cd| %>
+            <li class="flex items-center justify-between">
+              <span><%= cd.startdate.strftime('%b %-d') %> – <%= cd.enddate.strftime('%b %-d, %Y') %></span>
+              <% if @cabin.user_id == current_user.id || current_user.admin? %>
+                <%= button_to cabin_cabin_date_path(@cabin, cd), method: :delete,
+                      class: "text-red-400 hover:text-red-600 bg-transparent border-0 cursor-pointer",
+                      title: "Remove date" do %>
+                  <%= heroicon "x-mark", options: { class: "w-4 h-4" } %>
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-gray-500 text-sm mb-3">No availability dates set.</p>
+      <% end %>
+
+      <% if @cabin.user_id == current_user.id || current_user.admin? %>
+        <%= form_with model: @cabin_date, url: cabin_cabin_dates_path(@cabin), data: { controller: "form-validity" }, class: "space-y-2" do |f| %>
+          <% if @cabin_date.errors.any? %>
+            <div class="bg-red-50 border border-red-200 rounded p-3 text-sm text-red-700">
+              <ul class="list-disc list-inside space-y-1">
+                <% @cabin_date.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div>
+            <%= f.label :startdate, "From", class: "block text-xs font-medium text-gray-600 mb-0.5" %>
+            <%= f.date_field :startdate, required: true,
+                  class: "w-full border rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500" %>
+            <%= render "shared/field_errors", object: @cabin_date, attribute: :startdate %>
+          </div>
+          <div>
+            <%= f.label :enddate, "To", class: "block text-xs font-medium text-gray-600 mb-0.5" %>
+            <%= f.date_field :enddate, required: true,
+                  class: "w-full border rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500" %>
+            <%= render "shared/field_errors", object: @cabin_date, attribute: :enddate %>
+          </div>
+          <%= f.submit "Add Dates", data: { form_validity_target: "submit" }, class: "w-full bg-emerald-700 text-white py-1.5 rounded text-sm cursor-pointer hover:bg-emerald-800" %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <% if @cabin.user_id == current_user.id || current_user.admin? %>
+      <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-lg font-semibold mb-3">Upload Photo</h2>
+        <%= form_with model: CabinAttachment.new, url: cabin_cabin_attachments_path(@cabin), multipart: true, data: { controller: "form-validity" }, class: "space-y-2" do |f| %>
+          <%= f.file_field :image, accept: "image/*", required: true, class: "text-sm w-full" %>
+          <button type="submit" data-form-validity-target="submit" class="w-full bg-emerald-700 text-white py-1.5 rounded text-sm hover:bg-emerald-800">
+            Upload
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

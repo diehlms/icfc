@@ -1,0 +1,36 @@
+<h1 class="text-2xl font-bold text-emerald-900 mb-6">My Profile</h1>
+
+<div class="bg-white rounded-lg shadow p-6 max-w-lg">
+  <%= form_with model: current_user, url: profile_path, method: :patch, data: { controller: "form-validity" }, class: "space-y-4" do |f| %>
+    <% if current_user.errors.any? %>
+      <div class="bg-red-50 border border-red-200 rounded p-3 text-sm text-red-700">
+        <ul class="list-disc list-inside space-y-1">
+          <% current_user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="grid grid-cols-2 gap-3">
+      <div>
+        <%= f.label :firstname, "First Name", class: "form-label" %>
+        <%= f.text_field :firstname, class: "form-control" %>
+      </div>
+      <div>
+        <%= f.label :lastname, "Last Name", class: "form-label" %>
+        <%= f.text_field :lastname, class: "form-control" %>
+      </div>
+    </div>
+    <div>
+      <%= f.label :email, class: "form-label" %>
+      <%= f.email_field :email, required: true, maxlength: 105, class: "form-control" %>
+      <%= render "shared/field_errors", object: current_user, attribute: :email %>
+    </div>
+    <div>
+      <%= f.label :phone_number, "Phone Number", class: "form-label" %>
+      <%= f.telephone_field :phone_number, class: "form-control" %>
+    </div>
+    <%= f.submit "Save Changes", data: { form_validity_target: "submit" }, class: "btn-primary" %>
+  <% end %>
+</div>

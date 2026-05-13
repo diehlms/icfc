@@ -1,0 +1,16 @@
+<%# Append the new option to both departure and arrival selects %>
+<%= turbo_stream.append "rideshare_point_of_departure_id" do %>
+  <option value="<%= @location_point.id %>"><%= @location_point.location_name %></option>
+<% end %>
+
+<%= turbo_stream.append "rideshare_point_of_arrival_id" do %>
+  <option value="<%= @location_point.id %>"><%= @location_point.location_name %></option>
+<% end %>
+
+<%# Reset the inline form back to the "Add location" link %>
+<%= turbo_stream.replace "new_location_form" do %>
+  <turbo-frame id="new_location_form">
+    <p class="text-xs text-emerald-700 mt-1"><%= @location_point.location_name %> added.</p>
+    <%= link_to "Add another location", new_location_point_path, data: { turbo_frame: "new_location_form" }, class: "text-xs text-emerald-600 hover:underline" %>
+  </turbo-frame>
+<% end %>

@@ -1,9 +1,37 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :bigint           not null, primary key
+#  admin                  :boolean          default(FALSE)
+#  confirm_token          :string
+#  email                  :string
+#  email_confirmed        :boolean          default(FALSE)
+#  firstname              :string
+#  lastname               :string
+#  password_digest        :string
+#  password_reset_sent_at :datetime
+#  password_reset_token   :string
+#  phone_number           :string
+#  remember_digest        :string
+#  slug                   :string
+#  username               :string
+#  verified               :boolean          default(FALSE)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  email_id               :bigint
+#
+# Indexes
+#
+#  index_users_on_email_id  (email_id)
+#  index_users_on_slug      (slug) UNIQUE
+#
 one:
   id: 1
   firstname: "Regular"
   lastname: "User"
   email: "user@example.com"
-  password_digest: "<hashed_password>"
+  password_digest: <%= BCrypt::Password.create('password') %>
   admin: false
   created_at: <%= 1.day.ago.to_s(:db) %>
 
@@ -12,7 +40,7 @@ two:
   firstname: "Regular2"
   lastname: "Use2r"
   email: "user2@example.com"
-  password_digest: "<hashed_password>"
+  password_digest: <%= BCrypt::Password.create('password') %>
   admin: false
   created_at: <%= 1.day.ago.to_s(:db) %>
 
@@ -21,6 +49,15 @@ admin:
   firstname: "Admin"
   lastname: "User"
   email: "admin@example.com"
-  password_digest: "<hashed_password>"
+  password_digest: <%= BCrypt::Password.create('password') %>
   admin: true
+  created_at: <%= 1.day.ago.to_s(:db) %>
+
+unconfirmed:
+  id: 4
+  firstname: "Un"
+  lastname: "Confirmed"
+  email: "unconfirmed@example.com"
+  password_digest: <%= BCrypt::Password.create('password') %>
+  admin: false
   created_at: <%= 1.day.ago.to_s(:db) %>

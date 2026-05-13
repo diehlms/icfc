@@ -1,0 +1,63 @@
+<%= render "breadcrumb", title: "Archives" %>
+
+<% if current_user.admin? %>
+  <div class="bg-white rounded-lg shadow p-4 mb-4">
+    <h2 class="text-sm font-medium text-gray-700 mb-2">Upload Archive Document</h2>
+    <%= form_with url: documents_path, multipart: true, class: "flex flex-wrap gap-2 items-end" do |f| %>
+      <%= hidden_field_tag :redirect_to, camp_info_archives_path %>
+      <div>
+        <%= f.label :document_title, "Title", class: "block text-xs font-medium text-gray-600 mb-0.5" %>
+        <%= f.text_field :document_title, name: "document[document_title]", required: true,
+              class: "border rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500" %>
+      </div>
+      <div>
+        <%= f.label :document_folder, "Section", class: "block text-xs font-medium text-gray-600 mb-0.5" %>
+        <%= f.select :document_folder, [["Daily Bilges", "dailyBilges"], ["Back Bay Bilges", "backBayBilges"]],
+              {}, name: "document[document_folder]",
+              class: "border rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500" %>
+      </div>
+      <div>
+        <%= f.label :document, "File", class: "block text-xs font-medium text-gray-600 mb-0.5" %>
+        <%= f.file_field :document, name: "document[document]", required: true, class: "text-sm" %>
+      </div>
+      <%= f.submit "Upload", class: "btn-sm" %>
+    <% end %>
+  </div>
+<% end %>
+
+<% folder_labels = { "dailyBilges" => "Daily Bilges", "backBayBilges" => "Back Bay Bilges" } %>
+<% if @document_groups.any? %>
+  <div class="space-y-4">
+    <% @document_groups.each do |folder, docs| %>
+      <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="bg-gray-50 px-4 py-2 font-medium text-gray-700 text-sm border-b">
+          <%= folder_labels[folder] || folder %>
+        </div>
+        <ul class="divide-y divide-gray-100">
+          <% docs.each do |doc| %>
+            <li class="px-4 py-3 flex items-center justify-between">
+              <span class="text-sm"><%= doc.document_title %></span>
+              <div class="flex items-center gap-3">
+                <% if doc.document.present? %>
+                  <%= link_to "Download", doc.document_url, class: "text-xs text-emerald-700 hover:underline", target: "_blank", rel: "noopener" %>
+                <% end %>
+                <% if current_user.admin? %>
+                  <%= button_to document_path(doc), method: :delete,
+                        params: { redirect_to: camp_info_archives_path },
+                        class: "text-gray-400 hover:text-red-500 bg-transparent border-0 cursor-pointer",
+                        title: "Delete", data: { turbo_confirm: "Delete this document?" } do %>
+                    <%= heroicon "trash", options: { class: "w-4 h-4" } %>
+                  <% end %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="bg-white rounded-lg shadow p-6">
+    <p class="text-gray-500 text-sm">No archive documents yet.</p>
+  </div>
+<% end %>

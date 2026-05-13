@@ -1,0 +1,35 @@
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-emerald-900">Boating Charts</h1>
+  <%= link_to "Create New Chart", new_chart_path, class: "btn-primary" %>
+</div>
+
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <% if @charts.any? %>
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Caption</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created At</th>
+          <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <% @charts.each do |chart| %>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= chart.caption %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= chart.created_at.strftime("%b %d, %Y") %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
+              <%= link_to "Download", chart.chart.url, class: "text-emerald-600 hover:text-emerald-900", download: true, target: "_blank" %>
+              <%= button_to "Delete", chart_path(chart), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900 inline-block bg-transparent border-0 cursor-pointer p-0" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="p-8 text-center text-gray-500">
+      <p>No charts created yet.</p>
+      <%= link_to "Build your first chart", new_chart_path, class: "text-emerald-600 hover:underline mt-2 inline-block" %>
+    </div>
+  <% end %>
+</div>

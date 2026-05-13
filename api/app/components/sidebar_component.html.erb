@@ -1,0 +1,62 @@
+<aside data-sidebar-target="panel"
+       class="w-56 flex-shrink-0 bg-emerald-950 text-white overflow-y-auto min-h-0">
+  <nav class="p-3 space-y-1">
+    <%= helpers.nav_link "Home",        root_path %>
+    <% pay_bill_url = ENV.fetch('PAY_BILL_LINK', 'https://www.paypal.com/ncp/payment/95N2K7CA3CPF4') %>
+    <a href="<%= pay_bill_url %>" target="_blank" rel="noopener"
+       class="block px-3 py-2 rounded text-emerald-200 hover:bg-emerald-800 text-sm">
+      Pay Bill
+    </a>
+    <% yearbook_url = ENV.fetch('YEARBOOK_LINK', '/yearbooks/2022yearbook.pdf') %>
+    <a href="<%= yearbook_url %>" target="_blank" rel="noopener"
+       class="block px-3 py-2 rounded text-emerald-200 hover:bg-emerald-800 text-sm">
+      Yearbook
+    </a>
+        <div data-controller="disclosure">
+      <button data-action="click->disclosure#toggle"
+              class="w-full text-left px-3 py-2 rounded text-emerald-200 hover:bg-emerald-800 flex items-center justify-between text-sm">
+        <span>Reservations</span>
+        <span data-disclosure-target="icon" class="transition-transform duration-200"><%= helpers.heroicon "arrow-right", options: { class: "w-4 h-4" } %></span>
+      </button>
+      <div data-disclosure-target="panel" class="hidden pl-4 space-y-1">
+        <% if ENV['INSEASON_RESERVATION_LINK'].present? %>
+          <a href="<%= ENV['INSEASON_RESERVATION_LINK'] %>" target="_blank" rel="noopener"
+             class="block px-3 py-1.5 rounded text-sm text-emerald-200 hover:bg-emerald-800">In Season</a>
+        <% end %>
+        <% if ENV['OUTSEASON_RESERVATION_LINK'].present? %>
+          <a href="<%= ENV['OUTSEASON_RESERVATION_LINK'] %>" target="_blank" rel="noopener"
+             class="block px-3 py-1.5 rounded text-sm text-emerald-200 hover:bg-emerald-800">Off Season</a>
+        <% end %>
+      </div>
+    </div>
+
+    <div data-controller="disclosure">
+      <button data-action="click->disclosure#toggle"
+              class="w-full text-left px-3 py-2 rounded text-emerald-200 hover:bg-emerald-800 flex items-center justify-between text-sm">
+        <span>Camp Info</span>
+        <span data-disclosure-target="icon" class="transition-transform duration-200"><%= helpers.heroicon "arrow-right", options: { class: "w-4 h-4" } %></span>
+      </button>
+      <div data-disclosure-target="panel" class="hidden pl-4 space-y-1">
+        <%= helpers.nav_link "History",           camp_info_history_path, small: true %>
+        <%= helpers.nav_link "Customs",           camp_info_customs_path, small: true %>
+        <%= helpers.nav_link "Membership",        camp_info_membership_path, small: true %>
+        <%= helpers.nav_link "Committees",        camp_info_committees_path, small: true %>
+        <%= helpers.nav_link "Bylaws",            camp_info_bylaws_path, small: true %>
+        <%= helpers.nav_link "Charitable Giving", camp_info_charitable_giving_path, small: true %>
+        <%= helpers.nav_link "Family Agreements", camp_info_family_agreements_path, small: true %>
+        <%= helpers.nav_link "Planned Giving",    camp_info_planned_giving_path, small: true %>
+        <%= helpers.nav_link "Forms",             camp_info_forms_path, small: true %>
+        <%= helpers.nav_link "Archives",          camp_info_archives_path, small: true %>
+      </div>
+    </div>
+
+    <%= helpers.nav_link "Articles",    articles_path %>
+    <%= helpers.nav_link "Events",      events_path %>
+    <%= helpers.nav_link "Photos",      galleries_path %>
+    <%= helpers.nav_link "Cabins",      cabins_path %>
+    <%= helpers.nav_link "Rideshares",  rideshares_path %>
+    <%= helpers.nav_link "Directory",   users_path %>
+    <%= helpers.nav_link "Family Trees", family_trees_path %>
+    <%= helpers.nav_link "Profile",     profile_path %>
+  </nav>
+</aside>
