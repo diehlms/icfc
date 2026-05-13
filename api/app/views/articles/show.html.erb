@@ -25,7 +25,7 @@
     <% end %>
 
     <div class="prose prose-emerald max-w-none text-gray-800">
-      <%= raw @article.content %>
+      <%= sanitize(@article.content, tags: %w[p b i em strong ul ol li br], attributes: []) %>
     </div>
 
     <% if @article.user_id == current_user.id || current_user.admin? %>
