@@ -6,8 +6,10 @@ set -e
 unset BUNDLE_PATH
 unset BUNDLE_BIN
 
-if [ -f /tmp/pids/server.pid ]; then
-  echo "Cleanup service.pid"
-  rm /tmp/pids/server.pid
+mkdir -p tmp/pids
+
+if [ -f tmp/pids/server.pid ]; then
+  echo "Cleanup server.pid"
+  rm tmp/pids/server.pid
 fi
 exec bundle exec puma -t 8:32

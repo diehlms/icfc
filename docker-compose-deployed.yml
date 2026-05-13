@@ -16,7 +16,6 @@ services:
   production_api:
     image: ghcr.io/diehlms/icfc-api:latest
     restart: always
-    entrypoint: ["/bin/bash", "/rails/entrypoint.sh"]
     environment:
       - RAILS_ENV=production
       - RAILS_SERVE_STATIC_FILES=true
@@ -24,8 +23,6 @@ services:
       - 3000:3000
     env_file:
       - .env.production
-    volumes:
-      - ./entrypoint.sh:/rails/entrypoint.sh
     networks:
       - deployed_network
   productionpostgres: # no underscores allowed
