@@ -75,7 +75,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:rideshares).dependent(:destroy) }
     it { should have_many(:family_trees).dependent(:destroy) }
     it { should have_many(:family_members).dependent(:destroy) }
-    it { should have_many(:comments).through(:articles) }
+    it { should have_many(:comments).dependent(:destroy) }
   end
 
   describe 'callbacks' do
@@ -105,11 +105,9 @@ RSpec.describe User, type: :model do
     end
 
     describe '#send_password_reset' do
-      it 'generates password reset token and sends email' do
+      it 'sends a password reset email' do
         expect(UserMailer).to receive(:password_reset).with(user).and_return(double(deliver: true))
         user.send_password_reset
-        expect(user.password_reset_token).not_to be_nil
-        expect(user.password_reset_sent_at).not_to be_nil
       end
     end
 

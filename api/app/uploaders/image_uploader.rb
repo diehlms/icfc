@@ -65,7 +65,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
-  sig { params(new_file: CarrierWave::SanitizedFile).returns(T::Boolean) }
+  sig { params(new_file: T.untyped).returns(T::Boolean) }
   def image?(new_file)
     File.extname(new_file.filename).in?(%w[jpg jpeg gif png])
   end
