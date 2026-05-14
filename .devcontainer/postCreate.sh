@@ -33,6 +33,11 @@ cd /workspace
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 
+# Install tools managed by mise (e.g. terraform)
+echo "Installing mise tools..."
+mise trust /workspace/.mise.toml
+mise install
+
 echo "PostCreate setup complete!"
 echo ""
 echo "Environment variables loaded from .env"

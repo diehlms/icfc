@@ -26,6 +26,10 @@ RUN mkdir -p /etc/apt/keyrings && \
 # Install bundler, rails, and debugging tools
 RUN gem install bundler rails rake debug rdbg
 
+# Install mise (version manager)
+RUN curl https://mise.run | sh
+ENV PATH="/root/.local/bin:$PATH"
+
 # Install CLI tools for AI assistants
 # Install Claude Code CLI
 RUN curl -fsSL https://claude.ai/install.sh | bash
