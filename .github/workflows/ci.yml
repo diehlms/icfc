@@ -40,8 +40,8 @@ jobs:
 
       - name: Set up database
         run: bin/rails db:create db:schema:load
-        env:
-          DEFAULT_FROM_EMAIL_ADDRESS: example@email.com
 
       - name: Run specs
         run: bundle exec rspec
+        env:
+          DEFAULT_FROM_EMAIL_ADDRESS: example@email.com
