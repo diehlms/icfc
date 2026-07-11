@@ -8,6 +8,7 @@ import EditorController from "controllers/editor_controller"
 import FlashController from "controllers/flash_controller"
 import FormValidityController from "controllers/form_validity_controller"
 import ModalController from "controllers/modal_controller"
+import PasswordStrengthController from "controllers/password_strength_controller"
 import PasswordVisibilityController from "controllers/password_visibility_controller"
 import SearchController from "controllers/search_controller"
 import SidebarController from "controllers/sidebar_controller"
@@ -22,6 +23,7 @@ application.register("editor",             EditorController)
 application.register("flash",              FlashController)
 application.register("form-validity",      FormValidityController)
 application.register("modal",              ModalController)
+application.register("password-strength",   PasswordStrengthController)
 application.register("password-visibility", PasswordVisibilityController)
 application.register("search",             SearchController)
 application.register("sidebar",            SidebarController)

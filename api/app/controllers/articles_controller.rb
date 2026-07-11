@@ -5,7 +5,6 @@ class ArticlesController < ApplicationController
   extend T::Sig
 
   before_action :authenticate_user!
-  before_action :require_verified!, only: %i[new create edit update destroy upload_image]
   before_action :set_article, only: %i[show edit update destroy upload_image]
   before_action :require_owner!, only: %i[edit update destroy upload_image]
 

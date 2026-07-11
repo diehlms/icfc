@@ -13,17 +13,22 @@
           </ul>
         </div>
       <% end %>
-      <div data-controller="password-visibility">
-        <%= f.label :password, "New Password", class: "form-label" %>
-        <div class="relative">
-          <%= f.password_field :password, required: true, minlength: 8,
-                data: { password_visibility_target: "input" },
-                class: "form-control pr-10" %>
-          <button type="button" data-action="click->password-visibility#toggle"
-                  class="absolute inset-y-0 right-2 flex items-center text-gray-500 hover:text-gray-800 text-xs">
-            Show
-          </button>
+      <div data-controller="password-strength">
+        <div data-controller="password-visibility">
+          <%= f.label :password, "New Password", class: "form-label" %>
+          <div class="relative">
+            <%= f.password_field :password, required: true, minlength: 8,
+                  data: { password_visibility_target: "input",
+                          password_strength_target: "input",
+                          action: "input->password-strength#check" },
+                  class: "form-control pr-10" %>
+            <button type="button" data-action="click->password-visibility#toggle"
+                    class="absolute inset-y-0 right-2 flex items-center text-gray-500 hover:text-gray-800 text-xs">
+              Show
+            </button>
+          </div>
         </div>
+        <ul data-password-strength-target="rules" class="mt-2 space-y-1 text-xs"></ul>
         <%= render "shared/field_errors", object: @user, attribute: :password %>
       </div>
       <div>
