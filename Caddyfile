@@ -1,3 +1,7 @@
-www.icfc.net, icfc.net {
+icfc.net {
+  redir https://www.icfc.net{uri} permanent
+}
+
+www.icfc.net {
   reverse_proxy production_api:3000
 }
