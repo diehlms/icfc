@@ -8,7 +8,7 @@ class PasswordResetsController < ApplicationController
 
   def create
     login = params[:email].to_s.strip
-    @user = User.find_by(email: login.downcase) || User.where('LOWER(username) = ?', login.downcase).first
+    @user = User.find_by(email: login.downcase).first
     if @user
       @user.send_password_reset
       redirect_to login_path, notice: 'Password reset instructions sent to your email.'
