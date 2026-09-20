@@ -28,7 +28,7 @@
       <span class="w-8 h-8 rounded-full bg-emerald-700 flex items-center justify-center font-semibold text-xs">
         <%= user_initials %>
       </span>
-      <%= link_to "Log out", logout_path, data: { turbo_method: :delete }, class: "hover:text-emerald-200" %>
+      <%= link_to "Log out", logout_path, method: :delete, class: "hover:text-emerald-200" %>
     <% end %>
   </div>
 </nav>

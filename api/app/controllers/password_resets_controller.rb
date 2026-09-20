@@ -19,9 +19,9 @@ class PasswordResetsController < ApplicationController
 
   def edit
     @user = find_user_by_valid_token
-    if @user.nil?
-      redirect_to new_password_reset_path, alert: 'Password reset link is invalid or expired.'
-    end
+    return if @user.nil?
+
+    redirect_to new_password_reset_path, alert: 'Password reset link is invalid or expired.'
   end
 
   def update
