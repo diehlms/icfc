@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-bullseye AS rails-builder
+FROM ruby:3.2.2-bookworm AS rails-builder
 
 ENV appuser=rails
 ENV RAILS_ENV=production
