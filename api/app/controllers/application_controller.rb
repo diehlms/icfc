@@ -26,9 +26,12 @@ class ApplicationController < ActionController::Base
 
   sig { void }
   def require_verified!
-    return if current_user&.verified?
+    # For now, verification is deferred until we can fully commit. Most users are not 'verified'. Going
+    # to need to turn this on at any suspicion of spam
+    true
+    # return if current_user&.verified?
 
-    redirect_to root_path, alert: 'Your account must be verified before you can post content.'
+    # redirect_to root_path, alert: 'Your account must be verified before you can post content.'
   end
 
   sig { void }
@@ -36,37 +39,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert: 'Not authorized.' unless current_user&.admin?
   end
 
-  # JWT-based auth for API controllers
-  sig { void }
-  def authorize_request
-    header = request.headers['Authorization']
-    token = header&.split(' ')&.last
-
-    if token
-      begin
-        @decoded = JsonWebToken.decode(token)
-        @current_user = User.find(@decoded[:user_id])
-      rescue ActiveRecord::RecordNotFound => e
-        render json: { errors: "User not found: #{e.message}" }, status: :unauthorized
-      rescue JWT::DecodeError => e
-        render json: { errors: "Token decode error: #{e.message}" }, status: :unauthorized
-      end
-    else
-      render json: { errors: 'Missing token' }, status: :unauthorized
-    end
-  end
-
   sig { void }
   def check_authorization
     model = instance_variable_get("@#{controller_name.singularize}")
     authorize_resource(model, params[:user_id], false) if model.present?
-  end
-
-  sig { void }
-  def verify_captcha!
-    unless CaptchaService.verify(params[:captcha_token].to_s)
-      render json: { error: 'Captcha verification failed' }, status: :unprocessable_entity
-    end
   end
 
   sig { void }

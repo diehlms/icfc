@@ -37,18 +37,10 @@ RSpec.describe 'Sessions', type: :request do
     end
 
     context 'with username instead of email' do
-      it 'logs in successfully' do
+      it 'fails to log in and re-renders new' do
         post '/login', params: { email: 'johndoe', password: password }
-        expect(response).to redirect_to('/')
-        expect(session[:user_id]).to eq(user.id)
-      end
-    end
-
-    context 'with username containing whitespace and mixed case' do
-      it 'logs in successfully' do
-        post '/login', params: { email: '  JohnDoe  ', password: password }
-        expect(response).to redirect_to('/')
-        expect(session[:user_id]).to eq(user.id)
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(session[:user_id]).to be_nil
       end
     end
 

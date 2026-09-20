@@ -28,10 +28,13 @@ RSpec.describe 'PasswordResets', type: :request do
         expect(response).to redirect_to('/login')
       end
 
-      it 'works when providing username instead of email' do
-        expect(UserMailer).to receive(:password_reset).and_return(double(deliver: true))
+    end
+
+    context 'with a username instead of email' do
+      it 'does not send a reset email and renders the form with an alert' do
+        expect(UserMailer).not_to receive(:password_reset)
         post '/forgot-password', params: { email: user.username }
-        expect(response).to redirect_to('/login')
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 
