@@ -6,6 +6,8 @@ In a devcontainer-friendly IDE (VSCode, etc), ensure you have the devcontainers 
 
 Follow the extension's prompt to build the image in .devcontainer (In VSCode, CMD+SHIFT+P -> "build devcontainer")
 
+Before building, copy `.env.example` to `.env` at the repo root and fill in real values as needed.
+
 Once inside the container, run:
 
 ```sh

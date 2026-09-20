@@ -1,4 +1,4 @@
-FROM ruby:3.2.2-bullseye
+FROM ruby:3.2.2-bookworm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -39,7 +39,7 @@ ENV GEM_HOME="/usr/local/bundle"
 ENV PATH=$GEM_HOME/bin:$GEM_HOME/gems/bin:$PATH
 
 # Expose ports for development
-EXPOSE 3010 5173 8882
+EXPOSE 3000 5173 8882
 
 # Keep container running
 CMD []

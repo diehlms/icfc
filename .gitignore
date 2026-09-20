@@ -22,6 +22,7 @@ api/storage/*
 # Secrets and local config
 .env
 .env.*
+!.env.example
 /config/master.key
 /config/local_env.yml
 

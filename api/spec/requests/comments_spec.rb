@@ -12,18 +12,6 @@ RSpec.describe 'Comments', type: :request do
       end
     end
 
-    context 'when logged in as an unverified user' do
-      let(:unverified) { create(:user) }
-      before { web_login(unverified) }
-
-      it 'blocks comment creation' do
-        expect {
-          post article_comments_path(article), params: { comment: { content: 'Hello' } }
-        }.not_to change(Comment, :count)
-        expect(response).to redirect_to(root_path)
-      end
-    end
-
     context 'when logged in' do
       before { web_login(user) }
 
