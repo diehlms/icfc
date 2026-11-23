@@ -12,6 +12,7 @@ resource "hcloud_firewall" "web_firewall" {
     port            = "80"
     source_ips      = ["0.0.0.0/0", "::/0"]
     destination_ips = []
+    description     = ""
   }
 
   rule {
@@ -20,6 +21,7 @@ resource "hcloud_firewall" "web_firewall" {
     port            = "443"
     source_ips      = ["0.0.0.0/0", "::/0"]
     destination_ips = []
+    description     = ""
   }
 
   dynamic "rule" {
@@ -44,6 +46,7 @@ resource "hcloud_firewall" "web_firewall" {
       port            = "3001"
       source_ips      = ["${rule.value}/32"]
       destination_ips = []
+      description     = ""
     }
   }
 
@@ -56,6 +59,7 @@ resource "hcloud_firewall" "web_firewall" {
       port            = "8080"
       source_ips      = ["${rule.value}/32"]
       destination_ips = []
+      description     = ""
     }
   }
 
@@ -68,6 +72,10 @@ resource "hcloud_firewall" "web_firewall" {
       port            = "8081"
       source_ips      = ["${rule.value}/32"]
       destination_ips = []
+      # One live 8081 rule already carries this description; preserve it so
+      # adoption does not rewrite the rule. Hetzner reports no description as
+      # an empty string, so match that exactly for the other rules.
+      description = rule.value == "3.66.198.136" ? "DELETE ME?" : ""
     }
   }
 }

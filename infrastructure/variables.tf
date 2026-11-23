@@ -15,6 +15,11 @@ variable "home_ips" {
     "174.21.214.11",
     "193.121.74.143",
   ]
+
+  validation {
+    condition     = length(var.home_ips) > 0
+    error_message = "TF_VAR_home_ips is empty; remove the Spacelift override or set it to the app IPs."
+  }
 }
 
 variable "ssh_ips" {
@@ -32,4 +37,9 @@ variable "ssh_ips" {
     "174.21.215.90",
     "193.121.74.143",
   ]
+
+  validation {
+    condition     = length(var.ssh_ips) > 0
+    error_message = "TF_VAR_ssh_ips is empty; remove the Spacelift override or set it to the SSH IPs."
+  }
 }
