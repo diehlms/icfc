@@ -38,3 +38,9 @@ import {
   to = hcloud_server.web_server
   id = data.hcloud_server.existing_web_server.id
 }
+
+import {
+  to = hcloud_server_network.web_server_private
+  # Server-network entries import as "<server-id>-<network-id>".
+  id = "${data.hcloud_server.existing_web_server.id}-${data.hcloud_network.existing_private_network.id}"
+}
